@@ -23,6 +23,7 @@ const OG_LOCALE = { pt: "pt_BR", fr: "fr_FR", en: "en_GB", ar: "ar_AR" };
 const PREFIX = { pt: "", fr: "fr/", en: "en/", ar: "ar/" };
 const EXTRA_UI = {
   updated: { pt: "Atualizado em {d}", fr: "Mis à jour le {d}", en: "Updated {d}" },
+  emailSoon: { pt: "O e-mail de contato será publicado em breve.", fr: "L'adresse e-mail de contact sera publiée prochainement.", en: "A contact email will be published soon.", ar: "سيُنشر البريد الإلكتروني للتواصل قريبًا." },
   homeTag: { pt: "Notícias do esporte africano", fr: "L'actualité du sport africain", en: "African sports news", ar: "أخبار الرياضة الأفريقية" },
   skip: { pt: "Pular para o conteúdo", fr: "Aller au contenu", en: "Skip to content" },
   footNav: { pt: "Institucional", fr: "Informations", en: "Information" }
@@ -426,7 +427,9 @@ function watchPage() {
 function staticPage(key) {
   const p = X.PAGES[key];
   const email = `<a href="mailto:${esc(cfg.CONTACT_EMAIL)}">${esc(cfg.CONTACT_EMAIL)}</a>`;
-  const paras = L(p.body).map((t) => `<p>${esc(t).replace("{email}", email)}</p>`).join("");
+  const corpo = L(p.body).filter((t) => cfg.CONTACT_EMAIL || !t.includes("{email}"));
+  if (!cfg.CONTACT_EMAIL && key === "contato") corpo.push(T("emailSoon"));
+  const paras = corpo.map((t) => `<p>${esc(t).replace("{email}", email)}</p>`).join("");
   return `<div class="layout"><div class="article">
     <div class="page-head"><h1>${esc(L(p.title))}</h1></div>
     <div class="prose">${paras}</div>
