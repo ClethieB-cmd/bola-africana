@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-/* Busca classificação, últimos resultados e próximos jogos dos campeonatos nacionais na API-Football
-   e grava tudo em conteudo/ligas-auto.json. O GitHub roda este arquivo sozinho uma vez por dia
+/* Busca classificação (com todos os grupos), últimos resultados e próximos jogos das competições africanas
+   de clubes e seleções e dos campeonatos nacionais na API-Football, e grava tudo em conteudo/ligas-auto.json. O GitHub roda este arquivo sozinho uma vez por dia
    (veja .github/workflows/atualizar-ligas.yml). A chave da API fica no segredo API_FOOTBALL_KEY do repositório.
    Uso manual:  API_FOOTBALL_KEY=suachave node scripts/atualizar-ligas.js */
 "use strict";
@@ -21,7 +21,7 @@ if (!KEY) {
   process.exit(0);
 }
 
-let dados = { geradoEm: null, ligas: {}, mapa: {}, semCampeonato: [] };
+let dados = { geradoEm: null, continentais: {}, ligas: {}, mapa: {}, semCampeonato: [] };
 try { dados = { ...dados, ...JSON.parse(fs.readFileSync(OUT, "utf8")) }; } catch (e) { /* primeira execução */ }
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -40,13 +40,24 @@ async function api(endpoint, params) {
   return j.response || [];
 }
 
-const norm = (s) => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+const norm = (s) => String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 const plano = (s) => norm(s).replace(/[^a-z0-9]/g, "");
 const NOMES_EXTRA = {
   CIV: ["ivorycoast", "cotedivoire"], COD: ["congodr", "drcongo", "democraticrepublicofthecongo"],
   CGO: ["congo", "republicofthecongo"], CPV: ["capeverde", "capeverdeislands", "caboverde"],
   SWZ: ["eswatini", "swaziland"], STP: ["saotomeandprincipe", "saotomeprincipe"], GAM: ["gambia", "thegambia"]
 };
+/* Competições continentais: chave usada no site, nome na API, nomes a evitar. */
+const CONTINENTAIS = [
+  ["canq", /africa cup of nations.*qualif/, /women/],
+  ["can", /^africa cup of nations$/, null],
+  ["cl", /caf champions league/, /women/],
+  ["cc", /confederation cup/, null],
+  ["clf", /women.*champions league|champions league.*women/, null],
+  ["canf", /women.*africa cup of nations|africa cup of nations.*women/, /qualif/],
+  ["chan", /african nations championship/, /qualif/],
+  ["mundq", /world cup.*qualification.*africa/, null]
+];
 const RUIM = /women|femin|femen|\bu ?1\d|\bu ?2\d|reserve|youth|junior|cup|coupe|super ?cup|play-?off|qualif|\b2\b|ligue 2|division 2|second|d2\b/;
 
 function escolher(c, todas) {
@@ -69,7 +80,7 @@ function rotuloTemporada(s) {
   return a === b ? String(a) : `${a}/${String(b).slice(2)}`;
 }
 
-async function atualizar(c, liga) {
+async function atualizar(liga) {
   const temp = liga.seasons.find((s) => s.current) || liga.seasons[liga.seasons.length - 1];
   const cob = (temp.coverage || {});
   const item = { apiId: liga.league.id, apiNome: liga.league.name, temporada: rotuloTemporada(temp), ano: temp.year, tabela: [], resultados: [], proximos: [] };
@@ -78,7 +89,7 @@ async function atualizar(c, liga) {
     const st = await api("/standings", { league: liga.league.id, season: temp.year });
     const grupos = (st[0] && st[0].league && st[0].league.standings) || [];
     item.tabela = grupos.map((g) => ({
-      grupo: grupos.length > 1 && g[0] ? g[0].group : "",
+      grupo: grupos.length > 1 && g[0] ? String(g[0].group || "").replace(/^.*:\s*/, "") : "",
       linhas: g.map((x) => [x.rank, x.team.name, x.all.played, x.all.win, x.all.draw, x.all.lose, x.goalsDiff, x.points])
     })).filter((g) => g.linhas.length);
   }
@@ -97,15 +108,16 @@ async function atualizar(c, liga) {
 (async () => {
   let todas;
   try {
-    todas = await api("/leagues", { current: "true", type: "league" });
+    todas = await api("/leagues", { current: "true" });
   } catch (e) {
     console.error("Não consegui listar os campeonatos na API: " + e.message);
     process.exit(1);
   }
 
+  const ligasNac = todas.filter((l) => String(l.league.type).toLowerCase() === "league");
   const mapa = {}, sem = [];
   for (const c of CAMP) {
-    const l = escolher(c, todas);
+    const l = escolher(c, ligasNac);
     if (l) mapa[c.code] = { apiId: l.league.id, apiNome: l.league.name, apiPais: l.country.name };
     else sem.push(c.code);
   }
@@ -113,15 +125,31 @@ async function atualizar(c, liga) {
   dados.semCampeonato = sem;
   console.log(`A API tem campeonato atual para ${Object.keys(mapa).length} dos ${CAMP.length} países. Sem campeonato: ${sem.join(", ") || "nenhum"}.`);
 
-  // Atualiza primeiro os que estão há mais tempo sem atualização.
+  // Primeiro as competições continentais (grupos da CAN, Liga dos Campeões etc.).
+  const internacionais = todas.filter((l) => ["world", "africa"].includes(plano(l.country.name)));
+  dados.continentais = dados.continentais || {};
+  let parar = false;
+  for (const [chave, sim, nao] of CONTINENTAIS) {
+    const l = internacionais.find((x) => sim.test(norm(x.league.name)) && !(nao && nao.test(norm(x.league.name))));
+    if (!l) continue;
+    try {
+      dados.continentais[chave] = { ...(await atualizar(l)), chave };
+      console.log(`ok  ${chave}  ${l.league.name}`);
+    } catch (e) {
+      if (e instanceof Limite) { parar = true; break; }
+      console.log(`erro ${chave}  ${l.league.name}: ${e.message}`);
+    }
+  }
+
+  // Depois os campeonatos nacionais, começando pelos que estão há mais tempo sem atualização.
   const fila = CAMP.filter((c) => mapa[c.code])
     .sort((a, b) => String((dados.ligas[a.code] || {}).atualizado || "").localeCompare(String((dados.ligas[b.code] || {}).atualizado || "")));
 
   let feitos = 0, erros = 0;
-  for (const c of fila) {
-    const liga = todas.find((l) => l.league.id === mapa[c.code].apiId);
+  for (const c of parar ? [] : fila) {
+    const liga = ligasNac.find((l) => l.league.id === mapa[c.code].apiId);
     try {
-      dados.ligas[c.code] = await atualizar(c, liga);
+      dados.ligas[c.code] = await atualizar(liga);
       feitos++;
       console.log(`ok  ${c.code}  ${liga.league.name}`);
     } catch (e) {
