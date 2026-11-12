@@ -1,4 +1,5 @@
-# Busca os dados dos campeonatos nacionais uma vez por dia e, se algo mudou, manda publicar o site de novo.
+# Busca uma vez por dia os dados do futebol (competições africanas e campeonatos nacionais) e dos outros esportes
+# e, se algo mudou, manda publicar o site de novo.
 # Para rodar na hora: aba Actions > Atualizar campeonatos > Run workflow.
 name: Atualizar campeonatos
 
@@ -23,21 +24,27 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Buscar dados na API-Football
+      - name: Buscar dados do futebol na API-Football
+        continue-on-error: true
         env:
           API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
         run: node scripts/atualizar-ligas.js
+      - name: Buscar dados dos outros esportes na API-Sports
+        continue-on-error: true
+        env:
+          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
+        run: node scripts/atualizar-esportes.js
       - name: Salvar e publicar
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add conteudo/ligas-auto.json
+          git add conteudo/ligas-auto.json conteudo/esportes-auto.json
           if git diff --cached --quiet; then
             echo "Nada mudou."
           else
-            git commit -m "Atualiza dados dos campeonatos"
+            git commit -m "Atualiza dados dos campeonatos e esportes"
             git push
             gh workflow run publicar.yml --ref main
           fi
