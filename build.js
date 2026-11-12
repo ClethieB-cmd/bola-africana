@@ -106,8 +106,9 @@ function ad(name) {
 }
 
 /* ---------- componentes ---------- */
+const esporteDe = (n) => (Array.isArray(n.esporte) ? n.esporte[0] : n.esporte) || "futebol";
 function cover(n) {
-  return `<div class="cover cat-${n.cat}" style="--cx:${n.cover.cx || "78%"}" aria-hidden="true">
+  return `<div class="cover cat-${n.cat} sp-${esporteDe(n)}" aria-hidden="true">
     <div class="big">${esc(L(n.cover.big))}</div><div class="small">${esc(L(n.cover.small))}</div></div>`;
 }
 const tag = (k) => `<span class="tag cat-${k}">${esc(catName(k))}</span>`;
@@ -323,6 +324,7 @@ function campPage(c) {
   return `<div class="layout"><div class="article camp">
     <a class="back" href="${u(CATS.ligas.route)}">‹ ${esc(T("campAll"))}</a>
     <div class="page-head cat-ligas"><h1>${esc(campTitle(c))}</h1><p>${esc(T("campDesc", { de: L(c.de), liga: c.liga }))}</p></div>
+    <div class="cover banner cat-ligas sp-futebol" aria-hidden="true"></div>
     ${lg ? `<p class="camp-champ">${esc(T("champ"))} <b>${esc(lg.champ)}</b>. ${esc(L(lg.fact))} <a href="${lg.src}">${esc(T("source"))}</a></p>` : ""}
     ${c.texto ? `<div class="prose">${L(c.texto).map((t) => `<p>${esc(t)}</p>`).join("")}</div>` : ""}
     ${a ? `${a.tabela && a.tabela.length ? `<section class="section cat-ligas">${sectionHead(T("campTable") + (a.temporada ? " · " + T("campSeason", { s: a.temporada }) : ""))}${campTabela(a)}</section>` : ""}
@@ -455,7 +457,7 @@ function searchPage() {
   const norm = (s) => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
   const rows = sorted.map((n) => rowCard(n, ` data-q="${esc(norm([L(n.title), L(n.lead), L(n.body).join(" ")].join(" ")))}"`)).join("")
     + CAMP.map((c) => `<a class="row-story camp-row" href="${campUrl(c)}" data-q="${esc(norm(["campeonato championnat league liga", c.liga, ...LANGS.map((l) => c.nome[l] + " " + c.de[l])].join(" ")))}">
-      <div class="cover cat-ligas" aria-hidden="true"><div class="big">${esc(c.code)}</div></div>
+      <div class="cover cat-ligas sp-futebol" aria-hidden="true"><div class="big">${esc(c.code)}</div></div>
       <div><div class="meta">${tag("ligas")}</div><h3>${esc(campTitle(c))}</h3></div></a>`).join("")
     + ESP.linhasBusca(norm);
   return `<div class="search-page">
@@ -510,6 +512,7 @@ for (const l of LANGS) {
 
 /* arquivos de apoio */
 fs.cpSync(path.join(__dirname, "assets"), path.join(OUT, "assets"), { recursive: true });
+require("./build-campos.js")(path.join(OUT, "assets", "campos"));
 write("robots.txt", `User-agent: *\nAllow: /\nSitemap: ${absUrl("sitemap.xml")}\n`);
 write("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pages.map((p) => `  <url><loc>${absUrl(p)}</loc></url>`).join("\n")}\n</urlset>\n`);
 if (cfg.ADSENSE_CLIENT) write("ads.txt", `google.com, ${cfg.ADSENSE_CLIENT.replace(/^ca-/, "")}, DIRECT, f08c47fec0942fa0\n`);
