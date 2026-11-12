@@ -12,6 +12,10 @@ o que ajuda o Google a encontrar o site e é o que o AdSense espera.
 | `conteudo/noticias.js` | As matérias. Para publicar uma notícia nova, você mexe aqui. |
 | `conteudo/dados.js` | Agenda e placar, tabelas, ligas, nomes dos países e textos dos menus. |
 | `conteudo/textos-extra.js` | Nome do site em cada idioma, guia "Onde assistir" e as páginas Sobre, Contato e Privacidade. |
+| `conteudo/campeonatos.js` | Os 54 campeonatos nacionais: país, nome do campeonato e textos de apresentação. |
+| `conteudo/ligas-auto.json` | Classificação, resultados e próximos jogos baixados da API. É gerado sozinho: não edite. |
+| `scripts/atualizar-ligas.js` | Busca os dados dos campeonatos na API-Football. |
+| `.github/workflows/atualizar-ligas.yml` | Roda a busca uma vez por dia e publica o site de novo se algo mudou. |
 | `assets/` | Visual (`style.css`) e pequenos ajustes no navegador (`site.js`). |
 | `build.js` | Gera as páginas do site na pasta `_site/`. |
 | `.github/workflows/publicar.yml` | Faz o GitHub gerar e publicar o site sozinho a cada alteração. |
@@ -90,6 +94,44 @@ BASE_PATH: "/",
 Se você ainda não tiver a tradução, pode escrever só o português (`pt`). O site mostra o texto em português quando falta o francês ou o inglês.
 
 Se a tarefa ficar vermelha na aba **Actions**, normalmente falta uma vírgula, uma aspa ou um colchete. Abra a tarefa para ver a linha do erro.
+
+Para uma notícia aparecer na página do campeonato de um país, ela precisa citar o nome do país no título ou na linha fina.
+Se não citar, acrescente o campo `paises` com o código do país, por exemplo `paises: ["CIV"]`.
+
+## Campeonatos nacionais (54 países)
+
+Cada país tem uma página em `campeonatos/`, por exemplo `campeonatos/costa-do-marfim.html`, nos três idiomas.
+A lista completa aparece na página **Ligas nacionais**, e a busca do site também encontra os campeonatos.
+
+### Dados automáticos (classificação, resultados e próximos jogos)
+
+1. Crie uma conta grátis em [api-football.com](https://www.api-football.com) e copie a sua chave (API key) no painel.
+2. No GitHub, abra **Settings → Secrets and variables → Actions → New repository secret**.
+   Em **Name** escreva `API_FOOTBALL_KEY`, em **Secret** cole a chave e clique em **Add secret**.
+   Nunca coloque a chave em nenhum arquivo do repositório: ele é público.
+3. Abra a aba **Actions**, escolha **Atualizar campeonatos** e clique em **Run workflow** para rodar a primeira vez.
+   Depois disso ele roda sozinho todo dia às 23:47 GMT (20:47 em Brasília).
+
+O plano grátis dá 100 consultas por dia. Cada campeonato gasta 2 por atualização, então o robô atualiza até uns 47 por dia,
+começando pelos que estão há mais tempo sem atualização. O registro de cada execução, na aba Actions, mostra quais
+campeonatos a API tem e quais deram erro. Se o plano não liberar a temporada atual, o registro avisa e os dados antigos ficam.
+
+Se o robô escolher o campeonato errado de um país, veja o número certo em `conteudo/ligas-auto.json` (campo `mapa`)
+ou no painel da API e coloque em `API_ID`, dentro de `conteudo/campeonatos.js`.
+
+### Textos de apresentação
+
+Página com só uma tabela automática vale pouco para o Google. Escreva dois ou três parágrafos sobre cada campeonato
+(história, clubes principais, último campeão) em `TEXTOS`, no fim de `conteudo/campeonatos.js`.
+Enquanto a página não tiver texto nem dados, ela fica fora do Google (`noindex`) e fora do mapa do site.
+
+## Google Search Console
+
+1. Entre em [search.google.com/search-console](https://search.google.com/search-console) e adicione uma propriedade do tipo **Prefixo do URL**
+   com o endereço do site (por exemplo `https://SEU-USUARIO.github.io/bola-africana/`).
+2. Escolha o método **Tag HTML**, copie só o valor que fica dentro de `content="..."` e cole em `GOOGLE_VERIFICACAO`, no `config.js`.
+3. Espere a tarefa ficar verde na aba Actions e clique em **Verificar** no Search Console.
+4. Em **Sitemaps**, envie `sitemap.xml`.
 
 ## Como atualizar a agenda e o placar
 
