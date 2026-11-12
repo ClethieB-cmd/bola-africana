@@ -147,6 +147,12 @@ tênis de mesa, tênis, ciclismo e críquete. A lista fica em `conteudo/esportes
 - **Os outros esportes** não têm API grátis. A página mostra as notícias daquele esporte: na notícia, acrescente
   o campo `esporte` com o id do esporte, por exemplo `esporte: "judo"` ou `esporte: "tenis-de-mesa"`.
 
+## Árabe
+
+O site também sai em árabe, em `ar/`, escrito da direita para a esquerda. As traduções ficam em
+`conteudo/traducao-ar.js`. Notícia nova sem árabe aparece em francês nas páginas em árabe; para traduzir,
+acrescente `ar` nos campos da notícia, por exemplo `title: { pt: "...", fr: "...", en: "...", ar: "..." }`.
+
 ## Google Search Console
 
 1. Entre em [search.google.com/search-console](https://search.google.com/search-console) e adicione uma propriedade do tipo **Prefixo do URL**
