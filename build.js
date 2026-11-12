@@ -142,8 +142,8 @@ function scorebar() {
 }
 const FIXTURES_BAR = () => D.FIXTURES.filter((f) => f.bar);
 
-function agendaList(limit) {
-  const list = limit ? D.FIXTURES.slice(0, limit) : D.FIXTURES;
+function agendaList(limit, todos = D.FIXTURES) {
+  const list = limit ? todos.slice(0, limit) : todos;
   let html = "", day = "";
   list.forEach((f) => {
     const d = f.at.slice(0, 10);
@@ -188,8 +188,8 @@ function leaguesHtml() {
     <a class="src" href="${l.src}">${esc(T("source"))}</a></div>`).join("")}</div>
     <div class="radar" aria-label="${esc(T("radar"))}">${D.RADAR.map(([c, n]) => `<a href="${campUrl(CAMP.find((x) => x.code === c))}">${esc(C(c))} · ${esc(n)}</a>`).join("")}</div>`;
 }
-function watchHtml() {
-  return X.WATCH.map((w) => `<section class="watch cat-${w.cat}"><h2>${esc(L(w.comp))}</h2>
+function watchHtml(lista = X.WATCH) {
+  return lista.map((w) => `<section class="watch cat-${w.cat}"><h2>${esc(L(w.comp))}</h2>
     <div class="table-wrap"><table><thead><tr><th>${esc(T("region"))}</th><th>${esc(T("channel"))}</th><th>${esc(T("obs"))}</th></tr></thead><tbody>${
       w.rows.map(([r, c, o]) => `<tr><td>${esc(L(r))}</td><td>${esc(L(c))}</td><td>${esc(L(o))}</td></tr>`).join("")
     }</tbody></table></div>
@@ -201,9 +201,12 @@ function langMenu(id) {
   return `<details class="lang"><summary aria-label="${esc(T("langMenu"))}">${GLOBE}<span>${esc(X.LANG_NAMES[lang])}</span>${CHEV}</summary>
     <ul>${LANGS.map((l) => `<li><a href="${u(id, l)}" hreflang="${LOCALE[l]}" lang="${LOCALE[l]}" data-lang="${l}"${l === lang ? ' aria-current="true"' : ""}>${X.LANG_NAMES[l]}</a></li>`).join("")}</ul></details>`;
 }
+/* menu: Início, Masculino e Feminino. CAN 2027, clubes, ligas, agenda, tabelas e onde assistir ficam dentro de cada gênero */
+const ROTAS_MASC = ["masculino", ...["can", "cl", "cc", "ligas", "sel"].map((k) => CATS[k].route)];
 function navHtml(active) {
-  const items = [["index", T("home"), null], ...Object.entries(CATS).map(([k, c]) => [c.route, navName(k), k]), ["esportes", T("moreSports"), null], ["agenda", T("agenda"), null], ["tabelas", T("tables"), null], ["onde-assistir", T("watch"), null]];
-  return items.map(([id, label, k]) => `<a href="${u(id)}"${k ? ` style="--nav-c: var(--c-${k})"` : ""}${id === active ? ' aria-current="page"' : ""}>${esc(label)}</a>`).join("");
+  const atual = ROTAS_MASC.includes(active) ? "masculino" : active;
+  const items = [["index", T("home"), ""], ["masculino", T("gMasc"), "masc"], [CATS.fem.route, T("gFem"), "fem"]];
+  return items.map(([id, label, g]) => `<a href="${u(id)}"${g ? ` class="nav-gen nav-${g}"` : ""}${id === atual ? ' aria-current="page"' : ""}>${esc(label)}</a>`).join("");
 }
 function logoHtml(cls = "logo") {
   const w = L(X.BRAND).split(" ");
@@ -272,6 +275,9 @@ ${adsHead}${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld
       <a href="${u("contato")}">${esc(T("contact"))}</a>
       <a href="${u("privacidade")}">${esc(T("privacy"))}</a>
       <a href="${u("onde-assistir")}">${esc(T("watch"))}</a>
+      <a href="${u("agenda")}">${esc(T("agenda"))}</a>
+      <a href="${u("tabelas")}">${esc(T("tables"))}</a>
+      <a href="${u("esportes")}">${esc(T("moreSports"))}</a>
     </nav>
     <p class="foot-meta">© ${cfg.EDITION_DATE.slice(0, 4)} ${esc(brand())}. ${esc(T("foot2"))}</p>
   </div>
@@ -339,6 +345,7 @@ function campPage(c) {
 
 /* grupos das competições africanas e seção "Mais esportes" (arquivo build-esportes.js) */
 const ESP = require("./build-esportes.js")({ D, CAMP, NEWS, cfg, esc, L, T, u, ad, sectionHead, sidebar, timeTag, fmt, fmtDay, fmtTime, tzHint, storyCard, sorted, LANGS, LOCALE, getLang: () => lang });
+const GEN = require("./build-generos.js")({ D, X, CATS, ESP, sorted, esc, L, T, u, storyCard, agendaList, tzHint, watchHtml, sectionHead, LOCALE, getLang: () => lang });
 
 /* árabe: as traduções ficam em conteudo/traducao-ar.js; o que faltar aparece em francês */
 const AR = require("./conteudo/traducao-ar.js");
@@ -396,6 +403,7 @@ function categoryPage(k) {
   if (k === "cc") extra = `<section class="section cat-cc">${sectionHead(T("groupsTitle"))}${groupsHtml(D.CC_GROUPS, "cc")}<p class="note">${esc(T("ccNote"))}</p></section>`;
   if (k === "ligas") extra = `<section class="section cat-ligas">${sectionHead(T("champsTitle"))}${leaguesHtml()}</section>`;
   return `${ad("topo")}<div class="layout"><div>
+    ${ROTAS_MASC.includes(CATS[k].route) ? `<a class="back" href="${u("masculino")}">‹ ${esc(T("gMasc"))}</a>` : ""}
     <div class="page-head cat-${k}"><h1>${esc(catName(k))}</h1><p>${esc(L(CATS[k].desc))}</p></div>
     ${k === "ligas" ? campDirHtml() : ""}
     <div class="grid-stories">${items.map(storyCard).join("") || `<div class="empty">${esc(T("emptyCat"))}</div>`}</div>
@@ -487,6 +495,7 @@ for (const l of LANGS) {
   setLang(l);
   pages.push(emit("index", { title: brand(), desc: T("foot1"), body: () => homePage(), active: "index" }));
   for (const [k, c] of Object.entries(CATS)) {
+    if (k === "fem") continue; /* a página Feminino é feita pelo build-generos.js */
     pages.push(emit(c.route, { title: catName(k), desc: L(c.desc), body: () => categoryPage(k), active: c.route }));
   }
   pages.push(emit("agenda", { title: T("agenda"), desc: T("agendaDesc"), body: () => agendaPage(), active: "agenda" }));
@@ -502,6 +511,7 @@ for (const l of LANGS) {
     if (indexavel) pages.push(p);
   }
   ESP.emitir(emit, pages);
+  GEN.emitir(emit, pages);
   for (const n of NEWS) {
     pages.push(emit("noticias/" + n.slug, {
       title: L(n.title), desc: L(n.lead), body: () => articlePage(n), active: CATS[n.cat].route, type: "article",
