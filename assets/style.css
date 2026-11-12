@@ -308,3 +308,12 @@ footer p { margin: 0; max-width: 72ch; }
 .league a.country:hover { text-decoration: underline; }
 .radar a { font-size: 13.5px; background: var(--surface-2); border-radius: 999px; padding: 4px 12px; text-decoration: none; color: inherit; }
 .radar a:hover { text-decoration: underline; }
+.gtab .group li { display: grid; grid-template-columns: 20px minmax(0, 1fr) auto auto; gap: 8px; align-items: baseline; }
+.gtab .pos { font-family: var(--font-display); font-weight: 800; color: var(--muted); }
+.gtab .tm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.gtab .pj { font-size: 12.5px; color: var(--muted); }
+.gtab .pt { font-size: 13px; text-align: right; min-width: 44px; }
+.gtab .group li:first-child .tm { font-weight: 700; }
+.camp table { table-layout: fixed; }
+.camp th.num, .camp td.num { width: 52px; }
+.camp td { overflow-wrap: anywhere; }
