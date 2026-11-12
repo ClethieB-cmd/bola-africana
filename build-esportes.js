@@ -127,7 +127,7 @@ module.exports = function (h) {
       <div class="page-head"><h1>${esc(T("moreSports"))}</h1><p>${esc(T("moreSportsDesc"))}</p></div>
       <ul class="camp-dir esp-dir">${ESPORTES.map((e) => {
         const n = comps(e).length;
-        return `<li><a href="${espUrl(e)}"><div class="cover esp sp-${e.id}" aria-hidden="true"></div><span class="pais">${esc(L(e.nome))}</span><span class="liga">${esc(n ? T("espCompsN", { n }) : L(e.desc))}</span></a></li>`;
+        return `<li class="cor-${e.id}"><a href="${espUrl(e)}"><div class="cover esp sp-${e.id}" aria-hidden="true"></div><span class="pais">${esc(L(e.nome))}</span><span class="liga">${esc(n ? T("espCompsN", { n }) : L(e.desc))}</span></a></li>`;
       }).join("")}</ul>
     </div>${sidebar()}</div>`;
   }
@@ -136,9 +136,9 @@ module.exports = function (h) {
     const afr = cs.filter((c) => c.pais === "AFR");
     const nac = cs.filter((c) => c.pais !== "AFR").sort((a, b) => L(paisDe(a.pais).nome).localeCompare(L(paisDe(b.pais).nome), h.LOCALE[getLang()]));
     const news = newsDe(e).slice(0, 9);
-    return `<div class="layout"><div class="article camp">
+    return `<div class="layout"><div class="article camp cor-${e.id}">
       <a class="back" href="${u("esportes")}">‹ ${esc(T("allSports"))}</a>
-      <div class="page-head"><h1>${esc(L(e.nome))}</h1><p>${esc(L(e.desc))}</p></div>
+      <div class="page-head cor-${e.id}"><h1>${esc(L(e.nome))}</h1><p>${esc(L(e.desc))}</p></div>
       <div class="cover banner esp sp-${e.id}" aria-hidden="true"></div>
       ${afr.map((c) => `<section class="section"><div class="section-head"><h2>${esc(c.nome)}</h2><a href="${compUrl(e, c)}">${esc(T("fullPage"))}</a></div>${c.tabela && c.tabela.length ? gruposCards(c.tabela) : `<div class="panel">${jogosHtml((c.resultados || []).slice(0, 4), true)}</div>`}</section>`).join("")}
       ${nac.length ? `<section class="section">${sectionHead(T("espNational"))}<ul class="camp-dir">${nac.map((c) => `<li><a href="${compUrl(e, c)}"><span class="pais">${esc(L(paisDe(c.pais).nome))}</span><span class="liga">${esc(c.nome)}</span></a></li>`).join("")}</ul></section>` : ""}
@@ -147,7 +147,7 @@ module.exports = function (h) {
     </div>${sidebar()}</div>`;
   }
   function compPage(e, c) {
-    return `<div class="layout"><div class="article camp">
+    return `<div class="layout"><div class="article camp cor-${e.id}">
       <a class="back" href="${espUrl(e)}">‹ ${esc(L(e.nome))}</a>
       <div class="page-head"><h1>${esc(compTitle(e, c))}</h1><p>${esc(T("compDesc", { nome: c.nome }))}</p></div>
       <div class="cover banner esp sp-${e.id}" aria-hidden="true"></div>
@@ -158,14 +158,14 @@ module.exports = function (h) {
   function emitir(emit, pages) {
     for (const k of Object.keys(SLUG_FUT)) {
       if (!temDados(FUT[k])) continue;
-      pages.push(emit("competicoes/" + SLUG_FUT[k], { title: L(NOMES_FUT[k]), desc: T("compDesc", { nome: L(NOMES_FUT[k]) }), body: () => futPage(k), active: "tabelas" }));
+      pages.push(emit("competicoes/" + SLUG_FUT[k], { title: L(NOMES_FUT[k]), desc: T("compDesc", { nome: L(NOMES_FUT[k]) }), body: () => futPage(k), active: FUT_FEM.includes(k) ? "feminino" : "masculino" }));
     }
     pages.push(emit("esportes", { title: T("moreSports"), desc: T("moreSportsDesc"), body: () => hubPage(), active: "esportes" }));
     for (const e of ESPORTES) {
       const idx = espIndexavel(e);
       const p = emit("esportes/" + e.id, { title: L(e.nome), desc: L(e.desc), body: () => espPage(e), active: "esportes", noindex: !idx });
       if (idx) pages.push(p);
-      for (const c of comps(e)) pages.push(emit(`esportes/${e.id}/${compSlug(c)}`, { title: compTitle(e, c), desc: T("compDesc", { nome: c.nome }), body: () => compPage(e, c), active: "esportes" }));
+      for (const c of comps(e)) pages.push(emit(`esportes/${e.id}/${compSlug(c)}`, { title: compTitle(e, c), desc: T("compDesc", { nome: c.nome }), body: () => compPage(e, c), active: generoComp(c.nome) === "fem" ? "feminino" : "masculino" }));
     }
   }
 
@@ -184,5 +184,12 @@ module.exports = function (h) {
     return out;
   }
 
-  return { grupos, emitir, linhasBusca, futUrl, temFut: (k) => temDados(FUT[k]) };
+  /* masculino ou feminino: pelo nome da competição (a API marca as femininas com Women, Féminin, Ladies...) */
+  const generoComp = (nome) => (/\b(women|woman|ladies|girls|dames|f[ée]minin[ea]?s?)\b/i.test(nome) || /\sW$/.test(nome) ? "fem" : "masc");
+  const esporteDe = (n) => (Array.isArray(n.esporte) ? n.esporte[0] : n.esporte) || "futebol";
+  const generoNoticia = (n) => n.genero || (n.cat === "fem" || (n.tags || []).includes("fem") ? "fem" : "masc");
+  const FUT_FEM = ["clf", "canf"];
+  const futChaves = (g) => Object.keys(SLUG_FUT).filter((k) => (FUT_FEM.includes(k) ? "fem" : "masc") === g && temDados(FUT[k]));
+
+  return { grupos, emitir, linhasBusca, futUrl, temFut: (k) => temDados(FUT[k]), ESPORTES, comps, compUrl, espUrl, paisDe, newsDe, NOMES_FUT, futChaves, generoComp, generoNoticia, esporteDe };
 };
