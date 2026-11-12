@@ -31,19 +31,20 @@ module.exports = function (h) {
     nextT: { pt: "Próximos jogos", fr: "Prochains matchs", en: "Upcoming games" },
     seasonT: { pt: "Temporada {s}", fr: "Saison {s}", en: "{s} season" },
     updatedT: { pt: "Dados atualizados em {d}. Fonte: API-Sports.", fr: "Données mises à jour le {d}. Source : API-Sports.", en: "Data updated {d}. Source: API-Sports." },
-    ptsShort: { pt: "pts", fr: "pts", en: "pts" }
+    ptsShort: { pt: "pts", fr: "pts", en: "pts" },
+    jShort: { pt: "J", fr: "J", en: "P", ar: "م" }
   });
 
   /* nomes das competições continentais de futebol */
   const NOMES_FUT = {
-    canq: { pt: "Eliminatórias da CAN", fr: "Éliminatoires de la CAN", en: "AFCON qualifiers" },
-    can: { pt: "Copa Africana de Nações (CAN)", fr: "Coupe d'Afrique des nations (CAN)", en: "Africa Cup of Nations (AFCON)" },
-    cl: { pt: "Liga dos Campeões da CAF", fr: "Ligue des champions de la CAF", en: "CAF Champions League" },
-    cc: { pt: "Copa das Confederações da CAF", fr: "Coupe de la Confédération de la CAF", en: "CAF Confederation Cup" },
-    clf: { pt: "Liga dos Campeões Feminina da CAF", fr: "Ligue des champions féminine de la CAF", en: "CAF Women's Champions League" },
-    canf: { pt: "CAN Feminina", fr: "CAN féminine", en: "Women's AFCON" },
-    chan: { pt: "Campeonato Africano de Nações (CHAN)", fr: "Championnat d'Afrique des nations (CHAN)", en: "African Nations Championship (CHAN)" },
-    mundq: { pt: "Eliminatórias africanas da Copa do Mundo", fr: "Éliminatoires africaines de la Coupe du monde", en: "World Cup qualifiers (Africa)" }
+    canq: { pt: "Eliminatórias da CAN", fr: "Éliminatoires de la CAN", en: "AFCON qualifiers", ar: "تصفيات كأس أمم أفريقيا" },
+    can: { pt: "Copa Africana de Nações (CAN)", fr: "Coupe d'Afrique des nations (CAN)", en: "Africa Cup of Nations (AFCON)", ar: "كأس أمم أفريقيا" },
+    cl: { pt: "Liga dos Campeões da CAF", fr: "Ligue des champions de la CAF", en: "CAF Champions League", ar: "دوري أبطال أفريقيا" },
+    cc: { pt: "Copa das Confederações da CAF", fr: "Coupe de la Confédération de la CAF", en: "CAF Confederation Cup", ar: "كأس الكونفدرالية الأفريقية" },
+    clf: { pt: "Liga dos Campeões Feminina da CAF", fr: "Ligue des champions féminine de la CAF", en: "CAF Women's Champions League", ar: "دوري أبطال أفريقيا للسيدات" },
+    canf: { pt: "CAN Feminina", fr: "CAN féminine", en: "Women's AFCON", ar: "كأس أمم أفريقيا للسيدات" },
+    chan: { pt: "Campeonato Africano de Nações (CHAN)", fr: "Championnat d'Afrique des nations (CHAN)", en: "African Nations Championship (CHAN)", ar: "بطولة أمم أفريقيا للمحليين (الشان)" },
+    mundq: { pt: "Eliminatórias africanas da Copa do Mundo", fr: "Éliminatoires africaines de la Coupe du monde", en: "World Cup qualifiers (Africa)", ar: "تصفيات أفريقيا لكأس العالم" }
   };
   const SLUG_FUT = { canq: "eliminatorias-can", can: "can", cl: "liga-dos-campeoes-caf", cc: "copa-das-confederacoes-caf", clf: "liga-dos-campeoes-feminina-caf", canf: "can-feminina", chan: "chan", mundq: "eliminatorias-copa-do-mundo-africa" };
 
@@ -72,7 +73,7 @@ module.exports = function (h) {
   /* cartões compactos: todos os times de cada grupo, do primeiro ao último */
   function gruposCards(grupos, link) {
     return `<div class="groups gtab">${grupos.map((g) => `<div class="group"><h3>${esc(g.grupo ? grupoNome(g.grupo) : T("campTable"))}</h3><ol>${
-      g.linhas.map((r) => `<li><span class="pos">${esc(r[0])}</span><span class="tm">${esc(time(r[1]))}</span><span class="pj">${r[2] !== null ? esc(r[2]) + " J" : ""}</span><span class="pt">${r[7] !== null ? `<b>${esc(r[7])}</b> ${esc(T("ptsShort"))}` : esc(`${r[3] ?? ""}-${r[5] ?? ""}`)}</span></li>`).join("")
+      g.linhas.map((r) => `<li><span class="pos">${esc(r[0])}</span><span class="tm">${esc(time(r[1]))}</span><span class="pj">${r[2] !== null ? esc(r[2]) + " " + esc(T("jShort")) : ""}</span><span class="pt">${r[7] !== null ? `<b>${esc(r[7])}</b> ${esc(T("ptsShort"))}` : esc(`${r[3] ?? ""}-${r[5] ?? ""}`)}</span></li>`).join("")
     }</ol></div>`).join("")}</div>${link ? `<p class="note"><a href="${link}">${esc(T("fullPage"))}</a></p>` : ""}`;
   }
   function jogosHtml(lista, feitos) {
