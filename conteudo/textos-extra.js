@@ -24,9 +24,10 @@ module.exports = {
     },
     searchIntro: { pt: "Digite o nome de um clube, de uma seleção ou de uma competição.", fr: "Tapez le nom d'un club, d'une sélection ou d'une compétition.", en: "Type the name of a club, a national team or a competition." },
     foot1: {
-      pt: "Bola Africana é um site dedicado só ao futebol africano, masculino e feminino. As matérias são escritas a partir das fontes linkadas no fim de cada texto.",
-      fr: "Ballon Africain est un site consacré uniquement au football africain, masculin et féminin. Les articles sont rédigés à partir des sources indiquées à la fin de chaque texte.",
-      en: "African Ball is a site devoted entirely to African football, men's and women's. Stories are written from the sources linked at the end of each article."
+      pt: "Bola Africana é um site dedicado ao esporte africano, masculino e feminino. As matérias são escritas a partir das fontes linkadas no fim de cada texto.",
+      fr: "Ballon Africain est un site consacré au sport africain, masculin et féminin. Les articles sont rédigés à partir des sources indiquées à la fin de chaque texte.",
+      en: "African Ball is a site devoted to African sport, men's and women's. Stories are written from the sources linked at the end of each article.",
+      ar: "الكرة الأفريقية موقع مخصص للرياضة الأفريقية، للرجال والسيدات. تُكتب المواد استنادًا إلى المصادر المذكورة في نهاية كل نص."
     },
     foot2: { pt: "Horários exibidos no seu fuso horário.", fr: "Heures affichées dans votre fuseau horaire.", en: "Times shown in your time zone." },
     langMenu: { pt: "Escolher idioma", fr: "Choisir la langue", en: "Choose language" },
