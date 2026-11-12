@@ -20,6 +20,7 @@ o que ajuda o Google a encontrar o site e é o que o AdSense espera.
 | `conteudo/esportes-auto.json` | Dados automáticos dos outros esportes. É gerado sozinho: não edite. |
 | `scripts/atualizar-esportes.js` | Busca os dados dos outros esportes na API-Sports. |
 | `build-esportes.js` | Monta os grupos das competições africanas e as páginas de Mais esportes. |
+| `build-campos.js` | Desenha as capas: o campo de futebol, a quadra ou a pista de cada esporte, vistos de cima. |
 | `assets/` | Visual (`style.css`) e pequenos ajustes no navegador (`site.js`). |
 | `build.js` | Gera as páginas do site na pasta `_site/`. |
 | `.github/workflows/publicar.yml` | Faz o GitHub gerar e publicar o site sozinho a cada alteração. |
