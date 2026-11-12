@@ -16,6 +16,10 @@ o que ajuda o Google a encontrar o site e é o que o AdSense espera.
 | `conteudo/ligas-auto.json` | Classificação, resultados e próximos jogos baixados da API. É gerado sozinho: não edite. |
 | `scripts/atualizar-ligas.js` | Busca os dados dos campeonatos na API-Football. |
 | `.github/workflows/atualizar-ligas.yml` | Roda a busca uma vez por dia e publica o site de novo se algo mudou. |
+| `conteudo/esportes.js` | Os outros esportes (basquete, handebol, vôlei, rúgbi, atletismo, lutas...). |
+| `conteudo/esportes-auto.json` | Dados automáticos dos outros esportes. É gerado sozinho: não edite. |
+| `scripts/atualizar-esportes.js` | Busca os dados dos outros esportes na API-Sports. |
+| `build-esportes.js` | Monta os grupos das competições africanas e as páginas de Mais esportes. |
 | `assets/` | Visual (`style.css`) e pequenos ajustes no navegador (`site.js`). |
 | `build.js` | Gera as páginas do site na pasta `_site/`. |
 | `.github/workflows/publicar.yml` | Faz o GitHub gerar e publicar o site sozinho a cada alteração. |
@@ -124,6 +128,24 @@ ou no painel da API e coloque em `API_ID`, dentro de `conteudo/campeonatos.js`.
 Página com só uma tabela automática vale pouco para o Google. Escreva dois ou três parágrafos sobre cada campeonato
 (história, clubes principais, último campeão) em `TEXTOS`, no fim de `conteudo/campeonatos.js`.
 Enquanto a página não tiver texto nem dados, ela fica fora do Google (`noindex`) e fora do mapa do site.
+
+## Grupos das competições africanas
+
+Com a chave da API, o robô também baixa os grupos completos (do primeiro ao último colocado, com jogos, vitórias,
+empates, derrotas, saldo e pontos) das Eliminatórias da CAN, da Liga dos Campeões, da Copa das Confederações e de
+outras competições da CAF que a API tiver. Eles aparecem no início, em Tabelas, nas páginas de cada competição e em
+`competicoes/`. Sem dados, o site continua mostrando as tabelas escritas à mão em `conteudo/dados.js`.
+
+## Mais esportes
+
+A página **Mais esportes** reúne basquete, handebol, vôlei, rúgbi, atletismo, boxe, luta, judô, caratê, taekwondo,
+tênis de mesa, tênis, ciclismo e críquete. A lista fica em `conteudo/esportes.js`.
+
+- **Basquete, handebol, vôlei e rúgbi** têm dados automáticos da API-Sports, com a mesma chave da API-Football.
+  O robô descobre sozinho as competições africanas que a API tiver e cria uma página para cada uma.
+  Cada esporte tem a sua própria cota diária.
+- **Os outros esportes** não têm API grátis. A página mostra as notícias daquele esporte: na notícia, acrescente
+  o campo `esporte` com o id do esporte, por exemplo `esporte: "judo"` ou `esporte: "tenis-de-mesa"`.
 
 ## Google Search Console
 
