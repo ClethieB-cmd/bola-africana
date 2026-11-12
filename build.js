@@ -17,10 +17,10 @@ const PREVIEW = process.argv.includes("--preview");
 const OUT = path.join(__dirname, "_site");
 Object.assign(D.UI, X.UI);
 const { L, T, C, CATS } = D;
-const LANGS = ["pt", "fr", "en"];
+const LANGS = ["pt", "fr", "en", "ar"];
 const LOCALE = D.LANGS;
-const OG_LOCALE = { pt: "pt_BR", fr: "fr_FR", en: "en_GB" };
-const PREFIX = { pt: "", fr: "fr/", en: "en/" };
+const OG_LOCALE = { pt: "pt_BR", fr: "fr_FR", en: "en_GB", ar: "ar_AR" };
+const PREFIX = { pt: "", fr: "fr/", en: "en/", ar: "ar/" };
 const EXTRA_UI = {
   updated: { pt: "Atualizado em {d}", fr: "Mis à jour le {d}", en: "Updated {d}" },
   homeTag: { pt: "Notícias do futebol africano", fr: "L'actualité du football africain", en: "African football news" },
@@ -73,7 +73,8 @@ const absUrl = (p) => cfg.SITE_URL.replace(/\/$/, "") + "/" + p.replace(/(^|\/)i
 const MONTHS = {
   pt: ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"],
   fr: ["janv.", "févr.", "mars", "avr.", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc."],
-  en: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+  en: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+  ar: ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"]
 };
 function dateLabel(n) {
   const [y, m, d] = n.date.slice(0, 10).split("-").map(Number);
@@ -81,7 +82,7 @@ function dateLabel(n) {
   return n.monthOnly ? `${mon} ${y}` : `${d} ${mon} ${y}`;
 }
 const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
-const fmt = (opts) => new Intl.DateTimeFormat(LOCALE[lang], { timeZone: "UTC", ...opts });
+const fmt = (opts) => new Intl.DateTimeFormat(LOCALE[lang] + (lang === "ar" ? "-u-nu-latn" : ""), { timeZone: "UTC", ...opts });
 const fmtTime = (iso) => fmt({ hour: "2-digit", minute: "2-digit" }).format(new Date(iso));
 const fmtDay = (iso) => cap(fmt({ weekday: "short", day: "2-digit", month: "2-digit" }).format(new Date(iso)));
 const timeTag = (iso, kind, text) => `<time datetime="${iso}" data-local="${kind}">${esc(text)}</time>`;
@@ -216,7 +217,7 @@ function layout({ id, title, desc, body, active, type = "website", jsonld, noind
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${esc(cfg.ADSENSE_CLIENT)}" crossorigin="anonymous"></script>`
     : "";
   return `<!DOCTYPE html>
-<html lang="${LOCALE[lang]}">
+<html lang="${LOCALE[lang]}"${lang === "ar" ? ' dir="rtl"' : ""}>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -234,7 +235,7 @@ ${LANGS.map((l) => `<link rel="alternate" hreflang="${LOCALE[l]}" href="${absUrl
 <link rel="icon" href="${FAVICON}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400${lang === "ar" ? "&family=Cairo:wght@400;600;700;800;900" : ""}&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${asset("style.css")}">
 ${adsHead}${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld).replace(/</g, "\\u003c")}</script>` : ""}
 </head>
@@ -335,6 +336,27 @@ function campPage(c) {
 
 /* grupos das competições africanas e seção "Mais esportes" (arquivo build-esportes.js) */
 const ESP = require("./build-esportes.js")({ D, CAMP, NEWS, cfg, esc, L, T, u, ad, sectionHead, sidebar, timeTag, fmt, fmtDay, fmtTime, tzHint, storyCard, sorted, LANGS, LOCALE, getLang: () => lang });
+
+/* árabe: as traduções ficam em conteudo/traducao-ar.js; o que faltar aparece em francês */
+const AR = require("./conteudo/traducao-ar.js");
+const arChave = (s) => require("crypto").createHash("sha1").update(s).digest("hex").slice(0, 10);
+D.LANGS.ar = "ar";
+X.LANG_NAMES.ar = "العربية";
+let semAr = 0;
+function traduzAr(o) {
+  const t = (s) => (typeof s === "string" && s.trim() ? AR[arChave(s)] : s);
+  const r = Array.isArray(o.pt) ? o.pt.map(t) : t(o.pt);
+  if (Array.isArray(r) ? r.every((x) => x !== undefined) : r !== undefined) return r;
+  semAr++;
+  return o.fr ?? o.en ?? o.pt;
+}
+(function preencher(o, vistos) {
+  if (!o || typeof o !== "object" || vistos.has(o)) return;
+  vistos.add(o);
+  if (!Array.isArray(o) && o.pt !== undefined && (o.fr !== undefined || o.en !== undefined) && o.ar === undefined) o.ar = traduzAr(o);
+  for (const k of Object.keys(o)) preencher(o[k], vistos);
+})([D, X, NEWS, CAMP, require("./conteudo/esportes.js")], new Set());
+if (semAr) console.log(`Árabe: ${semAr} textos sem tradução, mostrados em francês nas páginas em árabe.`);
 
 /* ---------- páginas ---------- */
 function homePage() {
