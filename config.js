@@ -1,14 +1,14 @@
 /* CONFIGURAÇÃO DO SITE — troque estes valores e salve. O GitHub publica de novo sozinho. */
 module.exports = {
   // Endereço final do site, sem barra no fim. Troque quando tiver o domínio próprio.
-  SITE_URL: "https://www.seudominio.com",
+  SITE_URL: "https://clethieb-cmd.github.io/bola-africana",
 
   // Seu domínio próprio, ex.: "www.bolaafricana.com.br". Gera o arquivo CNAME. Deixe "" enquanto não tiver.
   DOMAIN: "",
 
   // Caminho do site no servidor. Com domínio próprio, deixe "/".
   // Sem domínio (endereço usuario.github.io/bola-africana), use "/bola-africana/".
-  BASE_PATH: "/",
+  BASE_PATH: "/bola-africana/",
 
   // ID de editor do Google AdSense, ex.: "ca-pub-1234567890123456". Deixe "" até criar a conta.
   // Quando preenchido, o site passa a carregar o código do AdSense e gera o arquivo ads.txt.
