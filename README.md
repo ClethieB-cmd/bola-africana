@@ -21,6 +21,7 @@ o que ajuda o Google a encontrar o site e é o que o AdSense espera.
 | `scripts/atualizar-esportes.js` | Busca os dados dos outros esportes na API-Sports. |
 | `build-esportes.js` | Monta os grupos das competições africanas e as páginas de Mais esportes. |
 | `build-campos.js` | Desenha as capas: o campo de futebol, a quadra ou a pista de cada esporte, vistos de cima. |
+| `build-generos.js` | Monta as páginas Masculino e Feminino do menu: todas as competições de cada gênero, esporte por esporte, com agenda, tabelas, onde assistir e notícias. |
 | `assets/` | Visual (`style.css`) e pequenos ajustes no navegador (`site.js`). |
 | `build.js` | Gera as páginas do site na pasta `_site/`. |
 | `.github/workflows/publicar.yml` | Faz o GitHub gerar e publicar o site sozinho a cada alteração. |
@@ -147,6 +148,18 @@ tênis de mesa, tênis, ciclismo e críquete. A lista fica em `conteudo/esportes
   Cada esporte tem a sua própria cota diária.
 - **Os outros esportes** não têm API grátis. A página mostra as notícias daquele esporte: na notícia, acrescente
   o campo `esporte` com o id do esporte, por exemplo `esporte: "judo"` ou `esporte: "tenis-de-mesa"`.
+
+## Masculino e Feminino
+
+O menu tem só **Início**, **Masculino** e **Feminino**. Cada gênero tem uma página com todos os esportes,
+cada um com a sua cor, as competições, a agenda, as tabelas, onde assistir e as notícias.
+
+- Competição automática entra no Feminino quando o nome dela tem Women, Féminin ou Ladies (é assim que a API marca).
+- Notícia entra no Feminino quando a categoria é `fem` ou quando ela tem a tag `fem`. Para uma notícia feminina
+  de outro esporte, acrescente `genero: "fem"`, por exemplo `esporte: "basquete", genero: "fem"`.
+- No Feminino só aparecem os esportes que já têm competição com dados ou notícia feminina. Os outros entram sozinhos
+  quando ganharem conteúdo.
+- As cores dos esportes ficam no fim de `assets/style.css` (classes `cor-futebol`, `cor-basquete`...).
 
 ## Árabe
 
