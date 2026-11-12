@@ -146,19 +146,42 @@ main { padding: 28px 0 56px; }
 .layout { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 36px; align-items: start; }
 @media (max-width: 960px) { .layout { grid-template-columns: minmax(0, 1fr); } }
 
-/* capa tipográfica com linhas de campo */
+/* capa: o campo, a quadra ou a pista do esporte, vistos de cima (desenhos em assets/campos/, gerados pelo build-campos.js) */
 .cover {
   --cc: var(--c-can);
-  position: relative; overflow: hidden; border-radius: 6px; color: #fff;
-  background-color: var(--cc);
-  background-image:
-    radial-gradient(circle at var(--cx, 78%) 50%, transparent 0 58px, rgba(255,255,255,.17) 58px 60px, transparent 60px),
-    radial-gradient(circle at var(--cx, 78%) 50%, rgba(255,255,255,.22) 0 4px, transparent 4px),
-    linear-gradient(90deg, transparent calc(var(--cx, 78%) - 1px), rgba(255,255,255,.15) calc(var(--cx, 78%) - 1px) calc(var(--cx, 78%) + 1px), transparent calc(var(--cx, 78%) + 1px)),
-    linear-gradient(160deg, rgba(255,255,255,.08), rgba(0,0,0,.22));
+  position: relative; isolation: isolate; overflow: hidden; border-radius: 6px; color: #fff;
+  background: #2a7032 url(campos/futebol.svg) center / cover no-repeat;
   display: flex; flex-direction: column; justify-content: flex-end; padding: 14px 16px;
   aspect-ratio: 16 / 9;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.12);
 }
+/* luz de estádio por cima e sombra no pé da capa, para o placar ler bem; a cor da seção fica na faixa lateral */
+.cover::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(120% 80% at 50% 0%, rgba(255,255,255,.16), transparent 60%),
+    linear-gradient(to top, rgba(8,14,10,.72) 0%, rgba(8,14,10,.32) 34%, transparent 62%);
+}
+.cover::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: var(--cc); z-index: 1; }
+.cover:empty::after { background: radial-gradient(120% 80% at 50% 0%, rgba(255,255,255,.14), transparent 60%), linear-gradient(to top, rgba(0,0,0,.16), transparent 45%); }
+.cover .big, .cover .small { text-shadow: 0 2px 14px rgba(0,0,0,.45); }
+.sp-futebol { background-image: url(campos/futebol.svg); }
+.sp-basquete { background-color: #c98a4f; background-image: url(campos/basquete.svg); }
+.sp-handebol { background-color: #2d6aa8; background-image: url(campos/handebol.svg); }
+.sp-volei { background-color: #2f6db5; background-image: url(campos/volei.svg); }
+.sp-rugbi { background-image: url(campos/rugbi.svg); }
+.sp-atletismo { background-color: #b8452e; background-image: url(campos/atletismo.svg); }
+.sp-boxe { background-color: #151b24; background-image: url(campos/boxe.svg); }
+.sp-luta { background-color: #24508f; background-image: url(campos/luta.svg); }
+.sp-judo { background-color: #2c5fa8; background-image: url(campos/judo.svg); }
+.sp-carate { background-color: #2c5fa8; background-image: url(campos/carate.svg); }
+.sp-taekwondo { background-color: #2c5fa8; background-image: url(campos/taekwondo.svg); }
+.sp-tenis-de-mesa { background-color: #1d3f73; background-image: url(campos/tenis-de-mesa.svg); }
+.sp-tenis { background-color: #2c5f9e; background-image: url(campos/tenis.svg); }
+.sp-ciclismo { background-color: #3a3e45; background-image: url(campos/ciclismo.svg); }
+.sp-criquete { background-image: url(campos/criquete.svg); }
+.cover.esp { --cc: #1b1f24; }
+.cover.banner { aspect-ratio: 5 / 2; margin: 4px 0 20px; }
 .cover .big { font-family: var(--font-display); font-weight: 900; line-height: .9; font-size: 64px; font-variant-numeric: tabular-nums; letter-spacing: -.005em; }
 .cover .small { font-size: 12.5px; font-weight: 600; opacity: .9; margin-top: 6px; }
 .cat-can { --cc: var(--c-can); --tc: var(--c-can); }
@@ -183,7 +206,7 @@ main { padding: 28px 0 56px; }
 
 .side-stories { display: flex; flex-direction: column; gap: 18px; }
 .row-story { display: grid; grid-template-columns: 132px minmax(0, 1fr); gap: 14px; text-decoration: none; align-items: start; }
-.row-story .cover { aspect-ratio: 4 / 3; padding: 8px 10px; --cx: 70%; }
+.row-story .cover { aspect-ratio: 4 / 3; padding: 8px 10px; }
 .row-story .cover .big { font-size: 30px; white-space: nowrap; }
 .row-story .cover .small { display: none; }
 .row-story h3 { font-family: var(--font-display); font-weight: 700; font-size: 22px; line-height: 1.05; margin: 6px 0 0; }
@@ -304,6 +327,10 @@ footer p { margin: 0; max-width: 72ch; }
 .camp .table-wrap td b { font-weight: 800; }
 .camp abbr { text-decoration: none; cursor: help; }
 .camp-row .cover .big { font-size: 26px; }
+.esp-dir a { padding: 0 0 10px; overflow: hidden; }
+.esp-dir .cover { aspect-ratio: 16 / 9; border-radius: 0; margin-bottom: 8px; padding: 10px 12px; }
+.esp-dir .cover::before { display: none; }
+.esp-dir .pais, .esp-dir .liga { padding: 0 12px; }
 .league a.country { font-size: 13px; color: var(--muted); font-weight: 600; text-decoration: none; }
 .league a.country:hover { text-decoration: underline; }
 .radar a { font-size: 13.5px; background: var(--surface-2); border-radius: 999px; padding: 4px 12px; text-decoration: none; color: inherit; }
@@ -337,3 +364,5 @@ html[lang="ar"] .story h3, html[lang="ar"] .row-story h3, html[lang="ar"] .secti
 [dir="rtl"] .sources ul { padding-left: 0; padding-right: 18px; }
 [dir="rtl"] .camp-dir a { border-left: 1px solid var(--line); border-right: 3px solid var(--c-ligas); }
 @media (max-width: 720px) { [dir="rtl"] .search, [dir="rtl"] .lang { margin-right: auto; margin-left: 0; } }
+[dir="rtl"] .cover::before { left: auto; right: 0; }
+.cover:empty::before { display: none; }
