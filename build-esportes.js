@@ -102,6 +102,7 @@ module.exports = function (h) {
     const c = FUT[k];
     return `<div class="layout"><div class="article camp">
       <div class="page-head cat-can"><h1>${esc(L(NOMES_FUT[k]))}</h1><p>${esc(T("compDesc", { nome: L(NOMES_FUT[k]) }))}</p></div>
+      <div class="cover banner cat-can sp-futebol" aria-hidden="true"></div>
       ${blocoComp(c, "cat-can", "campUpdated")}
     </div>${sidebar()}</div>`;
   }
@@ -126,7 +127,7 @@ module.exports = function (h) {
       <div class="page-head"><h1>${esc(T("moreSports"))}</h1><p>${esc(T("moreSportsDesc"))}</p></div>
       <ul class="camp-dir esp-dir">${ESPORTES.map((e) => {
         const n = comps(e).length;
-        return `<li><a href="${espUrl(e)}"><span class="pais">${esc(L(e.nome))}</span><span class="liga">${esc(n ? T("espCompsN", { n }) : L(e.desc))}</span></a></li>`;
+        return `<li><a href="${espUrl(e)}"><div class="cover esp sp-${e.id}" aria-hidden="true"></div><span class="pais">${esc(L(e.nome))}</span><span class="liga">${esc(n ? T("espCompsN", { n }) : L(e.desc))}</span></a></li>`;
       }).join("")}</ul>
     </div>${sidebar()}</div>`;
   }
@@ -138,6 +139,7 @@ module.exports = function (h) {
     return `<div class="layout"><div class="article camp">
       <a class="back" href="${u("esportes")}">‹ ${esc(T("allSports"))}</a>
       <div class="page-head"><h1>${esc(L(e.nome))}</h1><p>${esc(L(e.desc))}</p></div>
+      <div class="cover banner esp sp-${e.id}" aria-hidden="true"></div>
       ${afr.map((c) => `<section class="section"><div class="section-head"><h2>${esc(c.nome)}</h2><a href="${compUrl(e, c)}">${esc(T("fullPage"))}</a></div>${c.tabela && c.tabela.length ? gruposCards(c.tabela) : `<div class="panel">${jogosHtml((c.resultados || []).slice(0, 4), true)}</div>`}</section>`).join("")}
       ${nac.length ? `<section class="section">${sectionHead(T("espNational"))}<ul class="camp-dir">${nac.map((c) => `<li><a href="${compUrl(e, c)}"><span class="pais">${esc(L(paisDe(c.pais).nome))}</span><span class="liga">${esc(c.nome)}</span></a></li>`).join("")}</ul></section>` : ""}
       ${news.length ? `<section class="section">${sectionHead(T("espNews"))}<div class="grid-stories">${news.map(storyCard).join("")}</div></section>` : ""}
@@ -148,6 +150,7 @@ module.exports = function (h) {
     return `<div class="layout"><div class="article camp">
       <a class="back" href="${espUrl(e)}">‹ ${esc(L(e.nome))}</a>
       <div class="page-head"><h1>${esc(compTitle(e, c))}</h1><p>${esc(T("compDesc", { nome: c.nome }))}</p></div>
+      <div class="cover banner esp sp-${e.id}" aria-hidden="true"></div>
       ${blocoComp(c, "", "updatedT")}
     </div>${sidebar()}</div>`;
   }
@@ -167,17 +170,17 @@ module.exports = function (h) {
   }
 
   function linhasBusca(norm) {
-    const linha = (href, titulo, extra, codigo) => `<a class="row-story camp-row" href="${href}" data-q="${esc(norm(titulo + " " + extra))}">
-      <div class="cover" aria-hidden="true"><div class="big">${esc(codigo)}</div></div><div><h3>${esc(titulo)}</h3></div></a>`;
+    const linha = (href, titulo, extra, codigo, esp) => `<a class="row-story camp-row" href="${href}" data-q="${esc(norm(titulo + " " + extra))}">
+      <div class="cover esp sp-${esp}" aria-hidden="true"><div class="big">${esc(codigo)}</div></div><div><h3>${esc(titulo)}</h3></div></a>`;
     let out = "";
     for (const e of ESPORTES) {
-      out += linha(espUrl(e), L(e.nome), LANGS.map((l) => e.nome[l]).join(" "), L(e.nome).slice(0, 3).toUpperCase());
+      out += linha(espUrl(e), L(e.nome), LANGS.map((l) => e.nome[l]).join(" "), L(e.nome).slice(0, 3).toUpperCase(), e.id);
       for (const c of comps(e)) {
         const p = paisDe(c.pais);
-        out += linha(compUrl(e, c), compTitle(e, c), [c.nome, ...LANGS.map((l) => e.nome[l] + (p ? " " + p.nome[l] + " " + p.de[l] : " africa afrique"))].join(" "), c.pais === "AFR" ? "AFR" : c.pais);
+        out += linha(compUrl(e, c), compTitle(e, c), [c.nome, ...LANGS.map((l) => e.nome[l] + (p ? " " + p.nome[l] + " " + p.de[l] : " africa afrique"))].join(" "), c.pais === "AFR" ? "AFR" : c.pais, e.id);
       }
     }
-    for (const k of Object.keys(SLUG_FUT)) if (temDados(FUT[k])) out += linha(futUrl(k), L(NOMES_FUT[k]), LANGS.map((l) => NOMES_FUT[k][l]).join(" ") + " grupos groupes groups", "CAF");
+    for (const k of Object.keys(SLUG_FUT)) if (temDados(FUT[k])) out += linha(futUrl(k), L(NOMES_FUT[k]), LANGS.map((l) => NOMES_FUT[k][l]).join(" ") + " grupos groupes groups", "CAF", "futebol");
     return out;
   }
 
