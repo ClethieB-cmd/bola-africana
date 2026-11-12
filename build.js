@@ -23,7 +23,7 @@ const OG_LOCALE = { pt: "pt_BR", fr: "fr_FR", en: "en_GB", ar: "ar_AR" };
 const PREFIX = { pt: "", fr: "fr/", en: "en/", ar: "ar/" };
 const EXTRA_UI = {
   updated: { pt: "Atualizado em {d}", fr: "Mis à jour le {d}", en: "Updated {d}" },
-  homeTag: { pt: "Notícias do futebol africano", fr: "L'actualité du football africain", en: "African football news" },
+  homeTag: { pt: "Notícias do esporte africano", fr: "L'actualité du sport africain", en: "African sports news", ar: "أخبار الرياضة الأفريقية" },
   skip: { pt: "Pular para o conteúdo", fr: "Aller au contenu", en: "Skip to content" },
   footNav: { pt: "Institucional", fr: "Informations", en: "Information" }
 };
