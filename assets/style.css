@@ -290,3 +290,21 @@ footer p { margin: 0; max-width: 72ch; }
   .cover { transition: filter .15s ease; }
   a:hover > .cover { filter: brightness(1.08); }
 }
+
+/* campeonatos nacionais */
+.camp-dir { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px; }
+.camp-dir a { display: flex; flex-direction: column; gap: 2px; height: 100%; padding: 10px 12px; background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--c-ligas); border-radius: 6px; text-decoration: none; }
+.camp-dir a:hover .pais { text-decoration: underline; }
+.camp-dir .pais { font-weight: 700; font-size: 15px; }
+.camp-dir .liga { font-size: 12.5px; color: var(--muted); }
+.camp .page-head { margin-bottom: 8px; }
+.camp-champ { font-size: 15px; margin: 0 0 14px; }
+.camp-champ a { color: var(--muted); font-size: 13px; }
+.camp-grupo { font-family: var(--font-display); font-weight: 800; font-size: 20px; margin: 16px 0 8px; }
+.camp .table-wrap td b { font-weight: 800; }
+.camp abbr { text-decoration: none; cursor: help; }
+.camp-row .cover .big { font-size: 26px; }
+.league a.country { font-size: 13px; color: var(--muted); font-weight: 600; text-decoration: none; }
+.league a.country:hover { text-decoration: underline; }
+.radar a { font-size: 13.5px; background: var(--surface-2); border-radius: 999px; padding: 4px 12px; text-decoration: none; color: inherit; }
+.radar a:hover { text-decoration: underline; }
