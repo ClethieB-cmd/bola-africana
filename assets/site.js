@@ -2,6 +2,7 @@
    horários no fuso local, menu de idioma e busca. O site funciona mesmo sem este arquivo. */
 (function () {
   var locale = document.documentElement.lang || "pt-BR";
+  if (locale === "ar") locale = "ar-u-nu-latn";
   var cap = function (s) { return s.charAt(0).toUpperCase() + s.slice(1); };
 
   /* Horários: as páginas saem em GMT; aqui convertemos para o fuso de quem visita. */
