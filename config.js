@@ -20,8 +20,8 @@ module.exports = {
   // Código de verificação do Google Search Console (método "Tag HTML"): só o valor de content="...".
   GOOGLE_VERIFICACAO: "",
 
-  // E-mail que aparece nas páginas Contato, Sobre e Privacidade.
-  CONTACT_EMAIL: "contato@seudominio.com",
+  // E-mail que aparece nas páginas Contato, Sobre e Privacidade. Vazio: os trechos com e-mail ficam escondidos.
+  CONTACT_EMAIL: "",
 
   // Data da última atualização das notícias (aparece no topo do site).
   EDITION_DATE: "2026-11-12"
