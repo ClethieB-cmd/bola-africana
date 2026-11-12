@@ -1,0 +1,43 @@
+# Busca os dados dos campeonatos nacionais uma vez por dia e, se algo mudou, manda publicar o site de novo.
+# Para rodar na hora: aba Actions > Atualizar campeonatos > Run workflow.
+name: Atualizar campeonatos
+
+on:
+  schedule:
+    - cron: "47 23 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: atualizar-campeonatos
+  cancel-in-progress: false
+
+jobs:
+  dados:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Buscar dados na API-Football
+        env:
+          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
+        run: node scripts/atualizar-ligas.js
+      - name: Salvar e publicar
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add conteudo/ligas-auto.json
+          if git diff --cached --quiet; then
+            echo "Nada mudou."
+          else
+            git commit -m "Atualiza dados dos campeonatos"
+            git push
+            gh workflow run publicar.yml --ref main
+          fi
