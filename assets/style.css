@@ -317,3 +317,23 @@ footer p { margin: 0; max-width: 72ch; }
 .camp table { table-layout: fixed; }
 .camp th.num, .camp td.num { width: 52px; }
 .camp td { overflow-wrap: anywhere; }
+
+/* árabe (da direita para a esquerda) */
+html[lang="ar"] { --font-display: "Cairo", "Segoe UI", Tahoma, sans-serif; --font-body: "Cairo", "Segoe UI", Tahoma, sans-serif; }
+html[lang="ar"] .logo, html[lang="ar"] h1, html[lang="ar"] h2, html[lang="ar"] h3 { letter-spacing: 0; }
+html[lang="ar"] .page-head h1, html[lang="ar"] .article h1, html[lang="ar"] .lead-story h1 { line-height: 1.25; }
+html[lang="ar"] .story h3, html[lang="ar"] .row-story h3, html[lang="ar"] .section-head h2 { line-height: 1.3; }
+[dir="rtl"] .skip { left: auto; right: -9999px; }
+[dir="rtl"] .skip:focus { right: 12px; }
+[dir="rtl"] .today, [dir="rtl"] .section-head a { margin-left: 0; margin-right: auto; }
+[dir="rtl"] .lang { margin-left: 0; margin-right: 6px; }
+[dir="rtl"] .lang ul { left: auto; right: 0; }
+[dir="rtl"] th, [dir="rtl"] td { text-align: right; }
+[dir="rtl"] td.num, [dir="rtl"] th.num, [dir="rtl"] .fx .when, [dir="rtl"] .gtab .pt, [dir="rtl"] .chip-match .s { text-align: left; }
+[dir="rtl"] .fx .flag { margin-right: 0; margin-left: 6px; }
+[dir="rtl"] .cover .big, [dir="rtl"] .dates .d { direction: ltr; unicode-bidi: isolate; text-align: right; }
+[dir="rtl"] .fx .when { direction: ltr; unicode-bidi: isolate; }
+[dir="rtl"] .scorebar-label { padding-right: 0; padding-left: 6px; }
+[dir="rtl"] .sources ul { padding-left: 0; padding-right: 18px; }
+[dir="rtl"] .camp-dir a { border-left: 1px solid var(--line); border-right: 3px solid var(--c-ligas); }
+@media (max-width: 720px) { [dir="rtl"] .search, [dir="rtl"] .lang { margin-right: auto; margin-left: 0; } }
