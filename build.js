@@ -167,11 +167,13 @@ function sidebar() {
 }
 
 function groupsHtml(groups, k) {
+  if ((k === "cl" || k === "cc") && ESP.grupos(k)) return ESP.grupos(k);
   return `<div class="groups">${groups.map(([g, teams]) => `<div class="group cat-${k}"><h3>${esc(T("group"))} ${g}</h3><ol>${
     teams.map(([t, c]) => `<li><span>${esc(t ?? T("tbc"))}</span><span class="cty">${esc(c)}</span></li>`).join("")}</ol></div>`).join("")}</div>`;
 }
 const leaderNames = (arr) => arr.map((x) => (typeof x === "string" && D.COUNTRY[x] ? C(x) : L(x))).join(L(D.AND));
 function qualTable() {
+  if (ESP.grupos("canq")) return ESP.grupos("canq");
   return `<div class="table-wrap"><table><thead><tr><th>${esc(T("qGroup"))}</th><th>${esc(T("qLeader"))}</th><th class="num">${esc(T("qPts"))}</th><th>${esc(T("qNoteH"))}</th></tr></thead><tbody>${
     D.QUAL_LEADERS.map(([g, l, p, o]) => `<tr><td class="grp">${g}</td><td>${esc(leaderNames(l))}</td><td class="num">${esc(p)}</td><td>${esc(L(o))}</td></tr>`).join("")
   }</tbody></table></div><p class="note">${esc(T("qNote"))}</p>`;
@@ -197,7 +199,7 @@ function langMenu(id) {
     <ul>${LANGS.map((l) => `<li><a href="${u(id, l)}" hreflang="${LOCALE[l]}" lang="${LOCALE[l]}" data-lang="${l}"${l === lang ? ' aria-current="true"' : ""}>${X.LANG_NAMES[l]}</a></li>`).join("")}</ul></details>`;
 }
 function navHtml(active) {
-  const items = [["index", T("home"), null], ...Object.entries(CATS).map(([k, c]) => [c.route, navName(k), k]), ["agenda", T("agenda"), null], ["tabelas", T("tables"), null], ["onde-assistir", T("watch"), null]];
+  const items = [["index", T("home"), null], ...Object.entries(CATS).map(([k, c]) => [c.route, navName(k), k]), ["esportes", T("moreSports"), null], ["agenda", T("agenda"), null], ["tabelas", T("tables"), null], ["onde-assistir", T("watch"), null]];
   return items.map(([id, label, k]) => `<a href="${u(id)}"${k ? ` style="--nav-c: var(--c-${k})"` : ""}${id === active ? ' aria-current="page"' : ""}>${esc(label)}</a>`).join("");
 }
 function logoHtml(cls = "logo") {
@@ -331,6 +333,9 @@ function campPage(c) {
   </div>${sidebar()}</div>`;
 }
 
+/* grupos das competições africanas e seção "Mais esportes" (arquivo build-esportes.js) */
+const ESP = require("./build-esportes.js")({ D, CAMP, NEWS, cfg, esc, L, T, u, ad, sectionHead, sidebar, timeTag, fmt, fmtDay, fmtTime, tzHint, storyCard, sorted, LANGS, LOCALE, getLang: () => lang });
+
 /* ---------- páginas ---------- */
 function homePage() {
   const lead = sorted[0];
@@ -426,7 +431,8 @@ function searchPage() {
   const rows = sorted.map((n) => rowCard(n, ` data-q="${esc(norm([L(n.title), L(n.lead), L(n.body).join(" ")].join(" ")))}"`)).join("")
     + CAMP.map((c) => `<a class="row-story camp-row" href="${campUrl(c)}" data-q="${esc(norm(["campeonato championnat league liga", c.liga, ...LANGS.map((l) => c.nome[l] + " " + c.de[l])].join(" ")))}">
       <div class="cover cat-ligas" aria-hidden="true"><div class="big">${esc(c.code)}</div></div>
-      <div><div class="meta">${tag("ligas")}</div><h3>${esc(campTitle(c))}</h3></div></a>`).join("");
+      <div><div class="meta">${tag("ligas")}</div><h3>${esc(campTitle(c))}</h3></div></a>`).join("")
+    + ESP.linhasBusca(norm);
   return `<div class="search-page">
     <div class="page-head"><h1>${esc(T("searchTitle"))}</h1><p id="busca-msg" data-hits="${esc(L(D.UI.hits))}" data-nohits="${esc(L(D.UI.noHits))}" data-intro="${esc(T("searchIntro"))}">${esc(T("searchIntro"))}</p></div>
     <label for="busca-q" class="sr-only">${esc(T("searchLabel"))}</label>
@@ -468,6 +474,7 @@ for (const l of LANGS) {
     const p = emit("campeonatos/" + c.slug, { title: campTitle(c), desc: T("campDesc", { de: L(c.de), liga: c.liga }), body: () => campPage(c), active: CATS.ligas.route, noindex: !indexavel });
     if (indexavel) pages.push(p);
   }
+  ESP.emitir(emit, pages);
   for (const n of NEWS) {
     pages.push(emit("noticias/" + n.slug, {
       title: L(n.title), desc: L(n.lead), body: () => articlePage(n), active: CATS[n.cat].route, type: "article",
