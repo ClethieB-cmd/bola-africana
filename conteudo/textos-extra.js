@@ -102,24 +102,28 @@ module.exports = {
       body: {
         pt: [
           "O Bola Africana é um site de notícias dedicado ao esporte africano: futebol, basquete, handebol, vôlei, atletismo, lutas e outros esportes, com seleções e clubes, masculino e feminino, em português, francês, inglês e árabe.",
+          "Responsável pelo site: Clethie.",
           "No futebol, cobrimos as competições da CAF, como a Copa Africana de Nações, a Liga dos Campeões, a Copa das Confederações e a Liga dos Campeões Feminina, e temos uma página para o campeonato nacional de cada um dos 54 países africanos. Nos outros esportes, publicamos resultados e notícias das competições africanas.",
           "Cada matéria é escrita pela nossa equipe a partir de fontes públicas, como a CAF, as federações e a imprensa esportiva, sempre com o link da fonte no fim do texto. Não copiamos textos de outros sites.",
           "Encontrou um erro? Escreva para {email} com o link da matéria, e nós corrigimos."
         ],
         fr: [
           "Ballon Africain est un site d'actualités consacré au sport africain : football, basket-ball, handball, volley-ball, athlétisme, sports de combat et autres disciplines, sélections et clubs, masculin et féminin, en portugais, en français, en anglais et en arabe.",
+          "Responsable du site : Clethie.",
           "En football, nous couvrons les compétitions de la CAF, comme la Coupe d'Afrique des nations, la Ligue des champions, la Coupe de la Confédération et la Ligue des champions féminine, et nous avons une page pour le championnat national de chacun des 54 pays africains. Dans les autres sports, nous publions les résultats et l'actualité des compétitions africaines.",
           "Chaque article est rédigé par notre équipe à partir de sources publiques, comme la CAF, les fédérations et la presse sportive, toujours avec le lien de la source à la fin du texte. Nous ne copions pas les textes d'autres sites.",
           "Vous avez repéré une erreur ? Écrivez à {email} avec le lien de l'article, et nous la corrigerons."
         ],
         en: [
           "African Ball is a news site devoted to African sport: football, basketball, handball, volleyball, athletics, combat sports and more, national teams and clubs, men's and women's, in Portuguese, French, English and Arabic.",
+          "The site is run by Clethie.",
           "In football, we cover CAF competitions such as the Africa Cup of Nations, the Champions League, the Confederation Cup and the Women's Champions League, and we have a page for the national league of each of the 54 African countries. In other sports, we publish results and news from African competitions.",
           "Every story is written by our team from public sources such as CAF, national federations and the sports press, always with a link to the source at the end. We do not copy text from other sites.",
           "Spotted a mistake? Write to {email} with the link to the story, and we will fix it."
         ],
         ar: [
           "الكرة الأفريقية موقع إخباري مخصص للرياضة الأفريقية: كرة القدم وكرة السلة وكرة اليد والكرة الطائرة وألعاب القوى والرياضات القتالية وغيرها، منتخبات وأندية، رجالًا وسيدات، بالبرتغالية والفرنسية والإنجليزية والعربية.",
+          "إدارة الموقع: Clethie.",
           "في كرة القدم، نغطي مسابقات الكاف، مثل كأس أمم أفريقيا ودوري الأبطال وكأس الكونفدرالية ودوري أبطال أفريقيا للسيدات، ولدينا صفحة للدوري المحلي في كل دولة من الدول الأفريقية الـ54. وفي الرياضات الأخرى، ننشر نتائج المسابقات الأفريقية وأخبارها.",
           "يكتب فريقنا كل مادة استنادًا إلى مصادر عامة، مثل الكاف والاتحادات الوطنية والصحافة الرياضية، مع رابط المصدر دائمًا في نهاية النص. نحن لا ننسخ نصوصًا من مواقع أخرى.",
           "هل وجدت خطأ؟ راسلنا على {email} مع رابط المادة، وسنصححه."
