@@ -17,6 +17,9 @@ module.exports = {
   // IDs de blocos de anúncio criados no AdSense (opcional). Com "Anúncios automáticos" ligados, pode deixar vazio.
   ADSENSE_SLOTS: { topo: "", meio: "", lateral: "", materia: "" },
 
+  // Código de verificação do Google Search Console (método "Tag HTML"): só o valor de content="...".
+  GOOGLE_VERIFICACAO: "",
+
   // E-mail que aparece nas páginas Contato, Sobre e Privacidade.
   CONTACT_EMAIL: "contato@seudominio.com",
 
