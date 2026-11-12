@@ -1,1 +1,1489 @@
-{}
+{
+ "basquete": {
+  "competicoes": {
+   "324": {
+    "apiId": 324,
+    "nome": "AfroBasket",
+    "tipo": "cup",
+    "pais": "AFR",
+    "temporada": "2024/25",
+    "tabela": [
+     {
+      "grupo": "Group A",
+      "linhas": [
+       [
+        1,
+        "Ivory Coast",
+        3,
+        3,
+        null,
+        0,
+        21,
+        null
+       ],
+       [
+        1,
+        "D.R. Congo",
+        6,
+        5,
+        null,
+        1,
+        10,
+        null
+       ],
+       [
+        2,
+        "Cape Verde",
+        3,
+        2,
+        null,
+        1,
+        21,
+        null
+       ],
+       [
+        2,
+        "South Sudan",
+        6,
+        4,
+        null,
+        2,
+        92,
+        null
+       ],
+       [
+        3,
+        "D.R. Congo",
+        3,
+        1,
+        null,
+        2,
+        -14,
+        null
+       ],
+       [
+        3,
+        "Mali",
+        6,
+        3,
+        null,
+        3,
+        -18,
+        null
+       ],
+       [
+        4,
+        "Rwanda",
+        3,
+        0,
+        null,
+        3,
+        -28,
+        null
+       ],
+       [
+        4,
+        "Morocco",
+        6,
+        0,
+        null,
+        6,
+        -84,
+        null
+       ],
+       [
+        5,
+        "Mozambique",
+        0,
+        0,
+        null,
+        0,
+        0,
+        null
+       ]
+      ]
+     },
+     {
+      "grupo": "Group B",
+      "linhas": [
+       [
+        1,
+        "Nigeria",
+        3,
+        3,
+        null,
+        0,
+        48,
+        null
+       ],
+       [
+        1,
+        "Libya",
+        6,
+        4,
+        null,
+        2,
+        15,
+        null
+       ],
+       [
+        2,
+        "Cameroon",
+        3,
+        2,
+        null,
+        1,
+        15,
+        null
+       ],
+       [
+        2,
+        "Cape Verde",
+        6,
+        3,
+        null,
+        3,
+        5,
+        null
+       ],
+       [
+        3,
+        "Tunisia",
+        3,
+        1,
+        null,
+        2,
+        -21,
+        null
+       ],
+       [
+        3,
+        "Nigeria",
+        6,
+        3,
+        null,
+        3,
+        7,
+        null
+       ],
+       [
+        4,
+        "Madagascar",
+        3,
+        0,
+        null,
+        3,
+        -42,
+        null
+       ],
+       [
+        4,
+        "Uganda",
+        6,
+        2,
+        null,
+        4,
+        -27,
+        null
+       ]
+      ]
+     },
+     {
+      "grupo": "Group C",
+      "linhas": [
+       [
+        1,
+        "Angola",
+        3,
+        3,
+        null,
+        0,
+        50,
+        null
+       ],
+       [
+        1,
+        "Senegal",
+        6,
+        6,
+        null,
+        0,
+        133,
+        null
+       ],
+       [
+        2,
+        "Guinea",
+        3,
+        2,
+        null,
+        1,
+        20,
+        null
+       ],
+       [
+        2,
+        "Cameroon",
+        6,
+        4,
+        null,
+        2,
+        38,
+        null
+       ],
+       [
+        3,
+        "South Sudan",
+        3,
+        1,
+        null,
+        2,
+        53,
+        null
+       ],
+       [
+        3,
+        "Rwanda",
+        6,
+        2,
+        null,
+        4,
+        -22,
+        null
+       ],
+       [
+        4,
+        "Libya",
+        3,
+        0,
+        null,
+        3,
+        -123,
+        null
+       ],
+       [
+        4,
+        "Gabon",
+        6,
+        0,
+        null,
+        6,
+        -149,
+        null
+       ]
+      ]
+     },
+     {
+      "grupo": "Group D",
+      "linhas": [
+       [
+        1,
+        "Egypt",
+        3,
+        3,
+        null,
+        0,
+        42,
+        null
+       ],
+       [
+        1,
+        "Ivory Coast",
+        6,
+        6,
+        null,
+        0,
+        100,
+        null
+       ],
+       [
+        2,
+        "Senegal",
+        3,
+        2,
+        null,
+        1,
+        31,
+        null
+       ],
+       [
+        2,
+        "Egypt",
+        6,
+        3,
+        null,
+        3,
+        39,
+        null
+       ],
+       [
+        3,
+        "Mali",
+        3,
+        1,
+        null,
+        2,
+        -12,
+        null
+       ],
+       [
+        3,
+        "Madagascar",
+        6,
+        2,
+        null,
+        4,
+        -75,
+        null
+       ],
+       [
+        4,
+        "Uganda",
+        3,
+        0,
+        null,
+        3,
+        -61,
+        null
+       ],
+       [
+        4,
+        "Central African Republic",
+        6,
+        1,
+        null,
+        5,
+        -64,
+        null
+       ]
+      ]
+     },
+     {
+      "grupo": "Group E",
+      "linhas": [
+       [
+        1,
+        "Tunisia",
+        6,
+        5,
+        null,
+        1,
+        47,
+        null
+       ],
+       [
+        2,
+        "Angola",
+        6,
+        4,
+        null,
+        2,
+        66,
+        null
+       ],
+       [
+        3,
+        "Guinea",
+        6,
+        2,
+        null,
+        4,
+        -6,
+        null
+       ],
+       [
+        4,
+        "Kenya",
+        6,
+        1,
+        null,
+        5,
+        -107,
+        null
+       ]
+      ]
+     }
+    ],
+    "resultados": [
+     {
+      "d": "2025-08-24T18:00:00+00:00",
+      "c": "Angola",
+      "f": "Mali",
+      "gc": 70,
+      "gf": 43
+     },
+     {
+      "d": "2025-08-24T15:00:00+00:00",
+      "c": "Cameroon",
+      "f": "Senegal",
+      "gc": 72,
+      "gf": 98
+     },
+     {
+      "d": "2025-08-23T18:00:00+00:00",
+      "c": "Angola",
+      "f": "Cameroon",
+      "gc": 74,
+      "gf": 73
+     },
+     {
+      "d": "2025-08-23T15:00:00+00:00",
+      "c": "Mali",
+      "f": "Senegal",
+      "gc": 88,
+      "gf": 80
+     },
+     {
+      "d": "2025-08-21T18:00:00+00:00",
+      "c": "Angola",
+      "f": "Cape Verde",
+      "gc": 90,
+      "gf": 80
+     },
+     {
+      "d": "2025-08-21T15:00:00+00:00",
+      "c": "Egypt",
+      "f": "Cameroon",
+      "gc": 68,
+      "gf": 95
+     },
+     {
+      "d": "2025-08-20T18:00:00+00:00",
+      "c": "Nigeria",
+      "f": "Senegal",
+      "gc": 75,
+      "gf": 91
+     },
+     {
+      "d": "2025-08-20T15:00:00+00:00",
+      "c": "Ivory Coast",
+      "f": "Mali",
+      "gc": 96,
+      "gf": 102
+     },
+     {
+      "d": "2025-08-19T18:00:00+00:00",
+      "c": "Cameroon",
+      "f": "D.R. Congo",
+      "gc": 77,
+      "gf": 68
+     },
+     {
+      "d": "2025-08-19T15:00:00+00:00",
+      "c": "Cape Verde",
+      "f": "Tunisia",
+      "gc": 87,
+      "gf": 54
+     }
+    ],
+    "proximos": [],
+    "atualizado": "2026-11-12T21:45:45.215Z"
+   },
+   "412": {
+    "apiId": 412,
+    "nome": "AfroCan",
+    "tipo": "League",
+    "pais": "AFR",
+    "temporada": "2023",
+    "tabela": [
+     {
+      "grupo": "Group A",
+      "linhas": [
+       [
+        1,
+        "Kenya",
+        2,
+        1,
+        null,
+        1,
+        7,
+        null
+       ],
+       [
+        2,
+        "Ivory Coast",
+        2,
+        1,
+        null,
+        1,
+        4,
+        null
+       ],
+       [
+        3,
+        "Gabon",
+        2,
+        1,
+        null,
+        1,
+        -11,
+        null
+       ]
+      ]
+     },
+     {
+      "grupo": "Group B",
+      "linhas": [
+       [
+        1,
+        "Angola",
+        2,
+        2,
+        null,
+        0,
+        26,
+        null
+       ],
+       [
+        2,
+        "Nigeria",
+        2,
+        1,
+        null,
+        1,
+        -3,
+        null
+       ],
+       [
+        3,
+        "Mali",
+        2,
+        0,
+        null,
+        2,
+        -23,
+        null
+       ]
+      ]
+     },
+     {
+      "grupo": "Group C",
+      "linhas": [
+       [
+        1,
+        "Tunisia",
+        2,
+        2,
+        null,
+        0,
+        21,
+        null
+       ],
+       [
+        2,
+        "Morocco",
+        2,
+        1,
+        null,
+        1,
+        -14,
+        null
+       ],
+       [
+        3,
+        "Rwanda",
+        2,
+        0,
+        null,
+        2,
+        -7,
+        null
+       ]
+      ]
+     },
+     {
+      "grupo": "Group D",
+      "linhas": [
+       [
+        1,
+        "D.R. Congo",
+        2,
+        2,
+        null,
+        0,
+        26,
+        null
+       ],
+       [
+        2,
+        "Mozambique",
+        2,
+        1,
+        null,
+        1,
+        -13,
+        null
+       ],
+       [
+        3,
+        "Cameroon",
+        2,
+        0,
+        null,
+        2,
+        -13,
+        null
+       ]
+      ]
+     }
+    ],
+    "resultados": [
+     {
+      "d": "2023-07-16T17:00:00+00:00",
+      "c": "Morocco",
+      "f": "Ivory Coast",
+      "gc": 78,
+      "gf": 76
+     },
+     {
+      "d": "2023-07-16T14:00:00+00:00",
+      "c": "D.R. Congo",
+      "f": "Rwanda",
+      "gc": 73,
+      "gf": 82
+     },
+     {
+      "d": "2023-07-15T14:30:00+00:00",
+      "c": "Nigeria",
+      "f": "Angola",
+      "gc": 69,
+      "gf": 72
+     },
+     {
+      "d": "2023-07-15T12:00:00+00:00",
+      "c": "Kenya",
+      "f": "Tunisia",
+      "gc": 59,
+      "gf": 67
+     },
+     {
+      "d": "2023-07-14T17:00:00+00:00",
+      "c": "Rwanda",
+      "f": "Ivory Coast",
+      "gc": 71,
+      "gf": 74
+     },
+     {
+      "d": "2023-07-14T14:00:00+00:00",
+      "c": "Morocco",
+      "f": "D.R. Congo",
+      "gc": 76,
+      "gf": 69
+     },
+     {
+      "d": "2023-07-14T11:30:00+00:00",
+      "c": "Angola",
+      "f": "Tunisia",
+      "gc": 65,
+      "gf": 68
+     },
+     {
+      "d": "2023-07-14T09:00:00+00:00",
+      "c": "Kenya",
+      "f": "Nigeria",
+      "gc": 61,
+      "gf": 59
+     },
+     {
+      "d": "2023-07-13T17:00:00+00:00",
+      "c": "Angola",
+      "f": "Rwanda",
+      "gc": 63,
+      "gf": 73
+     },
+     {
+      "d": "2023-07-13T14:30:00+00:00",
+      "c": "Tunisia",
+      "f": "Ivory Coast",
+      "gc": 66,
+      "gf": 69
+     }
+    ],
+    "proximos": [],
+    "atualizado": "2026-11-12T21:46:06.743Z"
+   }
+  },
+  "geradoEm": "2026-11-12T21:46:13.867Z"
+ },
+ "handebol": {
+  "competicoes": {
+   "184": {
+    "apiId": 184,
+    "nome": "African Championship Women",
+    "tipo": "Cup",
+    "pais": "AFR",
+    "temporada": "2024",
+    "tabela": [
+     {
+      "grupo": "Group A",
+      "linhas": [
+       [
+        1,
+        "Congo W",
+        5,
+        4,
+        0,
+        1,
+        32,
+        8
+       ],
+       [
+        2,
+        "Egypt W",
+        5,
+        4,
+        0,
+        1,
+        39,
+        8
+       ],
+       [
+        3,
+        "Senegal W",
+        5,
+        4,
+        0,
+        1,
+        49,
+        8
+       ],
+       [
+        4,
+        "Algeria W",
+        5,
+        2,
+        0,
+        3,
+        0,
+        4
+       ],
+       [
+        5,
+        "Cape Verde W",
+        5,
+        1,
+        0,
+        4,
+        -18,
+        2
+       ],
+       [
+        6,
+        "Kenya W",
+        5,
+        0,
+        0,
+        5,
+        -102,
+        0
+       ]
+      ]
+     },
+     {
+      "grupo": "Group B",
+      "linhas": [
+       [
+        1,
+        "Angola W",
+        5,
+        5,
+        0,
+        0,
+        103,
+        10
+       ],
+       [
+        2,
+        "Cameroon W",
+        5,
+        4,
+        0,
+        1,
+        12,
+        8
+       ],
+       [
+        3,
+        "D.R. Congo W",
+        5,
+        3,
+        0,
+        2,
+        10,
+        6
+       ],
+       [
+        4,
+        "Tunisia W",
+        5,
+        1,
+        1,
+        3,
+        13,
+        3
+       ],
+       [
+        5,
+        "Guinea W",
+        5,
+        1,
+        1,
+        3,
+        -1,
+        3
+       ],
+       [
+        6,
+        "Uganda W",
+        5,
+        0,
+        0,
+        5,
+        -137,
+        0
+       ]
+      ]
+     }
+    ],
+    "resultados": [
+     {
+      "d": "2024-12-07T18:00:00+00:00",
+      "c": "Senegal W",
+      "f": "Angola W",
+      "gc": 18,
+      "gf": 27
+     },
+     {
+      "d": "2024-12-07T15:30:00+00:00",
+      "c": "Tunisia W",
+      "f": "Egypt W",
+      "gc": 25,
+      "gf": 22
+     },
+     {
+      "d": "2024-12-06T17:00:00+00:00",
+      "c": "Egypt W",
+      "f": "Angola W",
+      "gc": 22,
+      "gf": 36
+     },
+     {
+      "d": "2024-12-06T14:30:00+00:00",
+      "c": "Tunisia W",
+      "f": "Senegal W",
+      "gc": 18,
+      "gf": 26
+     },
+     {
+      "d": "2024-12-06T12:30:00+00:00",
+      "c": "Cape Verde W",
+      "f": "Guinea W",
+      "gc": 17,
+      "gf": 31
+     },
+     {
+      "d": "2024-12-06T10:30:00+00:00",
+      "c": "Congo W",
+      "f": "D.R. Congo W",
+      "gc": 28,
+      "gf": 30
+     },
+     {
+      "d": "2024-12-06T08:30:00+00:00",
+      "c": "Cameroon W",
+      "f": "Algeria W",
+      "gc": 29,
+      "gf": 24
+     },
+     {
+      "d": "2024-12-05T17:00:00+00:00",
+      "c": "D.R. Congo W",
+      "f": "Algeria W",
+      "gc": 33,
+      "gf": 17
+     },
+     {
+      "d": "2024-12-05T15:00:00+00:00",
+      "c": "Congo W",
+      "f": "Cameroon W",
+      "gc": 19,
+      "gf": 17
+     },
+     {
+      "d": "2024-12-05T15:00:00+00:00",
+      "c": "Uganda W",
+      "f": "Kenya W",
+      "gc": 34,
+      "gf": 25
+     }
+    ],
+    "proximos": [],
+    "atualizado": "2026-11-12T21:46:35.878Z"
+   },
+   "198": {
+    "apiId": 198,
+    "nome": "African Games",
+    "tipo": "League",
+    "pais": "AFR",
+    "temporada": "2024",
+    "tabela": [
+     {
+      "grupo": "Group 1",
+      "linhas": [
+       [
+        1,
+        "Egypt",
+        3,
+        3,
+        0,
+        0,
+        68,
+        6
+       ],
+       [
+        2,
+        "Nigeria",
+        3,
+        2,
+        0,
+        1,
+        28,
+        4
+       ],
+       [
+        3,
+        "Mali",
+        3,
+        1,
+        0,
+        2,
+        -39,
+        2
+       ],
+       [
+        4,
+        "Togo",
+        3,
+        0,
+        0,
+        3,
+        -57,
+        0
+       ]
+      ]
+     },
+     {
+      "grupo": "Group 2",
+      "linhas": [
+       [
+        1,
+        "D.R. Congo",
+        3,
+        3,
+        0,
+        0,
+        32,
+        6
+       ],
+       [
+        2,
+        "Benin",
+        3,
+        2,
+        0,
+        1,
+        0,
+        4
+       ],
+       [
+        3,
+        "Kenya",
+        3,
+        1,
+        0,
+        2,
+        -11,
+        2
+       ],
+       [
+        4,
+        "Ghana",
+        3,
+        0,
+        0,
+        3,
+        -21,
+        0
+       ]
+      ]
+     }
+    ],
+    "resultados": [
+     {
+      "d": "2024-03-22T18:30:00+00:00",
+      "c": "D.R. Congo",
+      "f": "Egypt",
+      "gc": 32,
+      "gf": 33
+     },
+     {
+      "d": "2024-03-22T14:00:00+00:00",
+      "c": "Nigeria",
+      "f": "Benin",
+      "gc": 38,
+      "gf": 20
+     },
+     {
+      "d": "2024-03-21T16:00:00+00:00",
+      "c": "Mali",
+      "f": "Kenya",
+      "gc": 33,
+      "gf": 35
+     },
+     {
+      "d": "2024-03-21T12:00:00+00:00",
+      "c": "Togo",
+      "f": "Ghana",
+      "gc": 27,
+      "gf": 34
+     },
+     {
+      "d": "2024-03-20T18:00:00+00:00",
+      "c": "D.R. Congo",
+      "f": "Nigeria",
+      "gc": 29,
+      "gf": 20
+     },
+     {
+      "d": "2024-03-20T14:00:00+00:00",
+      "c": "Egypt",
+      "f": "Benin",
+      "gc": 38,
+      "gf": 27
+     },
+     {
+      "d": "2024-03-17T18:00:00+00:00",
+      "c": "D.R. Congo",
+      "f": "Kenya",
+      "gc": 45,
+      "gf": 31
+     },
+     {
+      "d": "2024-03-17T16:00:00+00:00",
+      "c": "Egypt",
+      "f": "Nigeria",
+      "gc": 27,
+      "gf": 24
+     },
+     {
+      "d": "2024-03-17T14:00:00+00:00",
+      "c": "Mali",
+      "f": "Togo",
+      "gc": 31,
+      "gf": 25
+     },
+     {
+      "d": "2024-03-17T12:00:00+00:00",
+      "c": "Benin",
+      "f": "Ghana",
+      "gc": 29,
+      "gf": 25
+     }
+    ],
+    "proximos": [],
+    "atualizado": "2026-11-12T21:46:50.136Z"
+   },
+   "199": {
+    "apiId": 199,
+    "nome": "African Games Women",
+    "tipo": "League",
+    "pais": "AFR",
+    "temporada": "2024",
+    "tabela": [
+     {
+      "grupo": "Group 1",
+      "linhas": [
+       [
+        1,
+        "Angola W",
+        3,
+        3,
+        0,
+        0,
+        76,
+        6
+       ],
+       [
+        2,
+        "Algeria W",
+        3,
+        2,
+        0,
+        1,
+        -9,
+        4
+       ],
+       [
+        3,
+        "Ghana W",
+        3,
+        1,
+        0,
+        2,
+        -29,
+        2
+       ],
+       [
+        4,
+        "Burkina Faso W",
+        3,
+        0,
+        0,
+        3,
+        -38,
+        0
+       ]
+      ]
+     },
+     {
+      "grupo": "Group 2",
+      "linhas": [
+       [
+        1,
+        "D.R. Congo W",
+        3,
+        2,
+        1,
+        0,
+        29,
+        5
+       ],
+       [
+        2,
+        "Cameroon W",
+        3,
+        2,
+        0,
+        1,
+        39,
+        4
+       ],
+       [
+        3,
+        "Uganda W",
+        3,
+        1,
+        1,
+        1,
+        -1,
+        3
+       ],
+       [
+        4,
+        "Mali W",
+        3,
+        0,
+        0,
+        3,
+        -67,
+        0
+       ]
+      ]
+     }
+    ],
+    "resultados": [
+     {
+      "d": "2024-03-22T16:00:00+00:00",
+      "c": "Angola W",
+      "f": "D.R. Congo W",
+      "gc": 33,
+      "gf": 15
+     },
+     {
+      "d": "2024-03-22T12:00:00+00:00",
+      "c": "Cameroon W",
+      "f": "Algeria W",
+      "gc": 29,
+      "gf": 21
+     },
+     {
+      "d": "2024-03-21T18:00:00+00:00",
+      "c": "Ghana W",
+      "f": "Uganda W",
+      "gc": 28,
+      "gf": 30
+     },
+     {
+      "d": "2024-03-21T14:00:00+00:00",
+      "c": "Burkina Faso W",
+      "f": "Mali W",
+      "gc": 38,
+      "gf": 32
+     },
+     {
+      "d": "2024-03-20T16:00:00+00:00",
+      "c": "D.R. Congo W",
+      "f": "Algeria W",
+      "gc": 29,
+      "gf": 25
+     },
+     {
+      "d": "2024-03-20T12:00:00+00:00",
+      "c": "Angola W",
+      "f": "Cameroon W",
+      "gc": 35,
+      "gf": 16
+     },
+     {
+      "d": "2024-03-18T18:00:00+00:00",
+      "c": "Cameroon W",
+      "f": "D.R. Congo W",
+      "gc": 24,
+      "gf": 25
+     },
+     {
+      "d": "2024-03-18T16:00:00+00:00",
+      "c": "Angola W",
+      "f": "Algeria W",
+      "gc": 38,
+      "gf": 18
+     },
+     {
+      "d": "2024-03-18T14:00:00+00:00",
+      "c": "Burkina Faso W",
+      "f": "Ghana W",
+      "gc": 21,
+      "gf": 22
+     },
+     {
+      "d": "2024-03-18T12:00:00+00:00",
+      "c": "Uganda W",
+      "f": "Mali W",
+      "gc": 37,
+      "gf": 27
+     }
+    ],
+    "proximos": [],
+    "atualizado": "2026-11-12T21:47:04.397Z"
+   }
+  },
+  "geradoEm": "2026-11-12T21:47:04.397Z"
+ },
+ "volei": {
+  "competicoes": {},
+  "geradoEm": "2026-11-12T21:47:40.700Z"
+ },
+ "rugbi": {
+  "competicoes": {
+   "137": {
+    "apiId": 137,
+    "nome": "Kenya Cup",
+    "tipo": "Cup",
+    "pais": "KEN",
+    "temporada": "2023/24",
+    "tabela": [
+     {
+      "grupo": "",
+      "linhas": [
+       [
+        1,
+        "Kabras Sugar",
+        11,
+        11,
+        0,
+        0,
+        559,
+        54
+       ],
+       [
+        2,
+        "KCB",
+        11,
+        9,
+        0,
+        2,
+        333,
+        45
+       ],
+       [
+        3,
+        "Menengai Oilers",
+        11,
+        9,
+        0,
+        2,
+        147,
+        41
+       ],
+       [
+        4,
+        "Kenya Harlequin",
+        11,
+        7,
+        0,
+        4,
+        117,
+        33
+       ],
+       [
+        5,
+        "Nondescripts",
+        11,
+        7,
+        0,
+        4,
+        -8,
+        31
+       ],
+       [
+        6,
+        "Mwamba",
+        11,
+        5,
+        0,
+        6,
+        -157,
+        24
+       ],
+       [
+        7,
+        "Blak Blad",
+        11,
+        4,
+        1,
+        6,
+        -21,
+        23
+       ],
+       [
+        8,
+        "Nakuru",
+        11,
+        4,
+        1,
+        6,
+        -53,
+        23
+       ],
+       [
+        9,
+        "Strathmore Leos",
+        11,
+        4,
+        0,
+        7,
+        -110,
+        21
+       ],
+       [
+        10,
+        "Kisumu",
+        11,
+        3,
+        1,
+        7,
+        -204,
+        14
+       ],
+       [
+        11,
+        "Catholic Monks",
+        11,
+        1,
+        0,
+        10,
+        -263,
+        7
+       ],
+       [
+        12,
+        "Homeboyz",
+        11,
+        0,
+        1,
+        10,
+        -340,
+        0
+       ]
+      ]
+     }
+    ],
+    "resultados": [
+     {
+      "d": "2024-04-06T12:00:00+00:00",
+      "c": "Kabras Sugar",
+      "f": "KCB",
+      "gc": 29,
+      "gf": 5
+     },
+     {
+      "d": "2024-03-23T13:00:00+00:00",
+      "c": "Kabras Sugar",
+      "f": "Nondescripts",
+      "gc": 37,
+      "gf": 9
+     },
+     {
+      "d": "2024-03-23T13:00:00+00:00",
+      "c": "KCB",
+      "f": "Menengai Oilers",
+      "gc": 21,
+      "gf": 12
+     },
+     {
+      "d": "2024-03-16T13:00:00+00:00",
+      "c": "Menengai Oilers",
+      "f": "Blak Blad",
+      "gc": 26,
+      "gf": 20
+     },
+     {
+      "d": "2024-03-16T13:00:00+00:00",
+      "c": "Kenya Harlequin",
+      "f": "Nondescripts",
+      "gc": 20,
+      "gf": 26
+     },
+     {
+      "d": "2024-03-09T13:00:00+00:00",
+      "c": "Nondescripts",
+      "f": "Kenya Harlequin",
+      "gc": 21,
+      "gf": 13
+     },
+     {
+      "d": "2024-03-09T12:00:00+00:00",
+      "c": "Kisumu",
+      "f": "Strathmore Leos",
+      "gc": 23,
+      "gf": 17
+     },
+     {
+      "d": "2024-03-09T12:00:00+00:00",
+      "c": "Kabras Sugar",
+      "f": "KCB",
+      "gc": 14,
+      "gf": 10
+     },
+     {
+      "d": "2024-03-09T12:00:00+00:00",
+      "c": "Catholic Monks",
+      "f": "Menengai Oilers",
+      "gc": 23,
+      "gf": 34
+     },
+     {
+      "d": "2024-03-09T11:00:00+00:00",
+      "c": "Mwamba",
+      "f": "Nakuru",
+      "gc": 20,
+      "gf": 31
+     }
+    ],
+    "proximos": [],
+    "atualizado": "2026-11-12T21:48:09.712Z"
+   }
+  },
+  "geradoEm": "2026-11-12T21:48:45.514Z"
+ }
+}

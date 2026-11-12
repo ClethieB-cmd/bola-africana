@@ -1,6 +1,1646 @@
 {
- "geradoEm": null,
- "ligas": {},
- "mapa": {},
- "semCampeonato": []
+ "geradoEm": "2026-11-12T21:45:09.082Z",
+ "continentais": {
+  "chan": {
+   "apiId": 19,
+   "apiNome": "African Nations Championship",
+   "temporada": "2025",
+   "ano": 2024,
+   "tabela": [
+    {
+     "grupo": "African Nations Championship 2024, Group A",
+     "linhas": [
+      [
+       1,
+       "Kenya",
+       4,
+       3,
+       1,
+       0,
+       3,
+       10
+      ],
+      [
+       2,
+       "Morocco",
+       4,
+       3,
+       0,
+       1,
+       5,
+       9
+      ],
+      [
+       3,
+       "Congo DR",
+       4,
+       2,
+       0,
+       2,
+       1,
+       6
+      ],
+      [
+       4,
+       "Angola",
+       4,
+       1,
+       1,
+       2,
+       -3,
+       4
+      ],
+      [
+       5,
+       "Zambia",
+       4,
+       0,
+       0,
+       4,
+       -6,
+       0
+      ]
+     ]
+    },
+    {
+     "grupo": "African Nations Championship 2024, Group B",
+     "linhas": [
+      [
+       1,
+       "Tanzania",
+       4,
+       3,
+       1,
+       0,
+       4,
+       10
+      ],
+      [
+       2,
+       "Madagascar",
+       4,
+       2,
+       1,
+       1,
+       2,
+       7
+      ],
+      [
+       3,
+       "Mauritania",
+       4,
+       2,
+       1,
+       1,
+       1,
+       7
+      ],
+      [
+       4,
+       "Burkina Faso",
+       4,
+       1,
+       0,
+       3,
+       -2,
+       3
+      ],
+      [
+       5,
+       "Central African Republic",
+       4,
+       0,
+       1,
+       3,
+       -5,
+       1
+      ]
+     ]
+    },
+    {
+     "grupo": "African Nations Championship 2024, Group C",
+     "linhas": [
+      [
+       1,
+       "Uganda",
+       4,
+       2,
+       1,
+       1,
+       2,
+       7
+      ],
+      [
+       2,
+       "Algeria",
+       4,
+       1,
+       3,
+       0,
+       3,
+       6
+      ],
+      [
+       3,
+       "South Africa",
+       4,
+       1,
+       3,
+       0,
+       1,
+       6
+      ],
+      [
+       4,
+       "Guinea",
+       4,
+       1,
+       1,
+       2,
+       -3,
+       4
+      ],
+      [
+       5,
+       "Niger",
+       4,
+       0,
+       2,
+       2,
+       -3,
+       2
+      ]
+     ]
+    },
+    {
+     "grupo": "African Nations Championship 2024, Group D",
+     "linhas": [
+      [
+       1,
+       "Sudan",
+       3,
+       1,
+       2,
+       0,
+       4,
+       5
+      ],
+      [
+       2,
+       "Senegal",
+       3,
+       1,
+       2,
+       0,
+       1,
+       5
+      ],
+      [
+       3,
+       "Nigeria",
+       3,
+       1,
+       0,
+       2,
+       -3,
+       3
+      ],
+      [
+       4,
+       "Congo",
+       3,
+       0,
+       2,
+       1,
+       -2,
+       2
+      ]
+     ]
+    }
+   ],
+   "resultados": [
+    {
+     "d": "2025-08-30T15:00:00+00:00",
+     "c": "Madagascar",
+     "f": "Morocco",
+     "gc": 2,
+     "gf": 3
+    },
+    {
+     "d": "2025-08-29T15:00:00+00:00",
+     "c": "Sudan",
+     "f": "Senegal",
+     "gc": 1,
+     "gf": 1
+    },
+    {
+     "d": "2025-08-26T17:30:00+00:00",
+     "c": "Morocco",
+     "f": "Senegal",
+     "gc": 1,
+     "gf": 1
+    },
+    {
+     "d": "2025-08-26T14:30:00+00:00",
+     "c": "Madagascar",
+     "f": "Sudan",
+     "gc": 1,
+     "gf": 0
+    },
+    {
+     "d": "2025-08-23T17:00:00+00:00",
+     "c": "Sudan",
+     "f": "Algeria",
+     "gc": 1,
+     "gf": 1
+    },
+    {
+     "d": "2025-08-23T14:00:00+00:00",
+     "c": "Uganda",
+     "f": "Senegal",
+     "gc": 0,
+     "gf": 1
+    },
+    {
+     "d": "2025-08-22T17:00:00+00:00",
+     "c": "Tanzania",
+     "f": "Morocco",
+     "gc": 0,
+     "gf": 1
+    },
+    {
+     "d": "2025-08-22T14:00:00+00:00",
+     "c": "Kenya",
+     "f": "Madagascar",
+     "gc": 1,
+     "gf": 1
+    },
+    {
+     "d": "2025-08-19T17:00:00+00:00",
+     "c": "Nigeria",
+     "f": "Congo",
+     "gc": 2,
+     "gf": 0
+    },
+    {
+     "d": "2025-08-19T17:00:00+00:00",
+     "c": "Sudan",
+     "f": "Senegal",
+     "gc": 0,
+     "gf": 0
+    }
+   ],
+   "proximos": [],
+   "atualizado": "2026-11-12T21:40:09.971Z",
+   "chave": "chan"
+  },
+  "mundq": {
+   "apiId": 29,
+   "apiNome": "World Cup - Qualification Africa",
+   "temporada": "2023/25",
+   "ano": 2023,
+   "tabela": [
+    {
+     "grupo": "Group A",
+     "linhas": [
+      [
+       1,
+       "Egypt",
+       10,
+       8,
+       2,
+       0,
+       18,
+       26
+      ],
+      [
+       2,
+       "Burkina Faso",
+       10,
+       6,
+       3,
+       1,
+       15,
+       21
+      ],
+      [
+       3,
+       "Sierra Leone",
+       10,
+       4,
+       3,
+       3,
+       2,
+       15
+      ],
+      [
+       4,
+       "Guinea-Bissau",
+       10,
+       2,
+       4,
+       4,
+       -2,
+       10
+      ],
+      [
+       5,
+       "Ethiopia",
+       10,
+       2,
+       3,
+       5,
+       -5,
+       9
+      ],
+      [
+       6,
+       "Djibouti",
+       10,
+       0,
+       1,
+       9,
+       -28,
+       1
+      ]
+     ]
+    },
+    {
+     "grupo": "Group B",
+     "linhas": [
+      [
+       1,
+       "Senegal",
+       10,
+       7,
+       3,
+       0,
+       19,
+       24
+      ],
+      [
+       2,
+       "Congo DR",
+       10,
+       7,
+       1,
+       2,
+       9,
+       22
+      ],
+      [
+       3,
+       "Sudan",
+       10,
+       3,
+       4,
+       3,
+       2,
+       13
+      ],
+      [
+       4,
+       "Togo",
+       10,
+       1,
+       5,
+       4,
+       -5,
+       8
+      ],
+      [
+       5,
+       "Mauritania",
+       10,
+       1,
+       4,
+       5,
+       -9,
+       7
+      ],
+      [
+       6,
+       "South Sudan",
+       10,
+       0,
+       5,
+       5,
+       -16,
+       5
+      ]
+     ]
+    },
+    {
+     "grupo": "Group C",
+     "linhas": [
+      [
+       1,
+       "South Africa",
+       10,
+       5,
+       3,
+       2,
+       6,
+       18
+      ],
+      [
+       2,
+       "Nigeria",
+       10,
+       4,
+       5,
+       1,
+       7,
+       17
+      ],
+      [
+       3,
+       "Benin",
+       10,
+       5,
+       2,
+       3,
+       1,
+       17
+      ],
+      [
+       4,
+       "Lesotho",
+       10,
+       3,
+       3,
+       4,
+       -3,
+       12
+      ],
+      [
+       5,
+       "Rwanda",
+       10,
+       3,
+       2,
+       5,
+       -4,
+       11
+      ],
+      [
+       6,
+       "Zimbabwe",
+       10,
+       0,
+       5,
+       5,
+       -7,
+       5
+      ]
+     ]
+    },
+    {
+     "grupo": "Group D",
+     "linhas": [
+      [
+       1,
+       "Cape Verde Islands",
+       10,
+       7,
+       2,
+       1,
+       8,
+       23
+      ],
+      [
+       2,
+       "Cameroon",
+       10,
+       5,
+       4,
+       1,
+       12,
+       19
+      ],
+      [
+       3,
+       "Libya",
+       10,
+       4,
+       4,
+       2,
+       2,
+       16
+      ],
+      [
+       4,
+       "Angola",
+       10,
+       2,
+       6,
+       2,
+       1,
+       12
+      ],
+      [
+       5,
+       "Mauritius",
+       10,
+       1,
+       3,
+       6,
+       -10,
+       6
+      ],
+      [
+       6,
+       "Eswatini",
+       10,
+       0,
+       3,
+       7,
+       -13,
+       3
+      ]
+     ]
+    },
+    {
+     "grupo": "Group E",
+     "linhas": [
+      [
+       1,
+       "Morocco",
+       8,
+       8,
+       0,
+       0,
+       20,
+       24
+      ],
+      [
+       2,
+       "Niger",
+       8,
+       5,
+       0,
+       3,
+       1,
+       15
+      ],
+      [
+       3,
+       "Tanzania",
+       8,
+       3,
+       1,
+       4,
+       -1,
+       10
+      ],
+      [
+       4,
+       "Zambia",
+       8,
+       3,
+       0,
+       5,
+       0,
+       9
+      ],
+      [
+       5,
+       "Congo",
+       8,
+       0,
+       1,
+       7,
+       -20,
+       1
+      ],
+      [
+       6,
+       "Eritrea",
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
+     ]
+    },
+    {
+     "grupo": "Group F",
+     "linhas": [
+      [
+       1,
+       "Ivory Coast",
+       10,
+       8,
+       2,
+       0,
+       25,
+       26
+      ],
+      [
+       2,
+       "Gabon",
+       10,
+       8,
+       1,
+       1,
+       13,
+       25
+      ],
+      [
+       3,
+       "Gambia",
+       10,
+       4,
+       1,
+       5,
+       9,
+       13
+      ],
+      [
+       4,
+       "Kenya",
+       10,
+       3,
+       3,
+       4,
+       4,
+       12
+      ],
+      [
+       5,
+       "Burundi",
+       10,
+       3,
+       1,
+       6,
+       0,
+       10
+      ],
+      [
+       6,
+       "Seychelles",
+       10,
+       0,
+       0,
+       10,
+       -51,
+       0
+      ]
+     ]
+    },
+    {
+     "grupo": "Group G",
+     "linhas": [
+      [
+       1,
+       "Algeria",
+       10,
+       8,
+       1,
+       1,
+       16,
+       25
+      ],
+      [
+       2,
+       "Uganda",
+       10,
+       6,
+       0,
+       4,
+       5,
+       18
+      ],
+      [
+       3,
+       "Mozambique",
+       10,
+       6,
+       0,
+       4,
+       -3,
+       18
+      ],
+      [
+       4,
+       "Guinea",
+       10,
+       4,
+       3,
+       3,
+       3,
+       15
+      ],
+      [
+       5,
+       "Botswana",
+       10,
+       3,
+       1,
+       6,
+       -4,
+       10
+      ],
+      [
+       6,
+       "Somalia",
+       10,
+       0,
+       1,
+       9,
+       -17,
+       1
+      ]
+     ]
+    },
+    {
+     "grupo": "Group H",
+     "linhas": [
+      [
+       1,
+       "Tunisia",
+       10,
+       9,
+       1,
+       0,
+       22,
+       28
+      ],
+      [
+       2,
+       "Namibia",
+       10,
+       4,
+       3,
+       3,
+       3,
+       15
+      ],
+      [
+       3,
+       "Liberia",
+       10,
+       4,
+       3,
+       3,
+       2,
+       15
+      ],
+      [
+       4,
+       "Malawi",
+       10,
+       4,
+       1,
+       5,
+       1,
+       13
+      ],
+      [
+       5,
+       "Equatorial Guinea",
+       10,
+       3,
+       2,
+       5,
+       -7,
+       11
+      ],
+      [
+       6,
+       "Sao Tome and Principe",
+       10,
+       1,
+       0,
+       9,
+       -21,
+       3
+      ]
+     ]
+    },
+    {
+     "grupo": "Group I",
+     "linhas": [
+      [
+       1,
+       "Ghana",
+       10,
+       8,
+       1,
+       1,
+       17,
+       25
+      ],
+      [
+       2,
+       "Madagascar",
+       10,
+       6,
+       1,
+       3,
+       5,
+       19
+      ],
+      [
+       3,
+       "Mali",
+       10,
+       5,
+       3,
+       2,
+       11,
+       18
+      ],
+      [
+       4,
+       "Comoros",
+       10,
+       5,
+       0,
+       5,
+       -1,
+       15
+      ],
+      [
+       5,
+       "Central African Republic",
+       10,
+       2,
+       2,
+       6,
+       -13,
+       8
+      ],
+      [
+       6,
+       "Chad",
+       10,
+       0,
+       1,
+       9,
+       -19,
+       1
+      ]
+     ]
+    },
+    {
+     "grupo": "Ranking of second-placed teams",
+     "linhas": [
+      [
+       1,
+       "Gabon",
+       8,
+       6,
+       1,
+       1,
+       6,
+       19
+      ],
+      [
+       2,
+       "Congo DR",
+       8,
+       5,
+       1,
+       2,
+       5,
+       16
+      ],
+      [
+       3,
+       "Cameroon",
+       8,
+       4,
+       3,
+       1,
+       9,
+       15
+      ],
+      [
+       4,
+       "Nigeria",
+       8,
+       4,
+       3,
+       1,
+       7,
+       15
+      ],
+      [
+       5,
+       "Burkina Faso",
+       8,
+       4,
+       3,
+       1,
+       6,
+       15
+      ],
+      [
+       6,
+       "Niger",
+       8,
+       5,
+       0,
+       3,
+       1,
+       15
+      ],
+      [
+       7,
+       "Madagascar",
+       8,
+       4,
+       1,
+       3,
+       0,
+       13
+      ],
+      [
+       8,
+       "Uganda",
+       8,
+       4,
+       0,
+       4,
+       2,
+       12
+      ],
+      [
+       9,
+       "Namibia",
+       8,
+       2,
+       3,
+       3,
+       -2,
+       9
+      ]
+     ]
+    }
+   ],
+   "resultados": [
+    {
+     "d": "2025-11-16T19:00:00+00:00",
+     "c": "Nigeria",
+     "f": "Congo DR",
+     "gc": 1,
+     "gf": 1
+    },
+    {
+     "d": "2025-11-13T19:00:00+00:00",
+     "c": "Cameroon",
+     "f": "Congo DR",
+     "gc": 0,
+     "gf": 1
+    },
+    {
+     "d": "2025-11-13T16:00:00+00:00",
+     "c": "Nigeria",
+     "f": "Gabon",
+     "gc": 4,
+     "gf": 1
+    },
+    {
+     "d": "2025-10-14T19:00:00+00:00",
+     "c": "Senegal",
+     "f": "Mauritania",
+     "gc": 4,
+     "gf": 0
+    },
+    {
+     "d": "2025-10-14T19:00:00+00:00",
+     "c": "Morocco",
+     "f": "Congo",
+     "gc": 1,
+     "gf": 0
+    },
+    {
+     "d": "2025-10-14T19:00:00+00:00",
+     "c": "Ivory Coast",
+     "f": "Kenya",
+     "gc": 3,
+     "gf": 0
+    },
+    {
+     "d": "2025-10-14T19:00:00+00:00",
+     "c": "Gabon",
+     "f": "Burundi",
+     "gc": 2,
+     "gf": 0
+    },
+    {
+     "d": "2025-10-14T19:00:00+00:00",
+     "c": "Congo DR",
+     "f": "Sudan",
+     "gc": 1,
+     "gf": 0
+    },
+    {
+     "d": "2025-10-14T16:00:00+00:00",
+     "c": "Nigeria",
+     "f": "Benin",
+     "gc": 4,
+     "gf": 0
+    },
+    {
+     "d": "2025-10-14T16:00:00+00:00",
+     "c": "Guinea",
+     "f": "Botswana",
+     "gc": 2,
+     "gf": 2
+    }
+   ],
+   "proximos": [],
+   "atualizado": "2026-11-12T21:40:24.225Z",
+   "chave": "mundq"
+  }
+ },
+ "ligas": {
+  "MRI": {
+   "apiId": 763,
+   "apiNome": "Mauritian League",
+   "temporada": "2024/25",
+   "ano": 2024,
+   "tabela": [],
+   "resultados": [
+    {
+     "d": "2025-05-31T11:00:00+00:00",
+     "c": "Entente Boulet Rouge",
+     "f": "Cercle de Joachim",
+     "gc": 3,
+     "gf": 3
+    },
+    {
+     "d": "2025-05-30T14:30:00+00:00",
+     "c": "PAS Mates",
+     "f": "Chebel Citizens",
+     "gc": 2,
+     "gf": 4
+    },
+    {
+     "d": "2025-05-29T14:30:00+00:00",
+     "c": "Grande Riviere Sud Est",
+     "f": "ASVP",
+     "gc": 1,
+     "gf": 5
+    },
+    {
+     "d": "2025-05-29T14:30:00+00:00",
+     "c": "La Cure Waves",
+     "f": "Petite Rivière Noire",
+     "gc": 6,
+     "gf": 1
+    },
+    {
+     "d": "2025-05-28T14:30:00+00:00",
+     "c": "ASPL 2000",
+     "f": "Pamplemousses",
+     "gc": 1,
+     "gf": 3
+    },
+    {
+     "d": "2025-05-25T11:00:00+00:00",
+     "c": "ASVP",
+     "f": "PAS Mates",
+     "gc": 0,
+     "gf": 1
+    },
+    {
+     "d": "2025-05-25T11:00:00+00:00",
+     "c": "Entente Boulet Rouge",
+     "f": "Chebel Citizens",
+     "gc": 1,
+     "gf": 3
+    },
+    {
+     "d": "2025-05-24T15:00:00+00:00",
+     "c": "La Cure Waves",
+     "f": "Grande Riviere Sud Est",
+     "gc": 2,
+     "gf": 0
+    },
+    {
+     "d": "2025-05-24T11:30:00+00:00",
+     "c": "Pamplemousses",
+     "f": "Cercle de Joachim",
+     "gc": 1,
+     "gf": 2
+    },
+    {
+     "d": "2025-05-24T11:30:00+00:00",
+     "c": "Petite Rivière Noire",
+     "f": "ASPL 2000",
+     "gc": 2,
+     "gf": 0
+    }
+   ],
+   "proximos": [],
+   "atualizado": "2026-11-12T21:43:22.268Z"
+  },
+  "SOM": {
+   "apiId": 846,
+   "apiNome": "Somali Premier League",
+   "temporada": "2024/25",
+   "ano": 2024,
+   "tabela": [
+    {
+     "grupo": "",
+     "linhas": [
+      [
+       1,
+       "Mogadishu City",
+       22,
+       18,
+       3,
+       1,
+       46,
+       57
+      ],
+      [
+       2,
+       "Heegan",
+       22,
+       16,
+       3,
+       3,
+       40,
+       51
+      ],
+      [
+       3,
+       "Horseed",
+       22,
+       15,
+       4,
+       3,
+       39,
+       49
+      ],
+      [
+       4,
+       "Dekedaha",
+       22,
+       13,
+       4,
+       5,
+       26,
+       43
+      ],
+      [
+       5,
+       "Elman",
+       21,
+       10,
+       4,
+       7,
+       13,
+       34
+      ],
+      [
+       6,
+       "Gaadiidka",
+       22,
+       9,
+       3,
+       10,
+       3,
+       30
+      ],
+      [
+       7,
+       "Jeenyo",
+       21,
+       8,
+       2,
+       11,
+       -2,
+       26
+      ],
+      [
+       8,
+       "Jazeera",
+       22,
+       6,
+       4,
+       12,
+       -19,
+       22
+      ],
+      [
+       9,
+       "Badbaado",
+       22,
+       5,
+       6,
+       11,
+       -22,
+       21
+      ],
+      [
+       10,
+       "Raadsan",
+       22,
+       5,
+       5,
+       12,
+       -19,
+       20
+      ],
+      [
+       11,
+       "Gasco",
+       22,
+       4,
+       3,
+       15,
+       -30,
+       15
+      ],
+      [
+       12,
+       "Madbacadda",
+       22,
+       0,
+       3,
+       19,
+       -75,
+       3
+      ]
+     ]
+    }
+   ],
+   "resultados": [
+    {
+     "d": "2025-05-28T12:45:00+00:00",
+     "c": "Elman",
+     "f": "Jeenyo",
+     "gc": 2,
+     "gf": 0
+    },
+    {
+     "d": "2025-05-27T12:30:00+00:00",
+     "c": "Horseed",
+     "f": "Jazeera",
+     "gc": 4,
+     "gf": 1
+    },
+    {
+     "d": "2025-05-26T12:45:00+00:00",
+     "c": "Madbacadda",
+     "f": "Gasco",
+     "gc": 2,
+     "gf": 6
+    },
+    {
+     "d": "2025-05-25T12:30:00+00:00",
+     "c": "Gaadiidka",
+     "f": "Dekedaha",
+     "gc": 2,
+     "gf": 3
+    },
+    {
+     "d": "2025-05-24T12:45:00+00:00",
+     "c": "Heegan",
+     "f": "Mogadishu City",
+     "gc": 2,
+     "gf": 2
+    },
+    {
+     "d": "2025-05-23T12:45:00+00:00",
+     "c": "Raadsan",
+     "f": "Badbaado",
+     "gc": 1,
+     "gf": 1
+    },
+    {
+     "d": "2025-05-22T12:30:00+00:00",
+     "c": "Elman",
+     "f": "Horseed",
+     "gc": 3,
+     "gf": 2
+    },
+    {
+     "d": "2025-05-21T12:45:00+00:00",
+     "c": "Jeenyo",
+     "f": "Gasco",
+     "gc": 1,
+     "gf": 1
+    },
+    {
+     "d": "2025-05-20T12:45:00+00:00",
+     "c": "Jazeera",
+     "f": "Dekedaha",
+     "gc": 2,
+     "gf": 3
+    },
+    {
+     "d": "2025-05-19T12:45:00+00:00",
+     "c": "Heegan",
+     "f": "Madbacadda",
+     "gc": 4,
+     "gf": 1
+    }
+   ],
+   "proximos": [],
+   "atualizado": "2026-11-12T21:44:12.102Z"
+  },
+  "TOG": {
+   "apiId": 1084,
+   "apiNome": "Championnat National",
+   "temporada": "2024/25",
+   "ano": 2024,
+   "tabela": [],
+   "resultados": [
+    {
+     "d": "2025-06-08T15:00:00+00:00",
+     "c": "ASC Kara",
+     "f": "Binah",
+     "gc": 3,
+     "gf": 0
+    },
+    {
+     "d": "2025-06-08T15:00:00+00:00",
+     "c": "Barracuda",
+     "f": "Unisport",
+     "gc": 0,
+     "gf": 0
+    },
+    {
+     "d": "2025-06-08T15:00:00+00:00",
+     "c": "OTR",
+     "f": "Gbohloé-su des Lacs",
+     "gc": 0,
+     "gf": 1
+    },
+    {
+     "d": "2025-06-08T15:00:00+00:00",
+     "c": "Tambo",
+     "f": "ASKO Kara",
+     "gc": 1,
+     "gf": 4
+    },
+    {
+     "d": "2025-06-08T15:00:00+00:00",
+     "c": "Haknour",
+     "f": "Entente II",
+     "gc": 1,
+     "gf": 2
+    },
+    {
+     "d": "2025-06-08T15:00:00+00:00",
+     "c": "Espoir",
+     "f": "Doumbé de Mango",
+     "gc": 0,
+     "gf": 0
+    },
+    {
+     "d": "2025-06-05T15:30:00+00:00",
+     "c": "Doumbé de Mango",
+     "f": "Tambo",
+     "gc": 2,
+     "gf": 0
+    },
+    {
+     "d": "2025-06-04T15:30:00+00:00",
+     "c": "Unisport",
+     "f": "Haknour",
+     "gc": 1,
+     "gf": 1
+    },
+    {
+     "d": "2025-06-04T15:30:00+00:00",
+     "c": "Binah",
+     "f": "Espoir",
+     "gc": 1,
+     "gf": 0
+    },
+    {
+     "d": "2025-06-04T15:30:00+00:00",
+     "c": "Entente II",
+     "f": "OTR",
+     "gc": 1,
+     "gf": 0
+    }
+   ],
+   "proximos": [],
+   "atualizado": "2026-11-12T21:44:40.609Z"
+  }
+ },
+ "mapa": {
+  "ALG": {
+   "apiId": 186,
+   "apiNome": "Ligue 1",
+   "apiPais": "Algeria"
+  },
+  "ANG": {
+   "apiId": 397,
+   "apiNome": "Girabola",
+   "apiPais": "Angola"
+  },
+  "BEN": {
+   "apiId": 415,
+   "apiNome": "Championnat National",
+   "apiPais": "Benin"
+  },
+  "BOT": {
+   "apiId": 412,
+   "apiNome": "Premier League",
+   "apiPais": "Botswana"
+  },
+  "BFA": {
+   "apiId": 423,
+   "apiNome": "Ligue 1",
+   "apiPais": "Burkina-Faso"
+  },
+  "BDI": {
+   "apiId": 566,
+   "apiNome": "Ligue A",
+   "apiPais": "Burundi"
+  },
+  "CMR": {
+   "apiId": 411,
+   "apiNome": "Elite One",
+   "apiPais": "Cameroon"
+  },
+  "CGO": {
+   "apiId": 424,
+   "apiNome": "Ligue 1",
+   "apiPais": "Congo-DR"
+  },
+  "COD": {
+   "apiId": 424,
+   "apiNome": "Ligue 1",
+   "apiPais": "Congo-DR"
+  },
+  "EGY": {
+   "apiId": 233,
+   "apiNome": "Premier League",
+   "apiPais": "Egypt"
+  },
+  "SWZ": {
+   "apiId": 847,
+   "apiNome": "Premier League",
+   "apiPais": "Eswatini"
+  },
+  "ETH": {
+   "apiId": 363,
+   "apiNome": "Premier League",
+   "apiPais": "Ethiopia"
+  },
+  "GAB": {
+   "apiId": 968,
+   "apiNome": "Championnat D1",
+   "apiPais": "Gabon"
+  },
+  "GAM": {
+   "apiId": 845,
+   "apiNome": "GFA League",
+   "apiPais": "Gambia"
+  },
+  "GHA": {
+   "apiId": 570,
+   "apiNome": "Premier League",
+   "apiPais": "Ghana"
+  },
+  "GUI": {
+   "apiId": 378,
+   "apiNome": "Ligue 1",
+   "apiPais": "Guinea"
+  },
+  "CIV": {
+   "apiId": 386,
+   "apiNome": "Ligue 1",
+   "apiPais": "Ivory-Coast"
+  },
+  "KEN": {
+   "apiId": 276,
+   "apiNome": "FKF Premier League",
+   "apiPais": "Kenya"
+  },
+  "LES": {
+   "apiId": 962,
+   "apiNome": "Premier League",
+   "apiPais": "Lesotho"
+  },
+  "LBR": {
+   "apiId": 760,
+   "apiNome": "LFA First Division",
+   "apiPais": "Liberia"
+  },
+  "LBA": {
+   "apiId": 584,
+   "apiNome": "Premier League",
+   "apiPais": "Libya"
+  },
+  "MWI": {
+   "apiId": 391,
+   "apiNome": "Super League",
+   "apiPais": "Malawi"
+  },
+  "MLI": {
+   "apiId": 598,
+   "apiNome": "Première Division",
+   "apiPais": "Mali"
+  },
+  "MTN": {
+   "apiId": 762,
+   "apiNome": "Premier League",
+   "apiPais": "Mauritania"
+  },
+  "MRI": {
+   "apiId": 763,
+   "apiNome": "Mauritian League",
+   "apiPais": "Mauritius"
+  },
+  "MAR": {
+   "apiId": 200,
+   "apiNome": "Botola Pro",
+   "apiPais": "Morocco"
+  },
+  "NAM": {
+   "apiId": 409,
+   "apiNome": "Premier League",
+   "apiPais": "Namibia"
+  },
+  "NGA": {
+   "apiId": 399,
+   "apiNome": "NPFL",
+   "apiPais": "Nigeria"
+  },
+  "RWA": {
+   "apiId": 405,
+   "apiNome": "National Soccer League",
+   "apiPais": "Rwanda"
+  },
+  "SEN": {
+   "apiId": 403,
+   "apiNome": "Ligue 1",
+   "apiPais": "Senegal"
+  },
+  "SOM": {
+   "apiId": 846,
+   "apiNome": "Somali Premier League",
+   "apiPais": "Somalia"
+  },
+  "RSA": {
+   "apiId": 288,
+   "apiNome": "Premier Soccer League",
+   "apiPais": "South-Africa"
+  },
+  "SDN": {
+   "apiId": 402,
+   "apiNome": "Sudani Premier League",
+   "apiPais": "Sudan"
+  },
+  "TAN": {
+   "apiId": 567,
+   "apiNome": "Ligi kuu Bara",
+   "apiPais": "Tanzania"
+  },
+  "TOG": {
+   "apiId": 1084,
+   "apiNome": "Championnat National",
+   "apiPais": "Togo"
+  },
+  "TUN": {
+   "apiId": 202,
+   "apiNome": "Ligue 1",
+   "apiPais": "Tunisia"
+  },
+  "UGA": {
+   "apiId": 585,
+   "apiNome": "Premier League",
+   "apiPais": "Uganda"
+  },
+  "ZAM": {
+   "apiId": 400,
+   "apiNome": "Super League",
+   "apiPais": "Zambia"
+  },
+  "ZIM": {
+   "apiId": 401,
+   "apiNome": "Premier Soccer League",
+   "apiPais": "Zimbabwe"
+  }
+ },
+ "semCampeonato": [
+  "CPV",
+  "CTA",
+  "CHA",
+  "COM",
+  "DJI",
+  "EQG",
+  "ERI",
+  "GNB",
+  "MAD",
+  "MOZ",
+  "NIG",
+  "STP",
+  "SEY",
+  "SLE",
+  "SSD"
+ ]
 }
