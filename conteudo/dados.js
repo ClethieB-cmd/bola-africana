@@ -84,7 +84,7 @@ const CATS = {
     desc: { pt: "Seleções e clubes do futebol feminino africano: Liga dos Campeões Feminina, CAN Feminina e prêmios.", fr: "Sélections et clubs du football féminin africain : Ligue des champions féminine, CAN féminine et récompenses.", en: "National teams and clubs in African women's football: the Women's Champions League, WAFCON and awards." } },
   ligas: { route: "ligas",
     name: { pt: "Ligas nacionais", fr: "Championnats", en: "Leagues" },
-    desc: { pt: "Os campeonatos mais fortes do continente: Egito, Marrocos, África do Sul, Argélia e Tunísia.", fr: "Les championnats les plus relevés du continent : Égypte, Maroc, Afrique du Sud, Algérie et Tunisie.", en: "The continent's strongest leagues: Egypt, Morocco, South Africa, Algeria and Tunisia." } },
+    desc: { pt: "Os campeonatos nacionais dos 54 países africanos. Destaque para os mais fortes: Egito, Marrocos, África do Sul, Argélia e Tunísia.", fr: "Les championnats nationaux des 54 pays africains. Coup de projecteur sur les plus relevés : Égypte, Maroc, Afrique du Sud, Algérie et Tunisie.", en: "The national leagues of all 54 African countries, led by the strongest: Egypt, Morocco, South Africa, Algeria and Tunisia." } },
   sel: { route: "selecoes",
     name: { pt: "Seleções", fr: "Sélections", en: "National teams" },
     desc: { pt: "Seleções africanas, prêmios da CAF e o desempenho do continente nos grandes torneios.", fr: "Les sélections africaines, les récompenses de la CAF et les performances du continent dans les grands tournois.", en: "African national teams, CAF awards and the continent's results at major tournaments." } }
