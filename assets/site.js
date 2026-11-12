@@ -54,8 +54,11 @@
       var q = input.value;
       var nq = norm(q);
       var n = 0;
+      var words = nq.split(/\s+/).filter(function (w) { return w.length > 2; });
+      if (!words.length && nq) words = [nq];
       items.forEach(function (it) {
-        var hit = !nq || it.getAttribute("data-q").indexOf(nq) !== -1;
+        var dq = it.getAttribute("data-q");
+        var hit = !nq || words.every(function (w) { return dq.indexOf(w) !== -1; });
         it.hidden = !hit;
         if (hit) n++;
       });
