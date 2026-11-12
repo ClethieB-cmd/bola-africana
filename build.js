@@ -9,6 +9,9 @@ const cfg = require("./config.js");
 const D = require("./conteudo/dados.js");
 const NEWS = require("./conteudo/noticias.js");
 const X = require("./conteudo/textos-extra.js");
+const CAMP = require("./conteudo/campeonatos.js");
+let AUTO = { ligas: {} };
+try { AUTO = JSON.parse(fs.readFileSync(path.join(__dirname, "conteudo", "ligas-auto.json"), "utf8")); } catch (e) { /* ainda sem dados automáticos */ }
 
 const PREVIEW = process.argv.includes("--preview");
 const OUT = path.join(__dirname, "_site");
@@ -25,6 +28,30 @@ const EXTRA_UI = {
   footNav: { pt: "Institucional", fr: "Informations", en: "Information" }
 };
 Object.assign(D.UI, EXTRA_UI);
+const CAMP_UI = {
+  campTitle: { pt: "Campeonato {de}: {liga}", fr: "Championnat {de} : {liga}", en: "{de} league: {liga}" },
+  campDesc: { pt: "Classificação, resultados, próximos jogos e notícias do campeonato {de} ({liga}).", fr: "Classement, résultats, prochains matchs et actualité du championnat {de} ({liga}).", en: "Table, results, fixtures and news from the {de} league ({liga})." },
+  campDir: { pt: "Os 54 campeonatos nacionais", fr: "Les 54 championnats nationaux", en: "All 54 national leagues" },
+  campDirNote: { pt: "Escolha o país para ver a classificação, os resultados e os próximos jogos.", fr: "Choisissez un pays pour voir le classement, les résultats et les prochains matchs.", en: "Pick a country to see the table, results and upcoming fixtures." },
+  campHasData: { pt: "com tabela", fr: "avec classement", en: "with table" },
+  campAll: { pt: "Todos os campeonatos", fr: "Tous les championnats", en: "All leagues" },
+  campTable: { pt: "Classificação", fr: "Classement", en: "Table" },
+  campResults: { pt: "Últimos resultados", fr: "Derniers résultats", en: "Latest results" },
+  campNext: { pt: "Próximos jogos", fr: "Prochains matchs", en: "Upcoming fixtures" },
+  campNews: { pt: "Notícias", fr: "Actualité", en: "News" },
+  campSeason: { pt: "Temporada {s}", fr: "Saison {s}", en: "{s} season" },
+  campUpdated: { pt: "Dados atualizados em {d}. Fonte: API-Football.", fr: "Données mises à jour le {d}. Source : API-Football.", en: "Data updated {d}. Source: API-Football." },
+  campNoData: { pt: "Ainda não temos a classificação nem os resultados deste campeonato.", fr: "Nous n'avons pas encore le classement ni les résultats de ce championnat.", en: "We don't have the table or results for this league yet." },
+  thClub: { pt: "Clube", fr: "Club", en: "Club" },
+  thP: { pt: "J|Jogos", fr: "J|Joués", en: "P|Played" },
+  thW: { pt: "V|Vitórias", fr: "G|Gagnés", en: "W|Won" },
+  thD: { pt: "E|Empates", fr: "N|Nuls", en: "D|Drawn" },
+  thL: { pt: "D|Derrotas", fr: "P|Perdus", en: "L|Lost" },
+  thGD: { pt: "SG|Saldo de gols", fr: "Diff.|Différence de buts", en: "GD|Goal difference" },
+  thPts: { pt: "Pts|Pontos", fr: "Pts|Points", en: "Pts|Points" }
+};
+Object.assign(D.UI, CAMP_UI);
+for (const c of CAMP) if (!D.COUNTRY[c.code]) D.COUNTRY[c.code] = c.nome;
 
 let lang = "pt";
 let cur = "index.html";
@@ -151,10 +178,10 @@ function qualTable() {
 }
 function leaguesHtml() {
   return `<div class="leagues">${D.LEAGUES.map((l) => `<div class="league">
-    <span class="country">${esc(C(l.country))}</span><span class="name">${esc(l.name)}</span>
+    <a class="country" href="${campUrl(CAMP.find((c) => c.code === l.country))}">${esc(C(l.country))}</a><span class="name">${esc(l.name)}</span>
     <span class="champ">${esc(T("champ"))} <b>${esc(l.champ)}</b></span><span class="fact">${esc(L(l.fact))}</span>
     <a class="src" href="${l.src}">${esc(T("source"))}</a></div>`).join("")}</div>
-    <div class="radar" aria-label="${esc(T("radar"))}">${D.RADAR.map(([c, n]) => `<span>${esc(C(c))} · ${esc(n)}</span>`).join("")}</div>`;
+    <div class="radar" aria-label="${esc(T("radar"))}">${D.RADAR.map(([c, n]) => `<a href="${campUrl(CAMP.find((x) => x.code === c))}">${esc(C(c))} · ${esc(n)}</a>`).join("")}</div>`;
 }
 function watchHtml() {
   return X.WATCH.map((w) => `<section class="watch cat-${w.cat}"><h2>${esc(L(w.comp))}</h2>
@@ -193,7 +220,7 @@ function layout({ id, title, desc, body, active, type = "website", jsonld, noind
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(fullTitle)}</title>
 <meta name="description" content="${esc(desc)}">
-${noindex ? '<meta name="robots" content="noindex">\n' : ""}<link rel="canonical" href="${canonical}">
+${noindex ? '<meta name="robots" content="noindex">\n' : ""}${cfg.GOOGLE_VERIFICACAO ? `<meta name="google-site-verification" content="${esc(cfg.GOOGLE_VERIFICACAO)}">\n` : ""}<link rel="canonical" href="${canonical}">
 ${LANGS.map((l) => `<link rel="alternate" hreflang="${LOCALE[l]}" href="${absUrl(pathOf(id, l))}">`).join("\n")}
 <link rel="alternate" hreflang="x-default" href="${absUrl(pathOf(id, "pt"))}">
 <meta property="og:type" content="${type}">
@@ -250,6 +277,60 @@ ${adsHead}${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld
 `;
 }
 
+/* ---------- campeonatos nacionais ---------- */
+const campUrl = (c) => u("campeonatos/" + c.slug);
+const campAuto = (c) => {
+  const a = (AUTO.ligas || {})[c.code];
+  return a && ((a.tabela && a.tabela.length) || (a.resultados && a.resultados.length) || (a.proximos && a.proximos.length)) ? a : null;
+};
+const campIndexavel = (c) => !!(campAuto(c) || c.texto);
+const campTitle = (c) => T("campTitle", { de: L(c.de), liga: c.liga });
+const normTxt = (s) => String(s).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+function mencionaPais(n, c) {
+  if ((n.paises || []).includes(c.code)) return true;
+  const nome = normTxt(L(c.nome));
+  let txt = normTxt([L(n.title), L(n.lead)].join(" "));
+  for (const o of CAMP) { const on = normTxt(L(o.nome)); if (on !== nome && on.includes(nome)) txt = txt.split(on).join(" "); }
+  return new RegExp("(^|[^a-z])" + nome.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "([^a-z]|$)").test(txt);
+}
+function campDirHtml() {
+  const lista = CAMP.slice().sort((a, b) => L(a.nome).localeCompare(L(b.nome), LOCALE[lang]));
+  return `<section class="section cat-ligas" aria-labelledby="sec-camp">${sectionHead(T("campDir"), null, null, "sec-camp")}
+    <p class="note" style="margin:0 0 14px">${esc(T("campDirNote"))}</p>
+    <ul class="camp-dir">${lista.map((c) => `<li><a href="${campUrl(c)}"><span class="pais">${esc(L(c.nome))}</span><span class="liga">${esc(c.liga)}${campAuto(c) ? ` · ${esc(T("campHasData"))}` : ""}</span></a></li>`).join("")}</ul></section>`;
+}
+const th = (k, cls = "") => { const [a, t] = T(k).split("|"); return `<th${cls ? ` class="${cls}"` : ""}><abbr title="${esc(t)}">${esc(a)}</abbr></th>`; };
+function campTabela(a) {
+  return a.tabela.map((g) => `${g.grupo ? `<h3 class="camp-grupo">${esc(g.grupo)}</h3>` : ""}<div class="table-wrap"><table>
+    <thead><tr><th class="num">#</th><th>${esc(T("thClub"))}</th>${th("thP", "num")}${th("thW", "num")}${th("thD", "num")}${th("thL", "num")}${th("thGD", "num")}${th("thPts", "num")}</tr></thead>
+    <tbody>${g.linhas.map(([pos, time, j, v, e, d, sg, pts]) => `<tr><td class="num">${esc(pos)}</td><td>${esc(time)}</td><td class="num">${esc(j)}</td><td class="num">${esc(v)}</td><td class="num">${esc(e)}</td><td class="num">${esc(d)}</td><td class="num">${esc(sg > 0 ? "+" + sg : sg)}</td><td class="num"><b>${esc(pts)}</b></td></tr>`).join("")}</tbody></table></div>`).join("");
+}
+function campJogos(lista, feitos) {
+  return lista.map((g) => `<div class="fx ${feitos ? "done" : ""} cat-ligas">
+    <span class="teams"><span class="flag" aria-hidden="true"></span>${esc(g.c)} × ${esc(g.f)}</span>
+    <span class="when">${feitos ? esc(`${g.gc ?? ""}–${g.gf ?? ""}`) : timeTag(g.d, "time", fmtTime(g.d))}</span>
+    <span class="comp">${timeTag(g.d, "day", fmtDay(g.d))}</span></div>`).join("");
+}
+function campPage(c) {
+  const a = campAuto(c);
+  const lg = D.LEAGUES.find((l) => l.country === c.code);
+  const news = sorted.filter((n) => mencionaPais(n, c)).slice(0, 6);
+  const quando = a && a.atualizado ? fmt({ day: "numeric", month: "long", year: "numeric" }).format(new Date(a.atualizado)) : "";
+  return `<div class="layout"><div class="article camp">
+    <a class="back" href="${u(CATS.ligas.route)}">‹ ${esc(T("campAll"))}</a>
+    <div class="page-head cat-ligas"><h1>${esc(campTitle(c))}</h1><p>${esc(T("campDesc", { de: L(c.de), liga: c.liga }))}</p></div>
+    ${lg ? `<p class="camp-champ">${esc(T("champ"))} <b>${esc(lg.champ)}</b>. ${esc(L(lg.fact))} <a href="${lg.src}">${esc(T("source"))}</a></p>` : ""}
+    ${c.texto ? `<div class="prose">${L(c.texto).map((t) => `<p>${esc(t)}</p>`).join("")}</div>` : ""}
+    ${a ? `${a.tabela && a.tabela.length ? `<section class="section cat-ligas">${sectionHead(T("campTable") + (a.temporada ? " · " + T("campSeason", { s: a.temporada }) : ""))}${campTabela(a)}</section>` : ""}
+      ${ad("meio")}
+      ${a.resultados && a.resultados.length ? `<section class="section cat-ligas">${sectionHead(T("campResults"))}<div class="panel">${campJogos(a.resultados, true)}</div></section>` : ""}
+      ${a.proximos && a.proximos.length ? `<section class="section cat-ligas">${sectionHead(T("campNext"))}${tzHint()}<div class="panel">${campJogos(a.proximos, false)}</div></section>` : ""}
+      <p class="note">${esc(T("campUpdated", { d: quando }))}</p>`
+    : `<p class="note">${esc(T("campNoData"))}</p>`}
+    ${news.length ? `<section class="section cat-ligas">${sectionHead(T("campNews"))}<div class="grid-stories">${news.map(storyCard).join("")}</div></section>` : ""}
+  </div>${sidebar()}</div>`;
+}
+
 /* ---------- páginas ---------- */
 function homePage() {
   const lead = sorted[0];
@@ -286,6 +367,7 @@ function categoryPage(k) {
   if (k === "ligas") extra = `<section class="section cat-ligas">${sectionHead(T("champsTitle"))}${leaguesHtml()}</section>`;
   return `${ad("topo")}<div class="layout"><div>
     <div class="page-head cat-${k}"><h1>${esc(catName(k))}</h1><p>${esc(L(CATS[k].desc))}</p></div>
+    ${k === "ligas" ? campDirHtml() : ""}
     <div class="grid-stories">${items.map(storyCard).join("") || `<div class="empty">${esc(T("emptyCat"))}</div>`}</div>
     ${extra}</div>${sidebar()}</div>`;
 }
@@ -341,7 +423,10 @@ function articlePage(n) {
 
 function searchPage() {
   const norm = (s) => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-  const rows = sorted.map((n) => rowCard(n, ` data-q="${esc(norm([L(n.title), L(n.lead), L(n.body).join(" ")].join(" ")))}"`)).join("");
+  const rows = sorted.map((n) => rowCard(n, ` data-q="${esc(norm([L(n.title), L(n.lead), L(n.body).join(" ")].join(" ")))}"`)).join("")
+    + CAMP.map((c) => `<a class="row-story camp-row" href="${campUrl(c)}" data-q="${esc(norm(["campeonato championnat league liga", c.liga, ...LANGS.map((l) => c.nome[l] + " " + c.de[l])].join(" ")))}">
+      <div class="cover cat-ligas" aria-hidden="true"><div class="big">${esc(c.code)}</div></div>
+      <div><div class="meta">${tag("ligas")}</div><h3>${esc(campTitle(c))}</h3></div></a>`).join("");
   return `<div class="search-page">
     <div class="page-head"><h1>${esc(T("searchTitle"))}</h1><p id="busca-msg" data-hits="${esc(L(D.UI.hits))}" data-nohits="${esc(L(D.UI.noHits))}" data-intro="${esc(T("searchIntro"))}">${esc(T("searchIntro"))}</p></div>
     <label for="busca-q" class="sr-only">${esc(T("searchLabel"))}</label>
@@ -378,6 +463,11 @@ for (const l of LANGS) {
     pages.push(emit(key, { title: L(X.PAGES[key].title), desc: L(X.PAGES[key].body)[0].replace("{email}", cfg.CONTACT_EMAIL), body: () => staticPage(key), active: "" }));
   }
   emit("busca", { title: T("searchTitle"), desc: T("searchIntro"), body: () => searchPage(), active: "", noindex: true });
+  for (const c of CAMP) {
+    const indexavel = campIndexavel(c);
+    const p = emit("campeonatos/" + c.slug, { title: campTitle(c), desc: T("campDesc", { de: L(c.de), liga: c.liga }), body: () => campPage(c), active: CATS.ligas.route, noindex: !indexavel });
+    if (indexavel) pages.push(p);
+  }
   for (const n of NEWS) {
     pages.push(emit("noticias/" + n.slug, {
       title: L(n.title), desc: L(n.lead), body: () => articlePage(n), active: CATS[n.cat].route, type: "article",
@@ -398,4 +488,6 @@ const base = cfg.BASE_PATH || "/";
 write("404.html", `<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${esc(X.UI.notFoundPage.pt)} | Bola Africana</title><link rel="stylesheet" href="${base}assets/style.css"></head>
 <body><main><div class="wrap"><div class="page-head"><h1>${esc(X.UI.notFoundPage.pt)}</h1><p>${LANGS.map((l) => `<a href="${base}${PREFIX[l]}index.html">${esc(X.BRAND_TITLE[l])} · ${X.LANG_NAMES[l]}</a>`).join(" &nbsp; ")}</p></div></div></main></body></html>\n`);
 
-console.log(`Pronto: ${pages.length + 3} páginas em ${path.relative(process.cwd(), OUT) || OUT}${PREVIEW ? " (prévia com espaços de anúncio)" : ""}.`);
+const nCamp = CAMP.filter(campIndexavel).length;
+console.log(`Campeonatos: ${CAMP.length} páginas por idioma, ${nCamp} com dados ou texto (as demais ficam fora do Google até ganhar conteúdo).`);
+console.log(`Pronto: ${pages.length + 3} páginas no mapa do site em ${path.relative(process.cwd(), OUT) || OUT}${PREVIEW ? " (prévia com espaços de anúncio)" : ""}.`);
