@@ -94,13 +94,16 @@ async function atualizar(liga, ano) {
     const grupos = (st[0] && st[0].league && st[0].league.standings) || [];
     item.tabela = grupos.map((g) => ({
       grupo: grupos.length > 1 && g[0] ? String(g[0].group || "").replace(/^.*:\s*/, "") : "",
-      linhas: g.map((x) => [x.rank, x.team.name, x.all.played, x.all.win, x.all.draw, x.all.lose, x.goalsDiff, x.points])
+      linhas: g.map((x) => [x.rank, x.team.name, x.all.played, x.all.win, x.all.draw, x.all.lose, x.goalsDiff, x.points, x.team.id, x.team.logo])
     })).filter((g) => g.linhas.length);
   }
 
   const fx = await api("/fixtures", { league: liga.league.id, season: temp.year });
   const agora = Date.now();
   const jogo = (f) => ({ d: f.fixture.date, c: f.teams.home.name, f: f.teams.away.name, gc: f.goals.home, gf: f.goals.away });
+  /* todos os jogos encerrados da temporada, compactos, para a página de cada time: [data, casa, fora, gols casa, gols fora] */
+  item.jogos = fx.filter((f) => FIM.has(f.fixture.status.short)).sort((a, b) => b.fixture.timestamp - a.fixture.timestamp)
+    .map((f) => [f.fixture.date, f.teams.home.name, f.teams.away.name, f.goals.home, f.goals.away]);
   item.resultados = fx.filter((f) => FIM.has(f.fixture.status.short))
     .sort((a, b) => b.fixture.timestamp - a.fixture.timestamp).slice(0, 10).map(jogo);
   item.proximos = fx.filter((f) => ABERTO.has(f.fixture.status.short) && f.fixture.timestamp * 1000 >= agora - 3 * 3600e3)
@@ -152,7 +155,10 @@ async function atualizar(liga, ano) {
   }
 
   // Depois os campeonatos nacionais, começando pelos que estão há mais tempo sem atualização.
+  /* Temporada encerrada não muda: é buscada de novo só uma vez por semana. Assim sobra cota para os times. */
+  const recente = (iso, dias) => iso && Date.now() - Date.parse(iso) < dias * 864e5;
   const fila = CAMP.filter((c) => mapa[c.code])
+    .filter((c) => { const l = dados.ligas[c.code]; return !(l && l.anterior && l.jogos && l.apiId === mapa[c.code].apiId && recente(l.atualizado, 7)); })
     .sort((a, b) => String((dados.ligas[a.code] || {}).atualizado || "").localeCompare(String((dados.ligas[b.code] || {}).atualizado || "")));
 
   /* Plano grátis: a API só libera temporadas antigas (a mensagem diz "try from 2022 to 2024").
@@ -188,7 +194,7 @@ async function atualizar(liga, ano) {
       feitos++;
       console.log(`ok  ${c.code}  ${liga.league.name}  temporada ${dados.ligas[c.code].temporada}${dados.ligas[c.code].anterior ? " (encerrada)" : ""}`);
     } catch (e) {
-      if (e instanceof Limite) { console.log(`Limite de ${LIMITE} consultas atingido. Os demais ficam para a próxima execução.`); break; }
+      if (e instanceof Limite) { parar = true; console.log(`Limite de ${LIMITE} consultas atingido. Os demais ficam para a próxima execução.`); break; }
       erros++;
       console.log(`erro ${c.code}  ${liga.league.name}: ${e.message}`);
       if (/plan|season/i.test(e.message)) console.log("   O plano da API não dá acesso a esta temporada. Os dados anteriores foram mantidos.");
@@ -196,7 +202,45 @@ async function atualizar(liga, ano) {
   }
   for (const code of Object.keys(dados.ligas)) if (!mapa[code]) delete dados.ligas[code];
 
+  /* Times: dados do clube (uma consulta por campeonato, refeita uma vez por mês) e elenco (uma consulta por time).
+     Vai aos poucos, com a cota que sobrar do dia, começando pelo que está há mais tempo sem atualizar. */
+  dados.times = dados.times || {};
+  let nTimes = 0, nElencos = 0;
+  for (const c of parar ? [] : CAMP) {
+    const lg = dados.ligas[c.code];
+    if (!lg || !lg.apiId || recente(lg.timesEm, 30)) continue;
+    try {
+      const r = await api("/teams", { league: lg.apiId, season: lg.ano });
+      for (const t of r) {
+        const v = t.venue || {};
+        dados.times[t.team.id] = { ...(dados.times[t.team.id] || {}), id: t.team.id, nome: t.team.name, logo: t.team.logo || null, fundado: t.team.founded || null,
+          pais: c.code, estadio: v.name || null, cidade: v.city || null, capacidade: v.capacity || null };
+      }
+      lg.timesEm = new Date().toISOString();
+      nTimes += r.length;
+    } catch (e) {
+      if (e instanceof Limite) { parar = true; break; }
+      console.log(`erro times ${c.code}: ${e.message}`);
+    }
+  }
+  const filaElenco = Object.values(dados.times).filter((t) => !recente(t.elencoEm, 30))
+    .sort((a, b) => String(a.elencoEm || "").localeCompare(String(b.elencoEm || "")));
+  for (const t of parar || recente(dados.elencoBloqueado, 7) ? [] : filaElenco) {
+    try {
+      const r = await api("/players/squads", { team: t.id });
+      t.elenco = ((r[0] && r[0].players) || []).map((p) => [p.name, p.age ?? null, p.number ?? null, p.position || ""]);
+      t.elencoEm = new Date().toISOString();
+      nElencos++;
+    } catch (e) {
+      if (e instanceof Limite) break;
+      console.log(`erro elenco ${t.nome}: ${e.message}`);
+      if (/plan|subscri|access/i.test(e.message)) { dados.elencoBloqueado = new Date().toISOString(); console.log("   O plano não libera os elencos. Nova tentativa em 7 dias."); break; }
+      t.elencoEm = new Date().toISOString();
+    }
+  }
+  console.log(`Times com dados do clube: ${nTimes}. Elencos atualizados: ${nElencos}.`);
+
   dados.geradoEm = new Date().toISOString();
-  fs.writeFileSync(OUT, JSON.stringify(dados, null, 1) + "\n");
+  fs.writeFileSync(OUT, JSON.stringify(dados) + "\n");
   console.log(`Atualizados: ${feitos}. Com erro: ${erros}. Consultas usadas: ${usadas}.`);
 })();
