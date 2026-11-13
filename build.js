@@ -31,6 +31,8 @@ const EXTRA_UI = {
   skip: { pt: "Pular para o conteúdo", fr: "Aller au contenu", en: "Skip to content" },
   footNav: { pt: "Institucional", fr: "Informations", en: "Information", ar: "عن الموقع" },
   footSports: { pt: "Esportes", fr: "Sports", en: "Sports", ar: "الرياضات" },
+  newsOf: { pt: "Notícias · {x}", fr: "Actualités · {x}", en: "News · {x}", ar: "الأخبار · {x}" },
+  newsPageDesc: { pt: "Todas as notícias do site, competição por competição, da mais nova para a mais antiga.", fr: "Toute l'actualité du site, compétition par compétition, de la plus récente à la plus ancienne.", en: "Every story on the site, competition by competition, newest first.", ar: "جميع أخبار الموقع، بطولة بطولة، من الأحدث إلى الأقدم." },
   latestNews: { pt: "Últimas notícias", fr: "Dernières actualités", en: "Latest news", ar: "آخر الأخبار" },
   moreNews: { pt: "Mais notícias", fr: "Plus d'actualités", en: "More news", ar: "مزيد من الأخبار" },
   footServ: { pt: "Jogos e tabelas", fr: "Matchs et classements", en: "Fixtures and tables", ar: "المباريات والجداول" },
@@ -192,8 +194,12 @@ function agendaList(limit, todos = D.FIXTURES) {
 const tzHint = () => `<p class="hint" data-tz-template="${esc(T("tz", { tz: "{tz}" }))}">${esc(T("tzStatic"))}</p>`;
 const datesList = () => `<ul class="dates">${D.KEY_DATES.map(([d, t]) => `<li><span class="d">${esc(L(d))}</span><span>${esc(L(t))}</span></li>`).join("")}</ul>`;
 
-/* coluna lateral: as últimas notícias. A agenda e o placar ficam só na página Agenda */
-function sidebar(semSlug) {
+/* coluna lateral. Nas notícias: as últimas notícias. Nas outras páginas: "Em números", com os recordes
+   do futebol africano (build-historia.js). A agenda e o placar ficam só na página Agenda */
+function sidebar() {
+  return HI.fatos("geral", ad("lateral"));
+}
+function sidebarNoticias(semSlug) {
   const lista = sorted.filter((n) => n.slug !== semSlug).slice(0, 6);
   return `<aside class="sidebar">
     <section class="rail" aria-labelledby="rail-h"><h2 id="rail-h">${esc(T("latestNews"))}</h2>
@@ -208,11 +214,9 @@ function groupsHtml(groups, k) {
     teams.map(([t, c]) => `<li><span>${esc(t ?? T("tbc"))}</span><span class="cty">${bandeira(c)}${esc(c)}</span></li>`).join("")}</ol></div>`).join("")}</div>`;
 }
 const leaderNames = (arr) => arr.map((x) => (typeof x === "string" && D.COUNTRY[x] ? C(x) : L(x))).join(L(D.AND));
+/* eliminatórias da CAN 2027: classificação de todos os grupos (conteudo/historia.js) */
 function qualTable() {
-  if (ESP.grupos("canq")) return ESP.grupos("canq");
-  return `<div class="table-wrap"><table><thead><tr><th>${esc(T("qGroup"))}</th><th>${esc(T("qLeader"))}</th><th class="num">${esc(T("qPts"))}</th><th>${esc(T("qNoteH"))}</th></tr></thead><tbody>${
-    D.QUAL_LEADERS.map(([g, l, p, o]) => `<tr><td class="grp">${g}</td><td>${esc(leaderNames(l))}</td><td class="num">${esc(p)}</td><td>${esc(L(o))}</td></tr>`).join("")
-  }</tbody></table></div><p class="note">${esc(T("qNote"))}</p>`;
+  return HI.qualCards();
 }
 function leaguesHtml() {
   return `<div class="leagues">${D.LEAGUES.map((l) => `<div class="league">
@@ -305,7 +309,7 @@ ${adsHead}${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld
     <div class="foot-brand"><div class="logo">${logoHtml()}</div><p>${esc(T("foot1"))}</p></div>
     <nav class="foot-col" aria-labelledby="f-fut"><h2 id="f-fut">${esc(T("gFut"))}</h2>${["can", "cl", "cc", "sel", "ligas"].map((k) => `<a href="${u(CATS[k].route)}">${esc(catName(k))}</a>`).join("")}</nav>
     <nav class="foot-col" aria-labelledby="f-esp"><h2 id="f-esp">${esc(T("footSports"))}</h2><a href="${u("masculino")}">${esc(T("gMasc"))}</a><a href="${u(CATS.fem.route)}">${esc(T("gFem"))}</a><a href="${u("esportes")}">${esc(T("moreSports"))}</a></nav>
-    <nav class="foot-col" aria-labelledby="f-serv"><h2 id="f-serv">${esc(T("footServ"))}</h2><a href="${u("agenda")}">${esc(T("agenda"))}</a><a href="${u("tabelas")}">${esc(T("tables"))}</a><a href="${u("onde-assistir")}">${esc(T("watch"))}</a></nav>
+    <nav class="foot-col" aria-labelledby="f-serv"><h2 id="f-serv">${esc(T("footServ"))}</h2><a href="${u("noticias")}">${esc(T("news"))}</a><a href="${u("agenda")}">${esc(T("agenda"))}</a><a href="${u("tabelas")}">${esc(T("tables"))}</a><a href="${u("onde-assistir")}">${esc(T("watch"))}</a></nav>
     <nav class="foot-col" aria-labelledby="f-inst"><h2 id="f-inst">${esc(T("footNav"))}</h2><a href="${u("sobre")}">${esc(T("about"))}</a><a href="${u("contato")}">${esc(T("contact"))}</a><a href="${u("privacidade")}">${esc(T("privacy"))}</a></nav>
     <p class="foot-meta">© ${HOJE.slice(0, 4)} ${esc(brand())}. ${esc(T("foot2"))}</p>
   </div>
@@ -353,7 +357,6 @@ function campJogos(lista, feitos, c) {
 function campPage(c) {
   const a = campAuto(c);
   const lg = D.LEAGUES.find((l) => l.country === c.code);
-  const news = sorted.filter((n) => mencionaPais(n, c)).slice(0, 6);
   const quando = a && a.atualizado ? fmt({ day: "numeric", month: "long", year: "numeric" }).format(new Date(a.atualizado)) : "";
   return `<div class="layout"><div class="article camp">
     <a class="back" href="${u(CATS.ligas.route)}">‹ ${esc(T("campAll"))}</a>
@@ -369,7 +372,6 @@ function campPage(c) {
       ${a.proximos && a.proximos.length ? `<section class="section cat-ligas">${sectionHead(T("campNext"))}${tzHint()}<div class="panel">${campJogos(a.proximos, false, c)}</div></section>` : ""}
       <p class="note">${a.manual ? `${esc(T("campManual", { d: quando }))} <a href="${esc(a.fonte[1])}">${esc(a.fonte[0])}</a>` : esc(T("campUpdated", { d: quando }))}</p>`
     : `<p class="note">${esc(T("campNoData"))}</p>`}
-    ${news.length ? `<section class="section cat-ligas">${sectionHead(T("campNews"))}<div class="grid-stories">${news.map(storyCard).join("")}</div></section>` : ""}
   </div>${sidebar()}</div>`;
 }
 
@@ -377,7 +379,9 @@ function campPage(c) {
 const ESP = require("./build-esportes.js")({ D, CAMP, NEWS, cfg, esc, L, T, u, ad, sectionHead, sidebar, timeTag, fmt, fmtDay, fmtTime, tzHint, storyCard, sorted, LANGS, LOCALE, bandeira, getLang: () => lang });
 /* página de cada time dos campeonatos nacionais (arquivo build-times.js) */
 const TM = require("./build-times.js")({ D, CAMP, AUTO, CATS, esc, L, T, u, sectionHead, sidebar, storyCard, sorted, timeTag, fmt, fmtDay, fmtTime, tzHint, bandeira, campTitle, LOCALE, getLang: () => lang });
-const GEN = require("./build-generos.js")({ D, X, CATS, ESP, sorted, esc, L, T, u, storyCard, agendaList, tzHint, watchHtml, sectionHead, LOCALE, getLang: () => lang });
+/* história, títulos e recordes (arquivo build-historia.js, dados em conteudo/historia.js) */
+const HI = require("./build-historia.js")({ D, esc, L, T, C, u, CATS, bandeira, sectionHead, fmt });
+const GEN = require("./build-generos.js")({ D, X, CATS, ESP, HI, sorted, esc, L, T, u, storyCard, agendaList, tzHint, watchHtml, sectionHead, LOCALE, getLang: () => lang });
 
 /* árabe: as traduções ficam em conteudo/traducao-ar.js; o que faltar aparece em francês */
 const AR = require("./conteudo/traducao-ar.js");
@@ -414,19 +418,36 @@ function homePage() {
   </div>`;
 }
 
+/* páginas das competições: tabelas, grupos, história e títulos. As notícias ficam no Início e na página Notícias */
 function categoryPage(k) {
-  const items = sorted.filter((n) => n.tags.includes(k));
-  let extra = "";
-  if (k === "can") extra = `<section class="section cat-can">${sectionHead(T("leadersTitle"))}${qualTable()}</section>`;
-  if (k === "cl") extra = `<section class="section cat-cl">${sectionHead(T("groupsTitle"))}${groupsHtml(D.CL_GROUPS, "cl")}<p class="note">${esc(T("clNote"))}</p></section>`;
-  if (k === "cc") extra = `<section class="section cat-cc">${sectionHead(T("groupsTitle"))}${groupsHtml(D.CC_GROUPS, "cc")}<p class="note">${esc(T("ccNote"))}</p></section>`;
-  if (k === "ligas") extra = `<section class="section cat-ligas">${sectionHead(T("champsTitle"))}${leaguesHtml()}</section>`;
+  const temNoticias = sorted.some((n) => n.cat === k);
+  let corpo = "";
+  if (k === "can") corpo = HI.qualHtml() + ad("meio") + HI.canHtml();
+  if (k === "cl") corpo = `<section class="section cat-cl">${sectionHead(T("groupsTitle"))}${groupsHtml(D.CL_GROUPS, "cl")}<p class="note">${esc(T("clNote"))}</p></section>${ad("meio")}${HI.clHtml()}`;
+  if (k === "cc") corpo = `<section class="section cat-cc">${sectionHead(T("groupsTitle"))}${groupsHtml(D.CC_GROUPS, "cc")}<p class="note">${esc(T("ccNote"))}</p></section>${ad("meio")}${HI.ccHtml()}`;
+  if (k === "ligas") corpo = `${campDirHtml()}<section class="section cat-ligas">${sectionHead(T("champsTitle"))}${leaguesHtml()}</section>`;
+  if (k === "sel") corpo = HI.selHtml();
   return `${ad("topo")}<div class="layout"><div>
     ${ROTAS_MASC.includes(CATS[k].route) ? `<a class="back" href="${u("masculino")}">‹ ${esc(T("gMasc"))}</a>` : ""}
-    <div class="page-head cat-${k}"><h1>${esc(catName(k))}</h1><p>${esc(L(CATS[k].desc))}</p></div>
-    ${k === "ligas" ? campDirHtml() : ""}
-    <div class="grid-stories">${items.map(storyCard).join("") || `<div class="empty">${esc(T("emptyCat"))}</div>`}</div>
-    ${extra}</div>${sidebar()}</div>`;
+    <div class="page-head cat-${k}"><h1>${esc(catName(k))}</h1><p>${esc(L(CATS[k].desc))}</p>
+      ${temNoticias ? `<p class="page-links"><a href="${u("noticias")}#${k}">${esc(T("newsOf", { x: catName(k) }))} ›</a></p>` : ""}</div>
+    ${corpo}</div>${HI.fatos(k, ad("lateral"))}</div>`;
+}
+
+/* página Notícias: todas as notícias, separadas por competição e por esporte */
+function noticiasPage() {
+  const secoes = [];
+  for (const k of ["can", "cl", "cc", "fem", "ligas", "sel"]) {
+    const lista = sorted.filter((n) => n.cat === k && esporteDe(n) === "futebol");
+    if (lista.length) secoes.push([k, catName(k), lista]);
+  }
+  for (const e of ESP.ESPORTES) {
+    const lista = sorted.filter((n) => esporteDe(n) === e.id);
+    if (lista.length) secoes.push([e.id, L(e.nome), lista]);
+  }
+  return `<div class="page-head"><h1>${esc(T("news"))}</h1><p>${esc(T("newsPageDesc"))}</p></div>
+    <nav class="atalhos" aria-label="${esc(T("news"))}">${secoes.map(([id, nome]) => `<a href="#${id}">${esc(nome)}</a>`).join("")}</nav>
+    ${secoes.map(([id, nome, lista]) => `<section class="section" id="${id}" aria-labelledby="h-n-${id}">${sectionHead(nome, null, null, "h-n-" + id)}<div class="grid-stories">${lista.map(storyCard).join("")}</div></section>`).join("")}`;
 }
 
 function agendaPage() {
@@ -478,7 +499,7 @@ function articlePage(n) {
     ${ad("materia")}
     <div class="sources"><h2>${esc(T("sources"))}</h2><ul>${n.sources.map(([t, href]) => `<li><a href="${href}">${esc(t)}</a></li>`).join("")}</ul></div>
     ${related.length ? `<section class="section cat-${n.cat}">${sectionHead(T("related"))}<div class="grid-stories">${related.map(storyCard).join("")}</div></section>` : ""}
-  </article>${sidebar(n.slug)}</div>`;
+  </article>${sidebarNoticias(n.slug)}</div>`;
 }
 
 function searchPage() {
@@ -517,6 +538,7 @@ for (const l of LANGS) {
     if (k === "fem") continue; /* a página Feminino é feita pelo build-generos.js */
     pages.push(emit(c.route, { title: catName(k), desc: L(c.desc), body: () => categoryPage(k), active: c.route }));
   }
+  pages.push(emit("noticias", { title: T("news"), desc: T("newsPageDesc"), body: () => noticiasPage(), active: "noticias" }));
   pages.push(emit("agenda", { title: T("agenda"), desc: T("agendaDesc"), body: () => agendaPage(), active: "agenda" }));
   pages.push(emit("tabelas", { title: T("tables"), desc: T("tablesDesc"), body: () => tablesPage(), active: "tabelas" }));
   pages.push(emit("onde-assistir", { title: T("watch"), desc: T("watchDesc"), body: () => watchPage(), active: "onde-assistir" }));
