@@ -93,7 +93,10 @@ const brand = () => L(X.BRAND_TITLE);
 const pathOf = (id, l = lang) => PREFIX[l] + id + ".html";
 const rel = (target) => "../".repeat(cur.split("/").length - 1) + target;
 const u = (id, l) => rel(pathOf(id, l));
-const asset = (p) => rel("assets/" + p);
+/* o endereço do CSS e do JS leva um código da versão: quando o arquivo muda, o navegador baixa o novo na hora */
+const VERSAO = {};
+const versao = (p) => (VERSAO[p] = VERSAO[p] || require("crypto").createHash("sha1").update(fs.readFileSync(path.join(__dirname, "assets", p))).digest("hex").slice(0, 8));
+const asset = (p) => rel("assets/" + p) + "?v=" + versao(p);
 const absUrl = (p) => cfg.SITE_URL.replace(/\/$/, "") + "/" + p.replace(/(^|\/)index\.html$/, "$1");
 
 const MONTHS = {
