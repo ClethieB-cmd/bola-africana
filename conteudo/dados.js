@@ -121,18 +121,28 @@ const C = (code) => L(COUNTRY[code]) || code;
 
 
 /* Agenda: início em UTC (GMT divulgado pela imprensa); a página mostra no fuso de quem visita. */
-const Q = (g, venue) => ({ pt: `Eliminatórias CAN · Grupo ${g}${venue ? " · " + venue : ""}`, fr: `Élim. CAN · Groupe ${g}${venue ? " · " + venue : ""}`, en: `AFCON qualifiers · Group ${g}${venue ? " · " + venue : ""}` });
+const Q = (g, venue) => ({ pt: `Eliminatórias CAN · Grupo ${g}${venue ? " · " + venue : ""}`, fr: `Élim. CAN · Groupe ${g}${venue ? " · " + venue : ""}`, en: `AFCON qualifiers · Group ${g}${venue ? " · " + venue : ""}`, ar: `تصفيات كأس أمم أفريقيا · المجموعة ${g}${venue ? " · " + venue : ""}` });
 const FIXTURES = [
   { at: "2026-11-12T15:00Z", home: "GHA", away: "SOM", score: "2–0", cat: "can", comp: Q("C"), bar: true, today: true },
   { at: "2026-11-12T16:00Z", home: "COD", away: "SLE", score: "3–1", cat: "can", comp: Q("E"), bar: true, today: true },
-  { at: "2026-11-12T19:00Z", home: "SEN", away: "SDN", cat: "can", comp: Q("J"), bar: true, today: true },
-  { at: "2026-11-12T19:00Z", home: "CIV", away: "GAM", cat: "can", comp: Q("C", "Bouaké"), bar: true, today: true },
-  { at: "2026-11-12T19:00Z", home: "CMR", away: "NAM", cat: "can", comp: Q("G"), bar: true, today: true },
-  { at: "2026-11-13T16:00Z", home: "RSA", away: "KEN", cat: "can", comp: Q("D"), bar: true },
-  { at: "2026-11-13T19:00Z", home: "EGY", away: "MWI", cat: "can", comp: Q("B"), bar: true },
-  { at: "2026-11-13T20:00Z", home: "MAR", away: "NIG", cat: "can", comp: Q("A"), bar: true },
-  { at: "2026-11-14T16:00Z", home: "NGA", away: "TAN", cat: "can", comp: Q("L", "Uyo"), tv: "SuperSport" },
-  { at: "2026-11-14T19:00Z", home: "ALG", away: "TOG", cat: "can", comp: Q("I") },
+  { at: "2026-11-12T19:00Z", home: "SEN", away: "SDN", score: "4–1", cat: "can", comp: Q("J"), bar: true, today: true },
+  { at: "2026-11-12T19:00Z", home: "CIV", away: "GAM", score: "2–1", cat: "can", comp: Q("C", "Bouaké"), bar: true, today: true },
+  { at: "2026-11-12T19:00Z", home: "CMR", away: "NAM", score: "2–0", cat: "can", comp: Q("G"), bar: true, today: true },
+  { at: "2026-11-13T13:00Z", home: "COM", away: "CGO", score: "0–0", cat: "can", comp: Q("G", "Moroni") },
+  { at: "2026-11-13T13:00Z", home: "ZAM", away: "BDI", score: "1–1", cat: "can", comp: Q("I") },
+  { at: "2026-11-13T13:00Z", home: "MOZ", away: "ETH", score: "0–1", cat: "can", comp: Q("J"), bar: true },
+  { at: "2026-11-13T16:00Z", home: "RSA", away: "KEN", score: "2–2", cat: "can", comp: Q("D", "Soweto"), bar: true },
+  { at: "2026-11-13T16:00Z", home: "NGA", away: "TAN", score: "3–1", cat: "can", comp: Q("L", "Uyo"), bar: true, tv: "SuperSport" },
+  { at: "2026-11-13T16:00Z", home: "TUN", away: "LBA", score: "0–2", cat: "can", comp: Q("H", "Sfax"), bar: true },
+  { at: "2026-11-13T16:00Z", home: "GAB", away: "LES", score: "2–0", cat: "can", comp: Q("A") },
+  { at: "2026-11-13T16:00Z", home: "BFA", away: "MTN", score: "1–0", cat: "can", comp: Q("F", "Ouagadougou") },
+  { at: "2026-11-13T16:00Z", home: "CPV", away: "LBR", score: "4–2", cat: "can", comp: Q("K", "Praia") },
+  { at: "2026-11-13T19:00Z", home: "MLI", away: "RWA", score: "3–2", cat: "can", comp: Q("K", "Bamako") },
+  { at: "2026-11-13T19:00Z", home: "EGY", away: "MWI", score: "5–0", cat: "can", comp: Q("B", "Cairo"), bar: true },
+  { at: "2026-11-13T20:00Z", home: "MAR", away: "NIG", score: "5–1", cat: "can", comp: Q("A", "Casablanca"), bar: true },
+  { at: "2026-11-14T16:00Z", home: "UGA", away: "BOT", cat: "can", comp: Q("H") },
+  { at: "2026-11-14T19:00Z", home: "ALG", away: "TOG", cat: "can", comp: Q("I"), bar: true },
+  { at: "2026-11-14T19:00Z", home: "ANG", away: "SSD", cat: "can", comp: Q("B") },
   { at: "2026-11-15T12:00Z", timeTbd: true, home: "Sundowns", away: "AS FAR", club: true, cat: "fem", bar: true,
     comp: { pt: "Final · Liga dos Campeões Feminina · Ismailia", fr: "Finale · Ligue des champions féminine · Ismaïlia", en: "Final · Women's Champions League · Ismailia" }, tv: "CAF TV (YouTube)" },
   { at: "2026-11-16T13:00Z", home: "SDN", away: "SEN", cat: "can", comp: Q("J") },
