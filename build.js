@@ -31,6 +31,8 @@ const EXTRA_UI = {
   skip: { pt: "Pular para o conteúdo", fr: "Aller au contenu", en: "Skip to content" },
   footNav: { pt: "Institucional", fr: "Informations", en: "Information", ar: "عن الموقع" },
   footSports: { pt: "Esportes", fr: "Sports", en: "Sports", ar: "الرياضات" },
+  latestNews: { pt: "Últimas notícias", fr: "Dernières actualités", en: "Latest news", ar: "آخر الأخبار" },
+  moreNews: { pt: "Mais notícias", fr: "Plus d'actualités", en: "More news", ar: "مزيد من الأخبار" },
   footServ: { pt: "Jogos e tabelas", fr: "Matchs et classements", en: "Fixtures and tables", ar: "المباريات والجداول" },
   noGames: { pt: "Os próximos jogos entram aqui assim que forem marcados.", fr: "Les prochains matchs apparaîtront ici dès qu'ils seront programmés.", en: "Upcoming games will appear here as soon as they are scheduled.", ar: "ستظهر المباريات المقبلة هنا فور تحديد مواعيدها." }
 };
@@ -137,9 +139,12 @@ function cover(n) {
 const tag = (k) => `<span class="tag cat-${k}">${esc(catName(k))}</span>`;
 const meta = (n) => `<div class="meta">${tag(n.cat)}<span>${esc(dateLabel(n))}</span></div>`;
 const newsUrl = (n) => u("noticias/" + n.slug);
-const leadCard = (n) => `<a class="lead-story" href="${newsUrl(n)}">${cover(n)}${meta(n)}<h1>${esc(L(n.title))}</h1><p>${esc(L(n.lead))}</p></a>`;
-const rowCard = (n, attrs = "") => `<a class="row-story" href="${newsUrl(n)}"${attrs}>${cover(n)}<div>${meta(n)}<h3>${esc(L(n.title))}</h3></div></a>`;
-const storyCard = (n) => `<a class="story" href="${newsUrl(n)}">${cover(n)}${meta(n)}<h3>${esc(L(n.title))}</h3><p>${esc(L(n.lead))}</p></a>`;
+/* listas de notícias só com texto (chapéu, título, resumo e data); a imagem fica dentro da notícia */
+const kicker = (n) => `<div class="meta">${tag(n.cat)}</div>`;
+const dataNoticia = (n) => `<span class="date">${esc(dateLabel(n))}</span>`;
+const leadCard = (n) => `<a class="lead-story" href="${newsUrl(n)}">${kicker(n)}<h1>${esc(L(n.title))}</h1><p>${esc(L(n.lead))}</p>${dataNoticia(n)}</a>`;
+const rowCard = (n, attrs = "") => `<a class="row-story" href="${newsUrl(n)}"${attrs}>${meta(n)}<h3>${esc(L(n.title))}</h3></a>`;
+const storyCard = (n) => `<a class="story" href="${newsUrl(n)}">${kicker(n)}<h3>${esc(L(n.title))}</h3><p>${esc(L(n.lead))}</p>${dataNoticia(n)}</a>`;
 
 function sectionHead(title, link, linkText, id) {
   return `<div class="section-head"><h2${id ? ` id="${id}"` : ""}>${esc(title)}</h2>${link ? `<a href="${u(link)}">${esc(linkText)}</a>` : ""}</div>`;
@@ -184,12 +189,13 @@ function agendaList(limit, todos = D.FIXTURES) {
 const tzHint = () => `<p class="hint" data-tz-template="${esc(T("tz", { tz: "{tz}" }))}">${esc(T("tzStatic"))}</p>`;
 const datesList = () => `<ul class="dates">${D.KEY_DATES.map(([d, t]) => `<li><span class="d">${esc(L(d))}</span><span>${esc(L(t))}</span></li>`).join("")}</ul>`;
 
-function sidebar() {
+/* coluna lateral: as últimas notícias. A agenda e o placar ficam só na página Agenda */
+function sidebar(semSlug) {
+  const lista = sorted.filter((n) => n.slug !== semSlug).slice(0, 6);
   return `<aside class="sidebar">
-    <section class="panel"><h2>${esc(T("agenda"))}</h2>${tzHint()}${agendaList(10)}
-      <p class="note" style="margin-top:10px"><a href="${u("agenda")}">${esc(T("fullAgenda"))}</a><br><a href="${u("onde-assistir")}">${esc(T("watchLink"))}</a></p></section>
+    <section class="rail" aria-labelledby="rail-h"><h2 id="rail-h">${esc(T("latestNews"))}</h2>
+      <ol class="rail-list">${lista.map((n) => `<li><a href="${newsUrl(n)}">${kicker(n)}<span class="t">${esc(L(n.title))}</span></a></li>`).join("")}</ol></section>
     ${ad("lateral")}
-    <section class="panel"><h2>${esc(T("keyDates"))}</h2>${datesList()}</section>
   </aside>`;
 }
 
@@ -287,9 +293,6 @@ ${adsHead}${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld
     <nav class="nav" aria-label="${esc(T("navLabel"))}">${navHtml(active)}</nav>
   </div>
 </header>
-${FIXTURES_BAR().length ? `<div class="scorebar" aria-label="${esc(T("scoreAria"))}">
-  <div class="wrap scorebar-inner"><div class="scorebar-label"><strong>${esc(T("scoreTitle"))}</strong>${esc(T("scoreSub"))}</div>${scorebar()}</div>
-</div>` : ""}
 <main id="conteudo">
   <div class="wrap">${body}</div>
 </main>
@@ -355,7 +358,7 @@ function campPage(c) {
     ${lg ? `<p class="camp-champ">${esc(T("champ"))} <b>${esc(lg.champ)}</b>. ${esc(L(lg.fact))} <a href="${lg.src}">${esc(T("source"))}</a></p>` : ""}
     ${c.texto ? `<div class="prose">${L(c.texto).map((t) => `<p>${esc(t)}</p>`).join("")}</div>` : ""}
     ${a ? `${a.anterior ? `<p class="note camp-old">${esc(T("campOld", { s: a.temporada }))}</p>` : ""}
-      ${a.nota ? `<p class="note">${esc(L(a.nota.texto))} <a href="${esc(a.nota.fonte[1])}">${esc(a.nota.fonte[0])}</a></p>` : ""}
+      ${a.nota ? `<p class="note">${esc(L(a.nota.texto))} ${esc(T("source"))}: <a href="${esc(a.nota.fonte[1])}">${esc(a.nota.fonte[0])}</a>.</p>` : ""}
       ${a.tabela && a.tabela.length ? `<section class="section cat-ligas">${sectionHead(a.anterior ? T("campFinal", { s: a.temporada }) : T("campTable") + (a.temporada ? " · " + T("campSeason", { s: a.temporada }) : ""))}${campTabela(a, c)}</section>` : ""}
       ${ad("meio")}
       ${a.resultados && a.resultados.length ? `<section class="section cat-ligas">${sectionHead(a.anterior ? T("campResultsOld", { s: a.temporada }) : T("campResults"))}<div class="panel">${campJogos(a.resultados, true, c)}</div></section>` : ""}
@@ -395,29 +398,16 @@ if (semAr) console.log(`Árabe: ${semAr} textos sem tradução, mostrados em fra
 
 /* ---------- páginas ---------- */
 function homePage() {
-  const lead = sorted[0];
-  const side = [sorted[1], sorted[2], sorted.find((n) => n.slug === "wiliete-elimina-sundowns")].filter(Boolean);
-  const used = new Set([lead, ...side].map((n) => n.slug));
-  const take = (fn, max = 4) => { const out = sorted.filter((n) => fn(n) && !used.has(n.slug)).slice(0, max); out.forEach((n) => used.add(n.slug)); return out; };
-  const canItems = take((n) => n.cat === "can");
-  const femItems = take((n) => n.tags.includes("fem"));
-  const clubs = take((n) => n.cat === "cl" || n.cat === "cc");
-  const ligaItems = take((n) => n.cat === "ligas");
-  const selItems = take((n) => n.cat === "sel");
-  return `${ad("topo")}<div class="layout"><div>
-    <div class="hero">${leadCard(lead)}<div class="side-stories">${side.map((n) => rowCard(n)).join("")}</div></div>
-    ${section("can", canItems, T("secCan"))}
-    ${ad("meio")}
-    <section class="section cat-can" aria-labelledby="sec-qual">${sectionHead(T("secQual"), "tabelas", T("allTables"), "sec-qual")}${qualTable()}</section>
-    ${section("fem", femItems, T("secFem"))}
-    <section class="section cat-cl" aria-labelledby="sec-clubs">${sectionHead(T("secClubs"), CATS.cl.route, T("seeAll", { x: catName("cl") }), "sec-clubs")}
-      <div class="grid-stories">${clubs.map(storyCard).join("")}</div>
-      <div style="margin-top:22px">${groupsHtml(D.CL_GROUPS, "cl")}</div>
-      <p class="note">${esc(T("clNoteHome"))}</p></section>
-    <section class="section cat-ligas" aria-labelledby="sec-ligas">${sectionHead(T("secLigas"), CATS.ligas.route, T("seeAll", { x: catName("ligas") }), "sec-ligas")}
-      ${leaguesHtml()}<div class="grid-stories" style="margin-top:22px">${ligaItems.map(storyCard).join("")}</div></section>
-    ${section("sel", selItems, T("secSel"))}
-  </div>${sidebar()}</div>`;
+  /* início: só notícias, da mais nova para a mais antiga. Tabelas, grupos e agenda ficam nas próprias páginas */
+  const [lead, ...resto] = sorted;
+  const destaques = resto.slice(0, 3);
+  const demais = resto.slice(3);
+  return `<div class="home">
+    <div class="home-top">${leadCard(lead)}<div class="side-stories">${destaques.map(storyCard).join("")}</div></div>
+    ${ad("topo")}
+    ${demais.length ? `<section class="section" aria-labelledby="sec-ultimas">${sectionHead(T("latestNews"), null, null, "sec-ultimas")}
+      <div class="grid-stories">${demais.map(storyCard).join("")}</div></section>` : ""}
+  </div>`;
 }
 
 function categoryPage(k) {
@@ -438,6 +428,7 @@ function categoryPage(k) {
 function agendaPage() {
   return `<div class="layout"><div>
     <div class="page-head"><h1>${esc(T("agenda"))}</h1><p>${esc(T("agendaDesc"))}</p>${tzHint()}</div>
+    ${FIXTURES_BAR().length ? `<section class="placar" aria-label="${esc(T("scoreAria"))}"><h2>${esc(T("scoreTitle"))} <span>${esc(T("scoreSub"))}</span></h2><div class="scorebar-inner">${scorebar()}</div></section>` : ""}
     <div class="panel">${agendaList()}</div>
     <p class="note">${esc(T("agendaNote"))} <a href="${u("onde-assistir")}">${esc(T("watchLink"))}</a></p>
   </div><aside class="sidebar">${ad("lateral")}<section class="panel"><h2>${esc(T("keyDates"))}</h2>${datesList()}</section></aside></div>`;
@@ -483,15 +474,14 @@ function articlePage(n) {
     ${ad("materia")}
     <div class="sources"><h2>${esc(T("sources"))}</h2><ul>${n.sources.map(([t, href]) => `<li><a href="${href}">${esc(t)}</a></li>`).join("")}</ul></div>
     ${related.length ? `<section class="section cat-${n.cat}">${sectionHead(T("related"))}<div class="grid-stories">${related.map(storyCard).join("")}</div></section>` : ""}
-  </article>${sidebar()}</div>`;
+  </article>${sidebar(n.slug)}</div>`;
 }
 
 function searchPage() {
   const norm = (s) => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
   const rows = sorted.map((n) => rowCard(n, ` data-q="${esc(norm([L(n.title), L(n.lead), L(n.body).join(" ")].join(" ")))}"`)).join("")
     + CAMP.map((c) => `<a class="row-story camp-row" href="${campUrl(c)}" data-q="${esc(norm(["campeonato championnat league liga", c.liga, ...LANGS.map((l) => c.nome[l] + " " + c.de[l])].join(" ")))}">
-      <div class="cover cat-ligas sp-futebol" aria-hidden="true"><div class="big">${esc(c.code)}</div></div>
-      <div><div class="meta">${tag("ligas")}</div><h3>${esc(campTitle(c))}</h3></div></a>`).join("")
+      <div class="meta">${tag("ligas")}</div><h3>${esc(campTitle(c))}</h3></a>`).join("")
     + ESP.linhasBusca(norm);
   return `<div class="search-page">
     <div class="page-head"><h1>${esc(T("searchTitle"))}</h1><p id="busca-msg" data-hits="${esc(L(D.UI.hits))}" data-nohits="${esc(L(D.UI.noHits))}" data-intro="${esc(T("searchIntro"))}">${esc(T("searchIntro"))}</p></div>
