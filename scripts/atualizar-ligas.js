@@ -60,9 +60,17 @@ const CONTINENTAIS = [
 ];
 const RUIM = /women|femin|femen|\bu ?1\d|\bu ?2\d|reserve|youth|junior|cup|coupe|super ?cup|play-?off|qualif|\b2\b|ligue 2|division 2|second|d2\b/;
 
+/* País de cada liga da API. O nome do país vem primeiro e o código só entra quando o nome não bate:
+   assim a liga da RD Congo ("Congo-DR" na API) não cai também na página do Congo. */
+const PAIS_NOME = new Map(), PAIS_ISO = new Map();
+for (const c of CAMP) {
+  PAIS_ISO.set(c.iso, c.code);
+  for (const n of [c.nome.en, ...(NOMES_EXTRA[c.code] || [])]) PAIS_NOME.set(plano(n), c.code);
+}
+const paisDaLiga = (l) => PAIS_NOME.get(plano(l.country.name)) || PAIS_ISO.get(String(l.country.code || "").toUpperCase()) || null;
+
 function escolher(c, todas) {
-  const nomes = new Set([c.nome.en, ...(NOMES_EXTRA[c.code] || [])].map(plano));
-  const doPais = todas.filter((l) => (l.country.code && l.country.code.toUpperCase() === c.iso) || nomes.has(plano(l.country.name)));
+  const doPais = todas.filter((l) => paisDaLiga(l) === c.code);
   if (c.apiId) return doPais.find((l) => l.league.id === c.apiId) || todas.find((l) => l.league.id === c.apiId) || null;
   const pontos = (l) => {
     const n = norm(l.league.name);
@@ -131,7 +139,9 @@ async function atualizar(liga, ano) {
   const mapa = {}, sem = [];
   for (const c of CAMP) {
     const l = escolher(c, ligasNac);
-    if (l) mapa[c.code] = { apiId: l.league.id, apiNome: l.league.name, apiPais: l.country.name };
+    /* uma liga da API vale para um país só */
+    if (l && Object.values(mapa).some((m) => m.apiId === l.league.id)) { console.log(`aviso ${c.code}: a liga ${l.league.id} já é de outro país`); sem.push(c.code); }
+    else if (l) mapa[c.code] = { apiId: l.league.id, apiNome: l.league.name, apiPais: l.country.name };
     else sem.push(c.code);
   }
   dados.mapa = mapa;
