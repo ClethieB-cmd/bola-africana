@@ -410,3 +410,5 @@ html[lang="ar"] .story h3, html[lang="ar"] .row-story h3, html[lang="ar"] .secti
 .gen-duo { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 0 36px; align-items: start; }
 .gen-duo > :only-child { grid-column: 1 / -1; }
 @media (max-width: 860px) { .gen-duo { grid-template-columns: minmax(0, 1fr); } }
+.camp-old { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--gold); border-radius: 6px; padding: 10px 14px; color: var(--ink); max-width: none; }
+[dir="rtl"] .camp-old { border-left: 1px solid var(--line); border-right: 4px solid var(--gold); }
