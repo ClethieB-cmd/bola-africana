@@ -186,8 +186,8 @@ Cada time das tabelas dos campeonatos nacionais tem uma página própria (clique
 
 ## Menu
 
-O menu tem Início, Masculino, Feminino e Onde assistir. Clicar em Masculino ou Feminino abre uma janela com
-o futebol, os outros esportes, a agenda, as tabelas e onde assistir daquele gênero. No celular, o logo leva ao início.
+O menu tem Início, Masculino e Feminino. Clicar em Masculino ou Feminino abre uma janela com
+o futebol, os outros esportes, a agenda, as tabelas e onde assistir daquele gênero.
 
 ## Início e coluna lateral
 
