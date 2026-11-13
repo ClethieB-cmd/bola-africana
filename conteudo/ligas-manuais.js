@@ -26,10 +26,10 @@ module.exports = {
     fonte: ["FECOFOOT", "https://fecofoot.cg/championnat-national-l1/"],
     nota: {
       texto: {
-        pt: "A temporada seguinte, de 2025, foi interrompida antes do fim e ficou sem campeão, segundo a RSSSF.",
-        fr: "La saison suivante, en 2025, a été interrompue avant son terme et n'a pas désigné de champion, selon la RSSSF.",
-        en: "The following season, in 2025, was abandoned before the end with no champion, according to RSSSF.",
-        ar: "توقف الموسم التالي، موسم 2025، قبل نهايته دون تتويج بطل، بحسب RSSSF."
+        pt: "A temporada seguinte, de 2025, foi interrompida antes do fim e ficou sem campeão.",
+        fr: "La saison suivante, en 2025, a été interrompue avant son terme et n'a pas désigné de champion.",
+        en: "The following season, in 2025, was abandoned before the end with no champion.",
+        ar: "توقف الموسم التالي، موسم 2025، قبل نهايته دون تتويج بطل."
       },
       fonte: ["RSSSF", "https://rsssf.org/tablesk/kong2025.html"]
     },
