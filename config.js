@@ -18,7 +18,7 @@ module.exports = {
   ADSENSE_SLOTS: { topo: "", meio: "", lateral: "", materia: "" },
 
   // Código de verificação do Google Search Console (método "Tag HTML"): só o valor de content="...".
-  GOOGLE_VERIFICACAO: "",
+  GOOGLE_VERIFICACAO: "fmtFxHeodox_zwCeuW7f3d9LUg3OIpQUDhwJWF1O8fQ",
 
   // E-mail que aparece nas páginas Contato, Sobre e Privacidade. Vazio: os trechos com e-mail ficam escondidos.
   CONTACT_EMAIL: "",
