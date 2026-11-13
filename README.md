@@ -159,7 +159,15 @@ cada um com a sua cor, as competições, a agenda, as tabelas, onde assistir e a
   de outro esporte, acrescente `genero: "fem"`, por exemplo `esporte: "basquete", genero: "fem"`.
 - No Feminino só aparecem os esportes que já têm competição com dados ou notícia feminina. Os outros entram sozinhos
   quando ganharem conteúdo.
-- As cores dos esportes ficam no fim de `assets/style.css` (classes `cor-futebol`, `cor-basquete`...).
+- O site usa uma cor só (o verde de `--brand` no começo de `assets/style.css`) e o dourado como destaque.
+  O que diferencia os esportes é o desenho do campo ou da quadra.
+
+## Agenda, data e bandeiras
+
+- A data "Atualizado em" é a do dia em que o site foi gerado. O robô gera o site todo dia.
+- Na agenda e no placar, jogo com resultado fica 3 dias. Jogo sem resultado some quando o dia dele passa:
+  para ele voltar, coloque o placar no campo `score` em `conteudo/dados.js`.
+- As bandeiras vêm da flagcdn.com (Flagpedia), que distribui as bandeiras como domínio público.
 
 ## Árabe
 
