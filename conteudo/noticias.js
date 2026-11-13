@@ -10,6 +10,162 @@
    sources: [nome do veículo, link] — sempre cite de onde veio a informação */
 module.exports = [
   {
+    slug: "marrocos-egito-goleiam-mali-vira", cat: "can", tags: ["can", "sel"], date: "2026-11-13T22:30",
+    cover: { big: "5–1", cx: "82%", small: { pt: "Marrocos × Níger · Grupo A", fr: "Maroc × Niger · Groupe A", en: "Morocco × Niger · Group A", ar: "المغرب × النيجر · المجموعة A" } },
+    title: { pt: "Marrocos e Egito goleiam, e Mali vira sobre Ruanda nas eliminatórias", fr: "Le Maroc et l'Égypte déroulent, le Mali renverse le Rwanda", en: "Morocco and Egypt run riot as Mali come from behind to beat Rwanda", ar: "المغرب ومصر يكتسحان، ومالي تقلب الطاولة على رواندا" },
+    lead: { pt: "Hakimi marcou duas vezes nos 5 a 1 sobre o Níger em Casablanca, e Salah fez dois nos 5 a 0 do Egito sobre o Malawi.", fr: "Hakimi a marqué deux fois lors du 5-1 contre le Niger à Casablanca, et Salah a signé un doublé lors du 5-0 de l'Égypte contre le Malawi.", en: "Hakimi scored twice in a 5-1 win over Niger in Casablanca, and Salah got two in Egypt's 5-0 win over Malawi.", ar: "سجل حكيمي هدفين في الفوز 5-1 على النيجر في الدار البيضاء، وسجل صلاح هدفين في فوز مصر 5-0 على مالاوي." },
+    body: {
+      pt: [
+        "No Estádio Mohammed V, em Casablanca, o Marrocos venceu o Níger por 5 a 1 nesta sexta-feira (13). Yassir Zabiri abriu o placar aos 4 minutos, com passe de Brahim Díaz, e Achraf Hakimi marcou duas vezes, uma delas de falta antes do intervalo. Youssef En-Nesyri e Ayoub Oufkir completaram, e Mohamed Ali descontou para o Níger. Com três vitórias em três jogos, o Marrocos lidera o Grupo A com 9 pontos, três à frente do Gabão.",
+        "No Estádio Internacional do Cairo, o Egito goleou o Malawi por 5 a 0. Nasser Maher, Omar Marmoush e Mohamed Hany marcaram no primeiro tempo, e Mohamed Salah fez dois no fim, o segundo de pênalti. O Egito lidera o Grupo B com 7 pontos.",
+        "Em Bamako, no Estádio 26 de Março, o Mali virou sobre Ruanda e venceu por 3 a 2. Jojea Kwizera e Phanuel Kavita colocaram os ruandeses na frente duas vezes, e Kamory Doumbia e Moussa Kounfolo Yeo empataram. Mamadou Camara fez o gol da vitória aos 84 minutos. O Mali soma 9 pontos e lidera o Grupo K, três à frente de Ruanda. As duas seleções voltam a se enfrentar na terça-feira (17), em Kigali.",
+        "A 3ª rodada termina no sábado (14), com Uganda x Botsuana, Argélia x Togo e Angola x Sudão do Sul."
+      ],
+      fr: [
+        "Au stade Mohammed-V de Casablanca, le Maroc a battu le Niger 5-1 ce vendredi 13 novembre. Yassir Zabiri a ouvert le score à la 4e minute sur une passe de Brahim Díaz, et Achraf Hakimi a marqué deux fois, dont un coup franc avant la pause. Youssef En-Nesyri et Ayoub Oufkir ont complété la marque, Mohamed Ali réduisant l'écart pour le Niger. Avec trois victoires en trois matchs, le Maroc mène le groupe A avec 9 points, trois de plus que le Gabon.",
+        "Au stade international du Caire, l'Égypte a battu le Malawi 5-0. Nasser Maher, Omar Marmoush et Mohamed Hany ont marqué en première période, puis Mohamed Salah a signé un doublé en fin de match, le second sur penalty. L'Égypte mène le groupe B avec 7 points.",
+        "À Bamako, au stade du 26-Mars, le Mali a renversé le Rwanda 3-2. Jojea Kwizera et Phanuel Kavita ont donné deux fois l'avantage aux Rwandais, Kamory Doumbia et Moussa Kounfolo Yeo égalisant à chaque fois. Mamadou Camara a marqué le but de la victoire à la 84e minute. Le Mali compte 9 points et mène le groupe K, trois de plus que le Rwanda. Les deux équipes se retrouvent mardi 17 novembre à Kigali.",
+        "La 3e journée s'achève samedi 14 novembre avec Ouganda-Botswana, Algérie-Togo et Angola-Soudan du Sud."
+      ],
+      en: [
+        "At the Stade Mohammed V in Casablanca, Morocco beat Niger 5-1 on Friday (13 November). Yassir Zabiri opened the scoring on 4 minutes from a Brahim Díaz pass, and Achraf Hakimi scored twice, one of them a free kick before half-time. Youssef En-Nesyri and Ayoub Oufkir completed the rout, with Mohamed Ali pulling one back for Niger. With three wins from three, Morocco lead Group A on 9 points, three ahead of Gabon.",
+        "At Cairo International Stadium, Egypt beat Malawi 5-0. Nasser Maher, Omar Marmoush and Mohamed Hany scored in the first half, and Mohamed Salah added two late on, the second from the penalty spot. Egypt lead Group B on 7 points.",
+        "In Bamako, at the Stade du 26-Mars, Mali came from behind to beat Rwanda 3-2. Jojea Kwizera and Phanuel Kavita twice put Rwanda ahead, and Kamory Doumbia and Moussa Kounfolo Yeo equalised each time. Mamadou Camara scored the winner on 84 minutes. Mali have 9 points and lead Group K, three ahead of Rwanda. The sides meet again on Tuesday (17 November) in Kigali.",
+        "Matchday 3 ends on Saturday (14 November) with Uganda v Botswana, Algeria v Togo and Angola v South Sudan."
+      ],
+      ar: [
+        "على ملعب محمد الخامس في الدار البيضاء فاز المغرب على النيجر 5-1 يوم الجمعة 13 نوفمبر. افتتح ياسر الزبيري التسجيل في الدقيقة 4 بتمريرة من إبراهيم دياز، وسجل أشرف حكيمي هدفين أحدهما من ضربة حرة قبل الاستراحة. وأضاف يوسف النصيري وأيوب أوفقير هدفين، فيما قلّص محمد علي الفارق للنيجر. وبثلاثة انتصارات في ثلاث مباريات يتصدر المغرب المجموعة A بـ9 نقاط، بفارق ثلاث نقاط عن الغابون.",
+        "وعلى استاد القاهرة الدولي اكتسحت مصر مالاوي 5-0. سجل ناصر ماهر وعمر مرموش ومحمد هاني في الشوط الأول، وأضاف محمد صلاح هدفين في نهاية المباراة، الثاني من ركلة جزاء. وتتصدر مصر المجموعة B بـ7 نقاط.",
+        "وفي باماكو، على ملعب 26 مارس، قلبت مالي تأخرها أمام رواندا وفازت 3-2. تقدمت رواندا مرتين عبر جوجيا كويزيرا وفانويل كافيتا، وأدرك كاموري دومبيا وموسى كونفولو ييو التعادل في كل مرة. وسجل مامادو كامارا هدف الفوز في الدقيقة 84. وتملك مالي 9 نقاط في صدارة المجموعة K بفارق ثلاث نقاط عن رواندا. ويلتقي المنتخبان مجدداً يوم الثلاثاء 17 نوفمبر في كيغالي.",
+        "وتختتم الجولة الثالثة يوم السبت 14 نوفمبر بمباريات أوغندا وبوتسوانا، والجزائر وتوغو، وأنغولا وجنوب السودان."
+      ]
+    },
+    sources: [
+      ["Africa Top Sports", "https://africatopsports.com/football/elim-can-2027-maroc-5-1-niger-une-demonstration-des-lions-de-latlas-face-au-niger-a-casablanca/"],
+      ["Le360", "https://sport.le360.ma/football/can/eliminatoires-de-la-can-2027-portes-par-un-grand-hakimi-les-lions-de-latlas-surclassent-le-niger_IZWJHTV4XNEQLOEVER4UUQFD24/"],
+      ["Africa Soccer", "https://africasoccer.com/afcon-2027-qualifiers-egypt-thrash-malawi-5-0-to-extend-group-b-lead/"],
+      ["Sport News Africa", "https://sportnewsafrica.com/actualites/can-2027-mali-rwanda-3-2-debrief/"]
+    ]
+  },
+  {
+    slug: "libia-vence-tunisia-em-sfax", cat: "can", tags: ["can", "sel"], date: "2026-11-13T18:30",
+    cover: { big: "0–2", cx: "18%", small: { pt: "Tunísia × Líbia · Grupo H", fr: "Tunisie × Libye · Groupe H", en: "Tunisia × Libya · Group H", ar: "تونس × ليبيا · المجموعة H" } },
+    title: { pt: "Líbia vence a Tunísia em Sfax; Nigéria se recupera e Quênia arranca empate da África do Sul", fr: "La Libye bat la Tunisie à Sfax ; le Nigeria se relance et le Kenya arrache le nul en Afrique du Sud", en: "Libya beat Tunisia in Sfax as Nigeria bounce back and Kenya snatch a draw in South Africa", ar: "ليبيا تفوز على تونس في صفاقس، ونيجيريا تستعيد توازنها، وكينيا تنتزع التعادل من جنوب أفريقيا" },
+    lead: { pt: "Na tarde desta sexta-feira (13) das eliminatórias da CAN 2027, Gabão, Burkina Faso e Cabo Verde também venceram.", fr: "Ce vendredi 13 novembre après-midi, dans les éliminatoires de la CAN 2027, le Gabon, le Burkina Faso et le Cap-Vert ont aussi gagné.", en: "On Friday afternoon (13 November) in AFCON 2027 qualifying, Gabon, Burkina Faso and Cape Verde also won.", ar: "وفي مساء الجمعة 13 نوفمبر من تصفيات كأس أمم أفريقيا 2027 فازت أيضاً الغابون وبوركينا فاسو والرأس الأخضر." },
+    body: {
+      pt: [
+        "A Tunísia perdeu em casa para a Líbia por 2 a 0, no Estádio Taïeb Mhiri, em Sfax. Ali Youssef abriu o placar de pênalti no fim do primeiro tempo, após falta de Ali Maaloul, e Hamdou Elhouni fez o segundo aos 64 minutos, em contra-ataque. A Tunísia ainda teve um gol anulado por impedimento. No Grupo H, a Líbia soma 4 pontos, os mesmos de Uganda, que tem um jogo a menos; a Tunísia tem 2. Como Uganda já tem vaga garantida como país-sede, o grupo vale só mais uma vaga.",
+        "Em Uyo, a Nigéria venceu a Tanzânia por 3 a 1 e se recuperou da derrota para a Guiné-Bissau. Alhassan Yusuf marcou logo no começo, com passe de Ademola Lookman, e Alphonce Msanga empatou ainda no primeiro tempo. Na segunda etapa, Tolu Arokodare marcou duas vezes. A Nigéria chega a 6 pontos, um a menos que a líder Guiné-Bissau. As duas seleções voltam a se enfrentar na terça-feira (17), em Zanzibar.",
+        "No Orlando Stadium, em Soweto, a África do Sul de Pitso Mosimane empatou por 2 a 2 com o Quênia de Benni McCarthy. Os sul-africanos saíram na frente com gol contra de Amos Wanjala, e Michael Olunga empatou de pênalti antes do intervalo. Relebohile Mofokeng recolocou a África do Sul em vantagem no segundo tempo, mas Ryan Ogam empatou no último minuto. A África do Sul lidera o Grupo D com 7 pontos, um à frente da Guiné.",
+        "O Gabão bateu o Lesoto por 2 a 0, com dois gols de Denis Bouanga no segundo tempo, e chegou a 6 pontos no Grupo A, os mesmos do Marrocos, que ainda joga nesta sexta. Em Ouagadougou, Burkina Faso venceu a Mauritânia por 1 a 0, com gol de Elohim Kaboré nos acréscimos, e alcançou o Benin no topo do Grupo F, com 7 pontos. Em Praia, Cabo Verde conquistou a primeira vitória nas eliminatórias: 4 a 2 sobre a Libéria, com gols de Ayoni dos Santos, Djé Tavares, Dailon Livramento e Derensili Fernandes."
+      ],
+      fr: [
+        "La Tunisie s'est inclinée 2-0 à domicile face à la Libye, au stade Taïeb Mhiri de Sfax. Ali Youssef a ouvert le score sur penalty en fin de première période, après une faute d'Ali Maaloul, et Hamdou Elhouni a doublé la mise à la 64e minute en contre-attaque. La Tunisie a aussi vu un but refusé pour hors-jeu. Dans le groupe H, la Libye compte 4 points, autant que l'Ouganda, qui a un match en moins ; la Tunisie en a 2. L'Ouganda étant qualifié d'office comme pays hôte, il ne reste qu'une place dans ce groupe.",
+        "À Uyo, le Nigeria a battu la Tanzanie 3-1 et s'est relancé après sa défaite contre la Guinée-Bissau. Alhassan Yusuf a marqué d'entrée sur une passe d'Ademola Lookman, et Alphonce Msanga a égalisé avant la pause. En seconde période, Tolu Arokodare a signé un doublé. Le Nigeria compte 6 points, un de moins que la Guinée-Bissau, en tête. Les deux équipes se retrouvent mardi 17 novembre à Zanzibar.",
+        "À l'Orlando Stadium de Soweto, l'Afrique du Sud de Pitso Mosimane a fait match nul 2-2 avec le Kenya de Benni McCarthy. Les Sud-Africains ont ouvert le score sur un but contre son camp d'Amos Wanjala, avant que Michael Olunga n'égalise sur penalty avant la pause. Relebohile Mofokeng a redonné l'avantage à l'Afrique du Sud en seconde période, mais Ryan Ogam a égalisé dans la dernière minute. L'Afrique du Sud mène le groupe D avec 7 points, un de plus que la Guinée.",
+        "Le Gabon a battu le Lesotho 2-0 grâce à un doublé de Denis Bouanga en seconde période, et compte 6 points dans le groupe A, autant que le Maroc, qui joue plus tard ce vendredi. À Ouagadougou, le Burkina Faso a battu la Mauritanie 1-0 sur un but d'Elohim Kaboré dans le temps additionnel et rejoint le Bénin en tête du groupe F, avec 7 points. À Praia, le Cap-Vert a signé sa première victoire dans ces éliminatoires : 4-2 contre le Liberia, avec des buts d'Ayoni dos Santos, Djé Tavares, Dailon Livramento et Derensili Fernandes."
+      ],
+      en: [
+        "Tunisia lost 2-0 at home to Libya at the Stade Taïeb Mhiri in Sfax. Ali Youssef scored a penalty late in the first half after a foul by Ali Maaloul, and Hamdou Elhouni added the second on 64 minutes on the counter-attack. Tunisia also had a goal ruled out for offside. In Group H, Libya have 4 points, the same as Uganda, who have a game in hand; Tunisia have 2. With Uganda already qualified as a host nation, only one more place is available in the group.",
+        "In Uyo, Nigeria beat Tanzania 3-1 to recover from their defeat by Guinea-Bissau. Alhassan Yusuf scored early from an Ademola Lookman pass, and Alphonce Msanga equalised before half-time. In the second half Tolu Arokodare scored twice. Nigeria move to 6 points, one behind leaders Guinea-Bissau. The sides meet again on Tuesday (17 November) in Zanzibar.",
+        "At Orlando Stadium in Soweto, Pitso Mosimane's South Africa drew 2-2 with Benni McCarthy's Kenya. South Africa went ahead through an Amos Wanjala own goal, and Michael Olunga levelled from the penalty spot before the break. Relebohile Mofokeng put South Africa back in front in the second half, but Ryan Ogam equalised in the final minute. South Africa lead Group D on 7 points, one ahead of Guinea.",
+        "Gabon beat Lesotho 2-0 with two second-half goals from Denis Bouanga and have 6 points in Group A, the same as Morocco, who play later on Friday. In Ouagadougou, Burkina Faso beat Mauritania 1-0 with an Elohim Kaboré goal in stoppage time and joined Benin at the top of Group F on 7 points. In Praia, Cape Verde won for the first time in this campaign, 4-2 against Liberia, with goals from Ayoni dos Santos, Djé Tavares, Dailon Livramento and Derensili Fernandes."
+      ],
+      ar: [
+        "خسرت تونس على أرضها أمام ليبيا 0-2 على ملعب الطيب المهيري في صفاقس. افتتح علي يوسف التسجيل من ركلة جزاء في نهاية الشوط الأول بعد خطأ من علي معلول، وأضاف حمدو الهوني الهدف الثاني في الدقيقة 64 من هجمة مرتدة. وألغي لتونس هدف بداعي التسلل. وفي المجموعة H تملك ليبيا 4 نقاط، مثل أوغندا التي لعبت مباراة أقل، ولتونس نقطتان. وبما أن أوغندا ضمنت مكانها بصفتها دولة مضيفة، لم يبق في المجموعة سوى بطاقة واحدة.",
+        "وفي أويو فازت نيجيريا على تنزانيا 3-1 واستعادت توازنها بعد الخسارة أمام غينيا بيساو. سجل الحسن يوسف في البداية بتمريرة من أديمولا لوكمان، وأدرك ألفونس مسانغا التعادل قبل الاستراحة. وفي الشوط الثاني سجل تولو أروكوداري هدفين. وترفع نيجيريا رصيدها إلى 6 نقاط بفارق نقطة عن غينيا بيساو المتصدرة. ويلتقي المنتخبان مجدداً يوم الثلاثاء 17 نوفمبر في زنجبار.",
+        "وعلى ملعب أورلاندو في سويتو تعادلت جنوب أفريقيا بقيادة بيتسو موسيماني مع كينيا بقيادة بيني مكارثي 2-2. تقدمت جنوب أفريقيا بهدف عكسي من أموس وانجالا، وأدرك مايكل أولونغا التعادل من ركلة جزاء قبل الاستراحة. وأعاد ريليبوهيلي موفوكنغ التقدم لجنوب أفريقيا في الشوط الثاني، لكن رايان أوغام عادل النتيجة في الدقيقة الأخيرة. وتتصدر جنوب أفريقيا المجموعة D بـ7 نقاط بفارق نقطة عن غينيا.",
+        "وفازت الغابون على ليسوتو 2-0 بهدفين لدينيس بوانغا في الشوط الثاني، ورفعت رصيدها إلى 6 نقاط في المجموعة A، مثل المغرب الذي يلعب لاحقاً يوم الجمعة. وفي واغادوغو فازت بوركينا فاسو على موريتانيا 1-0 بهدف لإلوهيم كابوري في الوقت بدل الضائع، ولحقت ببنين في صدارة المجموعة F بـ7 نقاط. وفي برايا حققت الرأس الأخضر فوزها الأول في التصفيات بنتيجة 4-2 على ليبيريا، بأهداف أيوني دوس سانتوس وجيه تافاريس ودايلون ليفرامنتو وديرينسيلي فرنانديز."
+      ]
+    },
+    sources: [
+      ["Réalités", "https://realites.com.tn/fr/qualifications-can-2027-la-tunisie-chute-a-domicile-face-a-la-libye/"],
+      ["Africa Soccer", "https://africasoccer.com/arokodare-nigeria-tanzania-afcon-win/"],
+      ["TVC News", "https://www.tvcnews.tv/afcon-qualifiers-arokodare-nets-brace-as-seagles-trash-tanzania-3-1/"],
+      ["The Citizen", "https://www.citizen.co.za/sport/soccer/pitsos-bafana-rocked-by-bennis-kenya-in-afcon-draw/"],
+      ["Afrik-Foot", "https://www.afrik-foot.com/can-2027-q-la-tunisie-sombre-bouanga-porte-le-gabon-le-burkina-faso-sarrache-le-cap-vert-gagne-enfin"],
+      ["Balai", "https://www.balai.cv/noticias/cabo-verde-vence-liberia-por-4-2-e-conquista-primeira-vitoria-na-qualificacao-para-o-can-2027/"]
+    ]
+  },
+  {
+    slug: "etiopia-vence-mocambique", cat: "can", tags: ["can", "sel"], date: "2026-11-13T15:30",
+    cover: { big: "0–1", cx: "18%", small: { pt: "Moçambique × Etiópia · Grupo J", fr: "Mozambique × Éthiopie · Groupe J", en: "Mozambique × Ethiopia · Group J", ar: "موزمبيق × إثيوبيا · المجموعة J" } },
+    title: { pt: "Etiópia vence Moçambique fora de casa com gol aos 87 minutos", fr: "L'Éthiopie s'impose au Mozambique sur un but à la 87e minute", en: "Ethiopia win in Mozambique with an 87th-minute goal", ar: "إثيوبيا تفوز في موزمبيق بهدف في الدقيقة 87" },
+    lead: { pt: "No mesmo horário, Zâmbia e Burundi empataram por 1 a 1, e Comores e Congo ficaram no 0 a 0 em Moroni.", fr: "Au même moment, la Zambie et le Burundi ont fait match nul 1-1, et les Comores et le Congo se sont neutralisés 0-0 à Moroni.", en: "At the same time, Zambia and Burundi drew 1-1, and Comoros and Congo played out a goalless draw in Moroni.", ar: "وفي التوقيت نفسه تعادلت زامبيا وبوروندي 1-1، وانتهت مباراة جزر القمر والكونغو بالتعادل السلبي في موروني." },
+    body: {
+      pt: [
+        "A Etiópia conquistou nesta sexta-feira (13) a primeira vitória nas eliminatórias da CAN 2027: 1 a 0 sobre Moçambique, fora de casa. O gol saiu aos 87 minutos, com Canaan Markneh, depois de um jogo sem gols por quase todo o tempo.",
+        "Com o resultado, a Etiópia chega a 3 pontos no Grupo J. Moçambique, que vinha invicto, fica com 4, atrás do líder Senegal, que tem 7. As duas seleções voltam a se enfrentar na terça-feira (17).",
+        "Pelo Grupo I, Zâmbia e Burundi empataram por 1 a 1. Edward Chilufya abriu o placar para os zambianos aos 65 minutos, e Jean Girumugisha empatou aos 83. A Zâmbia soma 4 pontos, e o Burundi, 2. Os dois times se reencontram na terça-feira (17).",
+        "Em Moroni, no Estádio de Malouzini, Comores e Congo ficaram no 0 a 0 pelo Grupo G. Os comorenses têm 4 pontos, atrás de Camarões, que tem 7; o Congo tem 2. O jogo de volta será na terça-feira (17), em Brazzaville."
+      ],
+      fr: [
+        "L'Éthiopie a signé ce vendredi 13 novembre sa première victoire dans les éliminatoires de la CAN 2027 : 1-0 au Mozambique. Canaan Markneh a marqué à la 87e minute, au terme d'un match resté sans but presque jusqu'au bout.",
+        "Avec ce succès, l'Éthiopie compte 3 points dans le groupe J. Le Mozambique, qui était invaincu, reste à 4 points, derrière le leader sénégalais (7 points). Les deux équipes se retrouvent mardi 17 novembre.",
+        "Dans le groupe I, la Zambie et le Burundi ont fait match nul 1-1. Edward Chilufya a ouvert le score pour les Zambiens à la 65e minute, et Jean Girumugisha a égalisé à la 83e. La Zambie compte 4 points, le Burundi 2. Les deux équipes se retrouvent mardi 17 novembre.",
+        "À Moroni, au stade de Malouzini, les Comores et le Congo se sont neutralisés 0-0 dans le groupe G. Les Comoriens ont 4 points, derrière le Cameroun (7) ; le Congo en a 2. Le match retour aura lieu mardi 17 novembre à Brazzaville."
+      ],
+      en: [
+        "Ethiopia earned their first win of AFCON 2027 qualifying on Friday (13 November): 1-0 away to Mozambique. Canaan Markneh scored on 87 minutes after a match that stayed goalless for almost the whole game.",
+        "The result takes Ethiopia to 3 points in Group J. Mozambique, unbeaten until now, stay on 4, behind leaders Senegal on 7. The sides meet again on Tuesday (17 November).",
+        "In Group I, Zambia and Burundi drew 1-1. Edward Chilufya put Zambia ahead on 65 minutes and Jean Girumugisha equalised on 83. Zambia have 4 points and Burundi 2. They meet again on Tuesday (17 November).",
+        "In Moroni, at the Stade de Malouzini, Comoros and Congo drew 0-0 in Group G. Comoros have 4 points, behind Cameroon on 7; Congo have 2. The return match is on Tuesday (17 November) in Brazzaville."
+      ],
+      ar: [
+        "حققت إثيوبيا يوم الجمعة 13 نوفمبر فوزها الأول في تصفيات كأس أمم أفريقيا 2027، بنتيجة 1-0 على موزمبيق خارج أرضها. وسجل كنعان ماركنه الهدف في الدقيقة 87 بعد مباراة بقيت بلا أهداف حتى قرب النهاية.",
+        "بهذه النتيجة ترفع إثيوبيا رصيدها إلى 3 نقاط في المجموعة J. ويبقى رصيد موزمبيق، التي لم تكن قد خسرت من قبل، عند 4 نقاط خلف السنغال المتصدرة بـ7 نقاط. ويلتقي المنتخبان مجدداً يوم الثلاثاء 17 نوفمبر.",
+        "وفي المجموعة I تعادلت زامبيا وبوروندي 1-1. افتتح إدوارد شيلوفيا التسجيل لزامبيا في الدقيقة 65، وأدرك جان جيروموغيشا التعادل في الدقيقة 83. ولزامبيا 4 نقاط ولبوروندي نقطتان. ويلتقي المنتخبان مجدداً يوم الثلاثاء 17 نوفمبر.",
+        "وفي موروني، على ملعب مالوزيني، تعادلت جزر القمر والكونغو دون أهداف في المجموعة G. ولجزر القمر 4 نقاط خلف الكاميرون صاحبة 7 نقاط، وللكونغو نقطتان. وتقام مباراة الإياب يوم الثلاثاء 17 نوفمبر في برازافيل."
+      ]
+    },
+    sources: [
+      ["CAF", "https://www.cafonline.com/afcon2025/news/totalenergies-caf-afcon-2027-qualifiers-ethiopia-stun-mozambique-as-burundi-silence-zambia-and-comoros-held-by-congo/"],
+      ["Africa Soccer", "https://africasoccer.com/afcon-2027-qualifiers-ethiopia-stun-mozambique/"]
+    ]
+  },
+  {
+    slug: "senegal-costa-do-marfim-camaroes-vencem", cat: "can", tags: ["can", "sel"], date: "2026-11-13T09:00",
+    cover: { big: "4–1", cx: "82%", small: { pt: "Senegal × Sudão · Grupo J", fr: "Sénégal × Soudan · Groupe J", en: "Senegal × Sudan · Group J", ar: "السنغال × السودان · المجموعة J" } },
+    title: { pt: "Senegal goleia o Sudão; Costa do Marfim e Camarões vencem e lideram seus grupos", fr: "Le Sénégal corrige le Soudan ; la Côte d'Ivoire et le Cameroun gagnent et mènent leurs groupes", en: "Senegal thrash Sudan as Côte d'Ivoire and Cameroon win to lead their groups", ar: "السنغال تكتسح السودان، وكوت ديفوار والكاميرون تفوزان وتتصدران مجموعتيهما" },
+    lead: { pt: "A quinta-feira (12) das eliminatórias da CAN 2027 teve ainda vitórias de Benin e Guiné e empates de Guiné Equatorial e Madagascar.", fr: "Le jeudi 12 novembre des éliminatoires de la CAN 2027 a aussi vu les victoires du Bénin et de la Guinée, et les nuls de la Guinée équatoriale et de Madagascar.", en: "Thursday's AFCON 2027 qualifiers also brought wins for Benin and Guinea and draws for Equatorial Guinea and Madagascar.", ar: "وشهد يوم الخميس 12 نوفمبر من تصفيات كأس أمم أفريقيا 2027 أيضاً فوز بنين وغينيا، وتعادل غينيا الاستوائية ومدغشقر." },
+    body: {
+      pt: [
+        "O Senegal goleou o Sudão por 4 a 1 pelo Grupo J. Nicolas Jackson abriu o placar aos 31 minutos, e Mohamed Abuaagla empatou aos 45. No segundo tempo, Boulaye Dia, Ibrahim Mbaye e Pathé Mboup fecharam a conta. Os Leões chegaram a 7 pontos e lideram o grupo.",
+        "Em Bouaké, no Estádio da Paz, a Costa do Marfim venceu a Gâmbia por 2 a 1, com gols de Malick Yalcouyé e Elye Wahi no primeiro tempo; Musa Barrow descontou aos 38 minutos. Com três vitórias em três jogos, os Elefantes lideram o Grupo C com 9 pontos, três a mais que a Gâmbia.",
+        "Camarões bateu a Namíbia por 2 a 0 no Estádio Kouekong, em Bafoussam, com gols de Saidou Alioum Moubarak, aos 16 minutos, e Bil Nsongo, aos 29, e lidera o Grupo G com 7 pontos.",
+        "Pelo Grupo F, o Benin venceu a República Centro-Africana por 4 a 1, com dois gols de Tosin Aiyegun, e chegou a 7 pontos. A Guiné bateu a Eritreia por 2 a 1 (Grupo D). Guiné Equatorial e Zimbábue empataram sem gols (Grupo E), e Madagascar e Guiné-Bissau ficaram no 1 a 1 (Grupo L): Warren Caddy marcou aos 59 minutos e Renato Nhaga empatou aos 84. A Guiné-Bissau segue líder do Grupo L, com 7 pontos.",
+        "Os jogos de volta estão marcados para 16 e 17 de novembro."
+      ],
+      fr: [
+        "Le Sénégal a battu le Soudan 4-1 dans le groupe J. Nicolas Jackson a ouvert le score à la 31e minute, Mohamed Abuaagla a égalisé à la 45e. En seconde période, Boulaye Dia, Ibrahim Mbaye et Pathé Mboup ont alourdi la marque. Les Lions comptent 7 points et mènent le groupe.",
+        "À Bouaké, au stade de la Paix, la Côte d'Ivoire a battu la Gambie 2-1 grâce à Malick Yalcouyé et Elye Wahi en première période ; Musa Barrow a réduit l'écart à la 38e minute. Avec trois victoires en trois matchs, les Éléphants mènent le groupe C avec 9 points, trois de plus que la Gambie.",
+        "Le Cameroun a battu la Namibie 2-0 au stade Kouekong de Bafoussam, sur des buts de Saidou Alioum Moubarak (16e) et Bil Nsongo (29e), et mène le groupe G avec 7 points.",
+        "Dans le groupe F, le Bénin a battu la Centrafrique 4-1, avec un doublé de Tosin Aiyegun, et compte 7 points. La Guinée a battu l'Érythrée 2-1 (groupe D). La Guinée équatoriale et le Zimbabwe ont fait match nul 0-0 (groupe E), et Madagascar et la Guinée-Bissau 1-1 (groupe L) : Warren Caddy a marqué à la 59e minute, Renato Nhaga a égalisé à la 84e. La Guinée-Bissau reste en tête du groupe L avec 7 points.",
+        "Les matchs retour sont prévus les 16 et 17 novembre."
+      ],
+      en: [
+        "Senegal beat Sudan 4-1 in Group J. Nicolas Jackson opened the scoring on 31 minutes and Mohamed Abuaagla equalised on 45. In the second half Boulaye Dia, Ibrahim Mbaye and Pathé Mboup completed the win. The Lions have 7 points and lead the group.",
+        "In Bouaké, at the Stade de la Paix, Côte d'Ivoire beat Gambia 2-1 with first-half goals from Malick Yalcouyé and Elye Wahi; Musa Barrow pulled one back on 38 minutes. With three wins from three, the Elephants lead Group C on 9 points, three clear of Gambia.",
+        "Cameroon beat Namibia 2-0 at the Kouekong Stadium in Bafoussam, with goals from Saidou Alioum Moubarak (16) and Bil Nsongo (29), and lead Group G on 7 points.",
+        "In Group F, Benin beat the Central African Republic 4-1, with two goals from Tosin Aiyegun, and moved to 7 points. Guinea beat Eritrea 2-1 (Group D). Equatorial Guinea and Zimbabwe drew 0-0 (Group E), and Madagascar and Guinea-Bissau drew 1-1 (Group L): Warren Caddy scored on 59 minutes and Renato Nhaga equalised on 84. Guinea-Bissau still lead Group L on 7 points.",
+        "The return matches are on 16 and 17 November."
+      ],
+      ar: [
+        "فازت السنغال على السودان 4-1 في المجموعة J. افتتح نيكولا جاكسون التسجيل في الدقيقة 31، وأدرك محمد أبو عاقلة التعادل في الدقيقة 45. وفي الشوط الثاني أضاف بولاي ديا وإبراهيم مباي وباتيه مبوب ثلاثة أهداف. ورفعت أسود التيرانغا رصيدها إلى 7 نقاط في صدارة المجموعة.",
+        "وفي بواكي، على ملعب السلام، فازت كوت ديفوار على غامبيا 2-1 بهدفين في الشوط الأول لماليك يالكوييه وإيلي واهي، فيما قلّص موسى بارو الفارق في الدقيقة 38. وبثلاثة انتصارات في ثلاث مباريات تتصدر الأفيال المجموعة C بـ9 نقاط، بفارق ثلاث نقاط عن غامبيا.",
+        "وتغلبت الكاميرون على ناميبيا 2-0 على ملعب كويكونغ في بافوسام، بهدفين لسعيدو عليوم مبارك في الدقيقة 16 وبيل نسونغو في الدقيقة 29، لتتصدر المجموعة G بـ7 نقاط.",
+        "وفي المجموعة F فازت بنين على أفريقيا الوسطى 4-1، منها هدفان لتوسين أييغون، ورفعت رصيدها إلى 7 نقاط. وفازت غينيا على إريتريا 2-1 في المجموعة D. وتعادلت غينيا الاستوائية وزيمبابوي دون أهداف في المجموعة E، وتعادلت مدغشقر وغينيا بيساو 1-1 في المجموعة L: سجل وارن كادي في الدقيقة 59 وأدرك ريناتو نهاغا التعادل في الدقيقة 84. وتبقى غينيا بيساو في صدارة المجموعة L بـ7 نقاط.",
+        "وتقام مباريات الإياب يومي 16 و17 نوفمبر."
+      ]
+    },
+    sources: [
+      ["AllAfrica", "https://fr.allafrica.com/stories/202611130200.html"],
+      ["Africa Top Sports", "https://africatopsports.com/football/elim-can-2027-la-cote-divoire-domine-la-gambie-2-1-et-prend-seule-la-tete-du-groupe-c/"],
+      ["Blueprint", "https://blueprint.ng/afcon-2027-qualifiers-ghana-end-3-year-drought-as-senegal-dr-congo-win-big-full-results/"],
+      ["CAF", "https://www.cafonline.com/afcon2025/news/totalenergies-caf-afcon-2027-qualifiers-dr-congo-extend-perfect-run-as-guinea-bissau-and-zimbabwe-held-to-draws/"]
+    ]
+  },
+  {
     slug: "gana-vence-somalia", cat: "can", tags: ["can", "sel"], date: "2026-11-12T19:00",
     cover: { big: "2–0", cx: "82%", small: { pt: "Gana × Somália · Grupo C", fr: "Ghana × Somalie · Groupe C", en: "Ghana × Somalia · Group C" } },
     title: { pt: "Gana vence a Somália e soma os primeiros pontos rumo à CAN 2027", fr: "Le Ghana bat la Somalie et marque ses premiers points vers la CAN 2027", en: "Ghana beat Somalia for their first points on the road to AFCON 2027" },
