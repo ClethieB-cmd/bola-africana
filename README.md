@@ -22,6 +22,8 @@ o que ajuda o Google a encontrar o site e é o que o AdSense espera.
 | `build-esportes.js` | Monta os grupos das competições africanas e as páginas de Mais esportes. |
 | `build-campos.js` | Desenha as capas: o campo de futebol, a quadra ou a pista de cada esporte, vistos de cima. |
 | `build-generos.js` | Monta as páginas Masculino e Feminino do menu: todas as competições de cada gênero, esporte por esporte, com agenda, tabelas, onde assistir e notícias. |
+| `build-times.js` | Monta a página de cada time dos campeonatos nacionais: situação na tabela, jogos, notícias, elenco, dados do clube e história. |
+| `conteudo/times.js` | Histórias dos clubes, escritas pela redação. |
 | `assets/` | Visual (`style.css`) e pequenos ajustes no navegador (`site.js`). |
 | `build.js` | Gera as páginas do site na pasta `_site/`. |
 | `.github/workflows/publicar.yml` | Faz o GitHub gerar e publicar o site sozinho a cada alteração. |
@@ -161,6 +163,22 @@ cada um com a sua cor, as competições, a agenda, as tabelas, onde assistir e a
   quando ganharem conteúdo.
 - O site usa uma cor só (o verde de `--brand` no começo de `assets/style.css`) e o dourado como destaque.
   O que diferencia os esportes é o desenho do campo ou da quadra.
+
+## Times
+
+Cada time das tabelas dos campeonatos nacionais tem uma página própria (clique no nome do time na tabela).
+
+- No topo aparece a situação do time: posição, pontos, vitórias, empates, derrotas, saldo, próximos jogos e últimos jogos.
+- Depois vêm as notícias que citam o time, o elenco, os dados do clube (fundação, estádio, cidade, capacidade) e a história.
+- O robô busca os dados do clube e o elenco aos poucos, com a cota que sobra do dia. Leva alguns dias para todos os times.
+- A API não traz a história dos clubes. Para um clube ganhar história, escreva em `conteudo/times.js` (o arquivo explica como).
+- A página do time só entra no Google quando tem elenco, dados do clube ou história.
+- Os escudos vêm da API-Sports e pertencem aos clubes.
+
+## Menu
+
+O menu tem Início, Masculino, Feminino e Onde assistir. Clicar em Masculino ou Feminino abre uma janela com
+o futebol, os outros esportes, a agenda, as tabelas e onde assistir daquele gênero. No celular, o logo leva ao início.
 
 ## Agenda, data e bandeiras
 
