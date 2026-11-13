@@ -486,5 +486,3 @@ table.elenco td:nth-child(2) { font-weight: 600; }
   .nav > a, .nav .mega > a, .nav a.nav-gen { font-size: 14px; padding-left: 6px; padding-right: 6px; }
   .nav .mega > a { gap: 3px; }
 }
-/* no celular o logo já leva ao início: o menu fica numa linha só */
-@media (max-width: 480px) { .nav > a:first-child { display: none; } }
