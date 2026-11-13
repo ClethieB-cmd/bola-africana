@@ -60,7 +60,8 @@ module.exports = function (h) {
       futCards.push(cartao(u(CATS.ligas.route), L(CATS.ligas.name), T("gSubLigas")));
     }
     const futNews = noticias.filter((n) => ESP.esporteDe(n) === "futebol");
-    if (g === "fem" && futNews.length) futCards.push(cartao("#noticias", T("gFemNews"), contagem(futNews.length, "gNews1", "gNewsN")));
+    if (g === "fem" && h.HI) futCards.push(cartao("#historia", T("hHist"), T("hSubFem")));
+    if (g === "fem" && futNews.length) futCards.push(cartao(u("noticias") + "#fem", T("gFemNews"), contagem(futNews.length, "gNews1", "gNewsN")));
     let nFut = 0;
     for (const k of ESP.futChaves(g)) {
       /* Eliminatórias da CAN, Liga dos Campeões e Confederações já têm cartão próprio acima; entram só em Tabelas */
@@ -90,7 +91,8 @@ module.exports = function (h) {
     if (s.newsN) return contagem(s.newsN, "gNews1", "gNewsN");
     return T("gSoon");
   }
-  const temSecao = (s) => s.cards.length || s.news.length;
+  /* as notícias ficam na página Notícias: aqui entram só as competições */
+  const temSecao = (s) => s.cards.length > 0;
 
   function pagina(g) {
     const { noticias, lista, jogos, tv } = montar(g);
@@ -100,16 +102,16 @@ module.exports = function (h) {
       jogos.length && ["#agenda", T("agenda")],
       tabelas.length && ["#tabelas", T("tables")],
       tv.length && ["#onde-assistir", T("watch")],
-      noticias.length && ["#noticias", T("espNews")]
+      g === "fem" && h.HI && ["#historia", T("hHist")],
+      noticias.length && [u("noticias") + (g === "fem" ? "#fem" : ""), T("espNews")]
     ].filter(Boolean);
 
-    const tiles = lista.map((s) => `<li><a class="esp-tile cor-${s.id}" href="${temSecao(s) ? "#" + s.id : s.link}">
+    const tiles = lista.map((s) => `<li><a class="esp-tile cor-${s.id}" href="${temSecao(s) ? "#" + s.id : s.link || u("noticias") + "#" + s.id}">
       <div class="cover esp sp-${s.id}" aria-hidden="true"></div><span class="nome">${esc(s.nome)}</span><span class="n">${esc(rotuloTile(s))}</span></a></li>`).join("");
 
     const secoes = lista.filter(temSecao).map((s) => `<section class="esporte cor-${s.id}" id="${s.id}" aria-labelledby="h-${s.id}">
       <div class="esporte-head"><div class="cover esp sp-${s.id}" aria-hidden="true"></div><h2 id="h-${s.id}">${esc(s.nome)}</h2>${s.link ? `<a href="${s.link}">${esc(T("gSeeAll"))}</a>` : ""}</div>
       ${s.cards.length ? `<div class="comp-grid">${s.cards.join("")}</div>` : ""}
-      ${s.news.length ? `<div class="grid-stories">${s.news.slice(0, 3).map(storyCard).join("")}</div>` : ""}
     </section>`).join("");
 
     return `<div class="genero gen-${g}">
@@ -122,7 +124,7 @@ module.exports = function (h) {
       ${tabelas.length ? `<section class="section" id="tabelas" aria-labelledby="h-tabelas">${h.sectionHead(T("tables"), null, null, "h-tabelas")}<ul class="tab-links">${tabelas.map(([href, t, id]) => `<li><a class="cor-${id || "futebol"}" href="${href}">${esc(t)}</a></li>`).join("")}</ul></section>` : ""}
       </div>
       ${tv.length ? `<section class="section" id="onde-assistir" aria-labelledby="h-tv">${h.sectionHead(T("watch"), "onde-assistir", T("watchLink"), "h-tv")}${watchHtml(tv)}</section>` : ""}
-      ${noticias.length ? `<section class="section" id="noticias" aria-labelledby="h-noticias">${h.sectionHead(T("gLatest"), null, null, "h-noticias")}<div class="grid-stories">${noticias.slice(0, g === "fem" ? 24 : 8).map(storyCard).join("")}</div></section>` : ""}
+      ${g === "fem" && h.HI ? h.HI.femHtml() : ""}
     </div>`;
   }
 
@@ -143,12 +145,12 @@ module.exports = function (h) {
     const fut = g === "masc"
       ? [...["can", "cl", "cc", "sel", "ligas"].map((k) => [u(CATS[k].route), L(CATS[k].name)]),
          ...ESP.futChaves("masc").filter((k) => !["canq", "cl", "cc"].includes(k)).map((k) => [ESP.futUrl(k), L(ESP.NOMES_FUT[k])])]
-      : [...(lista.some((x) => x.id === "futebol") ? [[pg + "#futebol", T("gFemNews")]] : []), ...ESP.futChaves("fem").map((k) => [ESP.futUrl(k), L(ESP.NOMES_FUT[k])])];
+      : [[pg + "#historia", T("hHistFem")], [u("noticias") + "#fem", T("gFemNews")], ...ESP.futChaves("fem").map((k) => [ESP.futUrl(k), L(ESP.NOMES_FUT[k])])];
     const outros = g === "masc"
       ? ESP.ESPORTES.map((e) => [ESP.espUrl(e), L(e.nome)])
       : lista.filter((x) => x.id !== "futebol").map((x) => [pg + "#" + x.id, x.nome]);
     const serv = g === "masc"
-      ? [[u("agenda"), T("agenda")], [u("tabelas"), T("tables")], [u("onde-assistir"), T("watch")]]
+      ? [[u("noticias"), T("news")], [u("agenda"), T("agenda")], [u("tabelas"), T("tables")], [u("onde-assistir"), T("watch")]]
       : [jogos.length && [pg + "#agenda", T("agenda")], lista.some((x) => x.tabelas.length) && [pg + "#tabelas", T("tables")], tv.length && [pg + "#onde-assistir", T("watch")]].filter(Boolean);
     const col = (titulo, itens, cls = "") => (itens.length ? `<div class="mega-col${cls}"><h2>${esc(titulo)}</h2><ul>${itens.map(([href, t]) => `<li><a href="${href}">${esc(t)}</a></li>`).join("")}</ul></div>` : "");
     return (cacheMenu[chave] = `<div class="mega-panel" id="menu-${g}">${col(T("gFut"), fut)}${col(T("gOther"), outros, outros.length > 6 ? " mega-col-2" : "")}${col(T("footServ"), serv)}
