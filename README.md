@@ -24,6 +24,8 @@ o que ajuda o Google a encontrar o site e é o que o AdSense espera.
 | `build-generos.js` | Monta as páginas Masculino e Feminino do menu: todas as competições de cada gênero, esporte por esporte, com agenda, tabelas, onde assistir e notícias. |
 | `build-times.js` | Monta a página de cada time dos campeonatos nacionais: situação na tabela, jogos, notícias, elenco, dados do clube e história. |
 | `conteudo/times.js` | Histórias dos clubes, escritas pela redação. |
+| `conteudo/historia.js` | Títulos, finais, recordes e classificação das eliminatórias, com as fontes. |
+| `build-historia.js` | Monta as tabelas de história e títulos e a coluna "Em números". |
 | `conteudo/ligas-manuais.js` | Tabelas dos campeonatos que a API não cobre (hoje, o do Congo), copiadas de uma fonte conferida. |
 | `assets/` | Visual (`style.css`) e pequenos ajustes no navegador (`site.js`). |
 | `build.js` | Gera as páginas do site na pasta `_site/`. |
@@ -189,11 +191,29 @@ Cada time das tabelas dos campeonatos nacionais tem uma página própria (clique
 O menu tem Início, Masculino e Feminino. Clicar em Masculino ou Feminino abre uma janela com
 o futebol, os outros esportes, a agenda, as tabelas e onde assistir daquele gênero.
 
+## História, títulos e recordes
+
+As páginas CAN 2027, Liga dos Campeões, Copa das Confederações, Seleções e Feminino mostram a classificação, os grupos,
+as finais, os campeões, os recordes e os prêmios de melhor jogador e jogadora da África. Os dados ficam em
+`conteudo/historia.js`, com a fonte de cada bloco, e são montados pelo `build-historia.js`.
+
+- A classificação das eliminatórias da CAN 2027 é preenchida à mão (a API grátis não cobre a temporada atual).
+  Depois de cada rodada, troque os números dos grupos e a data em `ate`.
+- Quando uma competição tiver campeão novo, acrescente a final e some o título na tabela de clubes ou seleções.
+- A coluna lateral "Em números" sai desses mesmos dados.
+
+## Notícias
+
+As notícias aparecem no Início, na página Notícias (`noticias.html`, separada por competição e por esporte) e dentro
+de cada notícia. As páginas das competições, dos esportes, dos campeonatos e dos times não mostram notícias: elas têm
+um link para a parte certa da página Notícias.
+
 ## Início e coluna lateral
 
 O Início mostra só notícias: a manchete (a notícia mais nova), três destaques e as últimas notícias, da mais nova
 para a mais antiga, sem imagem. A imagem de cada notícia aparece só dentro dela. A coluna lateral das outras páginas
-mostra as seis notícias mais recentes. O placar da rodada, a agenda e as próximas datas ficam só na página Agenda.
+mostra as seis notícias mais recentes só dentro das notícias; nas outras páginas ela mostra "Em números". O placar
+da rodada, a agenda e as próximas datas ficam só na página Agenda.
 
 ## Agenda, data e bandeiras
 
