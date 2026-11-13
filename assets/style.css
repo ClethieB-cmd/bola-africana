@@ -21,19 +21,7 @@
   --font-body: "Public Sans", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   color-scheme: light;
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --paper: #0F1613;
-    --surface: #17211C;
-    --surface-2: #1E2A24;
-    --ink: #E6ECE7;
-    --muted: #9DAAA2;
-    --line: #2A3830;
-    --night: #08110D;
-    --kicker: #6FCB94;
-    color-scheme: dark;
-  }
-}
+/* o site é sempre claro (fundo branco), mesmo quando o computador ou o celular está no modo escuro */
 :root[data-theme="dark"] {
   --paper: #0F1613;
   --surface: #17211C;
