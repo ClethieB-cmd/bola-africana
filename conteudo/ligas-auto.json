@@ -1,5 +1,5 @@
 {
- "geradoEm": "2026-11-13T01:41:53.401Z",
+ "geradoEm": "2026-11-13T03:47:02.980Z",
  "continentais": {
   "chan": {
    "apiId": 19,
@@ -292,7 +292,7 @@
    ],
    "proximos": [],
    "anterior": true,
-   "atualizado": "2026-11-13T01:32:16.186Z",
+   "atualizado": "2026-11-13T03:40:27.856Z",
    "chave": "chan"
   },
   "mundq": {
@@ -1056,7 +1056,7 @@
    ],
    "proximos": [],
    "anterior": true,
-   "atualizado": "2026-11-13T01:32:30.601Z",
+   "atualizado": "2026-11-13T03:40:42.234Z",
    "chave": "mundq"
   }
  },
@@ -1679,7 +1679,7 @@
    ],
    "proximos": [],
    "anterior": true,
-   "atualizado": "2026-11-13T01:32:52.233Z"
+   "atualizado": "2026-11-13T03:41:03.814Z"
   },
   "ANG": {
    "apiId": 397,
@@ -1927,7 +1927,7 @@
    ],
    "proximos": [],
    "anterior": true,
-   "atualizado": "2026-11-13T01:33:06.643Z"
+   "atualizado": "2026-11-13T03:41:18.188Z"
   },
   "BEN": {
    "apiId": 415,
@@ -2380,7 +2380,7 @@
    ],
    "proximos": [],
    "anterior": true,
-   "atualizado": "2026-11-13T01:33:21.058Z"
+   "atualizado": "2026-11-13T03:41:32.583Z"
   },
   "BOT": {
    "apiId": 412,
@@ -2628,7 +2628,7 @@
    ],
    "proximos": [],
    "anterior": true,
-   "atualizado": "2026-11-13T01:33:35.489Z"
+   "atualizado": "2026-11-13T03:41:46.948Z"
   },
   "BFA": {
    "apiId": 423,
@@ -2846,7 +2846,7 @@
    ],
    "proximos": [],
    "anterior": true,
-   "atualizado": "2026-11-13T01:33:49.905Z"
+   "atualizado": "2026-11-13T03:42:01.358Z"
   },
   "BDI": {
    "apiId": 566,
@@ -3094,7 +3094,7 @@
    ],
    "proximos": [],
    "anterior": true,
-   "atualizado": "2026-11-13T01:34:04.318Z"
+   "atualizado": "2026-11-13T03:42:15.727Z"
   },
   "CMR": {
    "apiId": 411,
@@ -3377,7 +3377,7 @@
    ],
    "proximos": [],
    "anterior": true,
-   "atualizado": "2026-11-13T01:34:18.733Z"
+   "atualizado": "2026-11-13T03:42:30.100Z"
   },
   "CGO": {
    "apiId": 424,
@@ -3980,7 +3980,7 @@
    ],
    "proximos": [],
    "anterior": true,
-   "atualizado": "2026-11-13T01:34:33.182Z"
+   "atualizado": "2026-11-13T03:42:44.460Z"
   },
   "COD": {
    "apiId": 424,
@@ -4583,7 +4583,7 @@
    ],
    "proximos": [],
    "anterior": true,
-   "atualizado": "2026-11-13T01:34:47.581Z"
+   "atualizado": "2026-11-13T03:42:58.846Z"
   },
   "EGY": {
    "apiId": 233,
@@ -5041,7 +5041,7 @@
    ],
    "proximos": [],
    "anterior": true,
-   "atualizado": "2026-11-13T01:35:02.009Z"
+   "atualizado": "2026-11-13T03:43:13.234Z"
   },
   "SWZ": {
    "apiId": 847,
@@ -5269,7 +5269,7 @@
    ],
    "proximos": [],
    "anterior": true,
-   "atualizado": "2026-11-13T01:35:16.448Z"
+   "atualizado": "2026-11-13T03:43:27.602Z"
   },
   "ETH": {
    "apiId": 363,
@@ -5537,7 +5537,7 @@
    ],
    "proximos": [],
    "anterior": true,
-   "atualizado": "2026-11-13T01:35:30.870Z"
+   "atualizado": "2026-11-13T03:43:41.969Z"
   },
   "GAB": {
    "apiId": 968,
