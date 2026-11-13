@@ -110,7 +110,6 @@ module.exports = function (h) {
     const hist = historia(c, t, inf);
     const jogos = jogosDe(a, t.nome);
     const prox = (a.proximos || []).filter((g) => g.c === t.nome || g.f === t.nome);
-    const news = sorted.filter((n) => mencionaTime(n, t.nome)).slice(0, 6);
     const logo = t.logo || inf.logo;
     const quando = a.atualizado ? fmt({ day: "numeric", month: "long", year: "numeric" }).format(new Date(a.atualizado)) : "";
     const caixa = (rot, val, extra) => `<div class="stat"><span class="v">${esc(val)}</span><span class="k">${esc(rot)}${extra ? ` <small>${esc(extra)}</small>` : ""}</span></div>`;
@@ -131,7 +130,6 @@ module.exports = function (h) {
         <p class="note"><a href="${u("campeonatos/" + c.slug)}">${esc(T("campTable"))} · ${esc(a.apiNome || c.liga)}</a></p></section>
       ${prox.length ? `<section class="section">${sectionHead(T("campNext"))}${tzHint()}<div class="panel">${jogosHtml(c, prox, t.nome, false)}</div></section>` : ""}
       ${jogos.length ? `<section class="section">${sectionHead(T("tLast"))}<div class="panel">${jogosHtml(c, jogos.slice(0, 10), t.nome, true)}</div></section>` : ""}
-      ${news.length ? `<section class="section">${sectionHead(T("campNews"))}<div class="grid-stories">${news.map(storyCard).join("")}</div></section>` : ""}
       ${elenco.length ? `<section class="section">${sectionHead(T("tSquad"))}${elencoHtml(elenco)}<p class="note">${esc(T("tSquadNote"))}</p></section>` : ""}
       ${dados.length ? `<section class="section">${sectionHead(T("tClub"))}<dl class="ficha">${dados.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl></section>` : ""}
       ${hist ? `<section class="section">${sectionHead(T("tHist"))}<div class="prose">${L(hist.texto).map((p) => `<p>${esc(p)}</p>`).join("")}</div>
