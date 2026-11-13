@@ -172,7 +172,7 @@ module.exports = function (h) {
 
   function linhasBusca(norm) {
     const linha = (href, titulo, extra, codigo, esp) => `<a class="row-story camp-row" href="${href}" data-q="${esc(norm(titulo + " " + extra))}">
-      <div class="cover esp sp-${esp}" aria-hidden="true"><div class="big">${esc(codigo)}</div></div><div><h3>${esc(titulo)}</h3></div></a>`;
+      <h3>${esc(titulo)}</h3></a>`;
     let out = "";
     for (const e of ESPORTES) {
       out += linha(espUrl(e), L(e.nome), LANGS.map((l) => e.nome[l]).join(" "), L(e.nome).slice(0, 3).toUpperCase(), e.id);
