@@ -65,6 +65,17 @@ module.exports = function (h) {
     fArt: { pt: "{x}: gols, recorde de artilharia da CAN", fr: "{x} : buts, record de la CAN", en: "{x}: goals, the AFCON scoring record", ar: "{x}: أهداف، الرقم القياسي في كأس أمم أفريقيا" },
     fJogos: { pt: "{x}: jogos, recorde da CAN", fr: "{x} : matchs, record de la CAN", en: "{x}: games, the AFCON record", ar: "{x}: مباراة، الرقم القياسي في كأس أمم أفريقيا" },
     fTitJog: { pt: "{x}: títulos da CAN, recorde de um jogador", fr: "{x} : titres de CAN, record pour un joueur", en: "{x}: AFCON titles, a player record", ar: "{x}: ألقاب، الرقم القياسي للاعب في كأس أمم أفريقيا" },
+    lCampeao: { pt: "Último campeão", fr: "Dernier champion", en: "Latest champion", ar: "آخر بطل" },
+    lMaior: { pt: "Mais títulos", fr: "Le plus titré", en: "Most titles", ar: "الأكثر تتويجاً" },
+    lTit: { pt: "{n} títulos", fr: "{n} titres", en: "{n} titles", ar: "{n} لقباً" },
+    lTitCada: { pt: "{n} títulos cada", fr: "{n} titres chacun", en: "{n} titles each", ar: "{n} لقباً لكل منهما" },
+    lCopa: { pt: "Copa nacional", fr: "Coupe nationale", en: "National cup", ar: "الكأس المحلية" },
+    lVice: { pt: "final contra {x}", fr: "finale contre {x}", en: "final against {x}", ar: "النهائي أمام {x}" },
+    lArt: { pt: "Artilheiro {s}", fr: "Meilleur buteur {s}", en: "Top scorer {s}", ar: "الهداف {s}" },
+    lGols: { pt: "{n} gols", fr: "{n} buts", en: "{n} goals", ar: "{n} هدفاً" },
+    lGolsCada: { pt: "{n} gols cada", fr: "{n} buts chacun", en: "{n} goals each", ar: "{n} هدفاً لكل منهم" },
+    lMelhor: { pt: "Melhor jogador {s}", fr: "Meilleur joueur {s}", en: "Player of the season {s}", ar: "أفضل لاعب {s}" },
+    lConferido: { pt: "Conferido em {d}.", fr: "Vérifié le {d}.", en: "Checked on {d}.", ar: "تم التحقق في {d}." },
     fAtual: { pt: "Atual campeão: {x}", fr: "Tenant du titre : {x}", en: "Current champion: {x}", ar: "حامل اللقب: {x}" },
     fAtualF: { pt: "Atual campeã: {x}", fr: "Tenante du titre : {x}", en: "Current champion: {x}", ar: "حاملة اللقب: {x}" }
   });
@@ -197,11 +208,43 @@ module.exports = function (h) {
     sel: ["can", "potyM", "art"],
     fem: ["canf", "clf", "potyF"]
   };
+  /* quadro "Em números" de cada campeonato nacional (dados em conteudo/ligas-historia.js) */
+  const LHD = require("./conteudo/ligas-historia.js");
+  const LH = LHD.ligas;
+  const temLiga = (code) => !!LH[code];
+  const linha = (dt, dd) => `<div><dt>${esc(dt)}</dt><dd>${dd}</dd></div>`;
+  const lista = (nomes) => nomes.length < 2 ? nomes.join("") : nomes.slice(0, -1).join(", ") + ex(AND()) + nomes[nomes.length - 1];
+  function fatosLiga(c, ad) {
+    const f = LH[c.code];
+    if (!f) return "";
+    const rows = [];
+    if (f.campeao) rows.push(linha(T("lCampeao"), `<b>${esc(f.campeao[0])}</b> <span>${esc(f.campeao[1])}</span>`));
+    if (f.maior) {
+      const [clubes, n] = f.maior;
+      const qt = n == null ? "" : ` <span>${esc(T(clubes.length > 1 ? "lTitCada" : "lTit", { n }))}</span>`;
+      rows.push(linha(T("lMaior"), `<b>${lista(clubes.map(esc))}</b>${qt}`));
+    }
+    if (f.copa) {
+      const [nome, camp, temp, vice] = f.copa;
+      rows.push(linha(nome || T("lCopa"), `<b>${esc(camp)}</b> <span>${esc(temp)}${vice ? ", " + esc(T("lVice", { x: vice })) : ""}</span>`));
+    }
+    if (f.art) {
+      const [temp, ...js] = f.art;
+      const nomes = js.map(([j, cl]) => `<b>${esc(j)}</b> (${esc(cl)})`);
+      const gols = js.length > 1 ? T("lGolsCada", { n: js[0][2] }) : T("lGols", { n: js[0][2] });
+      rows.push(linha(T("lArt", { s: temp }), `${lista(nomes)} <span>${esc(gols)}</span>`));
+    }
+    if (f.melhor) rows.push(linha(T("lMelhor", { s: f.melhor[0] }), `<b>${esc(f.melhor[1])}</b> (${esc(f.melhor[2])})`));
+    return `<aside class="sidebar"><section class="panel fatos liga" aria-labelledby="fatos-h"><h2 id="fatos-h">${esc(T("fTitulo"))}</h2>
+      <p class="liga-nome">${bandeira(c.code)}${esc(c.liga)}</p><dl>${rows.join("")}</dl>
+      ${f.nota ? `<p class="note">${esc(L(f.nota))}</p>` : ""}${fontes(f.fontes)}<p class="note">${esc(T("lConferido", { d: data(LHD.conferido) }))}</p></section>${ad || ""}</aside>`;
+  }
+
   function fatos(k, ad) {
     const lista = LISTAS[k] || LISTAS.geral;
     return `<aside class="sidebar"><section class="panel fatos" aria-labelledby="fatos-h"><h2 id="fatos-h">${esc(T("fTitulo"))}</h2>
       ${ATUAL[k] ? ATUAL[k]() : ""}<ul>${lista.map((x) => ITENS[x]()).join("")}</ul></section>${ad || ""}</aside>`;
   }
 
-  return { qualHtml, qualCards, canHtml, clHtml, ccHtml, selHtml, femHtml, fatos };
+  return { qualHtml, qualCards, canHtml, clHtml, ccHtml, selHtml, femHtml, fatos, fatosLiga, temLiga };
 };
