@@ -43,7 +43,8 @@ module.exports = function (h) {
     tCap: { pt: "Capacidade", fr: "Capacité", en: "Capacity", ar: "السعة" },
     tCapN: { pt: "{n} lugares", fr: "{n} places", en: "{n} seats", ar: "{n} مقعد" },
     tHist: { pt: "História", fr: "Histoire", en: "History", ar: "التاريخ" },
-    tSrc: { pt: "Dados: API-Football, atualizados em {d}.", fr: "Données : API-Football, mises à jour le {d}.", en: "Data: API-Football, updated {d}.", ar: "البيانات: API-Football، حُدّثت في {d}." }
+    tSrc: { pt: "Dados: API-Football, atualizados em {d}.", fr: "Données : API-Football, mises à jour le {d}.", en: "Data: API-Football, updated {d}.", ar: "البيانات: API-Football، حُدّثت في {d}." },
+    tSrcMan: { pt: "Dados conferidos em {d}. Fonte:", fr: "Données vérifiées le {d}. Source :", en: "Data checked {d}. Source:", ar: "تم التحقق من البيانات في {d}. المصدر:" }
   });
 
   const plano = (s) => String(s || "").normalize("NFD").replace(/\p{M}/gu, "").toLowerCase();
@@ -135,8 +136,8 @@ module.exports = function (h) {
       ${dados.length ? `<section class="section">${sectionHead(T("tClub"))}<dl class="ficha">${dados.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl></section>` : ""}
       ${hist ? `<section class="section">${sectionHead(T("tHist"))}<div class="prose">${L(hist.texto).map((p) => `<p>${esc(p)}</p>`).join("")}</div>
         ${hist.fontes ? `<p class="note">${esc(T("sources"))}: ${hist.fontes.map(([nome, href]) => `<a href="${href}">${esc(nome)}</a>`).join(", ")}</p>` : ""}</section>` : ""}
-      ${!inf.elencoEm && !dados.length ? `<p class="note">${esc(T("tSoon"))}</p>` : ""}
-      <p class="note">${esc(T("tSrc", { d: quando }))}</p>
+      ${!a.manual && !inf.elencoEm && !dados.length ? `<p class="note">${esc(T("tSoon"))}</p>` : ""}
+      <p class="note">${a.manual ? `${esc(T("tSrcMan", { d: quando }))} <a href="${esc(a.fonte[1])}">${esc(a.fonte[0])}</a>` : esc(T("tSrc", { d: quando }))}</p>
     </div>${sidebar()}</div>`;
   }
 
