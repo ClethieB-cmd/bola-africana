@@ -24,6 +24,7 @@ o que ajuda o Google a encontrar o site e é o que o AdSense espera.
 | `build-generos.js` | Monta as páginas Masculino e Feminino do menu: todas as competições de cada gênero, esporte por esporte, com agenda, tabelas, onde assistir e notícias. |
 | `build-times.js` | Monta a página de cada time dos campeonatos nacionais: situação na tabela, jogos, notícias, elenco, dados do clube e história. |
 | `conteudo/times.js` | Histórias dos clubes, escritas pela redação. |
+| `conteudo/ligas-manuais.js` | Tabelas dos campeonatos que a API não cobre (hoje, o do Congo), copiadas de uma fonte conferida. |
 | `assets/` | Visual (`style.css`) e pequenos ajustes no navegador (`site.js`). |
 | `build.js` | Gera as páginas do site na pasta `_site/`. |
 | `.github/workflows/publicar.yml` | Faz o GitHub gerar e publicar o site sozinho a cada alteração. |
@@ -126,6 +127,14 @@ campeonatos a API tem e quais deram erro. Se o plano não liberar a temporada at
 
 Se o robô escolher o campeonato errado de um país, veja o número certo em `conteudo/ligas-auto.json` (campo `mapa`)
 ou no painel da API e coloque em `API_ID`, dentro de `conteudo/campeonatos.js`.
+O robô escolhe o país de cada liga primeiro pelo nome e só depois pelo código, e uma liga nunca vale para dois países
+(antes, a liga da RD Congo aparecia também na página do Congo).
+
+### Campeonatos que a API não cobre
+
+O campeonato do Congo (Brazzaville) não vem da API. A tabela está em `conteudo/ligas-manuais.js`, copiada da página da
+FECOFOOT, com a fonte e o dia da conferência. Para atualizar, troque as linhas da tabela e a data em `atualizado`.
+Se um dia a API passar a ter o campeonato, os dados dela entram no lugar sozinhos.
 
 ### Textos de apresentação
 
@@ -179,6 +188,12 @@ Cada time das tabelas dos campeonatos nacionais tem uma página própria (clique
 
 O menu tem Início, Masculino, Feminino e Onde assistir. Clicar em Masculino ou Feminino abre uma janela com
 o futebol, os outros esportes, a agenda, as tabelas e onde assistir daquele gênero. No celular, o logo leva ao início.
+
+## Início e coluna lateral
+
+O Início mostra só notícias: a manchete (a notícia mais nova), três destaques e as últimas notícias, da mais nova
+para a mais antiga, sem imagem. A imagem de cada notícia aparece só dentro dela. A coluna lateral das outras páginas
+mostra as seis notícias mais recentes. O placar da rodada, a agenda e as próximas datas ficam só na página Agenda.
 
 ## Agenda, data e bandeiras
 
