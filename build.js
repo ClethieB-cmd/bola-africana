@@ -238,7 +238,8 @@ function navHtml(active) {
   const cur = (id) => (id === atual ? ' aria-current="page"' : "");
   /* Masculino e Feminino abrem uma janela com tudo do gênero (build-generos.js); sem JavaScript, o clique leva à página */
   const gen = (id, label, g) => `<div class="mega" data-mega><a href="${u(id)}" class="nav-gen" aria-expanded="false" aria-controls="menu-${g}"${cur(id)}>${esc(label)}${CHEV}</a>${GEN.menu(g)}</div>`;
-  return `<a href="${u("index")}"${cur("index")}>${esc(T("home"))}</a>${gen("masculino", T("gMasc"), "masc")}${gen(CATS.fem.route, T("gFem"), "fem")}<a href="${u("onde-assistir")}"${cur("onde-assistir")}>${esc(T("watch"))}</a>`;
+  /* Onde assistir fica dentro das janelas de Masculino e Feminino */
+  return `<a href="${u("index")}"${cur("index")}>${esc(T("home"))}</a>${gen("masculino", T("gMasc"), "masc")}${gen(CATS.fem.route, T("gFem"), "fem")}`;
 }
 function logoHtml(cls = "logo") {
   const w = L(X.BRAND).split(" ");
