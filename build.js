@@ -44,6 +44,9 @@ const CAMP_UI = {
   campNext: { pt: "Próximos jogos", fr: "Prochains matchs", en: "Upcoming fixtures" },
   campNews: { pt: "Notícias", fr: "Actualité", en: "News" },
   campSeason: { pt: "Temporada {s}", fr: "Saison {s}", en: "{s} season" },
+  campFinal: { pt: "Classificação final · Temporada {s}", fr: "Classement final · Saison {s}", en: "Final table · {s} season", ar: "الترتيب النهائي · موسم {s}" },
+  campResultsOld: { pt: "Últimos jogos da temporada {s}", fr: "Derniers matchs de la saison {s}", en: "Last games of the {s} season", ar: "آخر مباريات موسم {s}" },
+  campOld: { pt: "Estes são os números da temporada {s}, já encerrada. A temporada atual entra aqui assim que os dados estiverem disponíveis.", fr: "Ce sont les chiffres de la saison {s}, terminée. La saison en cours apparaîtra ici dès que les données seront disponibles.", en: "These are the figures from the completed {s} season. The current season will appear here as soon as the data is available.", ar: "هذه أرقام موسم {s} المنتهي. سيظهر الموسم الحالي هنا فور توفر بياناته." },
   campUpdated: { pt: "Dados atualizados em {d}. Fonte: API-Football.", fr: "Données mises à jour le {d}. Source : API-Football.", en: "Data updated {d}. Source: API-Football." },
   campNoData: { pt: "Ainda não temos a classificação nem os resultados deste campeonato.", fr: "Nous n'avons pas encore le classement ni les résultats de ce championnat.", en: "We don't have the table or results for this league yet." },
   thClub: { pt: "Clube", fr: "Club", en: "Club" },
@@ -345,9 +348,10 @@ function campPage(c) {
     <div class="cover banner cat-ligas sp-futebol" aria-hidden="true"></div>
     ${lg ? `<p class="camp-champ">${esc(T("champ"))} <b>${esc(lg.champ)}</b>. ${esc(L(lg.fact))} <a href="${lg.src}">${esc(T("source"))}</a></p>` : ""}
     ${c.texto ? `<div class="prose">${L(c.texto).map((t) => `<p>${esc(t)}</p>`).join("")}</div>` : ""}
-    ${a ? `${a.tabela && a.tabela.length ? `<section class="section cat-ligas">${sectionHead(T("campTable") + (a.temporada ? " · " + T("campSeason", { s: a.temporada }) : ""))}${campTabela(a)}</section>` : ""}
+    ${a ? `${a.anterior ? `<p class="note camp-old">${esc(T("campOld", { s: a.temporada }))}</p>` : ""}
+      ${a.tabela && a.tabela.length ? `<section class="section cat-ligas">${sectionHead(a.anterior ? T("campFinal", { s: a.temporada }) : T("campTable") + (a.temporada ? " · " + T("campSeason", { s: a.temporada }) : ""))}${campTabela(a)}</section>` : ""}
       ${ad("meio")}
-      ${a.resultados && a.resultados.length ? `<section class="section cat-ligas">${sectionHead(T("campResults"))}<div class="panel">${campJogos(a.resultados, true)}</div></section>` : ""}
+      ${a.resultados && a.resultados.length ? `<section class="section cat-ligas">${sectionHead(a.anterior ? T("campResultsOld", { s: a.temporada }) : T("campResults"))}<div class="panel">${campJogos(a.resultados, true)}</div></section>` : ""}
       ${a.proximos && a.proximos.length ? `<section class="section cat-ligas">${sectionHead(T("campNext"))}${tzHint()}<div class="panel">${campJogos(a.proximos, false)}</div></section>` : ""}
       <p class="note">${esc(T("campUpdated", { d: quando }))}</p>`
     : `<p class="note">${esc(T("campNoData"))}</p>`}
