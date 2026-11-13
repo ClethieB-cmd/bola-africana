@@ -507,4 +507,12 @@ table.hist td.anos { color: var(--muted); font-size: 13px; line-height: 1.45; }
 .fatos b { font-family: var(--font-display); font-weight: 800; font-size: 34px; line-height: 1; color: var(--brand); text-align: center; }
 .fatos span { font-size: 14px; line-height: 1.35; }
 .fatos a:hover span { text-decoration: underline; }
+.fatos .liga-nome { display: flex; align-items: center; gap: 7px; margin: -2px 0 10px; font-weight: 700; font-size: 15px; }
+.fatos dl { margin: 0 0 6px; }
+.fatos dl > div { border-top: 1px solid var(--line); padding: 9px 0; }
+.fatos dt { margin: 0 0 3px; font-size: 11.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--kicker); }
+.fatos dd { margin: 0; font-size: 14px; line-height: 1.4; }
+.fatos dd b { font-family: inherit; font-size: inherit; font-weight: 700; line-height: inherit; color: var(--ink); text-align: start; }
+.fatos dd span { font-size: inherit; color: var(--muted); }
+.fatos.liga .note { font-size: 12.5px; margin: 6px 0 0; }
 .fatos .atual { margin: 0 0 10px; font-size: 14px; font-weight: 700; }
