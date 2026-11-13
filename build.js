@@ -225,8 +225,10 @@ function langMenu(id) {
 const ROTAS_MASC = ["masculino", ...["can", "cl", "cc", "ligas", "sel"].map((k) => CATS[k].route)];
 function navHtml(active) {
   const atual = ROTAS_MASC.includes(active) ? "masculino" : active;
-  const items = [["index", T("home"), ""], ["masculino", T("gMasc"), "masc"], [CATS.fem.route, T("gFem"), "fem"]];
-  return items.map(([id, label, g]) => `<a href="${u(id)}"${g ? ` class="nav-gen nav-${g}"` : ""}${id === atual ? ' aria-current="page"' : ""}>${esc(label)}</a>`).join("");
+  const cur = (id) => (id === atual ? ' aria-current="page"' : "");
+  /* Masculino e Feminino abrem uma janela com tudo do gênero (build-generos.js); sem JavaScript, o clique leva à página */
+  const gen = (id, label, g) => `<div class="mega" data-mega><a href="${u(id)}" class="nav-gen" aria-expanded="false" aria-controls="menu-${g}"${cur(id)}>${esc(label)}${CHEV}</a>${GEN.menu(g)}</div>`;
+  return `<a href="${u("index")}"${cur("index")}>${esc(T("home"))}</a>${gen("masculino", T("gMasc"), "masc")}${gen(CATS.fem.route, T("gFem"), "fem")}<a href="${u("onde-assistir")}"${cur("onde-assistir")}>${esc(T("watch"))}</a>`;
 }
 function logoHtml(cls = "logo") {
   const w = L(X.BRAND).split(" ");
@@ -326,14 +328,14 @@ function campDirHtml() {
     <ul class="camp-dir">${lista.map((c) => `<li><a href="${campUrl(c)}"><span class="pais">${esc(L(c.nome))}</span><span class="liga">${esc(c.liga)}${campAuto(c) ? ` · ${esc(T("campHasData"))}` : ""}</span></a></li>`).join("")}</ul></section>`;
 }
 const th = (k, cls = "") => { const [a, t] = T(k).split("|"); return `<th${cls ? ` class="${cls}"` : ""}><abbr title="${esc(t)}">${esc(a)}</abbr></th>`; };
-function campTabela(a) {
+function campTabela(a, c) {
   return a.tabela.map((g) => `${g.grupo ? `<h3 class="camp-grupo">${esc(g.grupo)}</h3>` : ""}<div class="table-wrap"><table>
     <thead><tr><th class="num">#</th><th>${esc(T("thClub"))}</th>${th("thP", "num")}${th("thW", "num")}${th("thD", "num")}${th("thL", "num")}${th("thGD", "num")}${th("thPts", "num")}</tr></thead>
-    <tbody>${g.linhas.map(([pos, time, j, v, e, d, sg, pts]) => `<tr><td class="num">${esc(pos)}</td><td>${esc(time)}</td><td class="num">${esc(j)}</td><td class="num">${esc(v)}</td><td class="num">${esc(e)}</td><td class="num">${esc(d)}</td><td class="num">${esc(sg > 0 ? "+" + sg : sg)}</td><td class="num"><b>${esc(pts)}</b></td></tr>`).join("")}</tbody></table></div>`).join("");
+    <tbody>${g.linhas.map(([pos, time, j, v, e, d, sg, pts]) => `<tr><td class="num">${esc(pos)}</td><td>${TM.link(c, time)}</td><td class="num">${esc(j)}</td><td class="num">${esc(v)}</td><td class="num">${esc(e)}</td><td class="num">${esc(d)}</td><td class="num">${esc(sg > 0 ? "+" + sg : sg)}</td><td class="num"><b>${esc(pts)}</b></td></tr>`).join("")}</tbody></table></div>`).join("");
 }
-function campJogos(lista, feitos) {
+function campJogos(lista, feitos, c) {
   return lista.map((g) => `<div class="fx ${feitos ? "done" : ""}">
-    <span class="teams">${esc(g.c)} × ${esc(g.f)}</span>
+    <span class="teams">${TM.link(c, g.c)} × ${TM.link(c, g.f)}</span>
     <span class="when">${feitos ? esc(`${g.gc ?? ""}–${g.gf ?? ""}`) : timeTag(g.d, "time", fmtTime(g.d))}</span>
     <span class="comp">${timeTag(g.d, "day", fmtDay(g.d))}</span></div>`).join("");
 }
@@ -349,10 +351,10 @@ function campPage(c) {
     ${lg ? `<p class="camp-champ">${esc(T("champ"))} <b>${esc(lg.champ)}</b>. ${esc(L(lg.fact))} <a href="${lg.src}">${esc(T("source"))}</a></p>` : ""}
     ${c.texto ? `<div class="prose">${L(c.texto).map((t) => `<p>${esc(t)}</p>`).join("")}</div>` : ""}
     ${a ? `${a.anterior ? `<p class="note camp-old">${esc(T("campOld", { s: a.temporada }))}</p>` : ""}
-      ${a.tabela && a.tabela.length ? `<section class="section cat-ligas">${sectionHead(a.anterior ? T("campFinal", { s: a.temporada }) : T("campTable") + (a.temporada ? " · " + T("campSeason", { s: a.temporada }) : ""))}${campTabela(a)}</section>` : ""}
+      ${a.tabela && a.tabela.length ? `<section class="section cat-ligas">${sectionHead(a.anterior ? T("campFinal", { s: a.temporada }) : T("campTable") + (a.temporada ? " · " + T("campSeason", { s: a.temporada }) : ""))}${campTabela(a, c)}</section>` : ""}
       ${ad("meio")}
-      ${a.resultados && a.resultados.length ? `<section class="section cat-ligas">${sectionHead(a.anterior ? T("campResultsOld", { s: a.temporada }) : T("campResults"))}<div class="panel">${campJogos(a.resultados, true)}</div></section>` : ""}
-      ${a.proximos && a.proximos.length ? `<section class="section cat-ligas">${sectionHead(T("campNext"))}${tzHint()}<div class="panel">${campJogos(a.proximos, false)}</div></section>` : ""}
+      ${a.resultados && a.resultados.length ? `<section class="section cat-ligas">${sectionHead(a.anterior ? T("campResultsOld", { s: a.temporada }) : T("campResults"))}<div class="panel">${campJogos(a.resultados, true, c)}</div></section>` : ""}
+      ${a.proximos && a.proximos.length ? `<section class="section cat-ligas">${sectionHead(T("campNext"))}${tzHint()}<div class="panel">${campJogos(a.proximos, false, c)}</div></section>` : ""}
       <p class="note">${esc(T("campUpdated", { d: quando }))}</p>`
     : `<p class="note">${esc(T("campNoData"))}</p>`}
     ${news.length ? `<section class="section cat-ligas">${sectionHead(T("campNews"))}<div class="grid-stories">${news.map(storyCard).join("")}</div></section>` : ""}
@@ -361,6 +363,8 @@ function campPage(c) {
 
 /* grupos das competições africanas e seção "Mais esportes" (arquivo build-esportes.js) */
 const ESP = require("./build-esportes.js")({ D, CAMP, NEWS, cfg, esc, L, T, u, ad, sectionHead, sidebar, timeTag, fmt, fmtDay, fmtTime, tzHint, storyCard, sorted, LANGS, LOCALE, bandeira, getLang: () => lang });
+/* página de cada time dos campeonatos nacionais (arquivo build-times.js) */
+const TM = require("./build-times.js")({ D, CAMP, AUTO, CATS, esc, L, T, u, sectionHead, sidebar, storyCard, sorted, timeTag, fmt, fmtDay, fmtTime, tzHint, bandeira, campTitle, LOCALE, getLang: () => lang });
 const GEN = require("./build-generos.js")({ D, X, CATS, ESP, sorted, esc, L, T, u, storyCard, agendaList, tzHint, watchHtml, sectionHead, LOCALE, getLang: () => lang });
 
 /* árabe: as traduções ficam em conteudo/traducao-ar.js; o que faltar aparece em francês */
@@ -526,6 +530,7 @@ for (const l of LANGS) {
     const p = emit("campeonatos/" + c.slug, { title: campTitle(c), desc: T("campDesc", { de: L(c.de), liga: c.liga }), body: () => campPage(c), active: CATS.ligas.route, noindex: !indexavel });
     if (indexavel) pages.push(p);
   }
+  TM.emitir(emit, pages);
   ESP.emitir(emit, pages);
   GEN.emitir(emit, pages);
   for (const n of NEWS) {
@@ -551,4 +556,5 @@ write("404.html", `<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"
 
 const nCamp = CAMP.filter(campIndexavel).length;
 console.log(`Campeonatos: ${CAMP.length} páginas por idioma, ${nCamp} com dados ou texto (as demais ficam fora do Google até ganhar conteúdo).`);
+console.log(`Times: ${TM.total()} páginas por idioma.`);
 console.log(`Pronto: ${pages.length + 3} páginas no mapa do site em ${path.relative(process.cwd(), OUT) || OUT}${PREVIEW ? " (prévia com espaços de anúncio)" : ""}.`);
