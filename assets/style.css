@@ -8,12 +8,14 @@
   --line: #D3DBD4;
   --gold: #E0A11B;
   --night: #0E1A15;
-  --c-can: #A93C17;
-  --c-cl: #213A6E;
-  --c-cc: #0D6763;
-  --c-fem: #6A2C8C;
-  --c-ligas: #2C6430;
-  --c-sel: #7A4710;
+  /* uma cor só para todas as seções: o verde do site. O dourado é o destaque */
+  --brand: #1A5C38;
+  --c-can: var(--brand);
+  --c-cl: var(--brand);
+  --c-cc: var(--brand);
+  --c-fem: var(--brand);
+  --c-ligas: var(--brand);
+  --c-sel: var(--brand);
   --font-display: "Big Shoulders Display", "Arial Narrow", "Roboto Condensed", Impact, sans-serif;
   --font-body: "Public Sans", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   color-scheme: light;
@@ -110,13 +112,14 @@ h1, h2, h3 { text-wrap: balance; margin: 0; }
 .search-list [hidden] { display: none; }
 
 /* rodapé */
-footer .wrap.foot { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 18px 40px; }
+footer .wrap.foot { display: grid; grid-template-columns: minmax(0, 2fr) repeat(4, minmax(0, 1fr)); gap: 24px 32px; }
 .foot-brand .logo { color: var(--ink); font-size: 26px; margin-bottom: 8px; }
-.foot nav { display: flex; flex-wrap: wrap; gap: 8px 20px; align-content: start; }
-.foot nav a { color: var(--ink); font-weight: 600; text-decoration: none; }
-.foot nav a:hover { text-decoration: underline; }
-.foot-meta { grid-column: 1 / -1; }
-@media (max-width: 640px) { footer .wrap.foot { grid-template-columns: minmax(0, 1fr); } }
+.foot-col { display: flex; flex-direction: column; gap: 9px; }
+.foot-col h2 { font-family: var(--font-body); font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin: 0 0 3px; }
+.foot-col a { color: var(--ink); font-weight: 600; text-decoration: none; }
+.foot-col a:hover { text-decoration: underline; }
+.foot-meta { grid-column: 1 / -1; border-top: 1px solid var(--line); padding-top: 16px; max-width: none !important; }
+@media (max-width: 900px) { footer .wrap.foot { grid-template-columns: repeat(2, minmax(0, 1fr)); } .foot-brand { grid-column: 1 / -1; } }
 
 .search { display: flex; align-items: center; background: #1C2C24; border: 1px solid #2B3E34; border-radius: 6px; padding: 0 10px; }
 .search input { background: transparent; border: 0; color: #EEF3EF; font: inherit; font-size: 14px; padding: 7px 4px; width: 170px; }
@@ -162,7 +165,6 @@ main { padding: 28px 0 56px; }
     radial-gradient(120% 80% at 50% 0%, rgba(255,255,255,.16), transparent 60%),
     linear-gradient(to top, rgba(8,14,10,.72) 0%, rgba(8,14,10,.32) 34%, transparent 62%);
 }
-.cover::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: var(--cc); z-index: 1; }
 .cover:empty::after { background: radial-gradient(120% 80% at 50% 0%, rgba(255,255,255,.14), transparent 60%), linear-gradient(to top, rgba(0,0,0,.16), transparent 45%); }
 .cover .big, .cover .small { text-shadow: 0 2px 14px rgba(0,0,0,.45); }
 .sp-futebol { background-image: url(campos/futebol.svg); }
@@ -213,7 +215,7 @@ main { padding: 28px 0 56px; }
 
 /* seções */
 .section { margin-top: 44px; }
-.section-head { display: flex; align-items: baseline; gap: 14px; border-top: 4px solid var(--tc, var(--ink)); padding-top: 10px; margin-bottom: 18px; }
+.section-head { display: flex; align-items: baseline; gap: 14px; border-top: 3px solid var(--ink); padding-top: 10px; margin-bottom: 18px; }
 .section-head h2 { font-family: var(--font-display); font-weight: 800; font-size: 30px; line-height: 1; }
 .section-head a { margin-left: auto; font-size: 14px; font-weight: 600; color: var(--muted); text-decoration: none; text-align: right; }
 .section-head a:hover { color: var(--ink); text-decoration: underline; }
@@ -236,7 +238,9 @@ main { padding: 28px 0 56px; }
 .fx .when { font-family: var(--font-display); font-weight: 800; font-size: 17px; text-align: right; font-variant-numeric: tabular-nums; }
 .fx .comp { grid-column: 1 / -1; font-size: 12px; color: var(--muted); }
 .fx.done .when { color: var(--ink); }
-.fx .flag { display: inline-block; width: 8px; height: 8px; border-radius: 2px; background: var(--tc); margin-right: 6px; transform: translateY(-1px); }
+.bandeira { display: inline-block; width: 20px; height: 14px; object-fit: cover; border-radius: 2px; margin-right: 7px; vertical-align: -2px; background: var(--surface-2); box-shadow: 0 0 0 1px rgba(0,0,0,.14); }
+.chip-match .bandeira { width: 18px; height: 13px; margin-right: 6px; vertical-align: -1px; }
+.group .cty .bandeira { width: 16px; height: 11px; margin-right: 5px; vertical-align: 0; }
 .dates { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
 .dates li { display: grid; grid-template-columns: 96px 1fr; gap: 10px; padding: 9px 0; border-top: 1px solid var(--line); font-size: 14px; }
 .dates li:first-child { border-top: 0; }
@@ -271,7 +275,7 @@ td.grp { font-family: var(--font-display); font-weight: 800; font-size: 18px; wi
 .radar span { font-size: 13.5px; background: var(--surface-2); border-radius: 999px; padding: 4px 12px; }
 
 /* página de categoria */
-.page-head { border-top: 6px solid var(--tc, var(--ink)); padding-top: 14px; margin-bottom: 22px; }
+.page-head { border-top: 5px solid var(--ink); padding-top: 14px; margin-bottom: 22px; }
 .page-head h1 { font-family: var(--font-display); font-weight: 900; font-size: clamp(40px, 6vw, 64px); line-height: .95; }
 .page-head p { color: var(--muted); max-width: 62ch; margin: 10px 0 0; font-size: 17px; }
 
@@ -329,7 +333,6 @@ footer p { margin: 0; max-width: 72ch; }
 .camp-row .cover .big { font-size: 26px; }
 .esp-dir a { padding: 0 0 10px; overflow: hidden; }
 .esp-dir .cover { aspect-ratio: 16 / 9; border-radius: 0; margin-bottom: 8px; padding: 10px 12px; }
-.esp-dir .cover::before { display: none; }
 .esp-dir .pais, .esp-dir .liga { padding: 0 12px; }
 .league a.country { font-size: 13px; color: var(--muted); font-weight: 600; text-decoration: none; }
 .league a.country:hover { text-decoration: underline; }
@@ -357,53 +360,31 @@ html[lang="ar"] .story h3, html[lang="ar"] .row-story h3, html[lang="ar"] .secti
 [dir="rtl"] .lang ul { left: auto; right: 0; }
 [dir="rtl"] th, [dir="rtl"] td { text-align: right; }
 [dir="rtl"] td.num, [dir="rtl"] th.num, [dir="rtl"] .fx .when, [dir="rtl"] .gtab .pt, [dir="rtl"] .chip-match .s { text-align: left; }
-[dir="rtl"] .fx .flag { margin-right: 0; margin-left: 6px; }
+[dir="rtl"] .bandeira { margin-right: 0; margin-left: 7px; }
 [dir="rtl"] .cover .big, [dir="rtl"] .dates .d { direction: ltr; unicode-bidi: isolate; text-align: right; }
 [dir="rtl"] .fx .when { direction: ltr; unicode-bidi: isolate; }
 [dir="rtl"] .scorebar-label { padding-right: 0; padding-left: 6px; }
 [dir="rtl"] .sources ul { padding-left: 0; padding-right: 18px; }
 [dir="rtl"] .camp-dir a { border-left: 1px solid var(--line); border-right: 3px solid var(--c-ligas); }
 @media (max-width: 720px) { [dir="rtl"] .search, [dir="rtl"] .lang { margin-right: auto; margin-left: 0; } }
-[dir="rtl"] .cover::before { left: auto; right: 0; }
-.cover:empty::before { display: none; }
 
-/* ---------- cor de cada esporte (a cor que lembra o esporte: gramado, bola, quadra, tatame...) ---------- */
-.cor-futebol { --sc: #1B8238; --sc-ink: #fff; --tc: var(--sc); }
-.cor-basquete { --sc: #E8641B; --sc-ink: #16120E; --tc: var(--sc); }
-.cor-handebol { --sc: #0A6FC2; --sc-ink: #fff; --tc: var(--sc); }
-.cor-volei { --sc: #F2B200; --sc-ink: #1B1B1B; --tc: var(--sc); }
-.cor-rugbi { --sc: #6D4C2F; --sc-ink: #fff; --tc: var(--sc); }
-.cor-atletismo { --sc: #D93A2B; --sc-ink: #fff; --tc: var(--sc); }
-.cor-boxe { --sc: #A3122B; --sc-ink: #fff; --tc: var(--sc); }
-.cor-luta { --sc: #C99A1A; --sc-ink: #1B1B1B; --tc: var(--sc); }
-.cor-judo { --sc: #2D3FA0; --sc-ink: #fff; --tc: var(--sc); }
-.cor-carate { --sc: #1C1C1C; --sc-ink: #fff; --tc: var(--sc); }
-.cor-taekwondo { --sc: #007D8C; --sc-ink: #fff; --tc: var(--sc); }
-.cor-tenis-de-mesa { --sc: #C2185B; --sc-ink: #fff; --tc: var(--sc); }
-.cor-tenis { --sc: #C5D928; --sc-ink: #1B1B1B; --tc: var(--sc); }
-.cor-ciclismo { --sc: #6A1B9A; --sc-ink: #fff; --tc: var(--sc); }
-.cor-criquete { --sc: #00695C; --sc-ink: #fff; --tc: var(--sc); }
+/* ---------- cartões dos esportes: o desenho do campo mostra o esporte; a cor é a do site ---------- */
+.cor-futebol, .cor-basquete, .cor-handebol, .cor-volei, .cor-rugbi, .cor-atletismo, .cor-boxe, .cor-luta, .cor-judo, .cor-carate, .cor-taekwondo, .cor-tenis-de-mesa, .cor-tenis, .cor-ciclismo, .cor-criquete { --sc: var(--night); --sc-ink: #fff; }
 
 /* ---------- menu Masculino e Feminino ---------- */
-.nav a.nav-gen { display: inline-flex; align-items: center; gap: 7px; font-weight: 800; font-size: 15px; letter-spacing: .01em; padding-left: 14px; padding-right: 14px; }
-.nav a.nav-gen::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--nav-c); }
-.nav-masc { --nav-c: var(--gold); }
-.nav-fem { --nav-c: #C98BE0; }
+.nav a.nav-gen { font-weight: 800; font-size: 15px; letter-spacing: .01em; padding-left: 14px; padding-right: 14px; }
 
 /* ---------- páginas Masculino e Feminino ---------- */
-.gen-masc { --tc: var(--gold); }
-.gen-fem { --tc: var(--c-fem); }
 .genero .page-head h1 { font-size: clamp(52px, 9vw, 96px); }
 .atalhos { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 6px; }
 .atalhos a { background: var(--night); color: #fff; text-decoration: none; font-weight: 700; font-size: 14px; padding: 9px 16px; border-radius: 999px; box-shadow: inset 0 -3px 0 var(--gold); }
-.gen-fem .atalhos a { background: var(--c-fem); box-shadow: inset 0 -3px 0 #C98BE0; }
 .atalhos a:hover { filter: brightness(1.18); }
 .esp-tiles { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(165px, 1fr)); gap: 12px; }
 .esp-tile { display: flex; flex-direction: column; height: 100%; background: var(--sc); color: var(--sc-ink); border-radius: 8px; overflow: hidden; text-decoration: none; transition: transform .15s ease, box-shadow .15s ease; }
 .esp-tile:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(0,0,0,.2); }
 .esp-tile .cover { border-radius: 0; aspect-ratio: 16 / 9; padding: 0; }
 .esp-tile .nome { font-family: var(--font-display); font-weight: 800; font-size: 25px; line-height: 1; padding: 10px 12px 3px; }
-.esp-tile .n { font-size: 13px; font-weight: 600; padding: 0 12px 12px; opacity: .92; }
+.esp-tile .n { font-size: 13px; font-weight: 600; padding: 0 12px 12px; color: #AFC0B6; }
 .esporte { margin-top: 44px; scroll-margin-top: 12px; }
 .esporte-head { position: relative; overflow: hidden; display: flex; align-items: center; gap: 14px; min-height: 96px; padding: 16px 20px; background: var(--sc); color: var(--sc-ink); border-radius: 8px; margin-bottom: 16px; }
 .esporte-head .cover { position: absolute; top: 0; bottom: 0; right: 0; width: 55%; aspect-ratio: auto; border-radius: 0; padding: 0; -webkit-mask-image: linear-gradient(90deg, transparent, #000 60%); mask-image: linear-gradient(90deg, transparent, #000 60%); }
@@ -411,20 +392,20 @@ html[lang="ar"] .story h3, html[lang="ar"] .row-story h3, html[lang="ar"] .secti
 .esporte-head a { position: relative; margin-left: auto; background: var(--sc-ink); color: var(--sc); font-weight: 800; font-size: 14px; padding: 8px 14px; border-radius: 999px; text-decoration: none; white-space: nowrap; }
 .esporte-head a:hover { text-decoration: underline; }
 .comp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
-.comp-card { display: flex; flex-direction: column; gap: 3px; padding: 12px 14px; background: var(--surface); border: 1px solid var(--line); border-left: 5px solid var(--sc); border-radius: 6px; text-decoration: none; color: var(--ink); }
+.comp-card { display: flex; flex-direction: column; gap: 3px; padding: 12px 14px; background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--gold); border-radius: 6px; text-decoration: none; color: var(--ink); }
 .comp-card:hover b { text-decoration: underline; }
-.comp-card .k { font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: color-mix(in srgb, var(--sc) 62%, var(--ink)); }
+.comp-card .k { font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--brand); }
 .comp-card b { font-size: 16px; font-weight: 700; line-height: 1.2; }
 .comp-card .s { font-size: 13px; color: var(--muted); }
 .esporte .grid-stories { margin-top: 18px; }
 .genero .section { scroll-margin-top: 12px; }
 .tab-links { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
-.tab-links a { display: inline-block; padding: 8px 14px; border-radius: 999px; background: var(--sc); color: var(--sc-ink); font-weight: 700; font-size: 14px; text-decoration: none; }
-.tab-links a:hover { filter: brightness(1.1); text-decoration: underline; }
+.tab-links a { display: inline-block; padding: 8px 14px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); color: var(--ink); font-weight: 700; font-size: 14px; text-decoration: none; }
+.tab-links a:hover { border-color: var(--gold); text-decoration: underline; }
 .esp-dir li a { border-left-color: var(--sc, var(--c-ligas)); }
 [dir="rtl"] .esporte-head .cover { right: auto; left: 0; -webkit-mask-image: linear-gradient(270deg, transparent, #000 60%); mask-image: linear-gradient(270deg, transparent, #000 60%); }
 [dir="rtl"] .esporte-head a { margin-left: 0; margin-right: auto; }
-[dir="rtl"] .comp-card { border-left: 1px solid var(--line); border-right: 5px solid var(--sc); }
+[dir="rtl"] .comp-card { border-left: 1px solid var(--line); border-right: 4px solid var(--gold); }
 [dir="rtl"] .esp-dir li a { border-right-color: var(--sc, var(--c-ligas)); }
 .gen-duo { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 0 36px; align-items: start; }
 .gen-duo > :only-child { grid-column: 1 / -1; }
