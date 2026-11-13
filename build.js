@@ -26,7 +26,10 @@ const EXTRA_UI = {
   emailSoon: { pt: "O e-mail de contato será publicado em breve.", fr: "L'adresse e-mail de contact sera publiée prochainement.", en: "A contact email will be published soon.", ar: "سيُنشر البريد الإلكتروني للتواصل قريبًا." },
   homeTag: { pt: "Notícias do esporte africano", fr: "L'actualité du sport africain", en: "African sports news", ar: "أخبار الرياضة الأفريقية" },
   skip: { pt: "Pular para o conteúdo", fr: "Aller au contenu", en: "Skip to content" },
-  footNav: { pt: "Institucional", fr: "Informations", en: "Information" }
+  footNav: { pt: "Institucional", fr: "Informations", en: "Information", ar: "عن الموقع" },
+  footSports: { pt: "Esportes", fr: "Sports", en: "Sports", ar: "الرياضات" },
+  footServ: { pt: "Jogos e tabelas", fr: "Matchs et classements", en: "Fixtures and tables", ar: "المباريات والجداول" },
+  noGames: { pt: "Os próximos jogos entram aqui assim que forem marcados.", fr: "Les prochains matchs apparaîtront ici dès qu'ils seront programmés.", en: "Upcoming games will appear here as soon as they are scheduled.", ar: "ستظهر المباريات المقبلة هنا فور تحديد مواعيدها." }
 };
 Object.assign(D.UI, EXTRA_UI);
 const CAMP_UI = {
@@ -53,6 +56,19 @@ const CAMP_UI = {
 };
 Object.assign(D.UI, CAMP_UI);
 for (const c of CAMP) if (!D.COUNTRY[c.code]) D.COUNTRY[c.code] = c.nome;
+
+/* data da edição: o dia em que o site foi gerado (o robô gera todo dia) */
+const HOJE = process.env.BUILD_DATE || new Date().toISOString().slice(0, 10);
+/* agenda: jogo com placar fica 3 dias; jogo sem placar some quando o dia dele passa (o resultado entra quando a redação atualizar) */
+{
+  const inicio = Date.parse(HOJE + "T00:00:00Z");
+  D.FIXTURES = D.FIXTURES.filter((f) => (f.score ? Date.parse(f.at) >= inicio - 3 * 864e5 : f.at.slice(0, 10) >= HOJE))
+    .map((f) => ({ ...f, today: f.at.slice(0, 10) === HOJE }));
+}
+
+/* bandeiras (imagens de domínio público servidas pela flagcdn.com, do Flagpedia) */
+const ISO2 = { ALG: "dz", ANG: "ao", BEN: "bj", BOT: "bw", BFA: "bf", BDI: "bi", CMR: "cm", CPV: "cv", CTA: "cf", CHA: "td", COM: "km", CGO: "cg", COD: "cd", DJI: "dj", EGY: "eg", EQG: "gq", ERI: "er", SWZ: "sz", ETH: "et", GAB: "ga", GAM: "gm", GHA: "gh", GUI: "gn", GNB: "gw", CIV: "ci", KEN: "ke", LES: "ls", LBR: "lr", LBA: "ly", MAD: "mg", MWI: "mw", MLI: "ml", MTN: "mr", MRI: "mu", MAR: "ma", MOZ: "mz", NAM: "na", NIG: "ne", NGA: "ng", RWA: "rw", STP: "st", SEN: "sn", SEY: "sc", SLE: "sl", SOM: "so", RSA: "za", SSD: "ss", SDN: "sd", TAN: "tz", TOG: "tg", TUN: "tn", UGA: "ug", ZAM: "zm", ZIM: "zw" };
+const bandeira = (code) => (ISO2[code] ? `<img class="bandeira" src="https://flagcdn.com/w40/${ISO2[code]}.png" srcset="https://flagcdn.com/w80/${ISO2[code]}.png 2x" width="20" height="14" alt="" loading="lazy" decoding="async">` : "");
 
 let lang = "pt";
 let cur = "index.html";
@@ -135,8 +151,8 @@ function scorebar() {
     const when = done ? esc(T("ft")) : f.timeTbd ? timeTag(f.at, "day", fmtDay(f.at)) : timeTag(f.at, "daytime", `${fmtDay(f.at)} ${fmtTime(f.at)}`);
     const aria = `${teamName(f, "home")} ${s1} ${T("vs")} ${teamName(f, "away")} ${s2}, ${L(f.comp)}`;
     return `<a class="chip-match ${done ? "done" : ""} ${f.today ? "is-today" : ""}" href="${u("agenda")}" aria-label="${esc(aria)}">
-      <span class="t">${esc(teamCode(f, "home"))}</span><span class="s">${esc(s1)}</span>
-      <span class="t">${esc(teamCode(f, "away"))}</span><span class="s">${esc(s2)}</span>
+      <span class="t">${f.club ? "" : bandeira(f.home)}${esc(teamCode(f, "home"))}</span><span class="s">${esc(s1)}</span>
+      <span class="t">${f.club ? "" : bandeira(f.away)}${esc(teamCode(f, "away"))}</span><span class="s">${esc(s2)}</span>
       <span class="m">${when}</span></a>`;
   }).join("");
 }
@@ -144,14 +160,15 @@ const FIXTURES_BAR = () => D.FIXTURES.filter((f) => f.bar);
 
 function agendaList(limit, todos = D.FIXTURES) {
   const list = limit ? todos.slice(0, limit) : todos;
+  if (!list.length) return `<p class="note">${esc(T("noGames"))}</p>`;
   let html = "", day = "";
   list.forEach((f) => {
     const d = f.at.slice(0, 10);
     if (d !== day) { day = d; html += `<div class="day">${timeTag(f.at, "day", fmtDay(f.at))}</div>`; }
     const when = f.score ? esc(f.score) : f.timeTbd ? esc(T("tbd")) : timeTag(f.at, "time", fmtTime(f.at));
     const extra = (f.score ? " · " + esc(T("ftLower")) : "") + (f.tv ? ` · <span class="tv">TV: ${esc(f.tv)}</span>` : "");
-    html += `<div class="fx ${f.score ? "done" : ""} cat-${f.cat}">
-      <span class="teams"><span class="flag" aria-hidden="true"></span>${esc(teamName(f, "home"))} × ${esc(teamName(f, "away"))}</span>
+    html += `<div class="fx ${f.score ? "done" : ""}">
+      <span class="teams">${f.club ? "" : bandeira(f.home)}${esc(teamName(f, "home"))} × ${f.club ? "" : bandeira(f.away)}${esc(teamName(f, "away"))}</span>
       <span class="when">${when}</span>
       <span class="comp">${esc(L(f.comp))}${extra}</span></div>`;
   });
@@ -172,7 +189,7 @@ function sidebar() {
 function groupsHtml(groups, k) {
   if ((k === "cl" || k === "cc") && ESP.grupos(k)) return ESP.grupos(k);
   return `<div class="groups">${groups.map(([g, teams]) => `<div class="group cat-${k}"><h3>${esc(T("group"))} ${g}</h3><ol>${
-    teams.map(([t, c]) => `<li><span>${esc(t ?? T("tbc"))}</span><span class="cty">${esc(c)}</span></li>`).join("")}</ol></div>`).join("")}</div>`;
+    teams.map(([t, c]) => `<li><span>${esc(t ?? T("tbc"))}</span><span class="cty">${bandeira(c)}${esc(c)}</span></li>`).join("")}</ol></div>`).join("")}</div>`;
 }
 const leaderNames = (arr) => arr.map((x) => (typeof x === "string" && D.COUNTRY[x] ? C(x) : L(x))).join(L(D.AND));
 function qualTable() {
@@ -216,7 +233,7 @@ function logoHtml(cls = "logo") {
 function layout({ id, title, desc, body, active, type = "website", jsonld, noindex }) {
   const fullTitle = id === "index" ? `${brand()} | ${T("homeTag")}` : `${title} | ${brand()}`;
   const canonical = absUrl(pathOf(id));
-  const editionLabel = T("updated", { d: fmt({ day: "numeric", month: "long", year: "numeric" }).format(new Date(cfg.EDITION_DATE + "T12:00:00Z")) });
+  const editionLabel = T("updated", { d: fmt({ day: "numeric", month: "long", year: "numeric" }).format(new Date(HOJE + "T12:00:00Z")) });
   const adsHead = cfg.ADSENSE_CLIENT
     ? `<meta name="google-adsense-account" content="${esc(cfg.ADSENSE_CLIENT)}">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${esc(cfg.ADSENSE_CLIENT)}" crossorigin="anonymous"></script>`
@@ -261,25 +278,20 @@ ${adsHead}${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld
     <nav class="nav" aria-label="${esc(T("navLabel"))}">${navHtml(active)}</nav>
   </div>
 </header>
-<div class="scorebar" aria-label="${esc(T("scoreAria"))}">
+${FIXTURES_BAR().length ? `<div class="scorebar" aria-label="${esc(T("scoreAria"))}">
   <div class="wrap scorebar-inner"><div class="scorebar-label"><strong>${esc(T("scoreTitle"))}</strong>${esc(T("scoreSub"))}</div>${scorebar()}</div>
-</div>
+</div>` : ""}
 <main id="conteudo">
   <div class="wrap">${body}</div>
 </main>
 <footer>
   <div class="wrap foot">
     <div class="foot-brand"><div class="logo">${logoHtml()}</div><p>${esc(T("foot1"))}</p></div>
-    <nav aria-label="${esc(T("footNav"))}">
-      <a href="${u("sobre")}">${esc(T("about"))}</a>
-      <a href="${u("contato")}">${esc(T("contact"))}</a>
-      <a href="${u("privacidade")}">${esc(T("privacy"))}</a>
-      <a href="${u("onde-assistir")}">${esc(T("watch"))}</a>
-      <a href="${u("agenda")}">${esc(T("agenda"))}</a>
-      <a href="${u("tabelas")}">${esc(T("tables"))}</a>
-      <a href="${u("esportes")}">${esc(T("moreSports"))}</a>
-    </nav>
-    <p class="foot-meta">© ${cfg.EDITION_DATE.slice(0, 4)} ${esc(brand())}. ${esc(T("foot2"))}</p>
+    <nav class="foot-col" aria-labelledby="f-fut"><h2 id="f-fut">${esc(T("gFut"))}</h2>${["can", "cl", "cc", "sel", "ligas"].map((k) => `<a href="${u(CATS[k].route)}">${esc(catName(k))}</a>`).join("")}</nav>
+    <nav class="foot-col" aria-labelledby="f-esp"><h2 id="f-esp">${esc(T("footSports"))}</h2><a href="${u("masculino")}">${esc(T("gMasc"))}</a><a href="${u(CATS.fem.route)}">${esc(T("gFem"))}</a><a href="${u("esportes")}">${esc(T("moreSports"))}</a></nav>
+    <nav class="foot-col" aria-labelledby="f-serv"><h2 id="f-serv">${esc(T("footServ"))}</h2><a href="${u("agenda")}">${esc(T("agenda"))}</a><a href="${u("tabelas")}">${esc(T("tables"))}</a><a href="${u("onde-assistir")}">${esc(T("watch"))}</a></nav>
+    <nav class="foot-col" aria-labelledby="f-inst"><h2 id="f-inst">${esc(T("footNav"))}</h2><a href="${u("sobre")}">${esc(T("about"))}</a><a href="${u("contato")}">${esc(T("contact"))}</a><a href="${u("privacidade")}">${esc(T("privacy"))}</a></nav>
+    <p class="foot-meta">© ${HOJE.slice(0, 4)} ${esc(brand())}. ${esc(T("foot2"))}</p>
   </div>
 </footer>
 <script src="${asset("site.js")}" defer></script>
@@ -317,8 +329,8 @@ function campTabela(a) {
     <tbody>${g.linhas.map(([pos, time, j, v, e, d, sg, pts]) => `<tr><td class="num">${esc(pos)}</td><td>${esc(time)}</td><td class="num">${esc(j)}</td><td class="num">${esc(v)}</td><td class="num">${esc(e)}</td><td class="num">${esc(d)}</td><td class="num">${esc(sg > 0 ? "+" + sg : sg)}</td><td class="num"><b>${esc(pts)}</b></td></tr>`).join("")}</tbody></table></div>`).join("");
 }
 function campJogos(lista, feitos) {
-  return lista.map((g) => `<div class="fx ${feitos ? "done" : ""} cat-ligas">
-    <span class="teams"><span class="flag" aria-hidden="true"></span>${esc(g.c)} × ${esc(g.f)}</span>
+  return lista.map((g) => `<div class="fx ${feitos ? "done" : ""}">
+    <span class="teams">${esc(g.c)} × ${esc(g.f)}</span>
     <span class="when">${feitos ? esc(`${g.gc ?? ""}–${g.gf ?? ""}`) : timeTag(g.d, "time", fmtTime(g.d))}</span>
     <span class="comp">${timeTag(g.d, "day", fmtDay(g.d))}</span></div>`).join("");
 }
@@ -344,7 +356,7 @@ function campPage(c) {
 }
 
 /* grupos das competições africanas e seção "Mais esportes" (arquivo build-esportes.js) */
-const ESP = require("./build-esportes.js")({ D, CAMP, NEWS, cfg, esc, L, T, u, ad, sectionHead, sidebar, timeTag, fmt, fmtDay, fmtTime, tzHint, storyCard, sorted, LANGS, LOCALE, getLang: () => lang });
+const ESP = require("./build-esportes.js")({ D, CAMP, NEWS, cfg, esc, L, T, u, ad, sectionHead, sidebar, timeTag, fmt, fmtDay, fmtTime, tzHint, storyCard, sorted, LANGS, LOCALE, bandeira, getLang: () => lang });
 const GEN = require("./build-generos.js")({ D, X, CATS, ESP, sorted, esc, L, T, u, storyCard, agendaList, tzHint, watchHtml, sectionHead, LOCALE, getLang: () => lang });
 
 /* árabe: as traduções ficam em conteudo/traducao-ar.js; o que faltar aparece em francês */
