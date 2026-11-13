@@ -26,6 +26,7 @@ o que ajuda o Google a encontrar o site e é o que o AdSense espera.
 | `conteudo/times.js` | Histórias dos clubes, escritas pela redação. |
 | `conteudo/historia.js` | Títulos, finais, recordes e classificação das eliminatórias, com as fontes. |
 | `build-historia.js` | Monta as tabelas de história e títulos e a coluna "Em números". |
+| `conteudo/ligas-historia.js` | Último campeão, maior campeão, copa, artilheiro e melhor jogador de cada campeonato, com as fontes. |
 | `conteudo/ligas-manuais.js` | Tabelas dos campeonatos que a API não cobre (hoje, o do Congo), copiadas de uma fonte conferida. |
 | `assets/` | Visual (`style.css`) e pequenos ajustes no navegador (`site.js`). |
 | `build.js` | Gera as páginas do site na pasta `_site/`. |
@@ -138,6 +139,14 @@ O campeonato do Congo (Brazzaville) não vem da API. A tabela está em `conteudo
 FECOFOOT, com a fonte e o dia da conferência. Para atualizar, troque as linhas da tabela e a data em `atualizado`.
 Se um dia a API passar a ter o campeonato, os dados dela entram no lugar sozinhos.
 
+### Em números de cada campeonato
+
+A coluna lateral de cada campeonato mostra o último campeão, o clube com mais títulos, a última final da copa
+nacional, o artilheiro e o melhor jogador da temporada. Os dados ficam em `conteudo/ligas-historia.js`, um bloco por
+país, com as fontes de cada um. Só entra o que está numa fonte: quando não achamos o artilheiro ou o melhor jogador de
+um campeonato, a linha não aparece. Atualize no fim de cada temporada (julho a agosto, na maioria dos países) e troque
+a data em `conferido`. País sem bloco mostra o quadro geral do continente.
+
 ### Textos de apresentação
 
 Página com só uma tabela automática vale pouco para o Google. Escreva dois ou três parágrafos sobre cada campeonato
@@ -212,7 +221,8 @@ um link para a parte certa da página Notícias.
 
 O Início mostra só notícias: a manchete (a notícia mais nova), três destaques e as últimas notícias, da mais nova
 para a mais antiga, sem imagem. A imagem de cada notícia aparece só dentro dela. A coluna lateral das outras páginas
-mostra as seis notícias mais recentes só dentro das notícias; nas outras páginas ela mostra "Em números". O placar
+mostra as seis notícias mais recentes só dentro das notícias; nas outras páginas ela mostra "Em números", e nos
+campeonatos nacionais os números daquele campeonato. O placar
 da rodada, a agenda e as próximas datas ficam só na página Agenda.
 
 ## Agenda, data e bandeiras
