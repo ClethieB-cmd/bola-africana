@@ -76,3 +76,33 @@
     run();
   }
 })();
+
+/* Menu: clicar em Masculino ou Feminino abre a janela com tudo do gênero; clicar fora ou Esc fecha.
+   Sem JavaScript, o clique leva direto à página do gênero. */
+(function () {
+  var megas = document.querySelectorAll("[data-mega]");
+  if (!megas.length) return;
+  function fechar(exceto) {
+    for (var i = 0; i < megas.length; i++) {
+      if (megas[i] === exceto) continue;
+      megas[i].classList.remove("open");
+      megas[i].querySelector("a").setAttribute("aria-expanded", "false");
+    }
+  }
+  Array.prototype.forEach.call(megas, function (m) {
+    var a = m.querySelector("a");
+    a.addEventListener("click", function (e) {
+      e.preventDefault();
+      var abrir = !m.classList.contains("open");
+      fechar(m);
+      m.classList.toggle("open", abrir);
+      a.setAttribute("aria-expanded", abrir ? "true" : "false");
+    });
+  });
+  document.addEventListener("click", function (e) {
+    if (!(e.target.closest && e.target.closest("[data-mega]"))) fechar(null);
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") fechar(null);
+  });
+})();
