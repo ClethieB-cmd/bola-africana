@@ -80,10 +80,14 @@ function rotuloTemporada(s) {
   return a === b ? String(a) : `${a}/${String(b).slice(2)}`;
 }
 
-async function atualizar(liga) {
-  const temp = liga.seasons.find((s) => s.current) || liga.seasons[liga.seasons.length - 1];
+/* Temporada pedida: a atual ou, quando o plano não libera a atual, a última que ele libera (ano). */
+async function atualizar(liga, ano) {
+  const atual = liga.seasons.find((s) => s.current) || liga.seasons[liga.seasons.length - 1];
+  const temp = ano ? { year: ano } : atual;
   const cob = (temp.coverage || {});
-  const item = { apiId: liga.league.id, apiNome: liga.league.name, temporada: rotuloTemporada(temp), ano: temp.year, tabela: [], resultados: [], proximos: [] };
+  const item = { apiId: liga.league.id, apiNome: liga.league.name, temporada: ano ? String(ano) : rotuloTemporada(temp), ano: temp.year, tabela: [], resultados: [], proximos: [] };
+  /* temporada já encerrada: a pedida porque o plano não libera a atual, ou uma que a API ainda marca como atual mas já terminou */
+  if (ano || (temp.end && Date.parse(temp.end) < Date.now() - 7 * 864e5)) item.anterior = true;
 
   if (cob.standings !== false) {
     const st = await api("/standings", { league: liga.league.id, season: temp.year });
@@ -101,6 +105,12 @@ async function atualizar(liga) {
     .sort((a, b) => b.fixture.timestamp - a.fixture.timestamp).slice(0, 10).map(jogo);
   item.proximos = fx.filter((f) => ABERTO.has(f.fixture.status.short) && f.fixture.timestamp * 1000 >= agora - 3 * 3600e3)
     .sort((a, b) => a.fixture.timestamp - b.fixture.timestamp).slice(0, 10).map(jogo);
+  if (ano && fx.length) {
+    /* rótulo da temporada antiga pelas datas dos jogos: 2024 ou 2024/25 */
+    const anos = fx.map((f) => Number(String(f.fixture.date).slice(0, 4))).filter(Boolean);
+    const a = Math.min(...anos), b = Math.max(...anos);
+    item.temporada = a === b ? String(a) : `${a}/${String(b).slice(2)}`;
+  }
   item.atualizado = new Date().toISOString();
   return item;
 }
@@ -145,13 +155,38 @@ async function atualizar(liga) {
   const fila = CAMP.filter((c) => mapa[c.code])
     .sort((a, b) => String((dados.ligas[a.code] || {}).atualizado || "").localeCompare(String((dados.ligas[b.code] || {}).atualizado || "")));
 
+  /* Plano grátis: a API só libera temporadas antigas (a mensagem diz "try from 2022 to 2024").
+     Quando a temporada atual é recusada, o robô guarda o último ano liberado e passa a pedir esse ano.
+     Uma vez por execução ele ainda testa a temporada atual: se o plano mudar, volta sozinho para ela. */
+  const anoLiberado = (msg) => { const m = String(msg).match(/from\s+(\d{4})\s+to\s+(\d{4})/i); return m ? Number(m[2]) : null; };
+  let testouAtual = false;
+  async function atualizarLiga(liga) {
+    const atual = (liga.seasons.find((s) => s.current) || liga.seasons[liga.seasons.length - 1] || {}).year;
+    const max = dados.planoAnoMax;
+    if (max && atual > max && testouAtual) return atualizar(liga, max);
+    try {
+      const item = await atualizar(liga);
+      if (max && atual > max) { delete dados.planoAnoMax; console.log("   A API liberou a temporada atual: o robô volta a usar a temporada atual."); }
+      return item;
+    } catch (e) {
+      const ano = anoLiberado(e.message);
+      if (!ano || e instanceof Limite) throw e;
+      dados.planoAnoMax = ano;
+      testouAtual = true;
+      console.log(`   O plano não libera a temporada atual; usando a temporada ${ano}.`);
+      return atualizar(liga, ano);
+    } finally {
+      if (max && atual > max) testouAtual = true;
+    }
+  }
+
   let feitos = 0, erros = 0;
   for (const c of parar ? [] : fila) {
     const liga = ligasNac.find((l) => l.league.id === mapa[c.code].apiId);
     try {
-      dados.ligas[c.code] = await atualizar(liga);
+      dados.ligas[c.code] = await atualizarLiga(liga);
       feitos++;
-      console.log(`ok  ${c.code}  ${liga.league.name}`);
+      console.log(`ok  ${c.code}  ${liga.league.name}  temporada ${dados.ligas[c.code].temporada}${dados.ligas[c.code].anterior ? " (encerrada)" : ""}`);
     } catch (e) {
       if (e instanceof Limite) { console.log(`Limite de ${LIMITE} consultas atingido. Os demais ficam para a próxima execução.`); break; }
       erros++;
