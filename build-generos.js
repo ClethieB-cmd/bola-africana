@@ -30,6 +30,9 @@ module.exports = function (h) {
     gSubTable: { pt: "Classificação e resultados", fr: "Classement et résultats", en: "Standings and results", ar: "الترتيب والنتائج" },
     gFutM: { pt: "CAN, clubes e 54 ligas", fr: "CAN, clubs et 54 championnats", en: "AFCON, clubs and 54 leagues", ar: "كأس الأمم والأندية و54 دوريًا" },
     gFemNews: { pt: "Notícias do futebol feminino", fr: "Actualité du football féminin", en: "Women's football news", ar: "أخبار كرة القدم النسائية" },
+    gOther: { pt: "Outros esportes", fr: "Autres sports", en: "Other sports", ar: "رياضات أخرى" },
+    gAllM: { pt: "Ver tudo do Masculino", fr: "Tout le sport masculin", en: "All men's sport", ar: "كل رياضة الرجال" },
+    gAllF: { pt: "Ver tudo do Feminino", fr: "Tout le sport féminin", en: "All women's sport", ar: "كل رياضة السيدات" },
     gLatest: { pt: "Últimas notícias", fr: "Dernières actualités", en: "Latest news", ar: "آخر الأخبار" }
   });
 
@@ -130,10 +133,32 @@ module.exports = function (h) {
     return T("gDescF", { lista: texto });
   }
 
+  /* janela do menu (como a da Gracenote): colunas com links, aberta ao clicar em Masculino ou Feminino */
+  const cacheMenu = {};
+  function menu(g) {
+    const chave = g + u("index"); /* links relativos: um menu por idioma e por profundidade da página */
+    if (cacheMenu[chave]) return cacheMenu[chave];
+    const { lista, jogos, tv } = montar(g);
+    const pg = g === "masc" ? u("masculino") : u(CATS.fem.route);
+    const fut = g === "masc"
+      ? [...["can", "cl", "cc", "sel", "ligas"].map((k) => [u(CATS[k].route), L(CATS[k].name)]),
+         ...ESP.futChaves("masc").filter((k) => !["canq", "cl", "cc"].includes(k)).map((k) => [ESP.futUrl(k), L(ESP.NOMES_FUT[k])])]
+      : [...(lista.some((x) => x.id === "futebol") ? [[pg + "#futebol", T("gFemNews")]] : []), ...ESP.futChaves("fem").map((k) => [ESP.futUrl(k), L(ESP.NOMES_FUT[k])])];
+    const outros = g === "masc"
+      ? ESP.ESPORTES.map((e) => [ESP.espUrl(e), L(e.nome)])
+      : lista.filter((x) => x.id !== "futebol").map((x) => [pg + "#" + x.id, x.nome]);
+    const serv = g === "masc"
+      ? [[u("agenda"), T("agenda")], [u("tabelas"), T("tables")], [u("onde-assistir"), T("watch")]]
+      : [jogos.length && [pg + "#agenda", T("agenda")], lista.some((x) => x.tabelas.length) && [pg + "#tabelas", T("tables")], tv.length && [pg + "#onde-assistir", T("watch")]].filter(Boolean);
+    const col = (titulo, itens, cls = "") => (itens.length ? `<div class="mega-col${cls}"><h2>${esc(titulo)}</h2><ul>${itens.map(([href, t]) => `<li><a href="${href}">${esc(t)}</a></li>`).join("")}</ul></div>` : "");
+    return (cacheMenu[chave] = `<div class="mega-panel" id="menu-${g}">${col(T("gFut"), fut)}${col(T("gOther"), outros, outros.length > 6 ? " mega-col-2" : "")}${col(T("footServ"), serv)}
+      <a class="mega-all" href="${pg}">${esc(T(g === "masc" ? "gAllM" : "gAllF"))} ›</a></div>`);
+  }
+
   function emitir(emit, pages) {
     pages.push(emit("masculino", { title: T("gMasc"), desc: T("gDescM"), body: () => pagina("masc"), active: "masculino" }));
     pages.push(emit(CATS.fem.route, { title: T("gFem"), desc: descricao("fem", montar("fem").lista), body: () => pagina("fem"), active: "feminino" }));
   }
 
-  return { emitir };
+  return { emitir, menu };
 };
