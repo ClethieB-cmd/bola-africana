@@ -143,8 +143,8 @@ module.exports = function (h) {
       <div class="cover banner esp sp-${e.id}" aria-hidden="true"></div>
       ${afr.map((c) => `<section class="section"><div class="section-head"><h2>${esc(c.nome)}</h2><a href="${compUrl(e, c)}">${esc(T("fullPage"))}</a></div>${c.tabela && c.tabela.length ? gruposCards(c.tabela) : `<div class="panel">${jogosHtml((c.resultados || []).slice(0, 4), true)}</div>`}</section>`).join("")}
       ${nac.length ? `<section class="section">${sectionHead(T("espNational"))}<ul class="camp-dir">${nac.map((c) => `<li><a href="${compUrl(e, c)}"><span class="pais">${esc(L(paisDe(c.pais).nome))}</span><span class="liga">${esc(c.nome)}</span></a></li>`).join("")}</ul></section>` : ""}
-      ${news.length ? `<section class="section">${sectionHead(T("espNews"))}<div class="grid-stories">${news.map(storyCard).join("")}</div></section>` : ""}
-      ${!cs.length && !news.length ? `<p class="note">${esc(T("espEmpty"))}</p>` : ""}
+      ${news.length ? `<p class="page-links"><a href="${u("noticias")}#${e.id}">${esc(T("espNews"))} · ${esc(L(e.nome))} ›</a></p>` : ""}
+      ${!cs.length ? `<p class="note">${esc(T("espEmpty"))}</p>` : ""}
     </div>${sidebar()}</div>`;
   }
   function compPage(e, c) {
