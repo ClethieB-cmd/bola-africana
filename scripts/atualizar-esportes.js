@@ -45,8 +45,9 @@ const JUVENIL = /\bu ?1\d|\bu ?2\d|youth|junior|reserve|\b2nd\b|second division|
 
 function paisDe(l) {
   const c = l.country || {};
-  if (c.code && PAIS_ISO.has(String(c.code).toUpperCase())) return PAIS_ISO.get(String(c.code).toUpperCase());
+  /* o nome do país vem antes do código, para a RD Congo ("Congo-DR") não cair no Congo */
   if (PAIS_NOME.has(plano(c.name))) return PAIS_NOME.get(plano(c.name));
+  if (c.code && PAIS_ISO.has(String(c.code).toUpperCase())) return PAIS_ISO.get(String(c.code).toUpperCase());
   const n = norm(l.name);
   if (["africa", "world", "international"].includes(plano(c.name)) && /afri|afro|\bbal\b/.test(n)) return "AFR";
   if (plano(c.name) === "africa") return "AFR";
