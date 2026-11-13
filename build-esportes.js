@@ -6,7 +6,7 @@ const fs = require("fs");
 const path = require("path");
 
 module.exports = function (h) {
-  const { D, CAMP, NEWS, cfg, esc, L, T, u, ad, sectionHead, sidebar, timeTag, fmt, fmtDay, fmtTime, tzHint, storyCard, sorted, LANGS, getLang } = h;
+  const { D, CAMP, NEWS, cfg, esc, L, T, u, ad, sectionHead, sidebar, timeTag, fmt, fmtDay, fmtTime, tzHint, storyCard, sorted, LANGS, getLang, bandeira } = h;
   const ESPORTES = require("./conteudo/esportes.js");
   const ler = (f) => { try { return JSON.parse(fs.readFileSync(path.join(__dirname, "conteudo", f), "utf8")); } catch (e) { return {}; } };
   const FUT = ler("ligas-auto.json").continentais || {};
@@ -56,6 +56,7 @@ module.exports = function (h) {
    ["saotomeandprincipe", "STP"], ["thegambia", "GAM"], ["centralafricanrep", "CTA"], ["equatorialguinea", "EQG"]]
     .forEach(([n, code]) => SELECAO.set(n, CAMP.find((c) => c.code === code)));
   const time = (n) => { const c = SELECAO.get(plano(n)); return c ? L(c.nome) : n; };
+  const flag = (n) => { const c = SELECAO.get(plano(n)); return c && bandeira ? bandeira(c.code) : ""; };
   const grupoNome = (g) => { const m = String(g).match(/^group\s+(.+)$/i); return m ? `${T("group")} ${m[1]}` : g; };
 
   /* tabela completa, com colunas que se ajustam ao esporte */
@@ -67,18 +68,18 @@ module.exports = function (h) {
       const cols = COLS.filter(([i]) => g.linhas.some((r) => r[i] !== null && r[i] !== undefined && r[i] !== ""));
       return `${g.grupo ? `<h3 class="camp-grupo">${esc(grupoNome(g.grupo))}</h3>` : ""}<div class="table-wrap"><table>
       <thead><tr><th class="num">#</th><th>${esc(T("thTeam"))}</th>${cols.map(([, k]) => th(k)).join("")}</tr></thead>
-      <tbody>${g.linhas.map((r) => `<tr><td class="num">${esc(r[0])}</td><td>${esc(time(r[1]))}</td>${cols.map(([i]) => `<td class="num">${i === 7 ? `<b>${esc(r[i])}</b>` : esc(i === 6 ? fmtSg(r[i]) : r[i])}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+      <tbody>${g.linhas.map((r) => `<tr><td class="num">${esc(r[0])}</td><td>${flag(r[1])}${esc(time(r[1]))}</td>${cols.map(([i]) => `<td class="num">${i === 7 ? `<b>${esc(r[i])}</b>` : esc(i === 6 ? fmtSg(r[i]) : r[i])}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
     }).join("");
   }
   /* cartões compactos: todos os times de cada grupo, do primeiro ao último */
   function gruposCards(grupos, link) {
     return `<div class="groups gtab">${grupos.map((g) => `<div class="group"><h3>${esc(g.grupo ? grupoNome(g.grupo) : T("campTable"))}</h3><ol>${
-      g.linhas.map((r) => `<li><span class="pos">${esc(r[0])}</span><span class="tm">${esc(time(r[1]))}</span><span class="pj">${r[2] !== null ? esc(r[2]) + " " + esc(T("jShort")) : ""}</span><span class="pt">${r[7] !== null ? `<b>${esc(r[7])}</b> ${esc(T("ptsShort"))}` : esc(`${r[3] ?? ""}-${r[5] ?? ""}`)}</span></li>`).join("")
+      g.linhas.map((r) => `<li><span class="pos">${esc(r[0])}</span><span class="tm">${flag(r[1])}${esc(time(r[1]))}</span><span class="pj">${r[2] !== null ? esc(r[2]) + " " + esc(T("jShort")) : ""}</span><span class="pt">${r[7] !== null ? `<b>${esc(r[7])}</b> ${esc(T("ptsShort"))}` : esc(`${r[3] ?? ""}-${r[5] ?? ""}`)}</span></li>`).join("")
     }</ol></div>`).join("")}</div>${link ? `<p class="note"><a href="${link}">${esc(T("fullPage"))}</a></p>` : ""}`;
   }
   function jogosHtml(lista, feitos) {
     return lista.map((g) => `<div class="fx ${feitos ? "done" : ""}">
-      <span class="teams"><span class="flag" aria-hidden="true"></span>${esc(time(g.c))} × ${esc(time(g.f))}</span>
+      <span class="teams">${flag(g.c)}${esc(time(g.c))} × ${flag(g.f)}${esc(time(g.f))}</span>
       <span class="when">${feitos ? esc(`${g.gc ?? ""}–${g.gf ?? ""}`) : timeTag(g.d, "time", fmtTime(g.d))}</span>
       <span class="comp">${timeTag(g.d, "day", fmtDay(g.d))}</span></div>`).join("");
   }
