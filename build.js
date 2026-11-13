@@ -326,7 +326,7 @@ const campAuto = (c) => {
   const a = (AUTO.ligas || {})[c.code];
   return a && ((a.tabela && a.tabela.length) || (a.resultados && a.resultados.length) || (a.proximos && a.proximos.length)) ? a : null;
 };
-const campIndexavel = (c) => !!(campAuto(c) || c.texto);
+const campIndexavel = (c) => !!(campAuto(c) || c.texto || HI.temLiga(c.code));
 const campTitle = (c) => T("campTitle", { de: L(c.de), liga: c.liga });
 const normTxt = (s) => String(s).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 function mencionaPais(n, c) {
@@ -372,7 +372,7 @@ function campPage(c) {
       ${a.proximos && a.proximos.length ? `<section class="section cat-ligas">${sectionHead(T("campNext"))}${tzHint()}<div class="panel">${campJogos(a.proximos, false, c)}</div></section>` : ""}
       <p class="note">${a.manual ? `${esc(T("campManual", { d: quando }))} <a href="${esc(a.fonte[1])}">${esc(a.fonte[0])}</a>` : esc(T("campUpdated", { d: quando }))}</p>`
     : `<p class="note">${esc(T("campNoData"))}</p>`}
-  </div>${sidebar()}</div>`;
+  </div>${HI.fatosLiga(c, ad("lateral")) || sidebar()}</div>`;
 }
 
 /* grupos das competições africanas e seção "Mais esportes" (arquivo build-esportes.js) */
