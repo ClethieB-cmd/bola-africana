@@ -12,6 +12,9 @@ const X = require("./conteudo/textos-extra.js");
 const CAMP = require("./conteudo/campeonatos.js");
 let AUTO = { ligas: {} };
 try { AUTO = JSON.parse(fs.readFileSync(path.join(__dirname, "conteudo", "ligas-auto.json"), "utf8")); } catch (e) { /* ainda sem dados automáticos */ }
+/* campeonatos que a API não cobre, preenchidos à mão (conteudo/ligas-manuais.js); quando a API tiver o campeonato, ela vale mais */
+AUTO.ligas = AUTO.ligas || {};
+for (const [k, v] of Object.entries(require("./conteudo/ligas-manuais.js"))) if (!AUTO.ligas[k]) AUTO.ligas[k] = v;
 
 const PREVIEW = process.argv.includes("--preview");
 const OUT = path.join(__dirname, "_site");
@@ -48,6 +51,7 @@ const CAMP_UI = {
   campResultsOld: { pt: "Últimos jogos da temporada {s}", fr: "Derniers matchs de la saison {s}", en: "Last games of the {s} season", ar: "آخر مباريات موسم {s}" },
   campOld: { pt: "Estes são os números da temporada {s}, já encerrada. A temporada atual entra aqui assim que os dados estiverem disponíveis.", fr: "Ce sont les chiffres de la saison {s}, terminée. La saison en cours apparaîtra ici dès que les données seront disponibles.", en: "These are the figures from the completed {s} season. The current season will appear here as soon as the data is available.", ar: "هذه أرقام موسم {s} المنتهي. سيظهر الموسم الحالي هنا فور توفر بياناته." },
   campUpdated: { pt: "Dados atualizados em {d}. Fonte: API-Football.", fr: "Données mises à jour le {d}. Source : API-Football.", en: "Data updated {d}. Source: API-Football." },
+  campManual: { pt: "Dados conferidos em {d}. Fonte:", fr: "Données vérifiées le {d}. Source :", en: "Data checked {d}. Source:", ar: "تم التحقق من البيانات في {d}. المصدر:" },
   campNoData: { pt: "Ainda não temos a classificação nem os resultados deste campeonato.", fr: "Nous n'avons pas encore le classement ni les résultats de ce championnat.", en: "We don't have the table or results for this league yet." },
   thClub: { pt: "Clube", fr: "Club", en: "Club" },
   thP: { pt: "J|Jogos", fr: "J|Joués", en: "P|Played" },
@@ -351,11 +355,12 @@ function campPage(c) {
     ${lg ? `<p class="camp-champ">${esc(T("champ"))} <b>${esc(lg.champ)}</b>. ${esc(L(lg.fact))} <a href="${lg.src}">${esc(T("source"))}</a></p>` : ""}
     ${c.texto ? `<div class="prose">${L(c.texto).map((t) => `<p>${esc(t)}</p>`).join("")}</div>` : ""}
     ${a ? `${a.anterior ? `<p class="note camp-old">${esc(T("campOld", { s: a.temporada }))}</p>` : ""}
+      ${a.nota ? `<p class="note">${esc(L(a.nota.texto))} <a href="${esc(a.nota.fonte[1])}">${esc(a.nota.fonte[0])}</a></p>` : ""}
       ${a.tabela && a.tabela.length ? `<section class="section cat-ligas">${sectionHead(a.anterior ? T("campFinal", { s: a.temporada }) : T("campTable") + (a.temporada ? " · " + T("campSeason", { s: a.temporada }) : ""))}${campTabela(a, c)}</section>` : ""}
       ${ad("meio")}
       ${a.resultados && a.resultados.length ? `<section class="section cat-ligas">${sectionHead(a.anterior ? T("campResultsOld", { s: a.temporada }) : T("campResults"))}<div class="panel">${campJogos(a.resultados, true, c)}</div></section>` : ""}
       ${a.proximos && a.proximos.length ? `<section class="section cat-ligas">${sectionHead(T("campNext"))}${tzHint()}<div class="panel">${campJogos(a.proximos, false, c)}</div></section>` : ""}
-      <p class="note">${esc(T("campUpdated", { d: quando }))}</p>`
+      <p class="note">${a.manual ? `${esc(T("campManual", { d: quando }))} <a href="${esc(a.fonte[1])}">${esc(a.fonte[0])}</a>` : esc(T("campUpdated", { d: quando }))}</p>`
     : `<p class="note">${esc(T("campNoData"))}</p>`}
     ${news.length ? `<section class="section cat-ligas">${sectionHead(T("campNews"))}<div class="grid-stories">${news.map(storyCard).join("")}</div></section>` : ""}
   </div>${sidebar()}</div>`;
