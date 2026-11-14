@@ -5,10 +5,142 @@
    tags: seções onde a matéria também aparece
    date: data e hora da publicação, formato "AAAA-MM-DDTHH:MM"
    monthOnly: true mostra só o mês na data
+   especial: true faz da matéria uma reportagem especial (página Especiais e seção própria no Início)
    cover.big: texto grande da capa (placar, número); cover.small: legenda da capa
    title, lead, body: título, linha fina e parágrafos em pt, fr e en
    sources: [nome do veículo, link] — sempre cite de onde veio a informação */
 module.exports = [
+  {
+    slug: "especial-al-ahly-zamalek-classico-do-cairo", especial: true, cat: "ligas", tags: ["ligas", "cl"], date: "2026-11-14T12:00",
+    cover: { big: "258", cx: "82%", small: { pt: "jogos entre Al Ahly e Zamalek desde 1917", fr: "matchs entre Al Ahly et Zamalek depuis 1917", en: "games between Al Ahly and Zamalek since 1917", ar: "مباراة بين الأهلي والزمالك منذ 1917" } },
+    title: { pt: "Al Ahly x Zamalek: o clássico que divide o Cairo há mais de um século", fr: "Al Ahly-Zamalek : le derby qui divise Le Caire depuis plus d'un siècle", en: "Al Ahly v Zamalek: the derby that has split Cairo for more than a century", ar: "الأهلي والزمالك: القمة التي تقسم القاهرة منذ أكثر من قرن" },
+    lead: { pt: "O primeiro jogo foi em 1917. Desde então foram 258 encontros, uma final continental e goleadas que cada torcida faz questão de lembrar.", fr: "Le premier match date de 1917. Depuis, 258 rencontres, une finale continentale et des cartons que chaque camp n'oublie pas.", en: "The first game was in 1917. Since then there have been 258 meetings, a continental final and thrashings each set of fans never forgets.", ar: "أقيمت المباراة الأولى عام 1917، ومنذ ذلك الحين التقى الفريقان 258 مرة، بينها نهائي قاري ونتائج كبيرة لا ينساها جمهور أي منهما." },
+    body: {
+      pt: [
+        "O Al Ahly nasceu em 24 de abril de 1907, a partir da ideia de Omar Lotfy, estudante de Direito que presidia um clube de alunos do ensino médio no Cairo. O nome quer dizer \"o nacional\" em árabe egípcio. Quatro anos depois, em 5 de janeiro de 1911, surgiu o Qasr El Nil, que mudou de nome várias vezes, foi Farouk I quando ganhou o patrocínio do rei, em 1941, e virou Zamalek em 1952.",
+        "Os dois se enfrentaram pela primeira vez em 9 de fevereiro de 1917, num amistoso no campo do Zamalek: 1 a 0 para o Al Ahly, gol de Abdel Hamid Moharram. Até maio de 2026 foram 258 jogos, com 113 vitórias do Al Ahly, 62 do Zamalek e 83 empates. Contando só partidas oficiais, são 234 jogos: 102 vitórias do Al Ahly, 53 do Zamalek e 79 empates.",
+        "Cada lado tem a sua goleada para lembrar. O Zamalek venceu por 6 a 0 duas vezes: em 1942, pela Liga do Cairo, e em 1944, na final da Copa do Egito. A maior vitória do Al Ahly foi o 6 a 1 de 16 de maio de 2002, pelo Campeonato Egípcio.",
+        "O jogo mais importante da história do clássico foi a final da Liga dos Campeões da CAF de 2020, disputada em 27 de novembro daquele ano no Estádio Internacional do Cairo, sem público por causa da pandemia. El Solia abriu o placar para o Al Ahly, Shikabala empatou, e Afsha fez o gol do título no fim. O Zamalek deu o troco na Supercopa da CAF de 2024, em Riad: 1 a 1 e vitória nos pênaltis por 4 a 3.",
+        "Na sala de troféus, o Al Ahly leva vantagem: 45 títulos egípcios contra 15 do Zamalek, 39 Copas do Egito contra 29 e 12 Ligas dos Campeões da CAF contra 5. A CAF elegeu os dois como o primeiro e o segundo melhores clubes africanos do século 20.",
+        "A rivalidade segue viva na temporada atual. O Zamalek foi campeão egípcio em 2025/26 e disputa a Liga dos Campeões de 2026/27. O Al Ahly terminou em terceiro e joga a Copa das Confederações."
+      ],
+      fr: [
+        "Al Ahly est né le 24 avril 1907, d'une idée d'Omar Lotfy, étudiant en droit qui présidait un club de lycéens au Caire. Son nom signifie « le national » en arabe égyptien. Quatre ans plus tard, le 5 janvier 1911, naissait le Qasr El Nil, qui a changé plusieurs fois de nom, s'est appelé Farouk Ier sous le patronage du roi à partir de 1941, puis Zamalek en 1952.",
+        "Les deux clubs se sont affrontés pour la première fois le 9 février 1917, en match amical sur le terrain du Zamalek : 1-0 pour Al Ahly, but d'Abdel Hamid Moharram. Jusqu'en mai 2026, on compte 258 rencontres : 113 victoires d'Al Ahly, 62 du Zamalek et 83 nuls. En matchs officiels seulement, 234 rencontres : 102 victoires d'Al Ahly, 53 du Zamalek et 79 nuls.",
+        "Chaque camp a son carton. Le Zamalek s'est imposé deux fois 6-0 : en 1942 en Ligue du Caire et en 1944 en finale de la Coupe d'Égypte. La plus large victoire d'Al Ahly est le 6-1 du 16 mai 2002 en championnat d'Égypte.",
+        "Le match le plus important de l'histoire du derby reste la finale de la Ligue des champions de la CAF 2020, jouée le 27 novembre de cette année-là au stade international du Caire, à huis clos en raison de la pandémie. El Solia a ouvert le score pour Al Ahly, Shikabala a égalisé et Afsha a marqué le but du titre en fin de match. Le Zamalek a pris sa revanche en Supercoupe de la CAF 2024 à Riyad : 1-1 puis victoire 4-3 aux tirs au but.",
+        "Au palmarès, Al Ahly mène : 45 titres de champion d'Égypte contre 15 pour le Zamalek, 39 Coupes d'Égypte contre 29 et 12 Ligues des champions de la CAF contre 5. La CAF a désigné les deux clubs comme les premier et deuxième meilleurs clubs africains du XXe siècle.",
+        "La rivalité reste vive cette saison. Le Zamalek a été sacré champion d'Égypte en 2025/26 et dispute la Ligue des champions 2026/27. Al Ahly a terminé troisième et joue la Coupe de la Confédération."
+      ],
+      en: [
+        "Al Ahly was founded on 24 April 1907, from an idea by Omar Lotfy, a law student who chaired a club for secondary school students in Cairo. The name means \"the national\" in Egyptian Arabic. Four years later, on 5 January 1911, came Qasr El Nil, which changed its name several times, became Farouk I under royal patronage in 1941 and turned into Zamalek in 1952.",
+        "The two first met on 9 February 1917, in a friendly at Zamalek's ground: Al Ahly won 1-0 with a goal from Abdel Hamid Moharram. Up to May 2026 they had played 258 times, with 113 Al Ahly wins, 62 for Zamalek and 83 draws. Counting official matches only, it is 234 games: 102 Al Ahly wins, 53 for Zamalek and 79 draws.",
+        "Each side has its own thrashing to remember. Zamalek won 6-0 twice: in 1942 in the Cairo League and in 1944 in the Egypt Cup final. Al Ahly's biggest win was 6-1 on 16 May 2002 in the Egyptian league.",
+        "The biggest game in the derby's history was the 2020 CAF Champions League final, played on 27 November that year at Cairo International Stadium behind closed doors because of the pandemic. El Solia put Al Ahly ahead, Shikabala equalised and Afsha scored the late winner. Zamalek got their revenge in the 2024 CAF Super Cup in Riyadh: 1-1 and a 4-3 win on penalties.",
+        "In the trophy cabinet, Al Ahly lead: 45 Egyptian league titles to Zamalek's 15, 39 Egypt Cups to 29 and 12 CAF Champions League titles to 5. CAF named the two the first and second best African clubs of the 20th century.",
+        "The rivalry is alive this season too. Zamalek were Egyptian champions in 2025/26 and play in the 2026/27 Champions League. Al Ahly finished third and play in the Confederation Cup."
+      ],
+      ar: [
+        "تأسس النادي الأهلي في 24 أبريل 1907 بفكرة من عمر لطفي، طالب الحقوق الذي كان يرأس ناديًا لطلاب المدارس العليا في القاهرة. وتعني كلمة الأهلي «الوطني» بالعامية المصرية. وبعد أربع سنوات، في 5 يناير 1911، ظهر نادي قصر النيل الذي غيّر اسمه عدة مرات، فصار نادي فاروق الأول تحت رعاية الملك عام 1941، ثم الزمالك عام 1952.",
+        "التقى الفريقان أول مرة في 9 فبراير 1917 في مباراة ودية على ملعب الزمالك، وفاز الأهلي 1-0 بهدف عبد الحميد محرم. وحتى مايو 2026 بلغ عدد المواجهات 258 مباراة، فاز الأهلي في 113 منها والزمالك في 62، وانتهت 83 بالتعادل. وفي المباريات الرسمية وحدها 234 مباراة: 102 فوز للأهلي و53 للزمالك و79 تعادلًا.",
+        "لكل فريق نتيجة كبيرة يتذكرها. فاز الزمالك 6-0 مرتين: عام 1942 في دوري القاهرة، وعام 1944 في نهائي كأس مصر. وأكبر فوز للأهلي كان 6-1 في 16 مايو 2002 في الدوري المصري.",
+        "أهم مباراة في تاريخ القمة كانت نهائي دوري أبطال أفريقيا 2020، الذي أقيم في 27 نوفمبر من ذلك العام على استاد القاهرة الدولي دون جمهور بسبب الجائحة. افتتح السولية التسجيل للأهلي، وعادل شيكابالا، ثم سجل أفشة هدف اللقب في الدقائق الأخيرة. ورد الزمالك في كأس السوبر الأفريقي 2024 في الرياض بالتعادل 1-1 ثم الفوز بركلات الترجيح 4-3.",
+        "في خزانة الألقاب يتفوق الأهلي: 45 لقبًا للدوري المصري مقابل 15 للزمالك، و39 كأس مصر مقابل 29، و12 لقبًا في دوري أبطال أفريقيا مقابل 5. واختار الكاف الناديين أفضل وثاني أفضل نادٍ أفريقي في القرن العشرين.",
+        "وتبقى المنافسة حاضرة هذا الموسم: توّج الزمالك بلقب الدوري المصري 2025/26 ويشارك في دوري الأبطال 2026/27، بينما أنهى الأهلي الموسم ثالثًا ويشارك في كأس الكونفدرالية."
+      ]
+    },
+    sources: [
+      ["Wikipedia (Cairo derby)", "https://en.wikipedia.org/wiki/Cairo_derby"],
+      ["Wikipedia (Al Ahly SC)", "https://en.wikipedia.org/wiki/Al_Ahly_SC"],
+      ["Wikipedia (Zamalek SC)", "https://en.wikipedia.org/wiki/Zamalek_SC"],
+      ["Wikipedia (2026–27 CAF Champions League)", "https://en.wikipedia.org/wiki/2026%E2%80%9327_CAF_Champions_League"],
+      ["Wikipedia (2026–27 CAF Confederation Cup)", "https://en.wikipedia.org/wiki/2026%E2%80%9327_CAF_Confederation_Cup"]
+    ]
+  },
+  {
+    slug: "especial-achraf-hakimi-trajetoria", especial: true, cat: "sel", tags: ["sel", "can"], date: "2026-11-14T11:00",
+    cover: { big: "3", cx: "82%", small: { pt: "Ligas dos Campeões da Europa de Hakimi", fr: "Ligues des champions européennes de Hakimi", en: "European Champions League titles for Hakimi", ar: "ألقاب دوري أبطال أوروبا لحكيمي" } },
+    title: { pt: "Achraf Hakimi: de Madri ao topo do futebol africano", fr: "Achraf Hakimi : de Madrid au sommet du football africain", en: "Achraf Hakimi: from Madrid to the top of African football", ar: "أشرف حكيمي: من مدريد إلى قمة الكرة الأفريقية" },
+    lead: { pt: "Filho de marroquinos e formado no Real Madrid, o lateral foi eleito o melhor jogador africano de 2025 e foi campeão da CAN com o Marrocos, em casa.", fr: "Fils de parents marocains et formé au Real Madrid, le latéral a été élu meilleur joueur africain 2025 et a remporté la CAN avec le Maroc, à domicile.", en: "Born to Moroccan parents and raised at Real Madrid, the full-back was named African Player of the Year for 2025 and won AFCON with Morocco on home soil.", ar: "ابن لأبوين مغربيين وخريج أكاديمية ريال مدريد، اختير أفضل لاعب أفريقي لعام 2025 وتوج بكأس أمم أفريقيا مع المغرب على أرضه." },
+    body: {
+      pt: [
+        "Achraf Hakimi nasceu em Madri em 4 de novembro de 1998, filho de pais marroquinos: o pai é de Oued Zem, e a mãe, de Ksar el-Kebir. Começou a jogar aos 8 anos no CD Colonia Ofigevi e entrou na base do Real Madrid em 2006.",
+        "Estreou no time principal do Real Madrid em 2017 e, na temporada 2017/18, tornou-se o primeiro marroquino a ganhar a Liga dos Campeões da Europa. Depois foi emprestado por dois anos ao Borussia Dortmund, onde chegou a 36,48 km/h numa partida de fevereiro de 2020, recorde de velocidade da Bundesliga.",
+        "Em 2020 foi para a Inter de Milão e ganhou o Campeonato Italiano de 2020/21. Em julho de 2021 assinou com o Paris Saint-Germain. Na França, ganhou cinco Campeonatos Franceses seguidos, de 2021/22 a 2025/26, e duas Copas da França. Com o PSG, venceu a Liga dos Campeões de 2024/25, com gol na final, e a de 2025/26. Com três títulos, igualou Samuel Eto'o como o africano que mais vezes ganhou a competição.",
+        "Pela seleção marroquina, estreou em 11 de outubro de 2016, num 4 a 0 sobre o Canadá. Na Copa do Mundo de 2022, converteu com uma cavadinha o pênalti decisivo contra a Espanha nas oitavas de final. O Marrocos se tornou a primeira seleção africana a chegar a uma semifinal de Copa e terminou em quarto lugar.",
+        "Em 2025, foi eleito o melhor jogador africano do ano pela CAF, o quinto marroquino a receber o prêmio e o primeiro desde Mustapha Hadji, em 1998. Ficou em sexto lugar na Bola de Ouro, a melhor colocação de um marroquino. Na CAN 2025, disputada no Marrocos, a seleção conquistou o segundo título continental da sua história.",
+        "Na sexta-feira (13), Hakimi marcou duas vezes, uma delas de falta, na vitória por 5 a 1 sobre o Níger, em Casablanca. Com três vitórias em três jogos, o Marrocos lidera o Grupo A das eliminatórias da CAN 2027."
+      ],
+      fr: [
+        "Achraf Hakimi est né à Madrid le 4 novembre 1998, de parents marocains : son père est originaire d'Oued Zem, sa mère de Ksar el-Kébir. Il a commencé à jouer à 8 ans au CD Colonia Ofigevi avant de rejoindre le centre de formation du Real Madrid en 2006.",
+        "Il a débuté en équipe première du Real Madrid en 2017 et, en 2017/18, est devenu le premier Marocain à remporter la Ligue des champions. Prêté ensuite deux ans au Borussia Dortmund, il y a atteint 36,48 km/h lors d'un match de février 2020, record de vitesse en Bundesliga.",
+        "En 2020, il a rejoint l'Inter Milan et remporté la Serie A 2020/21. En juillet 2021, il a signé au Paris Saint-Germain. En France, il a gagné cinq championnats de suite, de 2021/22 à 2025/26, et deux Coupes de France. Avec le PSG, il a remporté la Ligue des champions 2024/25, en marquant en finale, puis celle de 2025/26. Avec trois titres, il égale Samuel Eto'o, l'Africain le plus titré de la compétition.",
+        "Avec le Maroc, il a fait ses débuts le 11 octobre 2016, lors d'une victoire 4-0 contre le Canada. Au Mondial 2022, il a transformé d'une panenka le tir au but décisif contre l'Espagne en huitièmes de finale. Le Maroc est devenu la première sélection africaine à atteindre une demi-finale de Coupe du monde et a terminé quatrième.",
+        "En 2025, il a été élu meilleur joueur africain de l'année par la CAF, cinquième Marocain à recevoir ce prix et premier depuis Mustapha Hadji en 1998. Il a terminé sixième du Ballon d'or, meilleur classement d'un Marocain. Lors de la CAN 2025, organisée au Maroc, la sélection a remporté le deuxième titre continental de son histoire.",
+        "Vendredi 13 novembre, Hakimi a marqué deux fois, dont un coup franc, lors de la victoire 5-1 contre le Niger à Casablanca. Avec trois victoires en trois matchs, le Maroc mène le groupe A des éliminatoires de la CAN 2027."
+      ],
+      en: [
+        "Achraf Hakimi was born in Madrid on 4 November 1998 to Moroccan parents: his father is from Oued Zem and his mother from Ksar el-Kebir. He started playing at eight at CD Colonia Ofigevi and joined Real Madrid's academy in 2006.",
+        "He made his first-team debut for Real Madrid in 2017 and, in 2017/18, became the first Moroccan to win the European Champions League. He then spent two years on loan at Borussia Dortmund, where he reached 36.48 km/h in a February 2020 match, a Bundesliga speed record.",
+        "In 2020 he joined Inter Milan and won the 2020/21 Serie A title. In July 2021 he signed for Paris Saint-Germain. In France he has won five league titles in a row, from 2021/22 to 2025/26, and two French Cups. With PSG he won the 2024/25 Champions League, scoring in the final, and the 2025/26 edition. With three titles, he has matched Samuel Eto'o as the African with the most wins in the competition.",
+        "He made his Morocco debut on 11 October 2016 in a 4-0 win over Canada. At the 2022 World Cup he chipped home the decisive penalty against Spain in the round of 16. Morocco became the first African team to reach a World Cup semi-final and finished fourth.",
+        "In 2025 he was named CAF African Player of the Year, the fifth Moroccan to win the award and the first since Mustapha Hadji in 1998. He finished sixth in the Ballon d'Or, the best ranking for a Moroccan. At AFCON 2025, held in Morocco, the national team won the second continental title in its history.",
+        "On Friday (13 November), Hakimi scored twice, once from a free kick, in a 5-1 win over Niger in Casablanca. With three wins from three, Morocco lead Group A of AFCON 2027 qualifying."
+      ],
+      ar: [
+        "وُلد أشرف حكيمي في مدريد في 4 نوفمبر 1998 لأبوين مغربيين، فوالده من وادي زم ووالدته من القصر الكبير. بدأ اللعب في الثامنة من عمره في نادي كولونيا أوفيجيفي، ثم التحق بأكاديمية ريال مدريد عام 2006.",
+        "ظهر لأول مرة مع الفريق الأول لريال مدريد عام 2017، وفي موسم 2017/18 أصبح أول مغربي يفوز بدوري أبطال أوروبا. ثم انتقل معارًا لعامين إلى بوروسيا دورتموند، حيث بلغت سرعته 36.48 كلم في الساعة في مباراة في فبراير 2020، وهو رقم قياسي في الدوري الألماني.",
+        "انتقل عام 2020 إلى إنتر ميلان وفاز بالدوري الإيطالي 2020/21، ثم وقّع في يوليو 2021 لباريس سان جيرمان. وفي فرنسا فاز بخمسة ألقاب متتالية للدوري من 2021/22 إلى 2025/26 وبكأس فرنسا مرتين. ومع باريس سان جيرمان فاز بدوري أبطال أوروبا 2024/25 وسجل في النهائي، ثم بنسخة 2025/26. وبثلاثة ألقاب عادل رقم صامويل إيتو كأكثر الأفارقة تتويجًا بالمسابقة.",
+        "خاض أول مباراة مع المنتخب المغربي في 11 أكتوبر 2016 في الفوز 4-0 على كندا. وفي كأس العالم 2022 سجل بطريقة بانينكا ركلة الترجيح الحاسمة أمام إسبانيا في ثمن النهائي، وأصبح المغرب أول منتخب أفريقي يبلغ نصف نهائي كأس العالم وأنهى البطولة رابعًا.",
+        "في عام 2025 اختاره الكاف أفضل لاعب أفريقي، ليصبح خامس مغربي يفوز بالجائزة وأول مغربي منذ مصطفى حجي عام 1998. واحتل المركز السادس في الكرة الذهبية، وهو أفضل ترتيب لمغربي. وفي كأس أمم أفريقيا 2025 التي أقيمت في المغرب، أحرز المنتخب اللقب القاري الثاني في تاريخه.",
+        "ويوم الجمعة 13 نوفمبر سجل حكيمي هدفين، أحدهما من ضربة حرة، في الفوز 5-1 على النيجر في الدار البيضاء. وبثلاثة انتصارات في ثلاث مباريات يتصدر المغرب المجموعة A في تصفيات كأس أمم أفريقيا 2027."
+      ]
+    },
+    sources: [
+      ["Wikipedia (Achraf Hakimi)", "https://en.wikipedia.org/wiki/Achraf_Hakimi"],
+      ["Africa Top Sports", "https://africatopsports.com/football/elim-can-2027-maroc-5-1-niger-une-demonstration-des-lions-de-latlas-face-au-niger-a-casablanca/"]
+    ]
+  },
+  {
+    slug: "especial-futebol-feminino-africano-cresce", especial: true, cat: "fem", tags: ["fem"], date: "2026-11-14T10:00",
+    cover: { big: "6ª", cx: "82%", small: { pt: "final da Liga dos Campeões Feminina da CAF", fr: "finale de la Ligue des champions féminine de la CAF", en: "CAF Women's Champions League final", ar: "نهائي دوري أبطال أفريقيا للسيدات" } },
+    title: { pt: "Mais dinheiro, mais público e novas campeãs: o crescimento do futebol feminino africano", fr: "Plus d'argent, plus de public et de nouvelles championnes : l'essor du football féminin africain", en: "More money, bigger crowds and new champions: the rise of African women's football", ar: "أموال أكثر وجمهور أكبر وبطلات جديدات: صعود كرة القدم النسائية في أفريقيا" },
+    lead: { pt: "Criada em 2020, a Liga dos Campeões Feminina da CAF chega à sexta final neste domingo, com Mamelodi Sundowns e AS FAR, as duas maiores campeãs.", fr: "Créée en 2020, la Ligue des champions féminine de la CAF vit sa sixième finale ce dimanche, entre Mamelodi Sundowns et l'AS FAR, les deux clubs les plus titrés.", en: "Created in 2020, the CAF Women's Champions League reaches its sixth final on Sunday, between Mamelodi Sundowns and AS FAR, its two most successful clubs.", ar: "يبلغ دوري أبطال أفريقيا للسيدات، الذي أنشئ عام 2020، نهائيه السادس يوم الأحد بين ماميلودي صنداونز والجيش الملكي، أكثر ناديين تتويجًا." },
+    body: {
+      pt: [
+        "A CAF decidiu criar a Liga dos Campeões Feminina em 30 de junho de 2020, na mesma reunião em que cancelou a CAN Feminina daquele ano por causa da covid-19. A primeira final foi em 2021, no Cairo, sem público: Mamelodi Sundowns 2 x 0 Hasaacas Ladies, de Gana.",
+        "O torneio reúne oito clubes na fase final, saídos de eliminatórias nas seis zonas da CAF. O prêmio da campeã subiu de 400 mil para 600 mil dólares a partir de 2024, e o da vice, de 250 mil para 400 mil. A competição também abre portas na FIFA: o AS FAR, campeão de 2025, foi o primeiro clube a representar a CAF na primeira Copa dos Campeões Feminina da FIFA.",
+        "As finais mostram o equilíbrio entre o sul e o norte do continente. O Mamelodi Sundowns, da África do Sul, ganhou em 2021 e 2023; o AS FAR, do Marrocos, em 2022 e 2025; e o TP Mazembe, da RD Congo, em 2024. Neste domingo (15), em Ismailia, no Egito, Sundowns e AS FAR decidem quem será o primeiro tricampeão.",
+        "Na CAN Feminina, o crescimento também aparece. O torneio passou de 8 para 12 seleções em 2022. Na edição de 2024, disputada em 2025, o prêmio total subiu 45%, para 3,475 milhões de dólares, e o da campeã dobrou, para 1 milhão. O recorde de público é de 45.562 torcedores, na semifinal entre Marrocos e Nigéria, em 18 de julho de 2022, no Estádio Príncipe Moulay Abdellah, em Rabat.",
+        "A Nigéria continua a maior potência, com 10 títulos, o último na edição de 2024. Mas o mapa está mudando: a África do Sul foi campeã em 2022, e Camarões conquistou em 2026 o primeiro título, com 3 a 0 sobre o Malawi na final."
+      ],
+      fr: [
+        "La CAF a décidé de créer la Ligue des champions féminine le 30 juin 2020, lors de la réunion où elle a annulé la CAN féminine de cette année-là en raison du Covid-19. La première finale s'est jouée en 2021 au Caire, à huis clos : Mamelodi Sundowns 2-0 Hasaacas Ladies, du Ghana.",
+        "Le tournoi final réunit huit clubs, issus d'éliminatoires dans les six zones de la CAF. La prime du vainqueur est passée de 400 000 à 600 000 dollars à partir de 2024, celle du finaliste de 250 000 à 400 000. La compétition ouvre aussi les portes de la FIFA : l'AS FAR, sacrée en 2025, a été le premier club à représenter la CAF à la première Coupe des champions féminine de la FIFA.",
+        "Les finales montrent l'équilibre entre le sud et le nord du continent. Mamelodi Sundowns, d'Afrique du Sud, s'est imposé en 2021 et 2023 ; l'AS FAR, du Maroc, en 2022 et 2025 ; le TP Mazembe, de RD Congo, en 2024. Ce dimanche 15 novembre, à Ismaïlia, en Égypte, Sundowns et l'AS FAR se disputent le premier triplé.",
+        "La CAN féminine grandit aussi. Le tournoi est passé de 8 à 12 sélections en 2022. Pour l'édition 2024, jouée en 2025, la dotation totale a augmenté de 45 %, à 3,475 millions de dollars, et la prime de la championne a doublé, à 1 million. Le record d'affluence est de 45 562 spectateurs, pour la demi-finale Maroc-Nigeria du 18 juillet 2022, au stade Prince Moulay Abdellah de Rabat.",
+        "Le Nigeria reste la première puissance, avec 10 titres, le dernier lors de l'édition 2024. Mais la carte change : l'Afrique du Sud a été sacrée en 2022, et le Cameroun a remporté en 2026 son premier titre, 3-0 contre le Malawi en finale."
+      ],
+      en: [
+        "CAF decided to create the Women's Champions League on 30 June 2020, at the same meeting where it cancelled that year's Women's AFCON because of Covid-19. The first final was played in 2021 in Cairo, behind closed doors: Mamelodi Sundowns 2-0 Hasaacas Ladies of Ghana.",
+        "The final tournament brings together eight clubs that come through qualifiers in CAF's six zones. The winners' prize rose from 400,000 to 600,000 dollars from 2024, and the runners-up's from 250,000 to 400,000. The competition also opens FIFA's doors: AS FAR, the 2025 champions, were the first club to represent CAF at the first FIFA Women's Champions Cup.",
+        "The finals show a balance between the south and the north of the continent. South Africa's Mamelodi Sundowns won in 2021 and 2023, Morocco's AS FAR in 2022 and 2025, and DR Congo's TP Mazembe in 2024. On Sunday (15 November), in Ismailia, Egypt, Sundowns and AS FAR play to become the first three-time champions.",
+        "The Women's AFCON is growing too. The tournament went from 8 to 12 teams in 2022. For the 2024 edition, played in 2025, total prize money rose 45% to 3.475 million dollars, and the winners' prize doubled to 1 million. The attendance record is 45,562, for the Morocco v Nigeria semi-final on 18 July 2022 at the Prince Moulay Abdellah Stadium in Rabat.",
+        "Nigeria remain the leading power, with 10 titles, the latest at the 2024 edition. But the map is changing: South Africa won in 2022, and Cameroon won their first title in 2026, beating Malawi 3-0 in the final."
+      ],
+      ar: [
+        "قرر الكاف إنشاء دوري أبطال أفريقيا للسيدات في 30 يونيو 2020، في الاجتماع نفسه الذي ألغى فيه كأس أمم أفريقيا للسيدات لذلك العام بسبب جائحة كوفيد-19. وأقيم النهائي الأول عام 2021 في القاهرة دون جمهور، وفاز فيه ماميلودي صنداونز على هاساكاس ليديز الغاني 2-0.",
+        "تجمع البطولة في أدوارها النهائية ثمانية أندية تتأهل عبر تصفيات في مناطق الكاف الست. وارتفعت جائزة البطل من 400 ألف إلى 600 ألف دولار ابتداء من 2024، وجائزة الوصيف من 250 ألفًا إلى 400 ألف. كما تفتح البطولة أبواب الفيفا: فقد كان الجيش الملكي، بطل 2025، أول نادٍ يمثل الكاف في أول نسخة من كأس أبطال الفيفا للسيدات.",
+        "تكشف النهائيات توازنًا بين جنوب القارة وشمالها: فاز ماميلودي صنداونز الجنوب أفريقي عامي 2021 و2023، والجيش الملكي المغربي عامي 2022 و2025، وتي بي مازيمبي الكونغولي عام 2024. ويوم الأحد 15 نوفمبر في الإسماعيلية بمصر، يتنافس صنداونز والجيش الملكي على أن يصبح أحدهما أول من يتوج باللقب ثلاث مرات.",
+        "وتنمو كأس أمم أفريقيا للسيدات أيضًا، إذ ارتفع عدد المنتخبات من 8 إلى 12 عام 2022. وفي نسخة 2024 التي أقيمت عام 2025 زادت الجوائز الإجمالية 45% لتبلغ 3.475 مليون دولار، وتضاعفت جائزة البطل إلى مليون دولار. والرقم القياسي للحضور 45,562 متفرجًا في نصف النهائي بين المغرب ونيجيريا في 18 يوليو 2022 على ملعب الأمير مولاي عبد الله في الرباط.",
+        "وتبقى نيجيريا القوة الأولى بعشرة ألقاب، آخرها في نسخة 2024. لكن الخريطة تتغير: فقد توجت جنوب أفريقيا عام 2022، وأحرزت الكاميرون لقبها الأول عام 2026 بالفوز على مالاوي 3-0 في النهائي."
+      ]
+    },
+    sources: [
+      ["Wikipedia (CAF Women's Champions League)", "https://en.wikipedia.org/wiki/CAF_Women%27s_Champions_League"],
+      ["Wikipedia (Women's Africa Cup of Nations)", "https://en.wikipedia.org/wiki/Women%27s_Africa_Cup_of_Nations"]
+    ]
+  },
   {
     slug: "marrocos-egito-goleiam-mali-vira", cat: "can", tags: ["can", "sel"], date: "2026-11-13T22:30",
     cover: { big: "5–1", cx: "82%", small: { pt: "Marrocos × Níger · Grupo A", fr: "Maroc × Niger · Groupe A", en: "Morocco × Niger · Group A", ar: "المغرب × النيجر · المجموعة A" } },
