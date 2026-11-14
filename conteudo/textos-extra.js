@@ -98,55 +98,100 @@ module.exports = {
   /* Páginas fixas. {email} é trocado pelo e-mail de contato do config.js. */
   PAGES: {
     sobre: {
-      title: { pt: "Sobre o Bola Africana", fr: "À propos de Ballon Africain", en: "About African Ball" },
+      title: { pt: "Sobre o Bola Africana", fr: "À propos de Ballon Africain", en: "About African Ball", ar: "عن الكرة الأفريقية" },
       body: {
         pt: [
-          "O Bola Africana é um site de notícias dedicado ao esporte africano: futebol, basquete, handebol, vôlei, atletismo, lutas e outros esportes, com seleções e clubes, masculino e feminino, em português, francês, inglês e árabe.",
-          "Responsável pelo site: Clethie.",
-          "No futebol, cobrimos as competições da CAF, como a Copa Africana de Nações, a Liga dos Campeões, a Copa das Confederações e a Liga dos Campeões Feminina, e temos uma página para o campeonato nacional de cada um dos 54 países africanos. Nos outros esportes, publicamos resultados e notícias das competições africanas.",
-          "Cada matéria é escrita pela nossa equipe a partir de fontes públicas, como a CAF, as federações e a imprensa esportiva, sempre com o link da fonte no fim do texto. Não copiamos textos de outros sites.",
+          "O Bola Africana é um site de notícias dedicado ao esporte africano: futebol, basquete, handebol, vôlei, rúgbi, atletismo e outros esportes, seleções e clubes, masculino e feminino, em português, francês, inglês e árabe.",
+          "Nossa missão é dar ao esporte dos 54 países africanos uma cobertura conferida e acessível em quatro línguas, para quem acompanha o esporte africano dentro e fora do continente.",
+          "No futebol, cobrimos as competições da CAF, como a Copa Africana de Nações, a Liga dos Campeões, a Copa das Confederações e a Liga dos Campeões Feminina. Cada um dos 54 países tem uma página com a seleção, o campeonato nacional, os clubes e os outros esportes, no masculino e no feminino. Nos outros esportes, publicamos resultados e notícias das competições africanas e dos atletas africanos.",
+          "Cada matéria é escrita pela redação a partir de fontes públicas, como a CAF, as federações e a imprensa esportiva, sempre com o link da fonte no fim do texto. Não copiamos textos de outros sites. A Política editorial explica como conferimos as informações e como corrigimos erros.",
+          "## Expediente",
+          "Redação: Redação Bola Africana.",
+          "Idiomas: português, francês, inglês e árabe.",
+          "Contato da redação: {email}",
+          "Federações, ligas, clubes e assessorias de imprensa podem enviar notas oficiais, calendários e resultados ao mesmo endereço. A página Contato explica como.",
           "Encontrou um erro? Escreva para {email} com o link da matéria, e nós corrigimos."
         ],
         fr: [
-          "Ballon Africain est un site d'actualités consacré au sport africain : football, basket-ball, handball, volley-ball, athlétisme, sports de combat et autres disciplines, sélections et clubs, masculin et féminin, en portugais, en français, en anglais et en arabe.",
-          "Responsable du site : Clethie.",
-          "En football, nous couvrons les compétitions de la CAF, comme la Coupe d'Afrique des nations, la Ligue des champions, la Coupe de la Confédération et la Ligue des champions féminine, et nous avons une page pour le championnat national de chacun des 54 pays africains. Dans les autres sports, nous publions les résultats et l'actualité des compétitions africaines.",
-          "Chaque article est rédigé par notre équipe à partir de sources publiques, comme la CAF, les fédérations et la presse sportive, toujours avec le lien de la source à la fin du texte. Nous ne copions pas les textes d'autres sites.",
+          "Ballon Africain est un site d'actualités consacré au sport africain : football, basket-ball, handball, volley-ball, rugby, athlétisme et autres disciplines, sélections et clubs, masculin et féminin, en portugais, en français, en anglais et en arabe.",
+          "Notre mission est d'offrir au sport des 54 pays africains une couverture vérifiée et accessible en quatre langues, pour celles et ceux qui suivent le sport africain sur le continent et ailleurs.",
+          "En football, nous couvrons les compétitions de la CAF, comme la Coupe d'Afrique des nations, la Ligue des champions, la Coupe de la Confédération et la Ligue des champions féminine. Chacun des 54 pays a une page avec sa sélection, son championnat, ses clubs et ses autres sports, chez les hommes et chez les femmes. Dans les autres sports, nous publions les résultats et l'actualité des compétitions africaines et des athlètes africains.",
+          "Chaque article est rédigé par la rédaction à partir de sources publiques, comme la CAF, les fédérations et la presse sportive, toujours avec le lien de la source à la fin du texte. Nous ne copions pas les textes d'autres sites. La charte éditoriale explique comment nous vérifions les informations et corrigeons nos erreurs.",
+          "## Ours",
+          "Rédaction : Rédaction Ballon Africain.",
+          "Langues : portugais, français, anglais et arabe.",
+          "Contact de la rédaction : {email}",
+          "Les fédérations, ligues, clubs et services de presse peuvent envoyer communiqués officiels, calendriers et résultats à la même adresse. La page Contact explique comment.",
           "Vous avez repéré une erreur ? Écrivez à {email} avec le lien de l'article, et nous la corrigerons."
         ],
         en: [
-          "African Ball is a news site devoted to African sport: football, basketball, handball, volleyball, athletics, combat sports and more, national teams and clubs, men's and women's, in Portuguese, French, English and Arabic.",
-          "The site is run by Clethie.",
-          "In football, we cover CAF competitions such as the Africa Cup of Nations, the Champions League, the Confederation Cup and the Women's Champions League, and we have a page for the national league of each of the 54 African countries. In other sports, we publish results and news from African competitions.",
-          "Every story is written by our team from public sources such as CAF, national federations and the sports press, always with a link to the source at the end. We do not copy text from other sites.",
+          "African Ball is a news site devoted to African sport: football, basketball, handball, volleyball, rugby, athletics and more, national teams and clubs, men's and women's, in Portuguese, French, English and Arabic.",
+          "Our mission is to give the sport of all 54 African countries checked, accessible coverage in four languages, for everyone who follows African sport, on the continent and beyond.",
+          "In football, we cover CAF competitions such as the Africa Cup of Nations, the Champions League, the Confederation Cup and the Women's Champions League. Each of the 54 countries has a page with its national team, its league, its clubs and its other sports, men's and women's. In other sports, we publish results and news from African competitions and African athletes.",
+          "Every story is written by the newsroom from public sources such as CAF, national federations and the sports press, always with a link to the source at the end. We do not copy text from other sites. Our editorial policy explains how we check information and correct mistakes.",
+          "## Masthead",
+          "Newsroom: African Ball newsroom.",
+          "Languages: Portuguese, French, English and Arabic.",
+          "Newsroom contact: {email}",
+          "Federations, leagues, clubs and press officers can send official statements, fixtures and results to the same address. The Contact page explains how.",
           "Spotted a mistake? Write to {email} with the link to the story, and we will fix it."
         ],
         ar: [
-          "الكرة الأفريقية موقع إخباري مخصص للرياضة الأفريقية: كرة القدم وكرة السلة وكرة اليد والكرة الطائرة وألعاب القوى والرياضات القتالية وغيرها، منتخبات وأندية، رجالًا وسيدات، بالبرتغالية والفرنسية والإنجليزية والعربية.",
-          "إدارة الموقع: Clethie.",
-          "في كرة القدم، نغطي مسابقات الكاف، مثل كأس أمم أفريقيا ودوري الأبطال وكأس الكونفدرالية ودوري أبطال أفريقيا للسيدات، ولدينا صفحة للدوري المحلي في كل دولة من الدول الأفريقية الـ54. وفي الرياضات الأخرى، ننشر نتائج المسابقات الأفريقية وأخبارها.",
-          "يكتب فريقنا كل مادة استنادًا إلى مصادر عامة، مثل الكاف والاتحادات الوطنية والصحافة الرياضية، مع رابط المصدر دائمًا في نهاية النص. نحن لا ننسخ نصوصًا من مواقع أخرى.",
+          "الكرة الأفريقية موقع إخباري مخصص للرياضة الأفريقية: كرة القدم وكرة السلة وكرة اليد والكرة الطائرة والرغبي وألعاب القوى وغيرها، منتخبات وأندية، رجالًا وسيدات، بالبرتغالية والفرنسية والإنجليزية والعربية.",
+          "مهمتنا أن نقدم للرياضة في الدول الأفريقية الـ54 تغطية موثقة وسهلة الوصول بأربع لغات، لكل من يتابع الرياضة الأفريقية داخل القارة وخارجها.",
+          "في كرة القدم، نغطي مسابقات الكاف، مثل كأس أمم أفريقيا ودوري الأبطال وكأس الكونفدرالية ودوري أبطال أفريقيا للسيدات. ولكل دولة من الدول الـ54 صفحة تضم المنتخب والدوري المحلي والأندية والرياضات الأخرى، للرجال والسيدات. وفي الرياضات الأخرى، ننشر نتائج المسابقات الأفريقية وأخبار الرياضيين الأفارقة.",
+          "تكتب هيئة التحرير كل مادة استنادًا إلى مصادر عامة، مثل الكاف والاتحادات الوطنية والصحافة الرياضية، مع رابط المصدر دائمًا في نهاية النص. نحن لا ننسخ نصوصًا من مواقع أخرى. وتشرح السياسة التحريرية كيف نتحقق من المعلومات وكيف نصحح الأخطاء.",
+          "## هيئة التحرير",
+          "التحرير: هيئة تحرير الكرة الأفريقية.",
+          "اللغات: البرتغالية والفرنسية والإنجليزية والعربية.",
+          "البريد الإلكتروني للتحرير: {email}",
+          "يمكن للاتحادات والرابطات والأندية والمكاتب الإعلامية إرسال البيانات الرسمية والجداول والنتائج إلى العنوان نفسه. وتشرح صفحة الاتصال الطريقة.",
           "هل وجدت خطأ؟ راسلنا على {email} مع رابط المادة، وسنصححه."
         ]
       }
     },
     contato: {
-      title: { pt: "Contato", fr: "Contact", en: "Contact" },
+      title: { pt: "Contato", fr: "Contact", en: "Contact", ar: "اتصل بنا" },
       body: {
         pt: [
           "Fale com o Bola Africana para sugerir pautas, pedir correções ou propor parcerias.",
           "E-mail: {email}",
-          "Para pedir uma correção, mande o link da matéria e o trecho que precisa mudar."
+          "Para pedir uma correção, mande o link da matéria e o trecho que precisa mudar.",
+          "## Federações, ligas, clubes e assessorias de imprensa",
+          "Mande notas oficiais, convocações, calendários, tabelas e resultados para {email}. No assunto, escreva o nome da entidade e o tema, por exemplo: \"Federação Angolana de Futebol: convocação\".",
+          "Pode escrever em português, francês, inglês ou árabe. A matéria publicada sai nos quatro idiomas e cita a entidade como fonte.",
+          "A redação confere as informações antes de publicar e escreve a própria matéria; a nota não é publicada como foi recebida.",
+          "Fotos: mande só imagens que a entidade tenha direito de ceder, com o nome do autor para o crédito. Sem autorização e crédito, a foto não é publicada."
         ],
         fr: [
           "Contactez Ballon Africain pour proposer un sujet, demander une correction ou proposer un partenariat.",
           "E-mail : {email}",
-          "Pour demander une correction, envoyez le lien de l'article et le passage à modifier."
+          "Pour demander une correction, envoyez le lien de l'article et le passage à modifier.",
+          "## Fédérations, ligues, clubs et services de presse",
+          "Envoyez communiqués officiels, listes de joueurs, calendriers, classements et résultats à {email}. En objet, indiquez le nom de l'organisation et le sujet, par exemple : « Fédération sénégalaise de football : liste des convoqués ».",
+          "Vous pouvez écrire en portugais, en français, en anglais ou en arabe. L'article publié paraît dans les quatre langues et cite l'organisation comme source.",
+          "La rédaction vérifie les informations avant publication et rédige son propre article ; le communiqué n'est pas publié tel quel.",
+          "Photos : n'envoyez que des images que l'organisation a le droit de céder, avec le nom de l'auteur pour le crédit. Sans autorisation ni crédit, la photo n'est pas publiée."
         ],
         en: [
           "Contact African Ball to suggest a story, request a correction or propose a partnership.",
           "Email: {email}",
-          "To request a correction, send the link to the story and the passage that needs changing."
+          "To request a correction, send the link to the story and the passage that needs changing.",
+          "## Federations, leagues, clubs and press officers",
+          "Send official statements, squad lists, fixtures, tables and results to {email}. In the subject line, write the name of the organisation and the topic, for example: \"Football Kenya Federation: squad announcement\".",
+          "You can write in Portuguese, French, English or Arabic. The published story appears in all four languages and credits the organisation as the source.",
+          "The newsroom checks the information before publishing and writes its own story; statements are not published as received.",
+          "Photos: only send images the organisation has the right to share, with the photographer's name for the credit. Without permission and credit, a photo is not published."
+        ],
+        ar: [
+          "تواصل مع الكرة الأفريقية لاقتراح موضوع أو طلب تصحيح أو عرض شراكة.",
+          "البريد الإلكتروني: {email}",
+          "لطلب تصحيح، أرسل رابط المادة والجزء الذي يحتاج إلى تعديل.",
+          "## الاتحادات والرابطات والأندية والمكاتب الإعلامية",
+          "أرسلوا البيانات الرسمية وقوائم اللاعبين والجداول والترتيب والنتائج إلى {email}. واكتبوا في عنوان الرسالة اسم الجهة والموضوع، مثلًا: «الاتحاد المصري لكرة القدم: قائمة المنتخب».",
+          "يمكن الكتابة بالبرتغالية أو الفرنسية أو الإنجليزية أو العربية. وتُنشر المادة باللغات الأربع مع ذكر الجهة مصدرًا.",
+          "تتحقق هيئة التحرير من المعلومات قبل النشر وتكتب مادتها الخاصة، ولا يُنشر البيان كما ورد.",
+          "الصور: أرسلوا فقط الصور التي يحق للجهة التنازل عنها، مع اسم المصور لذكره. ولا تُنشر أي صورة دون إذن وذكر للمصدر."
         ]
       }
     },
@@ -160,6 +205,7 @@ module.exports = {
           "Fato e análise ficam separados: o que é dedução nossa aparece como tal. Não publicamos boatos de transferência nem conteúdo pago apresentado como notícia.",
           "Ferramentas de inteligência artificial ajudam na pesquisa, na redação e na tradução para francês, inglês e árabe. Toda informação publicada vem de uma fonte citada na matéria.",
           "Correções: se encontrar um erro, escreva para {email} com o link da matéria e o trecho que precisa mudar. Corrigimos o texto o quanto antes.",
+          "Imagens: as capas das matérias são ilustrações do próprio site. Fotos só entram com autorização de quem tem os direitos e com o crédito do autor. As bandeiras são de domínio público; os escudos dos clubes vêm dos dados da API-Sports e pertencem aos clubes; os escudos das federações não são reproduzidos.",
           "Publicidade: os anúncios, quando houver, aparecem identificados e não interferem na escolha nem no conteúdo das matérias."
         ],
         fr: [
@@ -169,6 +215,7 @@ module.exports = {
           "Les faits et l'analyse sont séparés : ce qui relève de notre déduction est présenté comme tel. Nous ne publions ni rumeurs de transfert ni contenu payé présenté comme une information.",
           "Des outils d'intelligence artificielle aident à la recherche, à la rédaction et à la traduction en français, en anglais et en arabe. Toute information publiée provient d'une source citée dans l'article.",
           "Corrections : si vous repérez une erreur, écrivez à {email} avec le lien de l'article et le passage à modifier. Nous corrigeons le texte au plus vite.",
+          "Images : les visuels des articles sont des illustrations créées par le site. Une photo n'est publiée qu'avec l'autorisation du détenteur des droits et le crédit de son auteur. Les drapeaux sont du domaine public ; les logos des clubs proviennent des données d'API-Sports et appartiennent aux clubs ; les écussons des fédérations ne sont pas reproduits.",
           "Publicité : les annonces, lorsqu'il y en a, sont identifiées et n'influencent ni le choix ni le contenu des articles."
         ],
         en: [
@@ -178,6 +225,7 @@ module.exports = {
           "Facts and analysis are kept apart: anything that is our own inference is presented as such. We do not publish transfer rumours or paid content presented as news.",
           "Artificial intelligence tools help with research, writing and translation into French, English and Arabic. Every piece of information we publish comes from a source cited in the story.",
           "Corrections: if you spot a mistake, write to {email} with the link to the story and the passage that needs changing. We fix the text as soon as possible.",
+          "Images: story covers are illustrations made by the site. Photos are published only with permission from the rights holder and with the photographer's credit. Flags are in the public domain; club crests come from API-Sports data and belong to the clubs; federation crests are not reproduced.",
           "Advertising: ads, when there are any, are labelled and have no influence on which stories we cover or what they say."
         ],
         ar: [
@@ -187,6 +235,7 @@ module.exports = {
           "نفصل بين الخبر والتحليل: ما هو استنتاج منا نقدمه على أنه كذلك. ولا ننشر شائعات الانتقالات ولا المحتوى المدفوع على أنه خبر.",
           "تساعدنا أدوات الذكاء الاصطناعي في البحث والكتابة والترجمة إلى الفرنسية والإنجليزية والعربية. وكل معلومة ننشرها مصدرها مذكور في المادة.",
           "التصحيحات: إذا وجدت خطأ فراسلنا على {email} مع رابط المادة والجزء الذي يحتاج إلى تعديل. ونصحح النص في أقرب وقت.",
+          "الصور: أغلفة المواد رسوم من إنتاج الموقع. ولا تُنشر صورة إلا بإذن صاحب الحقوق مع ذكر اسم المصور. والأعلام ملك عام؛ وشعارات الأندية مصدرها بيانات API-Sports وهي ملك للأندية؛ ولا ننشر شعارات الاتحادات.",
           "الإعلانات: تظهر الإعلانات، عند وجودها، بشكل واضح ولا تؤثر في اختيار المواد ولا في مضمونها."
         ]
       }
