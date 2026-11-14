@@ -77,34 +77,173 @@
   }
 })();
 
-/* Menu: clicar em Masculino ou Feminino abre a janela com tudo do gênero; clicar fora ou Esc fecha.
-   Sem JavaScript, o clique leva direto à página do gênero. */
+/* Cabeçalho: o botão MENU abre o menu lateral; o botão PAÍSES abre a janela de países.
+   Na janela, o visitante escolhe o país, depois masculino ou feminino, depois o esporte.
+   Sem JavaScript, MENU abre o menu pelo endereço #menu e PAÍSES leva à página dos países. */
 (function () {
-  var megas = document.querySelectorAll("[data-mega]");
-  if (!megas.length) return;
-  function fechar(exceto) {
-    for (var i = 0; i < megas.length; i++) {
-      if (megas[i] === exceto) continue;
-      megas[i].classList.remove("open");
-      megas[i].querySelector("a").setAttribute("aria-expanded", "false");
-    }
+  var raiz = document.documentElement;
+  var drawer = document.getElementById("menu");
+  var abreMenu = document.querySelector("[data-drawer]");
+  var janela = document.querySelector("[data-pp]");
+  var abreJanela = document.querySelector(".masthead [data-pp-abrir]");
+  var voltaFoco = null;
+
+  function fecharMenu(foco) {
+    if (!drawer || !drawer.classList.contains("open")) return;
+    drawer.classList.remove("open");
+    raiz.classList.remove("trava");
+    if (abreMenu) abreMenu.setAttribute("aria-expanded", "false");
+    if (foco !== false && voltaFoco) voltaFoco.focus();
   }
-  Array.prototype.forEach.call(megas, function (m) {
-    var a = m.querySelector("a");
+  function abrirMenu() {
+    fecharJanela(false);
+    voltaFoco = abreMenu;
+    drawer.classList.add("open");
+    raiz.classList.add("trava");
+    abreMenu.setAttribute("aria-expanded", "true");
+    var x = drawer.querySelector(".dr-x");
+    if (x) x.focus();
+  }
+  if (drawer && abreMenu) {
+    if (location.hash === "#menu") history.replaceState(null, "", location.pathname + location.search);
+    abreMenu.addEventListener("click", function (e) { e.preventDefault(); drawer.classList.contains("open") ? fecharMenu() : abrirMenu(); });
+    document.querySelectorAll("[data-drawer-fechar]").forEach(function (b) {
+      b.addEventListener("click", function (e) { e.preventDefault(); fecharMenu(); });
+    });
+  }
+
+  /* janela Países */
+  var passos = janela ? janela.querySelectorAll(".pp-passo") : [];
+  var escolha = { link: null, g: null };
+  function passo(n) {
+    for (var i = 0; i < passos.length; i++) passos[i].hidden = passos[i].getAttribute("data-passo") !== String(n);
+    var h = janela.querySelector('.pp-passo[data-passo="' + n + '"] .pp-h');
+    if (h) h.focus({ preventScroll: true });
+  }
+  function fecharJanela(foco) {
+    if (!janela || janela.hidden) return;
+    janela.hidden = true;
+    if (abreJanela) abreJanela.setAttribute("aria-expanded", "false");
+    if (foco !== false && abreJanela) abreJanela.focus();
+  }
+  function abrirJanela() {
+    fecharMenu(false);
+    janela.hidden = false;
+    abreJanela.setAttribute("aria-expanded", "true");
+    passo(1);
+  }
+  function preencher(sel, fn) { janela.querySelectorAll(sel).forEach(fn); }
+  if (janela && abreJanela) {
+    document.querySelectorAll("[data-pp-abrir]").forEach(function (a) {
+      a.addEventListener("click", function (e) {
+        e.preventDefault();
+        if (janela.hidden) abrirJanela(); else fecharJanela();
+      });
+    });
+    janela.querySelector("[data-pp-fechar]").addEventListener("click", function () { fecharJanela(); });
+    /* abas das regiões, com as setas do teclado */
+    var abas = janela.querySelectorAll('[role="tab"]');
+    function aba(t) {
+      for (var i = 0; i < abas.length; i++) {
+        var sim = abas[i] === t;
+        abas[i].setAttribute("aria-selected", sim ? "true" : "false");
+        abas[i].tabIndex = sim ? 0 : -1;
+        document.getElementById(abas[i].getAttribute("aria-controls")).hidden = !sim;
+      }
+    }
+    Array.prototype.forEach.call(abas, function (t, i) {
+      t.addEventListener("click", function () { aba(t); });
+      t.addEventListener("keydown", function (e) {
+        var rtl = raiz.dir === "rtl", d = 0;
+        if (e.key === "ArrowRight") d = rtl ? -1 : 1;
+        if (e.key === "ArrowLeft") d = rtl ? 1 : -1;
+        if (!d) return;
+        var n = abas[(i + d + abas.length) % abas.length];
+        aba(n); n.focus(); e.preventDefault();
+      });
+    });
+    /* passo 2: o país escolhido */
+    janela.querySelectorAll(".pp-grid a").forEach(function (a) {
+      a.addEventListener("click", function (e) {
+        e.preventDefault();
+        escolha.link = a;
+        var img = a.querySelector("img");
+        preencher("[data-pp-flag]", function (el) { el.innerHTML = img ? img.outerHTML : ""; });
+        preencher("[data-pp-nome]", function (el) { el.textContent = a.textContent; });
+        preencher("[data-pp-pagina]", function (el) { el.href = a.href; });
+        passo(2);
+      });
+    });
+    /* passo 3: os esportes do país no gênero escolhido */
+    janela.querySelectorAll(".pp-gen button").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var g = b.getAttribute("data-g"), a = escolha.link;
+        var ids = (a.getAttribute(g === "masculino" ? "data-m" : "data-f") || "").split(" ").filter(Boolean);
+        preencher("[data-pp-gen]", function (el) { el.textContent = b.textContent; });
+        janela.querySelectorAll(".pp-esp li").forEach(function (li) {
+          var id = li.getAttribute("data-esp");
+          li.hidden = ids.indexOf(id) === -1;
+          li.querySelector("a").href = a.href.split("#")[0] + "#" + g + "-" + id;
+        });
+        var vazio = janela.querySelector("[data-pp-vazio]");
+        vazio.hidden = ids.length > 0;
+        janela.querySelector("[data-pp-pick]").hidden = !ids.length;
+        if (!ids.length) vazio.textContent = janela.getAttribute("data-vazio-" + g).replace("{de}", a.getAttribute("data-de")).replace("{pais}", a.textContent);
+        passo(3);
+      });
+    });
+    janela.querySelectorAll("[data-voltar]").forEach(function (b) {
+      b.addEventListener("click", function () { passo(b.getAttribute("data-voltar")); });
+    });
+    /* um esporte da página em que o visitante já está: só troca a aba */
+    janela.querySelectorAll(".pp-esp a, [data-pp-pagina]").forEach(function (a) {
+      a.addEventListener("click", function () { fecharJanela(false); });
+    });
+    document.addEventListener("click", function (e) {
+      if (!janela.hidden && !janela.contains(e.target) && !(e.target.closest && e.target.closest("[data-pp-abrir]"))) fecharJanela(false);
+    });
+  }
+  document.addEventListener("keydown", function (e) {
+    if (e.key !== "Escape") return;
+    fecharMenu();
+    fecharJanela();
+  });
+})();
+
+/* Página do país: uma seção por vez (gênero e esporte), escolhida pelas abas ou pelo endereço (#feminino-futebol).
+   Sem JavaScript, todas as seções aparecem em sequência e as abas são atalhos. */
+(function () {
+  var pg = document.querySelector("[data-pais-pg]");
+  if (!pg) return;
+  var secoes = pg.querySelectorAll(".pais-sec");
+  var abas = pg.querySelectorAll(".pg-g");
+  var chips = pg.querySelectorAll(".pg-e");
+  pg.classList.add("js");
+  function mostrar(id, rolar) {
+    var alvo = document.getElementById(id);
+    if (!alvo || !alvo.classList.contains("pais-sec")) alvo = secoes[0];
+    var g = alvo.getAttribute("data-g");
+    for (var i = 0; i < secoes.length; i++) secoes[i].hidden = secoes[i] !== alvo;
+    for (i = 0; i < abas.length; i++) {
+      if (abas[i].getAttribute("data-g") === g) abas[i].setAttribute("aria-current", "true"); else abas[i].removeAttribute("aria-current");
+    }
+    for (i = 0; i < chips.length; i++) {
+      chips[i].hidden = chips[i].getAttribute("data-g") !== g;
+      if (chips[i].getAttribute("href") === "#" + alvo.id) chips[i].setAttribute("aria-current", "true"); else chips[i].removeAttribute("aria-current");
+    }
+    if (rolar) pg.querySelector(".pg-nav").scrollIntoView({ block: "start" });
+  }
+  function doEndereco(rolar) { mostrar(location.hash.slice(1), rolar); }
+  pg.querySelectorAll(".pg-g, .pg-e").forEach(function (a) {
     a.addEventListener("click", function (e) {
       e.preventDefault();
-      var abrir = !m.classList.contains("open");
-      fechar(m);
-      m.classList.toggle("open", abrir);
-      a.setAttribute("aria-expanded", abrir ? "true" : "false");
+      var id = a.getAttribute("href").slice(1);
+      history.replaceState(null, "", "#" + id);
+      mostrar(id, false);
     });
   });
-  document.addEventListener("click", function (e) {
-    if (!(e.target.closest && e.target.closest("[data-mega]"))) fechar(null);
-  });
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") fechar(null);
-  });
+  window.addEventListener("hashchange", function () { doEndereco(true); });
+  doEndereco(false);
 })();
 
 /* Compartilhar: o botão de copiar o link aparece só quando o navegador permite copiar.
