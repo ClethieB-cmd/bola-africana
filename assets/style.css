@@ -516,3 +516,73 @@ table.hist td.anos { color: var(--muted); font-size: 13px; line-height: 1.45; }
 .fatos dd span { font-size: inherit; color: var(--muted); }
 .fatos.liga .note { font-size: 12.5px; margin: 6px 0 0; }
 .fatos .atual { margin: 0 0 10px; font-size: 14px; font-weight: 700; }
+
+/* ---------- Central de jogos: faixa fina no topo (build-extras.js) ---------- */
+.central { background: var(--surface); border-bottom: 1px solid var(--line); }
+.central-in { display: flex; align-items: stretch; gap: 12px; padding-top: 8px; padding-bottom: 8px; }
+.central-tit { flex: none; display: flex; flex-direction: column; justify-content: center; gap: 2px; padding-inline-end: 12px; border-inline-end: 1px solid var(--line); text-decoration: none; font-family: var(--font-display); font-weight: 800; font-size: 17px; line-height: 1.05; color: var(--ink); }
+.central-tit span { font-family: var(--font-body); font-size: 12px; font-weight: 700; color: var(--brand); }
+.central-tit:hover span { text-decoration: underline; }
+.central-jogos { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; scroll-padding-inline: 2px; }
+.central-jogos::-webkit-scrollbar { display: none; }
+.cj { flex: none; display: grid; grid-template-columns: auto auto; column-gap: 10px; align-items: center; min-width: 128px; padding: 5px 10px; border-radius: 6px; background: var(--surface-2); color: var(--ink); text-decoration: none; }
+.cj:hover { box-shadow: inset 0 0 0 1px var(--brand); }
+.cj .t { display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-display); font-weight: 700; font-size: 15px; line-height: 1.2; letter-spacing: .02em; }
+.cj .t .bandeira { width: 16px; height: 11px; }
+.cj .s { font-family: var(--font-display); font-weight: 800; font-size: 15px; text-align: end; font-variant-numeric: tabular-nums; }
+.cj .m { grid-column: 1 / -1; font-size: 11px; color: var(--muted); margin-top: 1px; white-space: nowrap; }
+.cj .m b { color: var(--brand); }
+.cj.done .m { color: var(--ink); font-weight: 600; }
+.cj.is-today { box-shadow: inset 3px 0 0 var(--gold); }
+[dir="rtl"] .cj.is-today { box-shadow: inset -3px 0 0 var(--gold); }
+@media (max-width: 640px) { .central-tit { font-size: 15px; padding-inline-end: 8px; } .central-tit span { display: none; } .cj { min-width: 112px; } }
+
+/* ---------- Países ---------- */
+.nav .mega-paises { grid-template-columns: minmax(0, .8fr) minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1.1fr) minmax(0, 1.4fr); gap: 8px 22px; }
+.mega-paises .mega-col h2 small, .regiao h2 small { font-family: var(--font-body); font-size: 11.5px; font-weight: 700; letter-spacing: .06em; color: var(--muted); }
+.mega-paises .reg-oeste ul { columns: 2; column-gap: 18px; }
+.mega-paises .reg-sul ul { columns: 2; column-gap: 18px; }
+.mega-paises .mega-col a::before { content: none; }
+.nav .mega-paises a { align-items: center; gap: 7px; font-size: 14px; }
+.nav .mega-paises li { padding: 3px 0; }
+.mega-paises .bandeira, .regiao .bandeira { flex: none; width: 20px; height: 14px; object-fit: cover; border-radius: 2px; box-shadow: 0 0 0 1px rgba(0,0,0,.08); }
+@media (max-width: 1000px) { .nav .mega-paises { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 760px) { .nav .mega-paises { grid-template-columns: repeat(2, minmax(0, 1fr)); max-height: 70vh; overflow-y: auto; } .mega-paises .reg-oeste ul, .mega-paises .reg-sul ul { columns: 1; } }
+.paises-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; margin-top: 8px; }
+.regiao { background: var(--surface); border: 1px solid var(--line); border-top: 4px solid var(--brand); border-radius: 8px; padding: 16px 18px; }
+.regiao h2 { font-family: var(--font-display); font-weight: 800; font-size: 26px; line-height: 1; margin: 0 0 10px; }
+.regiao ul { list-style: none; margin: 0; padding: 0; }
+.regiao li { border-top: 1px solid var(--line); }
+.regiao li a { display: flex; align-items: center; gap: 10px; padding: 8px 0; color: var(--ink); text-decoration: none; }
+.regiao li a span { display: flex; flex-direction: column; min-width: 0; }
+.regiao li b { font-weight: 700; font-size: 15.5px; line-height: 1.25; }
+.regiao li small { font-size: 12.5px; color: var(--muted); line-height: 1.3; }
+.regiao li a:hover b { color: var(--brand); text-decoration: underline; }
+
+/* ---------- Especiais ---------- */
+.nav a.nav-esp { font-weight: 800; font-size: 15px; padding-left: 14px; padding-right: 14px; }
+.especiais-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+.especial-card { position: relative; display: flex; flex-direction: column; gap: 8px; min-height: 250px; padding: 22px 22px 20px; border-radius: 10px; background: linear-gradient(160deg, #173F2B 0%, var(--night) 70%); color: #fff; text-decoration: none; border-top: 4px solid var(--gold); overflow: hidden; }
+.especial-card:hover h3 { text-decoration: underline; }
+.esp-k { font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--gold); }
+.esp-n { font-family: var(--font-display); font-weight: 900; font-size: 64px; line-height: .9; color: rgba(255,255,255,.16); }
+.especial-card h3 { font-family: var(--font-display); font-weight: 800; font-size: 26px; line-height: 1.05; margin: auto 0 0; }
+.especial-card p { margin: 0; font-size: 14.5px; line-height: 1.45; color: #C9D6CE; }
+.tag-esp { color: #fff; background: var(--brand); padding: 2px 7px; border-radius: 3px; margin-inline-end: 8px; }
+
+/* ---------- assinatura e compartilhamento ---------- */
+.byline { margin: -4px 0 16px; font-size: 14px; color: var(--muted); font-weight: 600; }
+.share { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 26px 0 8px; padding-top: 16px; border-top: 1px solid var(--line); }
+.share-t { font-size: 12.5px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); margin-inline-end: 4px; }
+.share-b { display: inline-flex; align-items: center; min-height: 34px; padding: 6px 13px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: 700 13.5px/1 var(--font-body); text-decoration: none; cursor: pointer; }
+.share-b:hover { border-color: var(--brand); color: var(--brand); }
+.share-b:focus-visible, .cj:focus-visible, .especial-card:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+.cj .t .bandeira, .mega-paises .bandeira, .regiao .bandeira { margin: 0; }
+/* celular: o menu fica numa linha só e rola para o lado; as janelas se posicionam pelo cabeçalho, não pelo menu */
+@media (max-width: 480px) {
+  .masthead .wrap { position: relative; }
+  .nav { position: static; flex-wrap: nowrap; overflow-x: auto; gap: 0; }
+  .nav > a, .nav .mega > a, .nav a.nav-gen, .nav a.nav-esp { font-size: 13.5px; padding-left: 4px; padding-right: 4px; }
+  .nav .mega > a { gap: 1px; }
+  .nav .chev { width: 8px; height: 8px; }
+}
