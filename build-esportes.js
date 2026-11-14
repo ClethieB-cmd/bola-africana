@@ -192,5 +192,7 @@ module.exports = function (h) {
   const FUT_FEM = ["clf", "canf"];
   const futChaves = (g) => Object.keys(SLUG_FUT).filter((k) => (FUT_FEM.includes(k) ? "fem" : "masc") === g && temDados(FUT[k]));
 
-  return { grupos, emitir, linhasBusca, futUrl, temFut: (k) => temDados(FUT[k]), ESPORTES, comps, compUrl, espUrl, paisDe, newsDe, NOMES_FUT, futChaves, generoComp, generoNoticia, esporteDe };
+  /* nome de seleção como vem da API ("Angola W", "D.R. Congo") para o código do país */
+  const selCode = (n) => { const c = SELECAO.get(plano(String(n || "").replace(/\s+W$/, ""))); return c ? c.code : null; };
+  return { grupos, emitir, linhasBusca, futUrl, temFut: (k) => temDados(FUT[k]), ESPORTES, comps, compUrl, espUrl, paisDe, newsDe, NOMES_FUT, futChaves, generoComp, generoNoticia, esporteDe, selCode };
 };
