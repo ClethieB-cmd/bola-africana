@@ -1,7 +1,7 @@
 /* Países: a janela "Países" do cabeçalho e a página de cada país (pais/<slug>.html).
    O caminho é o mesmo nas duas: o visitante escolhe o país, depois masculino ou feminino, depois o esporte.
    Só aparece o esporte que tem conteúdo de verdade para aquele país e gênero. Usado pelo build.js.
-   Para ligar uma notícia a um país, use o campo paises: ["ANG", "MAR"] em conteudo/noticias.js;
+   Para ligar uma notícia a um país, use o campo paises: ["ANG", "MAR"] em conteudo/noticias.js ("LES/masc" liga só no masculino);
    sem esse campo, o país é achado pelo nome no título e na linha fina em português. */
 "use strict";
 
@@ -86,8 +86,10 @@ module.exports = function (h) {
   }
   /* na página do país, a matéria é feminina só se for da seção Feminino (ou tiver genero: "fem"); uma matéria de prêmios
      com a tag fem, por exemplo, fala dos dois gêneros e fica no masculino */
-  const generoDe = (n) => n.genero || (n.cat === "fem" ? "fem" : "masc");
-  const noticias = (code, g, esp) => sorted.filter((n) => paisesDe(n).includes(code) && generoDe(n) === G_API[g] && ESP.esporteDe(n) === esp);
+  const generoDe = (n, g) => n.genero === "misto" || (n.genero || (n.cat === "fem" ? "fem" : "masc")) === g;
+  /* "LES/masc" em paises liga a notícia ao país só naquele gênero (numa maratona com as duas provas, por exemplo) */
+  const ligada = (n, code, g) => paisesDe(n).some((x) => { const [c, so] = x.split("/"); return c === code && (!so || so === g); }) && generoDe(n, g);
+  const noticias = (code, g, esp) => sorted.filter((n) => ligada(n, code, G_API[g]) && ESP.esporteDe(n) === esp);
 
   /* ---------- dados de cada país (sem HTML, iguais em todos os idiomas) ---------- */
   const anos = (finais, code, pos) => finais.filter((f) => f[pos] === code).map((f) => f[0]);
@@ -128,7 +130,7 @@ module.exports = function (h) {
     const afr = cs.filter((cmp) => cmp.pais === "AFR" && equipes(cmp).has(code));
     const res = afr.flatMap((cmp) => (cmp.resultados || []).filter((r) => ESP.selCode(r.c) === code || ESP.selCode(r.f) === code).map((r) => ({ ...r, cmp })))
       .sort((a, b) => b.d.localeCompare(a.d));
-    const news = ESP.newsDe(e).filter((n) => paisesDe(n).includes(code) && generoDe(n) === G_API[g]);
+    const news = ESP.newsDe(e).filter((n) => ligada(n, code, G_API[g]));
     return nac.length || afr.length || news.length ? { nac, afr, res, news } : null;
   }
   /* quais esportes cada país tem, por gênero (futebol masculino sempre: as 54 federações têm campeonato e seleção) */
