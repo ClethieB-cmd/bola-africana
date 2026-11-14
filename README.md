@@ -26,6 +26,8 @@ o que ajuda o Google a encontrar o site e é o que o AdSense espera.
 | `conteudo/times.js` | Histórias dos clubes, escritas pela redação. |
 | `conteudo/historia.js` | Títulos, finais, recordes e classificação das eliminatórias, com as fontes. |
 | `build-historia.js` | Monta as tabelas de história e títulos e a coluna "Em números". |
+| `build-extras.js` | Central de jogos, menu e página de Países, Especiais, assinatura e botões de compartilhar, dados para o Google (JSON-LD) e RSS. |
+| `assets/og.png.b64` | Imagem que aparece quando alguém compartilha o site (WhatsApp, Facebook, X), guardada como texto; o build cria o `og.png`. |
 | `conteudo/ligas-historia.js` | Último campeão, maior campeão, copa, artilheiro e melhor jogador de cada campeonato, com as fontes. |
 | `conteudo/ligas-manuais.js` | Tabelas dos campeonatos que a API não cobre (hoje, o do Congo), copiadas de uma fonte conferida. |
 | `assets/` | Visual (`style.css`) e pequenos ajustes no navegador (`site.js`). |
@@ -216,6 +218,15 @@ as finais, os campeões, os recordes e os prêmios de melhor jogador e jogadora 
 As notícias aparecem no Início, na página Notícias (`noticias.html`, separada por competição e por esporte) e dentro
 de cada notícia. As páginas das competições, dos esportes, dos campeonatos e dos times não mostram notícias: elas têm
 um link para a parte certa da página Notícias.
+
+## Central de jogos, Países e Especiais
+
+- **Central de jogos**: a faixa fina no topo de todas as páginas mostra os jogos da lista `FIXTURES` (em `conteudo/dados.js`): os resultados dos últimos três dias, os jogos de hoje (marcados com "Hoje") e os próximos. Ela começa nos jogos de hoje. A Agenda completa continua na página Agenda.
+- **Países**: o item Países do menu abre as 54 federações da CAF divididas pelas cinco uniões regionais: Norte (UNAF), Oeste (WAFU-UFOA), Central (UNIFFAC), Leste (CECAFA) e Sul (COSAFA). Cada país leva à página do seu campeonato. Usamos as bandeiras, de domínio público; os escudos das federações são marcas registradas e não são reproduzidos.
+- **Especiais**: reportagens maiores ficam em `conteudo/noticias.js` com `especial: true`. Elas aparecem na página Especiais, numa seção própria no Início e na página Notícias, mas não ocupam a manchete do Início.
+- **Artilharia**: o robô busca, para cada campeonato da API, os 10 maiores goleadores da temporada mostrada na página (uma vez por semana com a temporada em andamento, uma vez por mês com ela encerrada). A tabela aparece na página do campeonato.
+- **Matérias**: cada matéria mostra a assinatura da redação, o tempo de leitura e botões para compartilhar no WhatsApp, X, Facebook, Telegram e LinkedIn, além de copiar o link.
+- **Google e redes**: cada página tem imagem de compartilhamento e dados estruturados (NewsArticle, BreadcrumbList, WebSite com busca), e cada idioma tem um RSS em `feed.xml`. A página Política editorial explica como trabalhamos.
 
 ## Início e coluna lateral
 
