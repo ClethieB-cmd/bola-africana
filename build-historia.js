@@ -214,7 +214,8 @@ module.exports = function (h) {
   const temLiga = (code) => !!LH[code];
   const linha = (dt, dd) => `<div><dt>${esc(dt)}</dt><dd>${dd}</dd></div>`;
   const lista = (nomes) => nomes.length < 2 ? nomes.join("") : nomes.slice(0, -1).join(", ") + ex(AND()) + nomes[nomes.length - 1];
-  function fatosLiga(c, ad) {
+  /* linhas do quadro (usadas também na página do país, build-paises.js) */
+  function linhasLiga(c) {
     const f = LH[c.code];
     if (!f) return "";
     const rows = [];
@@ -235,9 +236,13 @@ module.exports = function (h) {
       rows.push(linha(T("lArt", { s: temp }), `${lista(nomes)} <span>${esc(gols)}</span>`));
     }
     if (f.melhor) rows.push(linha(T("lMelhor", { s: f.melhor[0] }), `<b>${esc(f.melhor[1])}</b> (${esc(f.melhor[2])})`));
+    return `<dl>${rows.join("")}</dl>
+      ${f.nota ? `<p class="note">${esc(L(f.nota))}</p>` : ""}${fontes(f.fontes)}<p class="note">${esc(T("lConferido", { d: data(LHD.conferido) }))}</p>`;
+  }
+  function fatosLiga(c, ad) {
+    if (!LH[c.code]) return "";
     return `<aside class="sidebar"><section class="panel fatos liga" aria-labelledby="fatos-h"><h2 id="fatos-h">${esc(T("fTitulo"))}</h2>
-      <p class="liga-nome">${bandeira(c.code)}${esc(c.liga)}</p><dl>${rows.join("")}</dl>
-      ${f.nota ? `<p class="note">${esc(L(f.nota))}</p>` : ""}${fontes(f.fontes)}<p class="note">${esc(T("lConferido", { d: data(LHD.conferido) }))}</p></section>${ad || ""}</aside>`;
+      <p class="liga-nome">${bandeira(c.code)}${esc(c.liga)}</p>${linhasLiga(c)}</section>${ad || ""}</aside>`;
   }
 
   function fatos(k, ad) {
@@ -246,5 +251,6 @@ module.exports = function (h) {
       ${ATUAL[k] ? ATUAL[k]() : ""}<ul>${lista.map((x) => ITENS[x]()).join("")}</ul></section>${ad || ""}</aside>`;
   }
 
-  return { qualHtml, qualCards, canHtml, clHtml, ccHtml, selHtml, femHtml, fatos, fatosLiga, temLiga };
+  return { qualHtml, qualCards, canHtml, clHtml, ccHtml, selHtml, femHtml, fatos, fatosLiga, temLiga, linhasLiga,
+    util: { H, sel, clube, tabela, th, thAbbr, fontes, data, zona, AND } };
 };
