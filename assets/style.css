@@ -767,3 +767,6 @@ table.compacta tr.eu td { background: rgba(224, 161, 27, .16); font-weight: 700;
   .pb-cols { grid-template-columns: minmax(0, 1fr); gap: 0; }
   .pb-cols > div + div > h4:first-child { margin-top: 20px; }
 }
+
+/* páginas institucionais: subtítulos (Expediente, Federações e assessorias) */
+.prose h2 { max-width: 66ch; margin: 1.6em 0 .55em; padding-top: 14px; border-top: 1px solid var(--line); font-family: var(--font-display); font-weight: 800; font-size: 28px; line-height: 1.05; }
