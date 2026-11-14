@@ -21,7 +21,7 @@ module.exports = {
   GOOGLE_VERIFICACAO: "fmtFxHeodox_zwCeuW7f3d9LUg3OIpQUDhwJWF1O8fQ",
 
   // E-mail que aparece nas páginas Contato, Sobre e Privacidade. Vazio: os trechos com e-mail ficam escondidos.
-  CONTACT_EMAIL: "",
+  CONTACT_EMAIL: "bisseyouclethie@gmail.com",
 
   // Data da última atualização das notícias (aparece no topo do site).
   EDITION_DATE: "2026-11-12"
