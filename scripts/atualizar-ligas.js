@@ -200,7 +200,11 @@ async function atualizar(liga, ano) {
   for (const c of parar ? [] : fila) {
     const liga = ligasNac.find((l) => l.league.id === mapa[c.code].apiId);
     try {
+      const antes = dados.ligas[c.code];
       dados.ligas[c.code] = await atualizarLiga(liga);
+      /* mesma temporada: guarda a artilharia e a data dos times, que têm atualização própria */
+      const novo = dados.ligas[c.code];
+      if (antes && antes.apiId === novo.apiId && antes.ano === novo.ano) for (const k of ["artilharia", "artilhariaEm", "timesEm"]) if (antes[k] !== undefined) novo[k] = antes[k];
       feitos++;
       console.log(`ok  ${c.code}  ${liga.league.name}  temporada ${dados.ligas[c.code].temporada}${dados.ligas[c.code].anterior ? " (encerrada)" : ""}`);
     } catch (e) {
@@ -211,6 +215,28 @@ async function atualizar(liga, ano) {
     }
   }
   for (const code of Object.keys(dados.ligas)) if (!mapa[code]) delete dados.ligas[code];
+
+  /* Artilharia: os 10 maiores goleadores da temporada que o site mostra. Uma consulta por campeonato,
+     refeita uma vez por semana com a temporada em andamento e uma vez por mês com a temporada encerrada. */
+  let nArt = 0;
+  for (const c of parar ? [] : CAMP) {
+    const lg = dados.ligas[c.code];
+    if (!lg || !lg.apiId || recente(lg.artilhariaEm, lg.anterior ? 30 : 7)) continue;
+    try {
+      const r = await api("/players/topscorers", { league: lg.apiId, season: lg.ano });
+      lg.artilharia = r.map((x) => {
+        const s = (x.statistics && x.statistics[0]) || {};
+        return [x.player.name, (s.team || {}).name || "", (s.goals || {}).total ?? 0, (s.games || {}).appearences ?? null];
+      }).filter((x) => x[2] > 0).slice(0, 10);
+      lg.artilhariaEm = new Date().toISOString();
+      nArt++;
+    } catch (e) {
+      if (e instanceof Limite) { parar = true; break; }
+      console.log(`erro artilharia ${c.code}: ${e.message}`);
+      lg.artilhariaEm = new Date().toISOString();
+    }
+  }
+  console.log(`Artilharias atualizadas: ${nArt}.`);
 
   /* Times: dados do clube (uma consulta por campeonato, refeita uma vez por mês) e elenco (uma consulta por time).
      Vai aos poucos, com a cota que sobrar do dia, começando pelo que está há mais tempo sem atualizar. */
