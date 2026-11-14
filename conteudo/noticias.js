@@ -7,11 +7,164 @@
    monthOnly: true mostra só o mês na data
    especial: true faz da matéria uma reportagem especial (página Especiais e seção própria no Início)
    paises: códigos dos países da matéria, ex. ["ANG", "RSA"], para ela aparecer na página de cada país.
+     "LES/masc" liga a matéria ao país só no masculino ("/fem", só no feminino).
+   esporte: id do esporte quando não é futebol (basquete, handebol, rugbi, atletismo...); o chapéu e o link
+     de volta passam a ser os do esporte.
+   genero: "fem" para matéria feminina de outro esporte; "misto" quando trata das provas masculina e feminina.
      Sem esse campo, o site acha os países pelo nome no título e na linha fina em português.
    cover.big: texto grande da capa (placar, número); cover.small: legenda da capa
    title, lead, body: título, linha fina e parágrafos em pt, fr e en
    sources: [nome do veículo, link] — sempre cite de onde veio a informação */
 module.exports = [
+  {
+    slug: "franca-vence-africa-do-sul-rugbi-nations-championship", cat: "sel", esporte: "rugbi", genero: "masc", paises: ["RSA"], tags: ["rugbi"], date: "2026-11-14T21:00",
+    cover: { big: "21–19", small: { pt: "França x África do Sul, em Paris", fr: "France-Afrique du Sud, à Paris", en: "France v South Africa in Paris", ar: "فرنسا وجنوب أفريقيا في باريس" } },
+    title: {
+      pt: "França vence a África do Sul por 21 a 19 e complica os Springboks no Nations Championship",
+      fr: "La France bat l'Afrique du Sud 21-19 et met les Springboks en difficulté dans le Nations Championship",
+      en: "France beat South Africa 21-19 and put the Springboks under pressure in the Nations Championship",
+      ar: "فرنسا تفوز على جنوب أفريقيا 21-19 وتصعّب مهمة السبرينغبوكس في بطولة الأمم"
+    },
+    lead: {
+      pt: "Os campeões mundiais perderam em Paris na sexta-feira (13), seis dias depois de marcar nove tries contra a Itália.",
+      fr: "Les champions du monde ont perdu à Paris vendredi 13 novembre, six jours après avoir inscrit neuf essais face à l'Italie.",
+      en: "The world champions lost in Paris on Friday 13 November, six days after scoring nine tries against Italy.",
+      ar: "خسر أبطال العالم في باريس يوم الجمعة 13 نوفمبر، بعد ستة أيام من تسجيلهم تسع محاولات أمام إيطاليا."
+    },
+    body: {
+      pt: [
+        "A seleção sul-africana de rúgbi perdeu para a França por 21 a 19 na sexta-feira (13), no Stade de France, em Paris, pela série de novembro do Nations Championship. Foi a primeira vitória da França em casa sobre os Springboks desde 2005.",
+        "Os franceses abriram 14 a 0 no começo do jogo. Aaron Grandidier-Nkanang, Théo Attissogbe e Louis Bielle-Biarrey marcaram os tries da França. Pela África do Sul, marcaram Jan-Hendrik Wessels, Cobus Reinach e Malcolm Marx; um try de Kurt-Lee Arendse foi anulado por impedimento.",
+        "O jogo se decidiu nos minutos finais. Marx marcou a menos de dez minutos do fim, e Manie Libbok errou a conversão que empataria a partida. No último ataque sul-africano, Bielle-Biarrey parou a jogada, Antoine Dupont ficou com a bola e Maxime Lucu chutou para fora, encerrando o jogo.",
+        "A França recebeu três cartões amarelos, para Lucu, Grandidier-Nkanang e Régis Montagne. Pela África do Sul, Lood de Jager levou amarelo, e Jasper Wiese recebeu o vermelho de 20 minutos no começo do segundo tempo, por uma entrada perigosa.",
+        "No sábado anterior, os Springboks tinham vencido a Itália por 66 a 7 em Turim, com nove tries. Depois da derrota em Paris, a vaga na final do Nations Championship não depende mais só deles: a África do Sul precisa de um tropeço da Nova Zelândia contra País de Gales ou Inglaterra. O próximo adversário dos sul-africanos é a Irlanda."
+      ],
+      fr: [
+        "L'équipe d'Afrique du Sud de rugby a perdu 21-19 face à la France vendredi 13 novembre, au Stade de France, lors de la série de novembre du Nations Championship. C'est la première victoire de la France à domicile contre les Springboks depuis 2005.",
+        "Les Français ont mené 14-0 en début de match. Aaron Grandidier-Nkanang, Théo Attissogbe et Louis Bielle-Biarrey ont marqué les essais français. Côté sud-africain, Jan-Hendrik Wessels, Cobus Reinach et Malcolm Marx ont marqué ; un essai de Kurt-Lee Arendse a été refusé pour hors-jeu.",
+        "Le match s'est joué dans les dernières minutes. Marx a marqué à moins de dix minutes de la fin, et Manie Libbok a manqué la transformation qui aurait égalisé. Sur la dernière attaque sud-africaine, Bielle-Biarrey a stoppé l'action, Antoine Dupont a récupéré le ballon et Maxime Lucu l'a envoyé en touche, ce qui a mis fin au match.",
+        "La France a reçu trois cartons jaunes, pour Lucu, Grandidier-Nkanang et Régis Montagne. Côté sud-africain, Lood de Jager a pris un jaune, et Jasper Wiese a reçu un carton rouge de 20 minutes au début de la seconde période, pour un plaquage dangereux.",
+        "Le samedi précédent, les Springboks avaient battu l'Italie 66-7 à Turin, avec neuf essais. Après la défaite à Paris, leur place en finale du Nations Championship ne dépend plus seulement d'eux : l'Afrique du Sud a besoin d'un faux pas de la Nouvelle-Zélande face au pays de Galles ou à l'Angleterre. Le prochain adversaire des Sud-Africains est l'Irlande."
+      ],
+      en: [
+        "South Africa lost 21-19 to France on Friday 13 November at the Stade de France in Paris, in the November series of the Nations Championship. It was France's first home win over the Springboks since 2005.",
+        "France raced into a 14-0 lead early on. Aaron Grandidier-Nkanang, Théo Attissogbe and Louis Bielle-Biarrey scored France's tries. For South Africa, Jan-Hendrik Wessels, Cobus Reinach and Malcolm Marx crossed; a Kurt-Lee Arendse try was ruled out for offside.",
+        "The game was settled in the closing minutes. Marx scored with under ten minutes left, and Manie Libbok missed the conversion that would have levelled the scores. On South Africa's final attack, Bielle-Biarrey stopped the move, Antoine Dupont won the ball and Maxime Lucu kicked it into touch to end the match.",
+        "France were shown three yellow cards, to Lucu, Grandidier-Nkanang and Régis Montagne. For South Africa, Lood de Jager was sin-binned and Jasper Wiese received a 20-minute red card early in the second half for a dangerous tackle.",
+        "The previous Saturday, the Springboks had beaten Italy 66-7 in Turin, scoring nine tries. After the defeat in Paris, a place in the Nations Championship final is no longer in their own hands: South Africa need New Zealand to slip against Wales or England. Their next opponents are Ireland."
+      ],
+      ar: [
+        "خسر منتخب جنوب أفريقيا للرغبي أمام فرنسا 21-19 يوم الجمعة 13 نوفمبر على ملعب فرنسا في باريس، ضمن سلسلة نوفمبر من بطولة الأمم. وهو أول فوز لفرنسا على أرضها أمام السبرينغبوكس منذ 2005.",
+        "تقدم الفرنسيون 14-0 في بداية المباراة. وسجل محاولات فرنسا آرون غرانديدييه-نكانانغ وتيو أتيسوغبي ولويس بييل-بياريه. ولجنوب أفريقيا سجل يان-هندريك فيسلز وكوبوس رايناخ ومالكولم ماركس، وأُلغيت محاولة لكيرت-لي أرينديس بداعي التسلل.",
+        "حُسمت المباراة في الدقائق الأخيرة. سجل ماركس قبل أقل من عشر دقائق على النهاية، وأهدر ماني ليبوك التحويل الذي كان سيعادل النتيجة. وفي آخر هجمة لجنوب أفريقيا، أوقف بييل-بياريه اللعبة واستعاد أنطوان دوبون الكرة وأخرجها ماكسيم لوكو إلى خارج الملعب لتنتهي المباراة.",
+        "تلقت فرنسا ثلاث بطاقات صفراء للوكو وغرانديدييه-نكانانغ وريجيس مونتاني. ومن جانب جنوب أفريقيا، نال لود دي ياغر بطاقة صفراء، وتلقى ياسبر فيزه بطاقة حمراء لمدة 20 دقيقة في بداية الشوط الثاني بسبب تدخل خطير.",
+        "وفي السبت السابق، فاز السبرينغبوكس على إيطاليا 66-7 في تورينو بتسع محاولات. وبعد الخسارة في باريس، لم يعد التأهل إلى نهائي بطولة الأمم بأيديهم وحدهم: تحتاج جنوب أفريقيا إلى تعثر نيوزيلندا أمام ويلز أو إنجلترا. والمنافس التالي لجنوب أفريقيا هو أيرلندا."
+      ]
+    },
+    sources: [
+      ["RTÉ", "https://www.rte.ie/sport/rugby/2026/1113/1599077-dupont-guides-france-to-nail-biting-win-over-south-africa/"],
+      ["AP via Yahoo Sports", "https://sports.yahoo.com/articles/france-stuns-world-champion-springboks-222745096.html"],
+      ["EWN", "https://ewn.co.za/2026/11/09/springboks-off-to-flying-start-in-nations-championship-northern-series"]
+    ]
+  },
+  {
+    slug: "maratona-de-nova-york-chepkirui-vence-mofolo-no-podio", cat: "sel", esporte: "atletismo", genero: "misto", paises: ["KEN", "LES/masc"], tags: ["atletismo"], date: "2026-11-14T21:20",
+    cover: { big: "2:24:36", small: { pt: "tempo de Sheila Chepkirui em Nova York", fr: "le temps de Sheila Chepkirui à New York", en: "Sheila Chepkirui's time in New York", ar: "زمن شيلا تشيبكيروي في نيويورك" } },
+    title: {
+      pt: "Sheila Chepkirui vence a Maratona de Nova York, e Kamohelo Mofolo leva o Lesoto ao pódio",
+      fr: "Sheila Chepkirui remporte le marathon de New York, Kamohelo Mofolo offre un podium au Lesotho",
+      en: "Sheila Chepkirui wins the New York City Marathon as Kamohelo Mofolo takes Lesotho onto the podium",
+      ar: "شيلا تشيبكيروي تفوز بماراثون نيويورك وكاموهيلو موفولو يقود ليسوتو إلى منصة التتويج"
+    },
+    lead: {
+      pt: "O Quênia ocupou quatro dos cinco primeiros lugares da prova feminina em 1º de novembro. No masculino, o sueco Andreas Almgren venceu na estreia na distância.",
+      fr: "Le Kenya a pris quatre des cinq premières places chez les femmes le 1er novembre. Chez les hommes, le Suédois Andreas Almgren s'est imposé pour ses débuts sur la distance.",
+      en: "Kenya took four of the top five places in the women's race on 1 November. In the men's race, Sweden's Andreas Almgren won on his marathon debut.",
+      ar: "احتلت كينيا أربعة من المراكز الخمسة الأولى في سباق السيدات يوم 1 نوفمبر. وفي سباق الرجال، فاز السويدي أندرياس ألمغرين في أول ماراثون له."
+    },
+    body: {
+      pt: [
+        "A queniana Sheila Chepkirui venceu a Maratona de Nova York em 1º de novembro, com 2h24min36, segundo os tempos ainda não oficiais divulgados no dia. A americana Jess McClain chegou seis segundos depois, e a queniana Hellen Obiri, que defendia o título, terminou em terceiro, um segundo atrás de McClain.",
+        "O Quênia colocou quatro atletas entre as cinco primeiras: depois de Chepkirui e Obiri vieram Edna Kiplagat, em quarto, com 2h25min42, e Mercy Chelangat, em quinto, com 2h25min46.",
+        "No masculino, o sueco Andreas Almgren venceu em sua primeira maratona, com 2h06min01. O italiano Yemaneberhan Crippa foi segundo, com 2h06min14, e o terceiro lugar ficou com Kamohelo Mofolo, do Lesoto, com 2h06min26. O queniano Benson Kipruto terminou em quarto, logo atrás de Mofolo.",
+        "A prova foi rápida para todos os lados: segundo a Athletics Illustrated, 17 homens correram abaixo de 2h10 e 14 mulheres abaixo de 2h30."
+      ],
+      fr: [
+        "La Kényane Sheila Chepkirui a remporté le marathon de New York le 1er novembre en 2 h 24 min 36 s, selon les temps non officiels publiés le jour même. L'Américaine Jess McClain a terminé six secondes plus tard, et la Kényane Hellen Obiri, tenante du titre, a pris la troisième place, une seconde derrière McClain.",
+        "Le Kenya a placé quatre athlètes dans le top 5 : après Chepkirui et Obiri, Edna Kiplagat a fini quatrième en 2 h 25 min 42 s et Mercy Chelangat cinquième en 2 h 25 min 46 s.",
+        "Chez les hommes, le Suédois Andreas Almgren a gagné son premier marathon en 2 h 06 min 01 s. L'Italien Yemaneberhan Crippa a pris la deuxième place en 2 h 06 min 14 s, et la troisième est revenue à Kamohelo Mofolo, du Lesotho, en 2 h 06 min 26 s. Le Kényan Benson Kipruto a terminé quatrième, juste derrière Mofolo.",
+        "La course a été rapide : selon Athletics Illustrated, 17 hommes ont couru en moins de 2 h 10 et 14 femmes en moins de 2 h 30."
+      ],
+      en: [
+        "Kenya's Sheila Chepkirui won the New York City Marathon on 1 November in 2:24:36, according to the unofficial times published on the day. American Jess McClain finished six seconds later, and Kenya's Hellen Obiri, the defending champion, was third, one second behind McClain.",
+        "Kenya had four athletes in the top five: after Chepkirui and Obiri came Edna Kiplagat, fourth in 2:25:42, and Mercy Chelangat, fifth in 2:25:46.",
+        "In the men's race, Sweden's Andreas Almgren won his first marathon in 2:06:01. Italy's Yemaneberhan Crippa was second in 2:06:14, and third place went to Lesotho's Kamohelo Mofolo in 2:06:26. Kenya's Benson Kipruto finished fourth, just behind Mofolo.",
+        "It was a fast race all round: according to Athletics Illustrated, 17 men ran under 2:10 and 14 women under 2:30."
+      ],
+      ar: [
+        "فازت الكينية شيلا تشيبكيروي بماراثون نيويورك يوم 1 نوفمبر بزمن 2:24:36، وفق الأزمنة غير الرسمية المعلنة في اليوم نفسه. وحلت الأمريكية جيس ماكلين ثانية بفارق ست ثوانٍ، وجاءت الكينية هيلين أوبيري، حاملة اللقب، ثالثة بفارق ثانية واحدة عن ماكلين.",
+        "وضعت كينيا أربع عداءات بين الخمس الأوائل: بعد تشيبكيروي وأوبيري جاءت إدنا كيبلاغات رابعة بزمن 2:25:42، وميرسي تشيلانغات خامسة بزمن 2:25:46.",
+        "وفي سباق الرجال، فاز السويدي أندرياس ألمغرين في أول ماراثون له بزمن 2:06:01. وحل الإيطالي يمانبرهان كريبا ثانيًا بزمن 2:06:14، وذهب المركز الثالث إلى كاموهيلو موفولو من ليسوتو بزمن 2:06:26. وأنهى الكيني بنسون كيبروتو السباق رابعًا، خلف موفولو مباشرة.",
+        "كان السباق سريعًا: وفق موقع Athletics Illustrated، ركض 17 رجلًا في أقل من ساعتين وعشر دقائق، و14 امرأة في أقل من ساعتين ونصف."
+      ]
+    },
+    sources: [
+      ["NBC Sports", "https://nbcsports.com/olympics/news/new-york-city-marathon-results-2026"],
+      ["Athletics Illustrated", "https://athleticsillustrated.com/swede-andreas-almgren-and-kenyan-sheila-chepkirui-win-new-york-city-marathon/"]
+    ]
+  },
+  {
+    slug: "al-ahly-campeao-africano-handebol-masculino-feminino-luanda", cat: "ligas", esporte: "handebol", genero: "misto", paises: ["EGY", "ANG", "COD/masc"], tags: ["handebol"], date: "2026-11-14T21:40",
+    cover: { big: "26–25", small: { pt: "Al Ahly x Zamalek, final masculina em Luanda", fr: "Al Ahly-Zamalek, finale masculine à Luanda", en: "Al Ahly v Zamalek, men's final in Luanda", ar: "الأهلي والزمالك، نهائي الرجال في لواندا" } },
+    title: {
+      pt: "Al Ahly ganha os títulos masculino e feminino do Campeonato Africano de Clubes de handebol, em Luanda",
+      fr: "Al Ahly remporte les titres masculin et féminin du championnat d'Afrique des clubs de handball, à Luanda",
+      en: "Al Ahly win both the men's and women's African Club Championship handball titles in Luanda",
+      ar: "الأهلي يحرز لقبي الرجال والسيدات في بطولة أفريقيا للأندية لكرة اليد في لواندا"
+    },
+    lead: {
+      pt: "Os homens bateram o Zamalek depois de duas prorrogações, e as mulheres venceram o Primeiro de Agosto por um gol, no torneio disputado em Angola em outubro.",
+      fr: "Les hommes ont battu le Zamalek après deux prolongations, et les femmes ont dominé Primeiro de Agosto d'un but, lors du tournoi disputé en Angola en octobre.",
+      en: "The men beat Zamalek after two periods of extra time, and the women edged Primeiro de Agosto by one goal, at the tournament held in Angola in October.",
+      ar: "تغلب الرجال على الزمالك بعد شوطين إضافيين، وفازت السيدات على بريميرو دي أغوستو بفارق هدف، في البطولة التي أقيمت في أنغولا في أكتوبر."
+    },
+    body: {
+      pt: [
+        "O Al Ahly, do Egito, conquistou os dois títulos do 47º Campeonato Africano de Clubes Campeões de handebol, disputado de 5 a 14 de outubro em Luanda. Foi a primeira vez que a capital angolana recebeu a competição.",
+        "Na final masculina, o Al Ahly venceu o rival Zamalek por 26 a 25. O jogo terminou empatado em 22 a 22 no tempo normal e em 24 a 24 na primeira prorrogação; o gol da vitória saiu no fim da segunda. Segundo o clube, foi o nono título africano do Al Ahly no masculino e o quarto seguido.",
+        "Na final feminina, as egípcias derrotaram o Primeiro de Agosto, de Angola, por 21 a 20. Segundo o Al Ahly, é o segundo título africano do clube no feminino.",
+        "Os clubes da casa ficaram com o bronze no feminino: o Petro de Luanda venceu o HBC Abidjan, da Costa do Marfim, por 42 a 24 na disputa do terceiro lugar. No masculino, o JSK, da RD Congo, ficou com o bronze ao bater o Petro por 23 a 20.",
+        "Mohamed Emad, do Al Ahly, e John Shagary, do Flowers, do Benin, dividiram a artilharia masculina, com 42 gols cada. A próxima edição, a 48ª, está marcada para outubro de 2027 na Tunísia, segundo a federação tunisiana."
+      ],
+      fr: [
+        "Al Ahly (Égypte) a remporté les deux titres du 47e championnat d'Afrique des clubs champions de handball, disputé du 5 au 14 octobre à Luanda. C'était la première fois que la capitale angolaise accueillait la compétition.",
+        "En finale masculine, Al Ahly a battu son rival le Zamalek 26-25. Le match était à égalité 22-22 à la fin du temps réglementaire et 24-24 après la première prolongation ; le but de la victoire est tombé à la fin de la seconde. Selon le club, c'est le neuvième titre africain d'Al Ahly chez les hommes et le quatrième d'affilée.",
+        "En finale féminine, les Égyptiennes ont battu Primeiro de Agosto (Angola) 21-20. Selon Al Ahly, c'est le deuxième titre africain du club chez les femmes.",
+        "Les clubs hôtes ont pris le bronze chez les femmes : Petro de Luanda a battu le HBC Abidjan (Côte d'Ivoire) 42-24 dans le match pour la troisième place. Chez les hommes, le JSK (RD Congo) a pris le bronze en battant Petro 23-20.",
+        "Mohamed Emad (Al Ahly) et John Shagary (Flowers, Bénin) ont terminé co-meilleurs buteurs du tournoi masculin avec 42 buts chacun. La prochaine édition, la 48e, est prévue en octobre 2027 en Tunisie, selon la fédération tunisienne."
+      ],
+      en: [
+        "Egypt's Al Ahly won both titles at the 47th African Club Champions Championship in handball, played from 5 to 14 October in Luanda. It was the first time the Angolan capital had hosted the competition.",
+        "In the men's final, Al Ahly beat rivals Zamalek 26-25. The match was level at 22-22 after normal time and 24-24 after the first period of extra time; the winning goal came late in the second. According to the club, it was Al Ahly's ninth African men's title and fourth in a row.",
+        "In the women's final, the Egyptians beat Angola's Primeiro de Agosto 21-20. According to Al Ahly, it is the club's second African women's title.",
+        "The hosts took bronze in the women's event: Petro de Luanda beat Côte d'Ivoire's HBC Abidjan 42-24 in the third-place match. In the men's event, DR Congo's JSK won bronze by beating Petro 23-20.",
+        "Al Ahly's Mohamed Emad and John Shagary of Benin's Flowers shared the men's top-scorer award with 42 goals each. The next edition, the 48th, is set for October 2027 in Tunisia, according to the Tunisian federation."
+      ],
+      ar: [
+        "أحرز الأهلي المصري لقبي النسخة السابعة والأربعين من بطولة أفريقيا للأندية البطلة لكرة اليد، التي أقيمت من 5 إلى 14 أكتوبر في لواندا. وهي المرة الأولى التي تستضيف فيها العاصمة الأنغولية البطولة.",
+        "في نهائي الرجال، فاز الأهلي على غريمه الزمالك 26-25. وانتهى الوقت الأصلي بالتعادل 22-22، والشوط الإضافي الأول بالتعادل 24-24، وجاء هدف الفوز في نهاية الشوط الإضافي الثاني. ووفق النادي، هو اللقب الأفريقي التاسع للأهلي في فئة الرجال والرابع على التوالي.",
+        "وفي نهائي السيدات، تغلبت لاعبات الأهلي على بريميرو دي أغوستو الأنغولي 21-20. ووفق الأهلي، هو اللقب الأفريقي الثاني للنادي في فئة السيدات.",
+        "ونالت أندية البلد المضيف البرونزية في فئة السيدات: فاز بترو دي لواندا على نادي أبيدجان الإيفواري 42-24 في مباراة المركز الثالث. وفي فئة الرجال، نال نادي جي إس كي من الكونغو الديمقراطية البرونزية بفوزه على بترو 23-20.",
+        "وتقاسم محمد عماد من الأهلي وجون شاغاري من نادي فلاورز البنيني لقب هداف بطولة الرجال برصيد 42 هدفًا لكل منهما. والنسخة المقبلة، الثامنة والأربعون، مقررة في أكتوبر 2027 في تونس، وفق الاتحاد التونسي."
+      ]
+    },
+    sources: [
+      ["IHF", "https://www.ihf.info/media-center/news/al-ahly-make-historic-double-cahb-african-club-championship"],
+      ["Al Ahly", "https://www.alahlyegypt.com/en/news/article/warm-welcome-for-al-ahly-mens-and-womens-handball-teams-at-cairo-airport"],
+      ["AllAfrica", "https://fr.allafrica.com/stories/202610030071.html"],
+      ["AllAfrica / La Presse", "https://fr.allafrica.com/stories/202610220621.html"]
+    ]
+  },
   {
     slug: "especial-al-ahly-zamalek-classico-do-cairo", especial: true, cat: "ligas", paises: ["EGY"], tags: ["ligas", "cl"], date: "2026-11-14T12:00",
     cover: { big: "258", cx: "82%", small: { pt: "jogos entre Al Ahly e Zamalek desde 1917", fr: "matchs entre Al Ahly et Zamalek depuis 1917", en: "games between Al Ahly and Zamalek since 1917", ar: "مباراة بين الأهلي والزمالك منذ 1917" } },
@@ -590,7 +743,7 @@ module.exports = [
     ]
   },
   {
-    slug: "wiliete-elimina-sundowns", cat: "cl", paises: ["ANG", "RSA"], tags: ["cl"], date: "2026-10-25T20:00", monthOnly: true,
+    slug: "wiliete-elimina-sundowns", cat: "cl", paises: ["ANG", "RSA"], tags: ["cl"], date: "2026-10-28T18:00",
     cover: { big: "1–1", cx: "76%", small: { pt: "Sundowns × Wiliete · Pretória", fr: "Sundowns × Wiliete · Pretoria", en: "Sundowns × Wiliete · Pretoria" } },
     title: { pt: "Wiliete derruba o campeão Sundowns e leva um dérbi angolano à fase de grupos", fr: "Wiliete fait tomber le tenant Sundowns et offre un derby angolais en phase de groupes", en: "Wiliete knock out holders Sundowns and set up an Angolan derby in the groups" },
     lead: { pt: "O clube angolano empatou em Pretória e avançou pelo gol fora. No Grupo A, reencontra o Petro de Luanda.", fr: "Le club angolais a fait match nul à Pretoria et s'est qualifié grâce au but à l'extérieur. Dans le groupe A, il retrouve Petro de Luanda.", en: "The Angolan club drew in Pretoria and went through on away goals. In Group A they meet Petro de Luanda." },
@@ -617,7 +770,7 @@ module.exports = [
     ]
   },
   {
-    slug: "gambia-guine-bissau-surpresas", cat: "can", tags: ["can", "sel"], date: "2026-09-30T12:00", monthOnly: true,
+    slug: "gambia-guine-bissau-surpresas", cat: "can", tags: ["can", "sel"], date: "2026-09-30T12:00",
     cover: { big: "3–0", cx: "35%", small: { pt: "Guiné-Bissau × Nigéria", fr: "Guinée-Bissau × Nigeria", en: "Guinea-Bissau × Nigeria" } },
     title: { pt: "Gâmbia e Guiné-Bissau, as surpresas do início das eliminatórias", fr: "La Gambie et la Guinée-Bissau, les surprises du début des éliminatoires", en: "Gambia and Guinea-Bissau, the surprises of early qualifying" },
     lead: { pt: "A Gâmbia virou para cima de Gana e venceu por 4 a 2; a Guiné-Bissau aplicou 3 a 0 na Nigéria.", fr: "La Gambie a renversé le Ghana (4-2) et la Guinée-Bissau a infligé un 3-0 au Nigeria.", en: "Gambia came from behind to beat Ghana 4-2, and Guinea-Bissau beat Nigeria 3-0." },
@@ -641,7 +794,7 @@ module.exports = [
     ]
   },
   {
-    slug: "congo-segura-camaroes", cat: "can", tags: ["can", "sel"], date: "2026-09-29T21:00", monthOnly: true,
+    slug: "congo-segura-camaroes", cat: "can", tags: ["can", "sel"], date: "2026-09-29T21:00",
     cover: { big: "1–1", cx: "68%", small: { pt: "Congo × Camarões · Brazzaville", fr: "Congo × Cameroun · Brazzaville", en: "Congo × Cameroon · Brazzaville" } },
     title: { pt: "Congo segura Camarões em Brazzaville e mantém o Grupo G aberto", fr: "Le Congo tient le Cameroun en échec à Brazzaville et relance le groupe G", en: "Congo hold Cameroon in Brazzaville to keep Group G open" },
     lead: { pt: "Os Diables Rouges de Claude Le Roy empataram com os Leões Indomáveis. Agora enfrentam as Comores duas vezes.", fr: "Les Diables Rouges de Claude Le Roy ont accroché les Lions Indomptables. Ils affrontent maintenant deux fois les Comores.", en: "Claude Le Roy's Red Devils held the Indomitable Lions. They now play Comoros twice." },
@@ -699,7 +852,7 @@ module.exports = [
     ]
   },
   {
-    slug: "memoria-copa-2026-africa", cat: "sel", tags: ["sel"], date: "2026-07-10T12:00", monthOnly: true,
+    slug: "memoria-copa-2026-africa", cat: "sel", tags: ["sel"], date: "2026-07-10T12:00",
     cover: { big: { pt: "9 de 10", fr: "9 sur 10", en: "9 of 10" }, cx: "50%", small: { pt: "Africanos no mata-mata da Copa 2026", fr: "Africains en seizièmes du Mondial 2026", en: "African teams in the 2026 World Cup knockouts" } },
     title: { pt: "Memória: a Copa de 2026 foi a melhor da história para a África", fr: "Mémoire : le Mondial 2026, le meilleur de l'histoire pour l'Afrique", en: "Look back: the 2026 World Cup was Africa's best ever" },
     lead: { pt: "Nove das dez seleções africanas passaram da fase de grupos. O Marrocos parou nas quartas de final.", fr: "Neuf des dix sélections africaines ont passé la phase de groupes. Le Maroc s'est arrêté en quarts de finale.", en: "Nine of Africa's ten teams got out of the group stage. Morocco went out in the quarter-finals." },
