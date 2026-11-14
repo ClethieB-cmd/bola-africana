@@ -39,8 +39,8 @@ module.exports = function (h) {
         : f.today ? timeTag(f.at, "time", fmtTime(f.at)) : timeTag(f.at, "daytime", `${fmtDay(f.at)} ${fmtTime(f.at)}`);
       const aria = `${teamName(f, "home")} ${s1} ${T("vs")} ${teamName(f, "away")} ${s2}, ${L(f.comp)}`;
       return `<a class="cj ${feito ? "done" : ""} ${f.today ? "is-today" : ""}" href="${u("agenda")}" aria-label="${esc(aria)}">
-        <span class="t">${f.club ? "" : bandeira(f.home)}${esc(teamCode(f, "home"))}</span><span class="s">${esc(s1)}</span>
-        <span class="t">${f.club ? "" : bandeira(f.away)}${esc(teamCode(f, "away"))}</span><span class="s">${esc(s2)}</span>
+        <span class="t">${bandeira(f.club ? (f.paises || [])[0] : f.home)}${esc(teamCode(f, "home"))}</span><span class="s">${esc(s1)}</span>
+        <span class="t">${bandeira(f.club ? (f.paises || [])[1] : f.away)}${esc(teamCode(f, "away"))}</span><span class="s">${esc(s2)}</span>
         <span class="m">${f.today && !feito ? `<b>${esc(T("today"))}</b> ` : ""}${quando}</span></a>`;
     }).join("");
     return `<section class="central" aria-label="${esc(T("centralAria"))}"><div class="wrap central-in">
