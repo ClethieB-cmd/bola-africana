@@ -189,10 +189,12 @@ module.exports = function (h) {
   const generoComp = (nome) => (/\b(women|woman|ladies|girls|dames|f[ée]minin[ea]?s?)\b/i.test(nome) || /\sW$/.test(nome) ? "fem" : "masc");
   const esporteDe = (n) => (Array.isArray(n.esporte) ? n.esporte[0] : n.esporte) || "futebol";
   const generoNoticia = (n) => n.genero || (n.cat === "fem" || (n.tags || []).includes("fem") ? "fem" : "masc");
+  /* genero: "misto" é a notícia que trata das provas masculina e feminina (uma maratona, por exemplo): entra nos dois */
+  const temGenero = (n, g) => n.genero === "misto" || generoNoticia(n) === g;
   const FUT_FEM = ["clf", "canf"];
   const futChaves = (g) => Object.keys(SLUG_FUT).filter((k) => (FUT_FEM.includes(k) ? "fem" : "masc") === g && temDados(FUT[k]));
 
   /* nome de seleção como vem da API ("Angola W", "D.R. Congo") para o código do país */
   const selCode = (n) => { const c = SELECAO.get(plano(String(n || "").replace(/\s+W$/, ""))); return c ? c.code : null; };
-  return { grupos, emitir, linhasBusca, futUrl, temFut: (k) => temDados(FUT[k]), ESPORTES, comps, compUrl, espUrl, paisDe, newsDe, NOMES_FUT, futChaves, generoComp, generoNoticia, esporteDe, selCode };
+  return { grupos, emitir, linhasBusca, futUrl, temFut: (k) => temDados(FUT[k]), ESPORTES, comps, compUrl, espUrl, paisDe, newsDe, NOMES_FUT, futChaves, generoComp, generoNoticia, temGenero, esporteDe, selCode };
 };
