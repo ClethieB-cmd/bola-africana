@@ -6,12 +6,14 @@
    date: data e hora da publicação, formato "AAAA-MM-DDTHH:MM"
    monthOnly: true mostra só o mês na data
    especial: true faz da matéria uma reportagem especial (página Especiais e seção própria no Início)
+   paises: códigos dos países da matéria, ex. ["ANG", "RSA"], para ela aparecer na página de cada país.
+     Sem esse campo, o site acha os países pelo nome no título e na linha fina em português.
    cover.big: texto grande da capa (placar, número); cover.small: legenda da capa
    title, lead, body: título, linha fina e parágrafos em pt, fr e en
    sources: [nome do veículo, link] — sempre cite de onde veio a informação */
 module.exports = [
   {
-    slug: "especial-al-ahly-zamalek-classico-do-cairo", especial: true, cat: "ligas", tags: ["ligas", "cl"], date: "2026-11-14T12:00",
+    slug: "especial-al-ahly-zamalek-classico-do-cairo", especial: true, cat: "ligas", paises: ["EGY"], tags: ["ligas", "cl"], date: "2026-11-14T12:00",
     cover: { big: "258", cx: "82%", small: { pt: "jogos entre Al Ahly e Zamalek desde 1917", fr: "matchs entre Al Ahly et Zamalek depuis 1917", en: "games between Al Ahly and Zamalek since 1917", ar: "مباراة بين الأهلي والزمالك منذ 1917" } },
     title: { pt: "Al Ahly x Zamalek: o clássico que divide o Cairo há mais de um século", fr: "Al Ahly-Zamalek : le derby qui divise Le Caire depuis plus d'un siècle", en: "Al Ahly v Zamalek: the derby that has split Cairo for more than a century", ar: "الأهلي والزمالك: القمة التي تقسم القاهرة منذ أكثر من قرن" },
     lead: { pt: "O primeiro jogo foi em 1917. Desde então foram 258 encontros, uma final continental e goleadas que cada torcida faz questão de lembrar.", fr: "Le premier match date de 1917. Depuis, 258 rencontres, une finale continentale et des cartons que chaque camp n'oublie pas.", en: "The first game was in 1917. Since then there have been 258 meetings, a continental final and thrashings each set of fans never forgets.", ar: "أقيمت المباراة الأولى عام 1917، ومنذ ذلك الحين التقى الفريقان 258 مرة، بينها نهائي قاري ونتائج كبيرة لا ينساها جمهور أي منهما." },
@@ -102,7 +104,7 @@ module.exports = [
     ]
   },
   {
-    slug: "especial-futebol-feminino-africano-cresce", especial: true, cat: "fem", tags: ["fem"], date: "2026-11-14T10:00",
+    slug: "especial-futebol-feminino-africano-cresce", especial: true, cat: "fem", paises: ["RSA", "MAR"], tags: ["fem"], date: "2026-11-14T10:00",
     cover: { big: "6ª", cx: "82%", small: { pt: "final da Liga dos Campeões Feminina da CAF", fr: "finale de la Ligue des champions féminine de la CAF", en: "CAF Women's Champions League final", ar: "نهائي دوري أبطال أفريقيا للسيدات" } },
     title: { pt: "Mais dinheiro, mais público e novas campeãs: o crescimento do futebol feminino africano", fr: "Plus d'argent, plus de public et de nouvelles championnes : l'essor du football féminin africain", en: "More money, bigger crowds and new champions: the rise of African women's football", ar: "أموال أكثر وجمهور أكبر وبطلات جديدات: صعود كرة القدم النسائية في أفريقيا" },
     lead: { pt: "Criada em 2020, a Liga dos Campeões Feminina da CAF chega à sexta final neste domingo, com Mamelodi Sundowns e AS FAR, as duas maiores campeãs.", fr: "Créée en 2020, la Ligue des champions féminine de la CAF vit sa sixième finale ce dimanche, entre Mamelodi Sundowns et l'AS FAR, les deux clubs les plus titrés.", en: "Created in 2020, the CAF Women's Champions League reaches its sixth final on Sunday, between Mamelodi Sundowns and AS FAR, its two most successful clubs.", ar: "يبلغ دوري أبطال أفريقيا للسيدات، الذي أنشئ عام 2020، نهائيه السادس يوم الأحد بين ماميلودي صنداونز والجيش الملكي، أكثر ناديين تتويجًا." },
@@ -330,7 +332,7 @@ module.exports = [
     ]
   },
   {
-    slug: "final-liga-feminina-sundowns-as-far", cat: "fem", tags: ["fem"], date: "2026-11-12T18:00",
+    slug: "final-liga-feminina-sundowns-as-far", cat: "fem", paises: ["RSA", "MAR"], tags: ["fem"], date: "2026-11-12T18:00",
     cover: { big: { pt: "15/11", fr: "15/11", en: "15 Nov" }, cx: "70%", small: { pt: "Final em Ismailia · Sundowns × AS FAR", fr: "Finale à Ismaïlia · Sundowns × AS FAR", en: "Final in Ismailia · Sundowns × AS FAR" } },
     title: { pt: "Sundowns e AS FAR decidem a Liga dos Campeões Feminina no domingo", fr: "Sundowns et l'AS FAR se disputent la Ligue des champions féminine dimanche", en: "Sundowns and AS FAR meet in Sunday's Women's Champions League final" },
     lead: { pt: "As duas bicampeãs se enfrentam no Estádio do Canal de Suez, em Ismailia, valendo o terceiro título.", fr: "Les deux doubles championnes s'affrontent au stade du Canal de Suez, à Ismaïlia, pour un troisième titre.", en: "The two two-time champions face off at the Suez Canal Stadium in Ismailia, each chasing a third title." },
@@ -478,7 +480,7 @@ module.exports = [
     ]
   },
   {
-    slug: "champions-grupos-definidos", cat: "cl", tags: ["cl"], date: "2026-10-28T16:00",
+    slug: "champions-grupos-definidos", cat: "cl", paises: ["EGY", "ALG", "TUN", "RSA"], tags: ["cl"], date: "2026-10-28T16:00",
     cover: { big: "4×4", cx: "22%", small: { pt: "Sorteio no Cairo · Liga dos Campeões 2026/27", fr: "Tirage au Caire · Ligue des champions 2026/27", en: "Cairo draw · Champions League 2026/27" } },
     title: { pt: "Liga dos Campeões da CAF: grupos definidos, e a bola rola em 27 de novembro", fr: "Ligue des champions CAF : les groupes sont connus, coup d'envoi le 27 novembre", en: "CAF Champions League: groups set, with kick-off on 27 November" },
     lead: { pt: "O Grupo B reúne os campeões de Egito, Argélia e Tunísia. O Orlando Pirates carrega as esperanças sul-africanas.", fr: "Le groupe B réunit les champions d'Égypte, d'Algérie et de Tunisie. Les Orlando Pirates portent les espoirs sud-africains.", en: "Group B brings together the champions of Egypt, Algeria and Tunisia. Orlando Pirates carry South Africa's hopes." },
@@ -509,7 +511,7 @@ module.exports = [
     ]
   },
   {
-    slug: "al-ahly-copa-confederacoes", cat: "cc", tags: ["cc"], date: "2026-10-28T15:00",
+    slug: "al-ahly-copa-confederacoes", cat: "cc", paises: ["EGY", "MAR", "ANG"], tags: ["cc"], date: "2026-10-28T15:00",
     cover: { big: { pt: "Grupo A", fr: "Groupe A", en: "Group A" }, cx: "80%", small: "Al Ahly · Raja · ASKO Kara · Primeiro de Agosto" },
     title: { pt: "Al Ahly volta à Copa das Confederações em grupo com Raja e Primeiro de Agosto", fr: "Al Ahly retrouve la Coupe de la Confédération, dans un groupe avec le Raja et Primeiro de Agosto", en: "Al Ahly return to the Confederation Cup in a group with Raja and Primeiro de Agosto" },
     lead: { pt: "O maior campeão da Liga dos Campeões terminou o último Campeonato Egípcio em terceiro e disputa o segundo torneio da CAF.", fr: "Le club le plus titré de la Ligue des champions a terminé troisième du dernier championnat d'Égypte et dispute la deuxième compétition de la CAF.", en: "The Champions League's most successful club finished third in Egypt last season and now plays in CAF's second competition." },
@@ -563,7 +565,7 @@ module.exports = [
     ]
   },
   {
-    slug: "mas-fes-campeao-41-anos", cat: "ligas", tags: ["ligas", "cl"], date: "2026-10-28T09:00",
+    slug: "mas-fes-campeao-41-anos", cat: "ligas", paises: ["MAR"], tags: ["ligas", "cl"], date: "2026-10-28T09:00",
     cover: { big: { pt: "41 anos", fr: "41 ans", en: "41 years" }, cx: "24%", small: { pt: "MAS Fès, campeão marroquino", fr: "Le MAS Fès, champion du Maroc", en: "MAS Fès, champions of Morocco" } },
     title: { pt: "Maghreb de Fès, campeão após 41 anos, estreia na fase de grupos da Champions", fr: "Le Maghreb de Fès, champion après 41 ans, découvre la phase de groupes de la Ligue des champions", en: "Maghreb de Fès, champions after 41 years, reach the Champions League group stage" },
     lead: { pt: "O MAS fez 59 pontos na Botola Pro 2025/26, dois à frente do RS Berkane, e agora encara Pyramids e Al Hilal.", fr: "Le MAS a totalisé 59 points en Botola Pro 2025/26, deux de plus que la RS Berkane, et affronte désormais le Pyramids et Al Hilal.", en: "MAS finished the 2025/26 Botola Pro on 59 points, two ahead of RS Berkane, and now face Pyramids and Al Hilal." },
@@ -588,7 +590,7 @@ module.exports = [
     ]
   },
   {
-    slug: "wiliete-elimina-sundowns", cat: "cl", tags: ["cl"], date: "2026-10-25T20:00", monthOnly: true,
+    slug: "wiliete-elimina-sundowns", cat: "cl", paises: ["ANG", "RSA"], tags: ["cl"], date: "2026-10-25T20:00", monthOnly: true,
     cover: { big: "1–1", cx: "76%", small: { pt: "Sundowns × Wiliete · Pretória", fr: "Sundowns × Wiliete · Pretoria", en: "Sundowns × Wiliete · Pretoria" } },
     title: { pt: "Wiliete derruba o campeão Sundowns e leva um dérbi angolano à fase de grupos", fr: "Wiliete fait tomber le tenant Sundowns et offre un derby angolais en phase de groupes", en: "Wiliete knock out holders Sundowns and set up an Angolan derby in the groups" },
     lead: { pt: "O clube angolano empatou em Pretória e avançou pelo gol fora. No Grupo A, reencontra o Petro de Luanda.", fr: "Le club angolais a fait match nul à Pretoria et s'est qualifié grâce au but à l'extérieur. Dans le groupe A, il retrouve Petro de Luanda.", en: "The Angolan club drew in Pretoria and went through on away goals. In Group A they meet Petro de Luanda." },
