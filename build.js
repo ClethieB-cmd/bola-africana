@@ -246,7 +246,9 @@ function navHtml(active) {
   /* Masculino e Feminino abrem uma janela com tudo do gênero (build-generos.js); sem JavaScript, o clique leva à página */
   const gen = (id, label, g) => `<div class="mega" data-mega><a href="${u(id)}" class="nav-gen" aria-expanded="false" aria-controls="menu-${g}"${cur(id)}>${esc(label)}${CHEV}</a>${GEN.menu(g)}</div>`;
   /* Onde assistir fica dentro das janelas de Masculino e Feminino */
-  return `<a href="${u("index")}"${cur("index")}>${esc(T("home"))}</a>${gen("masculino", T("gMasc"), "masc")}${gen(CATS.fem.route, T("gFem"), "fem")}`;
+  /* Países abre uma janela com as 54 federações por região (build-extras.js) */
+  const paises = `<div class="mega" data-mega><a href="${u("paises")}" class="nav-gen" aria-expanded="false" aria-controls="menu-paises"${cur("paises")}>${esc(T("paises"))}${CHEV}</a>${EX.menuPaises()}</div>`;
+  return `<a href="${u("index")}"${cur("index")}>${esc(T("home"))}</a>${gen("masculino", T("gMasc"), "masc")}${gen(CATS.fem.route, T("gFem"), "fem")}${paises}<a href="${u("especiais")}" class="nav-esp"${cur("especiais")}>${esc(T("especiais"))}</a>`;
 }
 function logoHtml(cls = "logo") {
   const w = L(X.BRAND).split(" ");
@@ -277,6 +279,12 @@ ${LANGS.map((l) => `<link rel="alternate" hreflang="${LOCALE[l]}" href="${absUrl
 <meta property="og:url" content="${canonical}">
 <meta property="og:site_name" content="${esc(brand())}">
 <meta property="og:locale" content="${OG_LOCALE[lang]}">
+<meta property="og:image" content="${EX.OG}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0E1A15">
+<link rel="alternate" type="application/rss+xml" title="${esc(brand())}" href="${absUrl(PREFIX[lang] + "feed.xml")}">
 <link rel="icon" href="${FAVICON}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -301,6 +309,7 @@ ${adsHead}${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld
     <nav class="nav" aria-label="${esc(T("navLabel"))}">${navHtml(active)}</nav>
   </div>
 </header>
+${EX.central()}
 <main id="conteudo">
   <div class="wrap">${body}</div>
 </main>
@@ -308,9 +317,9 @@ ${adsHead}${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld
   <div class="wrap foot">
     <div class="foot-brand"><div class="logo">${logoHtml()}</div><p>${esc(T("foot1"))}</p></div>
     <nav class="foot-col" aria-labelledby="f-fut"><h2 id="f-fut">${esc(T("gFut"))}</h2>${["can", "cl", "cc", "sel", "ligas"].map((k) => `<a href="${u(CATS[k].route)}">${esc(catName(k))}</a>`).join("")}</nav>
-    <nav class="foot-col" aria-labelledby="f-esp"><h2 id="f-esp">${esc(T("footSports"))}</h2><a href="${u("masculino")}">${esc(T("gMasc"))}</a><a href="${u(CATS.fem.route)}">${esc(T("gFem"))}</a><a href="${u("esportes")}">${esc(T("moreSports"))}</a></nav>
+    <nav class="foot-col" aria-labelledby="f-esp"><h2 id="f-esp">${esc(T("footSports"))}</h2><a href="${u("masculino")}">${esc(T("gMasc"))}</a><a href="${u(CATS.fem.route)}">${esc(T("gFem"))}</a><a href="${u("esportes")}">${esc(T("moreSports"))}</a><a href="${u("paises")}">${esc(T("paises"))}</a><a href="${u("especiais")}">${esc(T("especiais"))}</a></nav>
     <nav class="foot-col" aria-labelledby="f-serv"><h2 id="f-serv">${esc(T("footServ"))}</h2><a href="${u("noticias")}">${esc(T("news"))}</a><a href="${u("agenda")}">${esc(T("agenda"))}</a><a href="${u("tabelas")}">${esc(T("tables"))}</a><a href="${u("onde-assistir")}">${esc(T("watch"))}</a></nav>
-    <nav class="foot-col" aria-labelledby="f-inst"><h2 id="f-inst">${esc(T("footNav"))}</h2><a href="${u("sobre")}">${esc(T("about"))}</a><a href="${u("contato")}">${esc(T("contact"))}</a><a href="${u("privacidade")}">${esc(T("privacy"))}</a></nav>
+    <nav class="foot-col" aria-labelledby="f-inst"><h2 id="f-inst">${esc(T("footNav"))}</h2><a href="${u("sobre")}">${esc(T("about"))}</a><a href="${u("contato")}">${esc(T("contact"))}</a><a href="${u("editorial")}">${esc(T("editorial"))}</a><a href="${u("privacidade")}">${esc(T("privacy"))}</a><a href="${rel(PREFIX[lang] + "feed.xml")}">${esc(T("rss"))}</a></nav>
     <p class="foot-meta">© ${HOJE.slice(0, 4)} ${esc(brand())}. ${esc(T("foot2"))}</p>
   </div>
 </footer>
@@ -354,6 +363,20 @@ function campJogos(lista, feitos, c) {
     <span class="when">${feitos ? esc(`${g.gc ?? ""}–${g.gf ?? ""}`) : timeTag(g.d, "time", fmtTime(g.d))}</span>
     <span class="comp">${timeTag(g.d, "day", fmtDay(g.d))}</span></div>`).join("");
 }
+/* artilharia da temporada que a página mostra (o robô busca os 10 maiores goleadores) */
+Object.assign(D.UI, {
+  campArt: { pt: "Artilharia · temporada {s}", fr: "Meilleurs buteurs · saison {s}", en: "Top scorers · {s} season", ar: "الهدافون · موسم {s}" },
+  artJog: { pt: "Jogador", fr: "Joueur", en: "Player", ar: "اللاعب" },
+  artTime: { pt: "Time", fr: "Équipe", en: "Team", ar: "الفريق" },
+  artGols: { pt: "Gols", fr: "Buts", en: "Goals", ar: "الأهداف" },
+  artJogos: { pt: "Jogos", fr: "Matchs", en: "Games", ar: "المباريات" }
+});
+function campArtilharia(a) {
+  if (!a.artilharia || !a.artilharia.length) return "";
+  const linhas = a.artilharia.map(([nome, time, gols, jogos], i) => `<tr><td class="num">${i + 1}</td><td>${esc(nome)}</td><td>${esc(time)}</td><td class="num"><b>${esc(gols)}</b></td><td class="num">${jogos == null ? "" : esc(jogos)}</td></tr>`).join("");
+  return `<section class="section cat-ligas">${sectionHead(T("campArt", { s: a.temporada }))}<div class="table-wrap"><table class="hist compacta artilharia"><thead><tr><th class="num">#</th><th>${esc(T("artJog"))}</th><th>${esc(T("artTime"))}</th><th class="num">${esc(T("artGols"))}</th><th class="num">${esc(T("artJogos"))}</th></tr></thead><tbody>${linhas}</tbody></table></div></section>`;
+}
+
 function campPage(c) {
   const a = campAuto(c);
   const lg = D.LEAGUES.find((l) => l.country === c.code);
@@ -367,6 +390,7 @@ function campPage(c) {
     ${a ? `${a.anterior ? `<p class="note camp-old">${esc(T("campOld", { s: a.temporada }))}</p>` : ""}
       ${a.nota ? `<p class="note">${esc(L(a.nota.texto))} ${esc(T("source"))}: <a href="${esc(a.nota.fonte[1])}">${esc(a.nota.fonte[0])}</a>.</p>` : ""}
       ${a.tabela && a.tabela.length ? `<section class="section cat-ligas">${sectionHead(a.anterior ? T("campFinal", { s: a.temporada }) : T("campTable") + (a.temporada ? " · " + T("campSeason", { s: a.temporada }) : ""))}${campTabela(a, c)}</section>` : ""}
+      ${campArtilharia(a)}
       ${ad("meio")}
       ${a.resultados && a.resultados.length ? `<section class="section cat-ligas">${sectionHead(a.anterior ? T("campResultsOld", { s: a.temporada }) : T("campResults"))}<div class="panel">${campJogos(a.resultados, true, c)}</div></section>` : ""}
       ${a.proximos && a.proximos.length ? `<section class="section cat-ligas">${sectionHead(T("campNext"))}${tzHint()}<div class="panel">${campJogos(a.proximos, false, c)}</div></section>` : ""}
@@ -381,6 +405,8 @@ const ESP = require("./build-esportes.js")({ D, CAMP, NEWS, cfg, esc, L, T, u, a
 const TM = require("./build-times.js")({ D, CAMP, AUTO, CATS, esc, L, T, u, sectionHead, sidebar, storyCard, sorted, timeTag, fmt, fmtDay, fmtTime, tzHint, bandeira, campTitle, LOCALE, getLang: () => lang });
 /* história, títulos e recordes (arquivo build-historia.js, dados em conteudo/historia.js) */
 const HI = require("./build-historia.js")({ D, esc, L, T, C, u, CATS, bandeira, sectionHead, fmt });
+/* Central de jogos, Países, Especiais, assinatura, compartilhamento, JSON-LD e RSS (arquivo build-extras.js) */
+const EX = require("./build-extras.js")({ D, CAMP, NEWS, esc, L, T, u, bandeira, teamName, teamCode, timeTag, fmtDay, fmtTime, absUrl, pathOf, brand, storyCard, sectionHead, LOCALE, PREFIX, getLang: () => lang });
 const GEN = require("./build-generos.js")({ D, X, CATS, ESP, HI, sorted, esc, L, T, u, storyCard, agendaList, tzHint, watchHtml, sectionHead, LOCALE, getLang: () => lang });
 
 /* árabe: as traduções ficam em conteudo/traducao-ar.js; o que faltar aparece em francês */
@@ -407,12 +433,13 @@ if (semAr) console.log(`Árabe: ${semAr} textos sem tradução, mostrados em fra
 /* ---------- páginas ---------- */
 function homePage() {
   /* início: só notícias, da mais nova para a mais antiga. Tabelas, grupos e agenda ficam nas próprias páginas */
-  const [lead, ...resto] = sorted;
+  const [lead, ...resto] = sorted.filter((n) => !n.especial);
   const destaques = resto.slice(0, 3);
   const demais = resto.slice(3);
   return `<div class="home">
     <div class="home-top">${leadCard(lead)}<div class="side-stories">${destaques.map(storyCard).join("")}</div></div>
     ${ad("topo")}
+    ${EX.homeEspeciais()}
     ${demais.length ? `<section class="section" aria-labelledby="sec-ultimas">${sectionHead(T("latestNews"), null, null, "sec-ultimas")}
       <div class="grid-stories">${demais.map(storyCard).join("")}</div></section>` : ""}
   </div>`;
@@ -453,7 +480,6 @@ function noticiasPage() {
 function agendaPage() {
   return `<div class="layout"><div>
     <div class="page-head"><h1>${esc(T("agenda"))}</h1><p>${esc(T("agendaDesc"))}</p>${tzHint()}</div>
-    ${FIXTURES_BAR().length ? `<section class="placar" aria-label="${esc(T("scoreAria"))}"><h2>${esc(T("scoreTitle"))} <span>${esc(T("scoreSub"))}</span></h2><div class="scorebar-inner">${scorebar()}</div></section>` : ""}
     <div class="panel">${agendaList()}</div>
     <p class="note">${esc(T("agendaNote"))} <a href="${u("onde-assistir")}">${esc(T("watchLink"))}</a></p>
   </div><aside class="sidebar">${ad("lateral")}<section class="panel"><h2>${esc(T("keyDates"))}</h2>${datesList()}</section></aside></div>`;
@@ -492,11 +518,13 @@ function articlePage(n) {
   const related = sorted.filter((x) => x.slug !== n.slug && x.tags.some((t) => n.tags.includes(t))).slice(0, 3);
   return `<div class="layout"><article class="article">
     <a class="back" href="${u(c.route)}">‹ ${esc(catName(n.cat))}</a>
-    ${meta(n)}
+    ${n.especial ? `<div class="meta"><span class="tag tag-esp">${esc(T("especial"))}</span>${tag(n.cat)}<span>${esc(dateLabel(n))}</span></div>` : meta(n)}
     <h1>${esc(L(n.title))}</h1><p class="lead">${esc(L(n.lead))}</p>
+    ${EX.assinatura(n)}
     ${cover(n)}
     <div class="body">${L(n.body).map((p) => `<p>${esc(p)}</p>`).join("")}</div>
     ${ad("materia")}
+    ${EX.compartilhar(n)}
     <div class="sources"><h2>${esc(T("sources"))}</h2><ul>${n.sources.map(([t, href]) => `<li><a href="${href}">${esc(t)}</a></li>`).join("")}</ul></div>
     ${related.length ? `<section class="section cat-${n.cat}">${sectionHead(T("related"))}<div class="grid-stories">${related.map(storyCard).join("")}</div></section>` : ""}
   </article>${sidebarNoticias(n.slug)}</div>`;
@@ -533,7 +561,10 @@ fs.rmSync(OUT, { recursive: true, force: true });
 const pages = [];
 for (const l of LANGS) {
   setLang(l);
-  pages.push(emit("index", { title: brand(), desc: T("foot1"), body: () => homePage(), active: "index" }));
+  pages.push(emit("index", { title: brand(), desc: T("foot1"), body: () => homePage(), active: "index", jsonld: EX.ldHome() }));
+  pages.push(emit("paises", { title: T("paisesTitle"), desc: T("paisesDesc"), body: () => EX.paginaPaises(), active: "paises" }));
+  pages.push(emit("especiais", { title: T("especiais"), desc: T("especiaisDesc"), body: () => EX.paginaEspeciais(), active: "especiais" }));
+  write(PREFIX[l] + "feed.xml", EX.rss(sorted));
   for (const [k, c] of Object.entries(CATS)) {
     if (k === "fem") continue; /* a página Feminino é feita pelo build-generos.js */
     pages.push(emit(c.route, { title: catName(k), desc: L(c.desc), body: () => categoryPage(k), active: c.route }));
@@ -557,7 +588,7 @@ for (const l of LANGS) {
   for (const n of NEWS) {
     pages.push(emit("noticias/" + n.slug, {
       title: L(n.title), desc: L(n.lead), body: () => articlePage(n), active: CATS[n.cat].route, type: "article",
-      jsonld: { "@context": "https://schema.org", "@type": "NewsArticle", headline: L(n.title), description: L(n.lead), datePublished: n.date + ":00Z", inLanguage: LOCALE[l], publisher: { "@type": "Organization", name: brand() }, mainEntityOfPage: absUrl(pathOf("noticias/" + n.slug)) }
+      jsonld: EX.ldNoticia(n, catName(n.cat), CATS[n.cat].route)
     }));
   }
 }
@@ -565,6 +596,8 @@ for (const l of LANGS) {
 /* arquivos de apoio */
 fs.cpSync(path.join(__dirname, "assets"), path.join(OUT, "assets"), { recursive: true });
 require("./build-campos.js")(path.join(OUT, "assets", "campos"));
+fs.writeFileSync(path.join(OUT, "assets", "og.png"), Buffer.from(fs.readFileSync(path.join(__dirname, "assets", "og.png.b64"), "utf8"), "base64"));
+fs.rmSync(path.join(OUT, "assets", "og.png.b64"));
 write("robots.txt", `User-agent: *\nAllow: /\nSitemap: ${absUrl("sitemap.xml")}\n`);
 write("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pages.map((p) => `  <url><loc>${absUrl(p)}</loc></url>`).join("\n")}\n</urlset>\n`);
 if (cfg.ADSENSE_CLIENT) write("ads.txt", `google.com, ${cfg.ADSENSE_CLIENT.replace(/^ca-/, "")}, DIRECT, f08c47fec0942fa0\n`);
