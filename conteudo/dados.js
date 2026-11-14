@@ -120,7 +120,8 @@ const COUNTRY = {
 const C = (code) => L(COUNTRY[code]) || code;
 
 
-/* Agenda: início em UTC (GMT divulgado pela imprensa); a página mostra no fuso de quem visita. */
+/* Agenda: início em UTC (GMT divulgado pela imprensa); a página mostra no fuso de quem visita.
+   Jogo de clubes: club: true, com paises: [país do mandante, país do visitante] para mostrar as bandeiras. */
 const Q = (g, venue) => ({ pt: `Eliminatórias CAN · Grupo ${g}${venue ? " · " + venue : ""}`, fr: `Élim. CAN · Groupe ${g}${venue ? " · " + venue : ""}`, en: `AFCON qualifiers · Group ${g}${venue ? " · " + venue : ""}`, ar: `تصفيات كأس أمم أفريقيا · المجموعة ${g}${venue ? " · " + venue : ""}` });
 const FIXTURES = [
   { at: "2026-11-12T15:00Z", home: "GHA", away: "SOM", score: "2–0", cat: "can", comp: Q("C"), bar: true, today: true },
@@ -143,8 +144,8 @@ const FIXTURES = [
   { at: "2026-11-14T16:00Z", home: "UGA", away: "BOT", cat: "can", comp: Q("H") },
   { at: "2026-11-14T19:00Z", home: "ALG", away: "TOG", cat: "can", comp: Q("I"), bar: true },
   { at: "2026-11-14T19:00Z", home: "ANG", away: "SSD", cat: "can", comp: Q("B") },
-  { at: "2026-11-15T12:00Z", timeTbd: true, home: "Sundowns", away: "AS FAR", club: true, cat: "fem", bar: true,
-    comp: { pt: "Final · Liga dos Campeões Feminina · Ismailia", fr: "Finale · Ligue des champions féminine · Ismaïlia", en: "Final · Women's Champions League · Ismailia" }, tv: "CAF TV (YouTube)" },
+  { at: "2026-11-15T15:00Z", home: "Sundowns", away: "AS FAR", club: true, paises: ["RSA", "MAR"], cat: "fem", bar: true,
+    comp: { pt: "Final · Liga dos Campeões Feminina · Ismailia", fr: "Finale · Ligue des champions féminine · Ismaïlia", en: "Final · Women's Champions League · Ismailia", ar: "النهائي · دوري أبطال أفريقيا للسيدات · الإسماعيلية" }, tv: "CAF TV (YouTube)" },
   { at: "2026-11-16T13:00Z", home: "SDN", away: "SEN", cat: "can", comp: Q("J") },
   { at: "2026-11-16T13:00Z", home: "NAM", away: "CMR", cat: "can", comp: Q("G") },
   { at: "2026-11-16T15:00Z", home: "SOM", away: "GHA", cat: "can", comp: Q("C") },
