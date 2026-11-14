@@ -21,7 +21,8 @@ o que ajuda o Google a encontrar o site e é o que o AdSense espera.
 | `scripts/atualizar-esportes.js` | Busca os dados dos outros esportes na API-Sports. |
 | `build-esportes.js` | Monta os grupos das competições africanas e as páginas de Mais esportes. |
 | `build-campos.js` | Desenha as capas: o campo de futebol, a quadra ou a pista de cada esporte, vistos de cima. |
-| `build-generos.js` | Monta as páginas Masculino e Feminino do menu: todas as competições de cada gênero, esporte por esporte, com agenda, tabelas, onde assistir e notícias. |
+| `build-generos.js` | Monta as páginas Masculino e Feminino (`masculino.html` e `feminino.html`): todas as competições de cada gênero, esporte por esporte. Elas não ficam mais no menu. |
+| `build-paises.js` | Monta a janela Países do cabeçalho e a página de cada país (`pais/<país>.html`): país, depois masculino ou feminino, depois o esporte. |
 | `build-times.js` | Monta a página de cada time dos campeonatos nacionais: situação na tabela, jogos, notícias, elenco, dados do clube e história. |
 | `conteudo/times.js` | Histórias dos clubes, escritas pela redação. |
 | `conteudo/historia.js` | Títulos, finais, recordes e classificação das eliminatórias, com as fontes. |
@@ -175,8 +176,9 @@ tênis de mesa, tênis, ciclismo e críquete. A lista fica em `conteudo/esportes
 
 ## Masculino e Feminino
 
-O menu tem só **Início**, **Masculino** e **Feminino**. Cada gênero tem uma página com todos os esportes,
-cada um com a sua cor, as competições, a agenda, as tabelas, onde assistir e as notícias.
+Masculino e Feminino não ficam no menu: o gênero se escolhe dentro de cada país (veja "Cabeçalho, menu e países").
+As páginas `masculino.html` e `feminino.html` continuam no ar, com todos os esportes de cada gênero; o Feminino
+aparece no menu como "Futebol feminino: história e títulos" e no rodapé como "Futebol feminino".
 
 - Competição automática entra no Feminino quando o nome dela tem Women, Féminin ou Ladies (é assim que a API marca).
 - Notícia entra no Feminino quando a categoria é `fem` ou quando ela tem a tag `fem`. Para uma notícia feminina
@@ -197,10 +199,27 @@ Cada time das tabelas dos campeonatos nacionais tem uma página própria (clique
 - A página do time só entra no Google quando tem elenco, dados do clube ou história.
 - Os escudos vêm da API-Sports e pertencem aos clubes.
 
-## Menu
+## Cabeçalho, menu e países
 
-O menu tem Início, Masculino e Feminino. Clicar em Masculino ou Feminino abre uma janela com
-o futebol, os outros esportes, a agenda, as tabelas e onde assistir daquele gênero.
+O cabeçalho segue o estilo dos grandes portais de esporte: **MENU** e **PAÍSES** à esquerda, a marca no centro,
+a busca e o idioma à direita (no celular, a busca vira um botão).
+
+- **MENU** abre o menu lateral: Início, Competições (futebol e outros esportes), Países, Especiais, Notícias, Agenda,
+  Tabelas, Onde assistir e as páginas institucionais. Sem JavaScript, o menu abre pelo endereço `#menu`.
+- **PAÍSES** abre uma janela com as cinco regiões da CAF em abas. O visitante escolhe o país, depois **Masculino** ou
+  **Feminino**, depois o esporte, e cai direto na parte certa da página do país (por exemplo `pais/angola.html#feminino-handebol`).
+  Sem JavaScript, o botão leva à página Países.
+- Só aparece o esporte que tem conteúdo de verdade naquele país e gênero. O futebol masculino aparece sempre (as 54
+  federações têm seleção e campeonato). Se um gênero não tiver nada, a janela e a página dizem que ainda não temos dados.
+- **Página do país** (`pais/<país>.html`): abas Masculino e Feminino, um botão por esporte e uma seção por vez.
+  No futebol masculino: a seleção (grupo das eliminatórias da CAN 2027, jogos, títulos e finais da CAN, Jogador Africano do Ano),
+  o campeonato nacional ("Em números"), os clubes com página própria e os títulos dos clubes na CAF. No futebol feminino:
+  CAN Feminina, Jogadora Africana do Ano e a Liga dos Campeões Feminina. Nos outros esportes: as competições em que a
+  seleção ou os clubes do país jogaram e os últimos resultados (dados da API-Sports).
+- Tudo sai de arquivos que já existem: `conteudo/historia.js`, `conteudo/ligas-historia.js`, `conteudo/dados.js`
+  (agenda) e os dados do robô. Não há número digitado só para a página do país.
+- **Notícias do país**: use `paises: ["ANG", "RSA"]` na notícia. Sem esse campo, o site acha o país pelo nome no título e
+  na linha fina em português. Na página do país, a notícia é feminina só se for da seção Feminino (`cat: "fem"`) ou tiver `genero: "fem"`.
 
 ## História, títulos e recordes
 
@@ -222,7 +241,7 @@ um link para a parte certa da página Notícias.
 ## Central de jogos, Países e Especiais
 
 - **Central de jogos**: a faixa fina no topo de todas as páginas mostra os jogos da lista `FIXTURES` (em `conteudo/dados.js`): os resultados dos últimos três dias, os jogos de hoje (marcados com "Hoje") e os próximos. Ela começa nos jogos de hoje. A Agenda completa continua na página Agenda.
-- **Países**: o item Países do menu abre as 54 federações da CAF divididas pelas cinco uniões regionais: Norte (UNAF), Oeste (WAFU-UFOA), Central (UNIFFAC), Leste (CECAFA) e Sul (COSAFA). Cada país leva à página do seu campeonato. Usamos as bandeiras, de domínio público; os escudos das federações são marcas registradas e não são reproduzidos.
+- **Países**: a página Países mostra as 54 federações da CAF divididas pelas cinco uniões regionais: Norte (UNAF), Oeste (WAFU-UFOA), Central (UNIFFAC), Leste (CECAFA) e Sul (COSAFA). Cada país leva à sua página (`pais/<país>.html`), e a página do campeonato tem um link de volta para ela. Usamos as bandeiras, de domínio público; os escudos das federações são marcas registradas e não são reproduzidos.
 - **Especiais**: reportagens maiores ficam em `conteudo/noticias.js` com `especial: true`. Elas aparecem na página Especiais, numa seção própria no Início e na página Notícias, mas não ocupam a manchete do Início.
 - **Artilharia**: o robô busca, para cada campeonato da API, os 10 maiores goleadores da temporada mostrada na página (uma vez por semana com a temporada em andamento, uma vez por mês com ela encerrada). A tabela aparece na página do campeonato.
 - **Matérias**: cada matéria mostra a assinatura da redação, o tempo de leitura e botões para compartilhar no WhatsApp, X, Facebook, Telegram e LinkedIn, além de copiar o link.
