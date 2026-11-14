@@ -123,6 +123,9 @@ const teamCode = (f, side) => (f.club ? (D.CLUB_CODES[f[side]] || f[side]) : f[s
 const GLOBE = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#AFC0B6" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.6 2.6 3.9 5.6 3.9 9s-1.3 6.4-3.9 9c-2.6-2.6-3.9-5.6-3.9-9S9.4 5.6 12 3z"></path></svg>`;
 const CHEV = `<svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#AFC0B6" stroke-width="2.6" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>`;
 const SEARCH_ICON = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8FA398" stroke-width="2.4" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>`;
+const MENU_ICON = `<svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M3.5 6.5h17M3.5 12h17M3.5 17.5h17"></path></svg>`;
+const FLAG_ICON = `<svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 21V3.5M5.5 4h12l-2.6 4.25 2.6 4.25h-12"></path></svg>`;
+const LUPA_ICON = `<svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m20 20-4.3-4.3"></path></svg>`;
 const FAVICON = "data:image/svg+xml," + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#0E1A15"/><circle cx="32" cy="32" r="14" fill="#E0A11B"/></svg>`);
 
 /* ---------- anúncios ---------- */
@@ -235,20 +238,38 @@ function watchHtml(lista = X.WATCH) {
 
 /* ---------- moldura da página ---------- */
 function langMenu(id) {
-  return `<details class="lang"><summary aria-label="${esc(T("langMenu"))}">${GLOBE}<span>${esc(X.LANG_NAMES[lang])}</span>${CHEV}</summary>
+  return `<details class="lang"><summary aria-label="${esc(T("langMenu"))}">${GLOBE}<span class="ln-n">${esc(X.LANG_NAMES[lang])}</span><span class="ln-c" aria-hidden="true">${lang.toUpperCase()}</span>${CHEV}</summary>
     <ul>${LANGS.map((l) => `<li><a href="${u(id, l)}" hreflang="${LOCALE[l]}" lang="${LOCALE[l]}" data-lang="${l}"${l === lang ? ' aria-current="true"' : ""}>${X.LANG_NAMES[l]}</a></li>`).join("")}</ul></details>`;
 }
-/* menu: Início, Masculino e Feminino. CAN 2027, clubes, ligas, agenda, tabelas e onde assistir ficam dentro de cada gênero */
-const ROTAS_MASC = ["masculino", ...["can", "cl", "cc", "ligas", "sel"].map((k) => CATS[k].route)];
-function navHtml(active) {
-  const atual = ROTAS_MASC.includes(active) ? "masculino" : active;
-  const cur = (id) => (id === atual ? ' aria-current="page"' : "");
-  /* Masculino e Feminino abrem uma janela com tudo do gênero (build-generos.js); sem JavaScript, o clique leva à página */
-  const gen = (id, label, g) => `<div class="mega" data-mega><a href="${u(id)}" class="nav-gen" aria-expanded="false" aria-controls="menu-${g}"${cur(id)}>${esc(label)}${CHEV}</a>${GEN.menu(g)}</div>`;
-  /* Onde assistir fica dentro das janelas de Masculino e Feminino */
-  /* Países abre uma janela com as 54 federações por região (build-extras.js) */
-  const paises = `<div class="mega" data-mega><a href="${u("paises")}" class="nav-gen" aria-expanded="false" aria-controls="menu-paises"${cur("paises")}>${esc(T("paises"))}${CHEV}</a>${EX.menuPaises()}</div>`;
-  return `<a href="${u("index")}"${cur("index")}>${esc(T("home"))}</a>${gen("masculino", T("gMasc"), "masc")}${gen(CATS.fem.route, T("gFem"), "fem")}${paises}<a href="${u("especiais")}" class="nav-esp"${cur("especiais")}>${esc(T("especiais"))}</a>`;
+/* menu lateral (botão MENU do cabeçalho): Início, Competições, Países, Especiais, serviços e páginas institucionais.
+   Masculino e Feminino não ficam no menu: o gênero se escolhe dentro do país (janela Países, build-paises.js).
+   Sem JavaScript, o menu abre pelo endereço #menu e fecha pelo X. */
+function drawerHtml(active, editionLabel) {
+  const item = ([href, texto, id]) => `<li><a href="${href}"${id && id === active ? ' aria-current="page"' : ""}>${esc(texto)}</a></li>`;
+  const pag = (id, texto) => [u(id), texto, id];
+  const fut = [
+    ...["can", "cl", "cc", "sel", "ligas"].map((k) => pag(CATS[k].route, L(CATS[k].name))),
+    ...ESP.futChaves("masc").filter((k) => !["canq", "cl", "cc"].includes(k)).map((k) => [ESP.futUrl(k), L(ESP.NOMES_FUT[k])]),
+    ...ESP.futChaves("fem").map((k) => [ESP.futUrl(k), L(ESP.NOMES_FUT[k])]),
+    [u(CATS.fem.route) + "#historia", T("hHistFem")]
+  ];
+  const outros = [...ESP.ESPORTES.map((e) => [ESP.espUrl(e), L(e.nome)]), pag("esportes", T("moreSports"))];
+  const aberto = ["can", "cl", "cc", "sel", "ligas"].some((k) => CATS[k].route === active) || active === "esportes";
+  return `<div class="drawer" id="menu" role="dialog" aria-modal="true" aria-label="${esc(T("mMenu"))}" tabindex="-1">
+  <div class="dr-head"><a class="logo" href="${u("index")}">${logoHtml()}</a><a class="dr-x" href="#" data-drawer-fechar aria-label="${esc(T("mFechar"))}">×</a></div>
+  <nav aria-label="${esc(T("navLabel"))}">
+    <ul class="dr-l">${item(pag("index", T("home")))}
+      <li><details class="dr-sub"${aberto ? " open" : ""}><summary>${esc(T("pComps"))}${CHEV}</summary>
+        <p class="dr-g">${esc(T("gFut"))}</p><ul>${fut.map(item).join("")}</ul>
+        <p class="dr-g">${esc(T("gOther"))}</p><ul class="dr-2">${outros.map(item).join("")}</ul></details></li>
+      <li><a href="${u("paises")}" data-pp-abrir${active === "paises" ? ' aria-current="page"' : ""}>${esc(T("paises"))}</a></li>
+      ${item(pag("especiais", T("especiais")))}</ul>
+    <ul class="dr-l dr-serv">${[pag("noticias", T("news")), pag("agenda", T("agenda")), pag("tabelas", T("tables")), pag("onde-assistir", T("watch"))].map(item).join("")}</ul>
+    <ul class="dr-l dr-inst">${[pag("sobre", T("about")), pag("contato", T("contact")), pag("editorial", T("editorial")), pag("privacidade", T("privacy"))].map(item).join("")}</ul>
+  </nav>
+  <p class="dr-data">${esc(editionLabel)}</p>
+</div>
+<a class="dr-fundo" href="#" tabindex="-1" aria-hidden="true" data-drawer-fechar></a>`;
 }
 function logoHtml(cls = "logo") {
   const w = L(X.BRAND).split(" ");
@@ -295,20 +316,25 @@ ${adsHead}${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld
 <body>
 <a class="skip" href="#conteudo">${esc(T("skip"))}</a>
 <header class="masthead">
-  <div class="wrap">
-    <div class="masthead-top">
-      <a class="logo" href="${u("index")}" aria-label="${esc(brand())}">${logoHtml()}</a>
-      ${langMenu(id)}
-      <span class="today">${esc(editionLabel)}</span>
+  <div class="wrap mh">
+    <div class="mh-l">
+      <a class="hb" href="#menu" data-drawer aria-controls="menu" aria-expanded="false">${MENU_ICON}<span>${esc(T("mMenu"))}</span></a>
+      <a class="hb" href="${u("paises")}" data-pp-abrir aria-controls="pop-paises" aria-expanded="false">${FLAG_ICON}<span>${esc(T("paises"))}</span></a>
+    </div>
+    <a class="logo" href="${u("index")}" aria-label="${esc(brand())}">${logoHtml()}</a>
+    <div class="mh-r">
       <form class="search" role="search" action="${u("busca")}" method="get">
         <label for="search-input" class="sr-only">${esc(T("searchLabel"))}</label>
         ${SEARCH_ICON}
         <input id="search-input" name="q" type="search" placeholder="${esc(T("searchPh"))}" autocomplete="off">
       </form>
+      <a class="hb hb-busca" href="${u("busca")}">${LUPA_ICON}<span>${esc(T("mBuscar"))}</span></a>
+      ${langMenu(id)}
     </div>
-    <nav class="nav" aria-label="${esc(T("navLabel"))}">${navHtml(active)}</nav>
   </div>
+  ${PA.janela()}
 </header>
+${drawerHtml(active, editionLabel)}
 ${EX.central()}
 <main id="conteudo">
   <div class="wrap">${body}</div>
@@ -317,7 +343,7 @@ ${EX.central()}
   <div class="wrap foot">
     <div class="foot-brand"><div class="logo">${logoHtml()}</div><p>${esc(T("foot1"))}</p></div>
     <nav class="foot-col" aria-labelledby="f-fut"><h2 id="f-fut">${esc(T("gFut"))}</h2>${["can", "cl", "cc", "sel", "ligas"].map((k) => `<a href="${u(CATS[k].route)}">${esc(catName(k))}</a>`).join("")}</nav>
-    <nav class="foot-col" aria-labelledby="f-esp"><h2 id="f-esp">${esc(T("footSports"))}</h2><a href="${u("masculino")}">${esc(T("gMasc"))}</a><a href="${u(CATS.fem.route)}">${esc(T("gFem"))}</a><a href="${u("esportes")}">${esc(T("moreSports"))}</a><a href="${u("paises")}">${esc(T("paises"))}</a><a href="${u("especiais")}">${esc(T("especiais"))}</a></nav>
+    <nav class="foot-col" aria-labelledby="f-esp"><h2 id="f-esp">${esc(T("footSports"))}</h2><a href="${u(CATS.fem.route)}">${esc(T("pFutFem"))}</a><a href="${u("esportes")}">${esc(T("moreSports"))}</a><a href="${u("paises")}">${esc(T("paises"))}</a><a href="${u("especiais")}">${esc(T("especiais"))}</a></nav>
     <nav class="foot-col" aria-labelledby="f-serv"><h2 id="f-serv">${esc(T("footServ"))}</h2><a href="${u("noticias")}">${esc(T("news"))}</a><a href="${u("agenda")}">${esc(T("agenda"))}</a><a href="${u("tabelas")}">${esc(T("tables"))}</a><a href="${u("onde-assistir")}">${esc(T("watch"))}</a></nav>
     <nav class="foot-col" aria-labelledby="f-inst"><h2 id="f-inst">${esc(T("footNav"))}</h2><a href="${u("sobre")}">${esc(T("about"))}</a><a href="${u("contato")}">${esc(T("contact"))}</a><a href="${u("editorial")}">${esc(T("editorial"))}</a><a href="${u("privacidade")}">${esc(T("privacy"))}</a><a href="${rel(PREFIX[lang] + "feed.xml")}">${esc(T("rss"))}</a></nav>
     <p class="foot-meta">© ${HOJE.slice(0, 4)} ${esc(brand())}. ${esc(T("foot2"))}</p>
@@ -383,7 +409,8 @@ function campPage(c) {
   const quando = a && a.atualizado ? fmt({ day: "numeric", month: "long", year: "numeric" }).format(new Date(a.atualizado)) : "";
   return `<div class="layout"><div class="article camp">
     <a class="back" href="${u(CATS.ligas.route)}">‹ ${esc(T("campAll"))}</a>
-    <div class="page-head cat-ligas"><h1>${esc(campTitle(c))}</h1><p>${esc(T("campDesc", { de: L(c.de), liga: c.liga }))}</p></div>
+    <div class="page-head cat-ligas"><h1>${esc(campTitle(c))}</h1><p>${esc(T("campDesc", { de: L(c.de), liga: c.liga }))}</p>
+      <p class="page-links"><a href="${PA.linkPais(c)}">${bandeira(c.code)} ${esc(T("pLigaPais", { pais: L(c.nome) }))} ›</a></p></div>
     <div class="cover banner cat-ligas sp-futebol" aria-hidden="true"></div>
     ${lg ? `<p class="camp-champ">${esc(T("champ"))} <b>${esc(lg.champ)}</b>. ${esc(L(lg.fact))} <a href="${lg.src}">${esc(T("source"))}</a></p>` : ""}
     ${c.texto ? `<div class="prose">${L(c.texto).map((t) => `<p>${esc(t)}</p>`).join("")}</div>` : ""}
@@ -408,6 +435,8 @@ const HI = require("./build-historia.js")({ D, esc, L, T, C, u, CATS, bandeira, 
 /* Central de jogos, Países, Especiais, assinatura, compartilhamento, JSON-LD e RSS (arquivo build-extras.js) */
 const EX = require("./build-extras.js")({ D, CAMP, NEWS, esc, L, T, u, bandeira, teamName, teamCode, timeTag, fmtDay, fmtTime, absUrl, pathOf, brand, storyCard, sectionHead, LOCALE, PREFIX, getLang: () => lang });
 const GEN = require("./build-generos.js")({ D, X, CATS, ESP, HI, sorted, esc, L, T, u, storyCard, agendaList, tzHint, watchHtml, sectionHead, LOCALE, getLang: () => lang });
+/* janela Países do cabeçalho e página de cada país: país, depois gênero, depois esporte (arquivo build-paises.js) */
+const PA = require("./build-paises.js")({ D, CAMP, NEWS, sorted, ESP, TM, HI, EX, CATS, AUTO, ISO2, esc, L, T, C, u, bandeira, storyCard, agendaList, tzHint, fmt, LOCALE, getLang: () => lang });
 
 /* árabe: as traduções ficam em conteudo/traducao-ar.js; o que faltar aparece em francês */
 const AR = require("./conteudo/traducao-ar.js");
@@ -455,7 +484,6 @@ function categoryPage(k) {
   if (k === "ligas") corpo = `${campDirHtml()}<section class="section cat-ligas">${sectionHead(T("champsTitle"))}${leaguesHtml()}</section>`;
   if (k === "sel") corpo = HI.selHtml();
   return `${ad("topo")}<div class="layout"><div>
-    ${ROTAS_MASC.includes(CATS[k].route) ? `<a class="back" href="${u("masculino")}">‹ ${esc(T("gMasc"))}</a>` : ""}
     <div class="page-head cat-${k}"><h1>${esc(catName(k))}</h1><p>${esc(L(CATS[k].desc))}</p>
       ${temNoticias ? `<p class="page-links"><a href="${u("noticias")}#${k}">${esc(T("newsOf", { x: catName(k) }))} ›</a></p>` : ""}</div>
     ${corpo}</div>${HI.fatos(k, ad("lateral"))}</div>`;
@@ -535,6 +563,7 @@ function searchPage() {
   const rows = sorted.map((n) => rowCard(n, ` data-q="${esc(norm([L(n.title), L(n.lead), L(n.body).join(" ")].join(" ")))}"`)).join("")
     + CAMP.map((c) => `<a class="row-story camp-row" href="${campUrl(c)}" data-q="${esc(norm(["campeonato championnat league liga", c.liga, ...LANGS.map((l) => c.nome[l] + " " + c.de[l])].join(" ")))}">
       <div class="meta">${tag("ligas")}</div><h3>${esc(campTitle(c))}</h3></a>`).join("")
+    + PA.linhasBusca(norm, tag("sel"))
     + ESP.linhasBusca(norm);
   return `<div class="search-page">
     <div class="page-head"><h1>${esc(T("searchTitle"))}</h1><p id="busca-msg" data-hits="${esc(L(D.UI.hits))}" data-nohits="${esc(L(D.UI.noHits))}" data-intro="${esc(T("searchIntro"))}">${esc(T("searchIntro"))}</p></div>
@@ -585,6 +614,7 @@ for (const l of LANGS) {
   TM.emitir(emit, pages);
   ESP.emitir(emit, pages);
   GEN.emitir(emit, pages);
+  PA.emitir(emit, pages);
   for (const n of NEWS) {
     pages.push(emit("noticias/" + n.slug, {
       title: L(n.title), desc: L(n.lead), body: () => articlePage(n), active: CATS[n.cat].route, type: "article",
