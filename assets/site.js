@@ -106,3 +106,28 @@
     if (e.key === "Escape") fechar(null);
   });
 })();
+
+/* Compartilhar: o botão de copiar o link aparece só quando o navegador permite copiar.
+   Central de jogos: a faixa começa nos jogos de hoje ou, se não houver, no próximo jogo. */
+(function () {
+  document.querySelectorAll(".share-copy").forEach(function (b) {
+    if (!navigator.clipboard) return;
+    b.hidden = false;
+    b.addEventListener("click", function () {
+      var t = b.textContent;
+      navigator.clipboard.writeText(b.getAttribute("data-url")).then(function () {
+        b.textContent = b.getAttribute("data-ok");
+        setTimeout(function () { b.textContent = t; }, 2000);
+      });
+    });
+  });
+  var faixa = document.querySelector("[data-central]");
+  if (faixa) {
+    var alvo = faixa.querySelector(".is-today") || faixa.querySelector(".cj:not(.done)");
+    if (alvo) {
+      var x = window.scrollX, y = window.scrollY;
+      alvo.scrollIntoView({ block: "nearest", inline: "start" });
+      window.scrollTo(x, y);
+    }
+  }
+})();
