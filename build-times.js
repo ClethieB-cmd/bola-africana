@@ -159,5 +159,7 @@ module.exports = function (h) {
   }
 
   const total = () => CAMP.reduce((n, c) => n + timesDe(c).length, 0);
-  return { link, emitir, total };
+  /* os times de um campeonato com página própria, para a página do país (build-paises.js) */
+  const lista = (c) => timesDe(c).map((t) => ({ nome: t.nome, href: u(idPagina(c, t.nome)), logo: t.logo }));
+  return { link, emitir, total, lista };
 };
