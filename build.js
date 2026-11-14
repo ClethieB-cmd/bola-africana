@@ -119,6 +119,8 @@ const fmtDay = (iso) => cap(fmt({ weekday: "short", day: "2-digit", month: "2-di
 const timeTag = (iso, kind, text) => `<time datetime="${iso}" data-local="${kind}">${esc(text)}</time>`;
 const teamName = (f, side) => (f.club ? f[side] : C(f[side]));
 const teamCode = (f, side) => (f.club ? (D.CLUB_CODES[f[side]] || f[side]) : f[side]);
+/* bandeira do time no jogo: a da seleção ou, num jogo de clubes, a do país do clube (campo paises do jogo) */
+const flagT = (f, side) => bandeira(f.club ? (f.paises || [])[side === "home" ? 0 : 1] : f[side]);
 
 const GLOBE = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#AFC0B6" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.6 2.6 3.9 5.6 3.9 9s-1.3 6.4-3.9 9c-2.6-2.6-3.9-5.6-3.9-9S9.4 5.6 12 3z"></path></svg>`;
 const CHEV = `<svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#AFC0B6" stroke-width="2.6" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>`;
@@ -145,10 +147,15 @@ function cover(n) {
     <div class="big">${esc(L(n.cover.big))}</div><div class="small">${esc(L(n.cover.small))}</div></div>`;
 }
 const tag = (k) => `<span class="tag cat-${k}">${esc(catName(k))}</span>`;
-const meta = (n) => `<div class="meta">${tag(n.cat)}<span>${esc(dateLabel(n))}</span></div>`;
+/* notícia de outro esporte (campo esporte): o chapéu, o link de volta e a seção são os do esporte */
+const espDe = (n) => (esporteDe(n) === "futebol" ? null : ESP.ESPORTES.find((e) => e.id === esporteDe(n)) || null);
+const secaoNome = (n) => { const e = espDe(n); return e ? L(e.nome) : catName(n.cat); };
+const secaoRota = (n) => { const e = espDe(n); return e ? "esportes/" + e.id : CATS[n.cat].route; };
+const tagN = (n) => (espDe(n) ? `<span class="tag tag-esporte">${esc(secaoNome(n))}</span>` : tag(n.cat));
+const meta = (n) => `<div class="meta">${tagN(n)}<span>${esc(dateLabel(n))}</span></div>`;
 const newsUrl = (n) => u("noticias/" + n.slug);
 /* listas de notícias só com texto (chapéu, título, resumo e data); a imagem fica dentro da notícia */
-const kicker = (n) => `<div class="meta">${tag(n.cat)}</div>`;
+const kicker = (n) => `<div class="meta">${tagN(n)}</div>`;
 const dataNoticia = (n) => `<span class="date">${esc(dateLabel(n))}</span>`;
 const leadCard = (n) => `<a class="lead-story" href="${newsUrl(n)}">${kicker(n)}<h1>${esc(L(n.title))}</h1><p>${esc(L(n.lead))}</p>${dataNoticia(n)}</a>`;
 const rowCard = (n, attrs = "") => `<a class="row-story" href="${newsUrl(n)}"${attrs}>${meta(n)}<h3>${esc(L(n.title))}</h3></a>`;
@@ -171,8 +178,8 @@ function scorebar() {
     const when = done ? esc(T("ft")) : f.timeTbd ? timeTag(f.at, "day", fmtDay(f.at)) : timeTag(f.at, "daytime", `${fmtDay(f.at)} ${fmtTime(f.at)}`);
     const aria = `${teamName(f, "home")} ${s1} ${T("vs")} ${teamName(f, "away")} ${s2}, ${L(f.comp)}`;
     return `<a class="chip-match ${done ? "done" : ""} ${f.today ? "is-today" : ""}" href="${u("agenda")}" aria-label="${esc(aria)}">
-      <span class="t">${f.club ? "" : bandeira(f.home)}${esc(teamCode(f, "home"))}</span><span class="s">${esc(s1)}</span>
-      <span class="t">${f.club ? "" : bandeira(f.away)}${esc(teamCode(f, "away"))}</span><span class="s">${esc(s2)}</span>
+      <span class="t">${flagT(f, "home")}${esc(teamCode(f, "home"))}</span><span class="s">${esc(s1)}</span>
+      <span class="t">${flagT(f, "away")}${esc(teamCode(f, "away"))}</span><span class="s">${esc(s2)}</span>
       <span class="m">${when}</span></a>`;
   }).join("");
 }
@@ -188,7 +195,7 @@ function agendaList(limit, todos = D.FIXTURES) {
     const when = f.score ? esc(f.score) : f.timeTbd ? esc(T("tbd")) : timeTag(f.at, "time", fmtTime(f.at));
     const extra = (f.score ? " · " + esc(T("ftLower")) : "") + (f.tv ? ` · <span class="tv">TV: ${esc(f.tv)}</span>` : "");
     html += `<div class="fx ${f.score ? "done" : ""}">
-      <span class="teams">${f.club ? "" : bandeira(f.home)}${esc(teamName(f, "home"))} × ${f.club ? "" : bandeira(f.away)}${esc(teamName(f, "away"))}</span>
+      <span class="teams">${flagT(f, "home")}${esc(teamName(f, "home"))} × ${flagT(f, "away")}${esc(teamName(f, "away"))}</span>
       <span class="when">${when}</span>
       <span class="comp">${esc(L(f.comp))}${extra}</span></div>`;
   });
@@ -476,7 +483,7 @@ function homePage() {
 
 /* páginas das competições: tabelas, grupos, história e títulos. As notícias ficam no Início e na página Notícias */
 function categoryPage(k) {
-  const temNoticias = sorted.some((n) => n.cat === k);
+  const temNoticias = sorted.some((n) => n.cat === k && esporteDe(n) === "futebol");
   let corpo = "";
   if (k === "can") corpo = HI.qualHtml() + ad("meio") + HI.canHtml();
   if (k === "cl") corpo = `<section class="section cat-cl">${sectionHead(T("groupsTitle"))}${groupsHtml(D.CL_GROUPS, "cl")}<p class="note">${esc(T("clNote"))}</p></section>${ad("meio")}${HI.clHtml()}`;
@@ -534,7 +541,7 @@ function staticPage(key) {
   const email = `<a href="mailto:${esc(cfg.CONTACT_EMAIL)}">${esc(cfg.CONTACT_EMAIL)}</a>`;
   const corpo = L(p.body).filter((t) => cfg.CONTACT_EMAIL || !t.includes("{email}"));
   if (!cfg.CONTACT_EMAIL && key === "contato") corpo.push(T("emailSoon"));
-  const paras = corpo.map((t) => `<p>${esc(t).replace("{email}", email)}</p>`).join("");
+  const paras = corpo.map((t) => (t.startsWith("## ") ? `<h2>${esc(t.slice(3))}</h2>` : `<p>${esc(t).replace("{email}", email)}</p>`)).join("");
   return `<div class="layout"><div class="article">
     <div class="page-head"><h1>${esc(L(p.title))}</h1></div>
     <div class="prose">${paras}</div>
@@ -542,11 +549,10 @@ function staticPage(key) {
 }
 
 function articlePage(n) {
-  const c = CATS[n.cat];
   const related = sorted.filter((x) => x.slug !== n.slug && x.tags.some((t) => n.tags.includes(t))).slice(0, 3);
   return `<div class="layout"><article class="article">
-    <a class="back" href="${u(c.route)}">‹ ${esc(catName(n.cat))}</a>
-    ${n.especial ? `<div class="meta"><span class="tag tag-esp">${esc(T("especial"))}</span>${tag(n.cat)}<span>${esc(dateLabel(n))}</span></div>` : meta(n)}
+    <a class="back" href="${u(secaoRota(n))}">‹ ${esc(secaoNome(n))}</a>
+    ${n.especial ? `<div class="meta"><span class="tag tag-esp">${esc(T("especial"))}</span>${tagN(n)}<span>${esc(dateLabel(n))}</span></div>` : meta(n)}
     <h1>${esc(L(n.title))}</h1><p class="lead">${esc(L(n.lead))}</p>
     ${EX.assinatura(n)}
     ${cover(n)}
@@ -617,8 +623,8 @@ for (const l of LANGS) {
   PA.emitir(emit, pages);
   for (const n of NEWS) {
     pages.push(emit("noticias/" + n.slug, {
-      title: L(n.title), desc: L(n.lead), body: () => articlePage(n), active: CATS[n.cat].route, type: "article",
-      jsonld: EX.ldNoticia(n, catName(n.cat), CATS[n.cat].route)
+      title: L(n.title), desc: L(n.lead), body: () => articlePage(n), active: secaoRota(n), type: "article",
+      jsonld: EX.ldNoticia(n, secaoNome(n), secaoRota(n))
     }));
   }
 }
