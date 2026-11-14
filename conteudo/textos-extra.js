@@ -150,6 +150,47 @@ module.exports = {
         ]
       }
     },
+    editorial: {
+      title: { pt: "Política editorial", fr: "Charte éditoriale", en: "Editorial policy", ar: "السياسة التحريرية" },
+      body: {
+        pt: [
+          "O Bola Africana cobre o esporte africano com informação conferida. Esta página explica como trabalhamos. Última atualização: 14 de novembro de 2026.",
+          "Fontes: toda matéria se apoia em fontes públicas identificáveis, como a CAF, as federações nacionais, os clubes e a imprensa esportiva, e traz no fim os links para essas fontes. Sempre que possível, resultados, datas e números são conferidos em mais de uma fonte.",
+          "Quando as fontes divergem, dizemos isso no texto e indicamos qual número usamos e por quê. O que não conseguimos confirmar fica de fora.",
+          "Fato e análise ficam separados: o que é dedução nossa aparece como tal. Não publicamos boatos de transferência nem conteúdo pago apresentado como notícia.",
+          "Ferramentas de inteligência artificial ajudam na pesquisa, na redação e na tradução para francês, inglês e árabe. Toda informação publicada vem de uma fonte citada na matéria.",
+          "Correções: se encontrar um erro, escreva para {email} com o link da matéria e o trecho que precisa mudar. Corrigimos o texto o quanto antes.",
+          "Publicidade: os anúncios, quando houver, aparecem identificados e não interferem na escolha nem no conteúdo das matérias."
+        ],
+        fr: [
+          "Ballon Africain couvre le sport africain avec des informations vérifiées. Cette page explique notre façon de travailler. Dernière mise à jour : 14 novembre 2026.",
+          "Sources : chaque article s'appuie sur des sources publiques identifiables, comme la CAF, les fédérations nationales, les clubs et la presse sportive, et renvoie à ces sources à la fin du texte. Dans la mesure du possible, résultats, dates et chiffres sont vérifiés dans plus d'une source.",
+          "Lorsque les sources divergent, nous le disons dans le texte et précisons quel chiffre nous retenons et pourquoi. Ce que nous ne pouvons pas confirmer n'est pas publié.",
+          "Les faits et l'analyse sont séparés : ce qui relève de notre déduction est présenté comme tel. Nous ne publions ni rumeurs de transfert ni contenu payé présenté comme une information.",
+          "Des outils d'intelligence artificielle aident à la recherche, à la rédaction et à la traduction en français, en anglais et en arabe. Toute information publiée provient d'une source citée dans l'article.",
+          "Corrections : si vous repérez une erreur, écrivez à {email} avec le lien de l'article et le passage à modifier. Nous corrigeons le texte au plus vite.",
+          "Publicité : les annonces, lorsqu'il y en a, sont identifiées et n'influencent ni le choix ni le contenu des articles."
+        ],
+        en: [
+          "African Ball covers African sport with checked information. This page explains how we work. Last updated: 14 November 2026.",
+          "Sources: every story relies on identifiable public sources, such as CAF, national federations, clubs and the sports press, and links to them at the end. Whenever possible, results, dates and figures are checked against more than one source.",
+          "When sources disagree, we say so in the story and explain which figure we use and why. What we cannot confirm is left out.",
+          "Facts and analysis are kept apart: anything that is our own inference is presented as such. We do not publish transfer rumours or paid content presented as news.",
+          "Artificial intelligence tools help with research, writing and translation into French, English and Arabic. Every piece of information we publish comes from a source cited in the story.",
+          "Corrections: if you spot a mistake, write to {email} with the link to the story and the passage that needs changing. We fix the text as soon as possible.",
+          "Advertising: ads, when there are any, are labelled and have no influence on which stories we cover or what they say."
+        ],
+        ar: [
+          "يغطي موقع الكرة الأفريقية الرياضة الأفريقية بمعلومات موثقة. توضح هذه الصفحة طريقة عملنا. آخر تحديث: 14 نوفمبر 2026.",
+          "المصادر: تستند كل مادة إلى مصادر عامة معروفة، مثل الكاف والاتحادات الوطنية والأندية والصحافة الرياضية، وتتضمن في نهايتها روابط هذه المصادر. ونتحقق من النتائج والتواريخ والأرقام في أكثر من مصدر كلما أمكن.",
+          "عندما تختلف المصادر نذكر ذلك في النص ونوضح الرقم الذي اعتمدناه وسبب اختياره. وما لا نستطيع التأكد منه لا ننشره.",
+          "نفصل بين الخبر والتحليل: ما هو استنتاج منا نقدمه على أنه كذلك. ولا ننشر شائعات الانتقالات ولا المحتوى المدفوع على أنه خبر.",
+          "تساعدنا أدوات الذكاء الاصطناعي في البحث والكتابة والترجمة إلى الفرنسية والإنجليزية والعربية. وكل معلومة ننشرها مصدرها مذكور في المادة.",
+          "التصحيحات: إذا وجدت خطأ فراسلنا على {email} مع رابط المادة والجزء الذي يحتاج إلى تعديل. ونصحح النص في أقرب وقت.",
+          "الإعلانات: تظهر الإعلانات، عند وجودها، بشكل واضح ولا تؤثر في اختيار المواد ولا في مضمونها."
+        ]
+      }
+    },
     privacidade: {
       title: { pt: "Política de privacidade", fr: "Politique de confidentialité", en: "Privacy policy" },
       body: {
