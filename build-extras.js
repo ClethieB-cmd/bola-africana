@@ -12,7 +12,7 @@ module.exports = function (h) {
     today: { pt: "Hoje", fr: "Aujourd'hui", en: "Today", ar: "اليوم" },
     paises: { pt: "Países", fr: "Pays", en: "Countries", ar: "الدول" },
     paisesTitle: { pt: "As 54 federações da CAF", fr: "Les 54 fédérations de la CAF", en: "The 54 CAF member associations", ar: "الاتحادات الـ54 الأعضاء في الكاف" },
-    paisesDesc: { pt: "Os países do futebol africano por região, como a CAF organiza as suas cinco uniões regionais. Escolha um país para ver o campeonato nacional, os números e a seleção nas eliminatórias.", fr: "Les pays du football africain par région, selon les cinq unions zonales de la CAF. Choisissez un pays pour voir son championnat, ses chiffres et sa sélection en éliminatoires.", en: "African football countries by region, following CAF's five zonal unions. Pick a country to see its league, its numbers and its national team in qualifying.", ar: "دول كرة القدم الأفريقية حسب المنطقة، وفق الاتحادات الإقليمية الخمسة للكاف. اختر دولة لترى دوريها وأرقامها ومنتخبها في التصفيات." },
+    paisesDesc: { pt: "Os países do futebol africano por região, como a CAF organiza as suas cinco uniões regionais. Escolha um país e depois masculino ou feminino para ver a seleção, o campeonato, os clubes e os outros esportes.", fr: "Les pays du football africain par région, selon les cinq unions zonales de la CAF. Choisissez un pays, puis masculin ou féminin, pour voir la sélection, le championnat, les clubs et les autres sports.", en: "African football countries by region, following CAF's five zonal unions. Pick a country, then men's or women's, to see the national team, the league, the clubs and other sports.", ar: "دول كرة القدم الأفريقية حسب المنطقة، وفق الاتحادات الإقليمية الخمسة للكاف. اختر دولة ثم الرجال أو السيدات لترى المنتخب والدوري والأندية والرياضات الأخرى." },
     paisesAll: { pt: "Ver as 54 federações", fr: "Voir les 54 fédérations", en: "See all 54 associations", ar: "عرض الاتحادات الـ54" },
     paisesNota: { pt: "Usamos as bandeiras dos países, de domínio público. Os escudos das federações são marcas registradas e não são reproduzidos aqui.", fr: "Nous utilisons les drapeaux des pays, du domaine public. Les écussons des fédérations sont des marques déposées et ne sont pas reproduits ici.", en: "We use national flags, which are in the public domain. Federation crests are registered trademarks and are not reproduced here.", ar: "نستخدم أعلام الدول لأنها ملك عام. شعارات الاتحادات علامات مسجلة ولا ننشرها هنا." },
     especiais: { pt: "Especiais", fr: "Grands formats", en: "Features", ar: "ملفات خاصة" },
@@ -60,7 +60,7 @@ module.exports = function (h) {
   if (conta !== 54) throw new Error(`Países: ${conta} federações nas regiões, o esperado é 54`);
   const porCode = Object.fromEntries(CAMP.map((c) => [c.code, c]));
   const ordenar = (codes) => [...codes].sort((a, b) => L(porCode[a].nome).localeCompare(L(porCode[b].nome), LOCALE[getLang()]));
-  const linkPais = (code) => `<a href="${u("campeonatos/" + porCode[code].slug)}">${bandeira(code)}<span>${esc(L(porCode[code].nome))}</span></a>`;
+  const linkPais = (code) => `<a href="${u("pais/" + porCode[code].slug)}">${bandeira(code)}<span>${esc(L(porCode[code].nome))}</span></a>`;
 
   const cacheMenu = {};
   function menuPaises() {
@@ -74,7 +74,7 @@ module.exports = function (h) {
     return `<div class="page-head"><h1>${esc(T("paisesTitle"))}</h1><p>${esc(T("paisesDesc"))}</p></div>
       <div class="paises-grid">${REGIOES.map(([id, nome, uniao, codes]) => `<section class="regiao" aria-labelledby="reg-${id}">
         <h2 id="reg-${id}">${esc(L(nome))} <small>${esc(uniao)} · ${codes.length}</small></h2>
-        <ul>${ordenar(codes).map((c) => `<li><a href="${u("campeonatos/" + porCode[c].slug)}">${bandeira(c)}<span><b>${esc(L(porCode[c].nome))}</b><small>${esc(porCode[c].liga)}</small></span></a></li>`).join("")}</ul></section>`).join("")}</div>
+        <ul>${ordenar(codes).map((c) => `<li><a href="${u("pais/" + porCode[c].slug)}">${bandeira(c)}<span><b>${esc(L(porCode[c].nome))}</b><small>${esc(porCode[c].liga)}</small></span></a></li>`).join("")}</ul></section>`).join("")}</div>
       <p class="note">${esc(T("paisesNota"))}</p>`;
   }
 
