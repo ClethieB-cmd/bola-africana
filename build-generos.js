@@ -47,7 +47,7 @@ module.exports = function (h) {
 
   /* o que cada gênero tem, esporte por esporte */
   function montar(g) {
-    const noticias = sorted.filter((n) => generoNoticia(n) === g);
+    const noticias = sorted.filter((n) => ESP.temGenero(n, g));
     const lista = [];
 
     const futCards = [];
@@ -73,7 +73,7 @@ module.exports = function (h) {
 
     for (const e of ESP.ESPORTES) {
       const cs = ESP.comps(e).filter((c) => ESP.generoComp(c.nome) === g);
-      const news = ESP.newsDe(e).filter((n) => generoNoticia(n) === g);
+      const news = ESP.newsDe(e).filter((n) => ESP.temGenero(n, g));
       if (g === "fem" && !cs.length && !news.length) continue;
       lista.push({
         id: e.id, nome: L(e.nome), desc: L(e.desc), link: ESP.espUrl(e), n: cs.length, news, newsN: news.length,
