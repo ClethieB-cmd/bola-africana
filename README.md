@@ -30,7 +30,7 @@ o que ajuda o Google a encontrar o site e é o que o AdSense espera.
 | `build-extras.js` | Central de jogos, menu e página de Países, Especiais, assinatura e botões de compartilhar, dados para o Google (JSON-LD) e RSS. |
 | `assets/og.png.b64` | Imagem que aparece quando alguém compartilha o site (WhatsApp, Facebook, X), guardada como texto; o build cria o `og.png`. |
 | `conteudo/ligas-historia.js` | Último campeão, maior campeão, copa, artilheiro e melhor jogador de cada campeonato, com as fontes. |
-| `conteudo/ligas-manuais.js` | Tabelas dos campeonatos que a API não cobre (hoje, o do Congo), copiadas de uma fonte conferida. |
+| `conteudo/ligas-manuais.js` | Tabelas preenchidas à mão: a temporada 2026/27 de Marrocos, Egito, África do Sul, Camarões, Costa do Marfim e RD Congo, e o campeonato do Congo, que a API não cobre. |
 | `assets/` | Visual (`style.css`) e pequenos ajustes no navegador (`site.js`). |
 | `build.js` | Gera as páginas do site na pasta `_site/`. |
 | `.github/workflows/publicar.yml` | Faz o GitHub gerar e publicar o site sozinho a cada alteração. |
@@ -136,11 +136,30 @@ ou no painel da API e coloque em `API_ID`, dentro de `conteudo/campeonatos.js`.
 O robô escolhe o país de cada liga primeiro pelo nome e só depois pelo código, e uma liga nunca vale para dois países
 (antes, a liga da RD Congo aparecia também na página do Congo).
 
-### Campeonatos que a API não cobre
+### Campeonatos preenchidos à mão
 
 O campeonato do Congo (Brazzaville) não vem da API. A tabela está em `conteudo/ligas-manuais.js`, copiada da página da
 FECOFOOT, com a fonte e o dia da conferência. Para atualizar, troque as linhas da tabela e a data em `atualizado`.
 Se um dia a API passar a ter o campeonato, os dados dela entram no lugar sozinhos.
+
+O plano gratuito da API-Football vai só até a temporada 2024, então ela mostra a temporada 2024/25 já encerrada. Para
+seis ligas, a temporada 2026/27 em curso está no mesmo arquivo, marcada com `atual: true` e `ano: 2026`, e entra no
+lugar da API enquanto a API não chegar a essa temporada:
+
+| Liga | Fontes |
+|---|---|
+| Marrocos, Botola Pro | FotMob (o Sofascore errou um placar da 1ª rodada; o Le Matin confirmou o do FotMob) |
+| Egito, Premier League | FotMob e Sofascore, iguais |
+| África do Sul, Premiership | FotMob e Sofascore, iguais |
+| Camarões, Elite One | Flashscore (tabela e placares) e Sofascore (datas e próximos jogos) |
+| Costa do Marfim, Ligue 1 | Flashscore e Sofascore, iguais |
+| RD Congo, Linafoot Ligue 1 | Sofascore (o Flashscore ainda não tinha um jogo de 05/11) |
+
+Cada liga traz a classificação, os últimos resultados, os próximos jogos e todos os jogos da temporada (que alimentam a
+página de cada time). Os jogos de "próximos" com data passada somem sozinhos na publicação seguinte, mas a tabela não
+se atualiza sozinha: confira de novo nas fontes depois de cada rodada, troque `tabela`, `resultados`, `proximos` e
+`jogos` e mude `atualizado`. Antes de publicar, a soma de vitórias, empates e derrotas tem de dar o número de jogos,
+os pontos têm de ser 3 por vitória e 1 por empate, e o total de gols pró tem de ser igual ao de gols contra.
 
 ### Em números de cada campeonato
 
