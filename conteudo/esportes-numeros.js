@@ -56,10 +56,10 @@ module.exports = {
             "AfroBasket titles for Angola, a record; the latest in 2025 at home, 70-43 over Mali in the final",
             "لقبًا لأنغولا في بطولة أفريقيا لكرة السلة، وهو رقم قياسي؛ آخرها عام 2025 على أرضها بالفوز على مالي 70-43 في النهائي")],
           [6, t(
-            "campeões diferentes nas seis temporadas da BAL; em 2026, o RSSB Tigers, de Ruanda, ganhou em Kigali na sua primeira participação",
-            "champions différents en six saisons de BAL ; en 2026, les RSSB Tigers (Rwanda) ont gagné à Kigali pour leur première participation",
-            "different champions in six BAL seasons; in 2026 Rwanda's RSSB Tigers won in Kigali in their first season",
-            "أبطال مختلفون في المواسم الستة لدوري كرة السلة الأفريقي؛ وفي 2026 فاز نادي RSSB تايغرز الرواندي باللقب في كيغالي في أول مشاركة له")],
+            "campeões diferentes nas seis temporadas da BAL; em 2026, o RSSB Tigers, de Ruanda, ganhou em Kigali na sua primeira participação, com 90 a 88 sobre o Petro de Luanda na final",
+            "champions différents en six saisons de BAL ; en 2026, les RSSB Tigers (Rwanda) ont gagné à Kigali pour leur première participation, 90-88 contre Petro de Luanda en finale",
+            "different champions in six BAL seasons; in 2026 Rwanda's RSSB Tigers won in Kigali in their first season, beating Petro de Luanda 90-88 in the final",
+            "أبطال مختلفون في المواسم الستة لدوري كرة السلة الأفريقي؛ وفي 2026 فاز نادي RSSB تايغرز الرواندي باللقب في كيغالي في أول مشاركة له، بالفوز على بترو دي لواندا 90-88 في النهائي")],
           [4, t(
             "finais da BAL do Petro de Luanda (2022, 2024, 2025 e 2026), com o título de 2024",
             "finales de BAL pour Petro de Luanda (2022, 2024, 2025 et 2026), avec le titre en 2024",
@@ -192,9 +192,14 @@ module.exports = {
             "medalhas africanas no judô dos Jogos de Paris 2024",
             "médaille africaine en judo aux Jeux de Paris 2024",
             "African judo medals at the Paris 2024 Games",
-            "ميدالية أفريقية في الجودو في ألعاب باريس 2024")]
+            "ميدالية أفريقية في الجودو في ألعاب باريس 2024")],
+          [4, t(
+            "ouros da Argélia, somando homens e mulheres, à frente do quadro de medalhas do 47º Campeonato Africano, em Nairóbi, de 24 a 26 de abril de 2026; o Egito venceu a disputa por equipes mistas",
+            "titres pour l'Algérie, hommes et femmes confondus, en tête du tableau des médailles des 47es Championnats d'Afrique, à Nairobi, du 24 au 26 avril 2026 ; l'Égypte a remporté l'épreuve par équipes mixtes",
+            "gold medals for Algeria, men and women combined, top of the medal table at the 47th African Championships in Nairobi, 24-26 April 2026; Egypt won the mixed team event",
+            "ذهبيات للجزائر، رجالًا وسيدات، تصدرت بها جدول الميداليات في البطولة الأفريقية السابعة والأربعين في نيروبي من 24 إلى 26 أبريل 2026؛ وفازت مصر بمسابقة الفرق المختلطة")]
         ],
-        fontes: [W("List_of_Olympic_medalists_in_judo"), W("Judo_at_the_2024_Summer_Olympics")]
+        fontes: [W("List_of_Olympic_medalists_in_judo"), W("Judo_at_the_2024_Summer_Olympics"), ["APS", "https://www.aps.dz/en/sports/individual-sports/moepfje7-algeria-claims-title-with-9-medals-including-4-gold"], W("2026_African_Judo_Championships")]
       },
       feminino: {
         itens: [
@@ -207,9 +212,78 @@ module.exports = {
             "medalhas africanas no judô dos Jogos de Paris 2024",
             "médaille africaine en judo aux Jeux de Paris 2024",
             "African judo medals at the Paris 2024 Games",
-            "ميدالية أفريقية في الجودو في ألعاب باريس 2024")]
+            "ميدالية أفريقية في الجودو في ألعاب باريس 2024")],
+          [4, t(
+            "ouros da Argélia, somando homens e mulheres, à frente do quadro de medalhas do 47º Campeonato Africano, em Nairóbi, de 24 a 26 de abril de 2026; o Egito venceu a disputa por equipes mistas",
+            "titres pour l'Algérie, hommes et femmes confondus, en tête du tableau des médailles des 47es Championnats d'Afrique, à Nairobi, du 24 au 26 avril 2026 ; l'Égypte a remporté l'épreuve par équipes mixtes",
+            "gold medals for Algeria, men and women combined, top of the medal table at the 47th African Championships in Nairobi, 24-26 April 2026; Egypt won the mixed team event",
+            "ذهبيات للجزائر، رجالًا وسيدات، تصدرت بها جدول الميداليات في البطولة الأفريقية السابعة والأربعين في نيروبي من 24 إلى 26 أبريل 2026؛ وفازت مصر بمسابقة الفرق المختلطة")]
         ],
-        fontes: [W("List_of_Olympic_medalists_in_judo"), W("Judo_at_the_2024_Summer_Olympics")]
+        fontes: [W("List_of_Olympic_medalists_in_judo"), W("Judo_at_the_2024_Summer_Olympics"), ["APS", "https://www.aps.dz/en/sports/individual-sports/moepfje7-algeria-claims-title-with-9-medals-including-4-gold"], W("2026_African_Judo_Championships")]
+      }
+    },
+    boxe: {
+      masculino: {
+        itens: [
+          ["51 kg", t(
+            "bronze de David de Pina em Paris 2024, a primeira medalha olímpica de Cabo Verde",
+            "bronze de David de Pina à Paris en 2024, la première médaille olympique du Cap-Vert",
+            "David de Pina's bronze at Paris 2024, Cape Verde's first Olympic medal",
+            "برونزية ديفيد دي بينا في باريس 2024، أول ميدالية أولمبية للرأس الأخضر")],
+          [14, t(
+            "medalhas do Quênia, anfitrião e primeiro colocado no 1º Campeonato Africano da World Boxing, em Nairóbi, em outubro de 2026: 5 ouros, 3 pratas e 6 bronzes, somando homens e mulheres",
+            "médailles pour le Kenya, pays hôte et premier des 1ers Championnats d'Afrique de World Boxing, à Nairobi, en octobre 2026 : 5 or, 3 argent et 6 bronze, hommes et femmes confondus",
+            "medals for hosts Kenya, top of the first World Boxing African Championships in Nairobi, October 2026: 5 gold, 3 silver and 6 bronze, men and women combined",
+            "ميدالية لكينيا، البلد المضيف ومتصدر أول بطولة أفريقية لاتحاد World Boxing في نيروبي في أكتوبر 2026: 5 ذهبيات و3 فضيات و6 برونزيات للرجال والسيدات معًا")]
+        ],
+        fontes: [["Olympics.com", "https://olympics.com/en/news/paris-2024-boxing-yunior-alcantara-david-de-pina-win-bronze"], ["Citizen Digital", "https://citizen.digital/article/kenya-crowned-african-boxing-champions-with-14-medals-n392582"]]
+      },
+      feminino: {
+        itens: [
+          ["66 kg", t(
+            "ouro olímpico de Imane Khelif, da Argélia, em Paris 2024, com vitória sobre a chinesa Yang Liu na final",
+            "titre olympique d'Imane Khelif (Algérie) à Paris en 2024, victoire sur la Chinoise Yang Liu en finale",
+            "Olympic gold for Algeria's Imane Khelif at Paris 2024, beating China's Yang Liu in the final",
+            "ذهبية أولمبية للجزائرية إيمان خليف في باريس 2024، بفوزها على الصينية يانغ ليو في النهائي")],
+          [14, t(
+            "medalhas do Quênia, anfitrião e primeiro colocado no 1º Campeonato Africano da World Boxing, em Nairóbi, em outubro de 2026: 5 ouros, 3 pratas e 6 bronzes, somando homens e mulheres",
+            "médailles pour le Kenya, pays hôte et premier des 1ers Championnats d'Afrique de World Boxing, à Nairobi, en octobre 2026 : 5 or, 3 argent et 6 bronze, hommes et femmes confondus",
+            "medals for hosts Kenya, top of the first World Boxing African Championships in Nairobi, October 2026: 5 gold, 3 silver and 6 bronze, men and women combined",
+            "ميدالية لكينيا، البلد المضيف ومتصدر أول بطولة أفريقية لاتحاد World Boxing في نيروبي في أكتوبر 2026: 5 ذهبيات و3 فضيات و6 برونزيات للرجال والسيدات معًا")]
+        ],
+        fontes: [W("Imane_Khelif"), ["Citizen Digital", "https://citizen.digital/article/kenya-crowned-african-boxing-champions-with-14-medals-n392582"]]
+      }
+    },
+    ciclismo: {
+      masculino: {
+        itens: [
+          ["3:44:02", t(
+            "Callum Ormiston, da África do Sul: campeão africano de estrada nos 153 km de Kisumu, no Quênia, em 25 de outubro de 2026",
+            "Callum Ormiston (Afrique du Sud) : champion d'Afrique sur route, 153 km à Kisumu (Kenya), le 25 octobre 2026",
+            "South Africa's Callum Ormiston: African road race champion over 153 km in Kisumu, Kenya, 25 October 2026",
+            "الجنوب أفريقي كالوم أورميستون: بطل أفريقيا في سباق الطريق لمسافة 153 كم في كيسومو بكينيا يوم 25 أكتوبر 2026")],
+          ["40:32", t(
+            "Alexandre Mayer, de Maurício: campeão africano do contrarrelógio, 30,6 km, em Kisumu",
+            "Alexandre Mayer (Maurice) : champion d'Afrique du contre-la-montre, 30,6 km, à Kisumu",
+            "Mauritius' Alexandre Mayer: African time trial champion, 30.6 km, Kisumu",
+            "الموريشيوسي ألكسندر ماير: بطل أفريقيا في سباق ضد الساعة لمسافة 30.6 كم في كيسومو")]
+        ],
+        fontes: [["The New Times", "https://www.newtimes.co.rw/article/39957/sports/cycling/ormiston-wins-african-road-race-title-as-rwandans-miss-podium"], ["The Standard", "https://www.standardmedia.co.ke/sports/article/2001560680/south-africa-pedals-to-gold-powered-by-kenyan-ugali"]]
+      },
+      feminino: {
+        itens: [
+          ["31:02", t(
+            "Diane Ingabire, de Ruanda: campeã africana do contrarrelógio, 20,4 km, em Kisumu, 1,54 s à frente de Aurélie Halbwachs, de Maurício",
+            "Diane Ingabire (Rwanda) : championne d'Afrique du contre-la-montre, 20,4 km, à Kisumu, 1,54 s devant Aurélie Halbwachs (Maurice)",
+            "Rwanda's Diane Ingabire: African time trial champion, 20.4 km, Kisumu, 1.54 s ahead of Mauritius' Aurélie Halbwachs",
+            "الرواندية ديان إنغابيري: بطلة أفريقيا في سباق ضد الساعة لمسافة 20.4 كم في كيسومو، بفارق 1.54 ثانية أمام الموريشيوسية أوريلي هالبواكس")],
+          [3, t(
+            "títulos de Ruanda nos contrarrelógios femininos de Kisumu: Diane Ingabire (elite), Jazila Mwamikazi (sub-23) e Yvonne Masengesho (júnior)",
+            "titres pour le Rwanda dans les contre-la-montre féminins de Kisumu : Diane Ingabire (élite), Jazila Mwamikazi (moins de 23 ans) et Yvonne Masengesho (juniors)",
+            "titles for Rwanda in the women's time trials in Kisumu: Diane Ingabire (elite), Jazila Mwamikazi (under-23) and Yvonne Masengesho (junior)",
+            "ألقاب لرواندا في سباقات ضد الساعة للسيدات في كيسومو: ديان إنغابيري (النخبة) وجازيلا مواميكازي (تحت 23 عامًا) وإيفون ماسينغيشو (الناشئات)")]
+        ],
+        fontes: [["The Standard", "https://www.standardmedia.co.ke/sports/article/2001560680/south-africa-pedals-to-gold-powered-by-kenyan-ugali"]]
       }
     },
     taekwondo: {
