@@ -176,9 +176,9 @@ tênis de mesa, tênis, ciclismo e críquete. A lista fica em `conteudo/esportes
 
 ## Masculino e Feminino
 
-Masculino e Feminino não ficam no menu: o gênero se escolhe dentro de cada país (veja "Cabeçalho, menu e países").
-As páginas `masculino.html` e `feminino.html` continuam no ar, com todos os esportes de cada gênero; o Feminino
-aparece no menu como "Futebol feminino: história e títulos" e no rodapé como "Futebol feminino".
+Masculino e Feminino não ficam no menu: o gênero se escolhe dentro de cada país (veja "Cabeçalho, menu e países")
+e nas abas Masculino e Feminino de cada competição e de cada esporte. As páginas `masculino.html` e `feminino.html`
+continuam no ar, com todos os esportes de cada gênero; o rodapé leva ao Feminino pelo link "Futebol feminino".
 
 - Competição automática entra no Feminino quando o nome dela tem Women, Féminin ou Ladies (é assim que a API marca).
 - Notícia entra no Feminino quando a categoria é `fem` ou quando ela tem a tag `fem`. Para uma notícia feminina
@@ -198,6 +198,18 @@ Cada time das tabelas dos campeonatos nacionais tem uma página própria (clique
 - A API não traz a história dos clubes. Para um clube ganhar história, escreva em `conteudo/times.js` (o arquivo explica como).
 - A página do time só entra no Google quando tem elenco, dados do clube ou história.
 - Os escudos vêm da API-Sports e pertencem aos clubes.
+
+## Abas Masculino e Feminino e "Em números" de cada esporte
+
+- As páginas das competições (CAN 2027, Liga dos Campeões, Copa das Confederações, Seleções, Ligas nacionais e as de
+  `competicoes/`) e as páginas de cada esporte têm no topo as abas **Masculino** e **Feminino**. A aba troca o conteúdo
+  (notícias, jogos e tabelas) e o quadro lateral "Em números" ao mesmo tempo, sem abrir janela. O endereço `#feminino`
+  abre direto a aba Feminino. O CHAN não tem abas: é só masculino. O código fica em `build-abas.js`.
+- Nas páginas de outros esportes, o quadro "Em números" nunca mostra futebol: os números de cada esporte e gênero ficam
+  em `conteudo/esportes-numeros.js`, com as fontes de cada quadro e a data em que foram conferidos. Esporte sem números
+  conferidos fica sem o quadro.
+- Fontes de referência para conferir e atualizar: CAA e World Athletics (atletismo), FIBA África e BAL (basquete),
+  CAHB (handebol), CAVB (vôlei), Rugby Africa (rúgbi), AJU e IJF (judô), União Africana de Taekwondo e ICC (críquete).
 
 ## Cabeçalho, menu e países
 
@@ -237,6 +249,13 @@ as finais, os campeões, os recordes e os prêmios de melhor jogador e jogadora 
 As notícias aparecem no Início, na página Notícias (`noticias.html`, separada por competição e por esporte) e dentro
 de cada notícia. As páginas das competições, dos esportes, dos campeonatos e dos times não mostram notícias: elas têm
 um link para a parte certa da página Notícias.
+
+- **Outros esportes**: com o campo `esporte` (por exemplo `esporte: "rugbi"`), o chapéu da notícia e o link de volta
+  passam a ser os do esporte. Use `genero: "fem"` para uma notícia feminina e `genero: "misto"` quando a notícia trata
+  das provas masculina e feminina (uma maratona, por exemplo).
+- **Datas**: toda notícia mostra dia, mês e ano. A data é a do momento da notícia e precisa bater com as fontes.
+- **Páginas Sobre, Contato e Política editorial** ficam em `conteudo/textos-extra.js`. Um parágrafo que começa com
+  `## ` vira subtítulo (é assim que aparecem o Expediente e a parte para federações e assessorias).
 
 ## Central de jogos, Países e Especiais
 
@@ -284,6 +303,8 @@ Em `conteudo/dados.js`, na lista `FIXTURES`:
 - `score`: coloque o placar (ex.: `"2–0"`) quando o jogo acabar.
 - `bar: true`: mostra o jogo na faixa de placar do topo.
 - `tv`: emissora do jogo (ex.: `"SuperSport"`).
+- Jogo de clubes: `club: true` e `paises: ["RSA", "MAR"]` (país do mandante e do visitante) para mostrar as bandeiras.
+  A sigla de cada clube fica em `CLUB_CODES`.
 
 O guia "Onde assistir" fica em `conteudo/textos-extra.js`, na lista `WATCH`.
 
