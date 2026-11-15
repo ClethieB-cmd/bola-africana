@@ -198,7 +198,9 @@ module.exports = function (h) {
     can: () => `<p class="atual">${T("fAtual", { x: `${sel("MAR")} (2025)` })}</p>`,
     cl: () => `<p class="atual">${T("fAtual", { x: `${clube("Mamelodi Sundowns", "RSA")} (2026)` })}</p>`,
     cc: () => `<p class="atual">${T("fAtual", { x: `${clube("USM Alger", "ALG")} (2026)` })}</p>`,
-    fem: () => `<p class="atual">${T("fAtualF", { x: `${sel("CMR")} (CAN 2026)` })}</p>`
+    fem: () => `<p class="atual">${T("fAtualF", { x: `${sel("CMR")} (CAN 2026)` })}</p>`,
+    canFem: () => `<p class="atual">${T("fAtualF", { x: `${sel("CMR")} (2026)` })}</p>`,
+    clFem: () => `<p class="atual">${T("fAtualF", { x: `${clube("AS FAR", "MAR")} (2025)` })}</p>`
   };
   const LISTAS = {
     geral: ["can", "cl", "cc", "canf", "potyM", "potyF"],
@@ -206,7 +208,11 @@ module.exports = function (h) {
     cl: ["cl", "clPais"],
     cc: ["cc", "ccPais"],
     sel: ["can", "potyM", "art"],
-    fem: ["canf", "clf", "potyF"]
+    fem: ["canf", "clf", "potyF"],
+    /* aba Feminino das páginas de competição */
+    canFem: ["canf", "potyF"],
+    clFem: ["clf", "potyF"],
+    selFem: ["canf", "potyF"]
   };
   /* quadro "Em números" de cada campeonato nacional (dados em conteudo/ligas-historia.js) */
   const LHD = require("./conteudo/ligas-historia.js");
@@ -245,12 +251,30 @@ module.exports = function (h) {
       <p class="liga-nome">${bandeira(c.code)}${esc(c.liga)}</p>${linhasLiga(c)}</section>${ad || ""}</aside>`;
   }
 
-  function fatos(k, ad) {
+  /* o quadro sozinho (as páginas com abas Masculino e Feminino mostram um por aba) */
+  function painel(k) {
     const lista = LISTAS[k] || LISTAS.geral;
-    return `<aside class="sidebar"><section class="panel fatos" aria-labelledby="fatos-h"><h2 id="fatos-h">${esc(T("fTitulo"))}</h2>
-      ${ATUAL[k] ? ATUAL[k]() : ""}<ul>${lista.map((x) => ITENS[x]()).join("")}</ul></section>${ad || ""}</aside>`;
+    return `<section class="panel fatos"><h2>${esc(T("fTitulo"))}</h2>
+      ${ATUAL[k] ? ATUAL[k]() : ""}<ul>${lista.map((x) => ITENS[x]()).join("")}</ul></section>`;
+  }
+  function fatos(k, ad) {
+    return `<aside class="sidebar">${painel(k)}${ad || ""}</aside>`;
+  }
+  /* partes do futebol feminino, para a aba Feminino das páginas da CAN, da Liga dos Campeões e das Seleções */
+  const clfTabela = () => tabela(`${th("thTemporada", "num")}${th("thCampeao")}${th("thPlacar")}${th("thVice")}`,
+    H.clfFinais.map(([ano, c, cp, p, v, vp]) => `<tr><td class="num">${ano}</td><td>${clube(c, cp)}</td><td><b>${esc(p)}</b></td><td>${clube(v, vp)}</td></tr>`));
+  function canfHtml() {
+    return `<section class="section" aria-labelledby="h-canftit">${sectionHead(T("hCanfTit"), null, null, "h-canftit")}${titulosSelHtml(H.canfTitulos, H.canfFinais, false)}<p class="note">${esc(L(H.canfNota))}</p></section>
+      <section class="section" aria-labelledby="h-canffin">${sectionHead(T("hCanf"), null, null, "h-canffin")}${finaisHtml(H.canfFinais, [])}${fontes(H.canfFontes)}</section>`;
+  }
+  function clfHtml() {
+    return `<section class="section" aria-labelledby="h-clf">${sectionHead(T("hClf"), null, null, "h-clf")}${clfTabela()}${fontes(H.clfFontes)}</section>`;
+  }
+  function selFemHtml() {
+    return `<section class="section" aria-labelledby="h-canftit2">${sectionHead(T("hCanfTit"), null, null, "h-canftit2")}${titulosSelHtml(H.canfTitulos, H.canfFinais, false)}<p class="note">${esc(L(H.canfNota))}</p></section>
+      <section class="section" aria-labelledby="h-potyf">${sectionHead(T("hPotyF"), null, null, "h-potyf")}${potyHtml(H.potyF, true)}${fontes([...H.canfFontes.slice(0, 1), H.potyFontes[1]])}</section>`;
   }
 
-  return { qualHtml, qualCards, canHtml, clHtml, ccHtml, selHtml, femHtml, fatos, fatosLiga, temLiga, linhasLiga,
+  return { qualHtml, qualCards, canHtml, clHtml, ccHtml, selHtml, femHtml, canfHtml, clfHtml, selFemHtml, fatos, painel, fatosLiga, temLiga, linhasLiga,
     util: { H, sel, clube, tabela, th, thAbbr, fontes, data, zona, AND } };
 };
