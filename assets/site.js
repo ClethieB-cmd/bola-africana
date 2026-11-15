@@ -270,3 +270,43 @@
     }
   }
 })();
+
+/* Abas Masculino e Feminino das páginas de competição e de esporte: trocam o conteúdo e o quadro "Em números" juntos.
+   O endereço #feminino abre direto a aba Feminino. Sem JavaScript, as duas partes aparecem em sequência. */
+(function () {
+  var raiz = document.querySelector("[data-gen-abas]");
+  if (!raiz) return;
+  raiz.classList.add("js");
+  var abas = raiz.querySelectorAll(".gb");
+  var paineis = raiz.querySelectorAll(".gen-painel");
+  function mostrar(g, foco) {
+    if (g !== "masculino" && g !== "feminino") g = raiz.getAttribute("data-inicial") || "masculino";
+    for (var i = 0; i < abas.length; i++) {
+      var sim = abas[i].getAttribute("data-gen") === g;
+      abas[i].setAttribute("aria-selected", sim ? "true" : "false");
+      abas[i].tabIndex = sim ? 0 : -1;
+      if (sim && foco) abas[i].focus();
+    }
+    for (var j = 0; j < paineis.length; j++) paineis[j].hidden = paineis[j].getAttribute("data-gen") !== g;
+  }
+  Array.prototype.forEach.call(abas, function (a, i) {
+    a.addEventListener("click", function (e) {
+      e.preventDefault();
+      var g = a.getAttribute("data-gen");
+      history.replaceState(null, "", "#" + g);
+      mostrar(g, false);
+    });
+    a.addEventListener("keydown", function (e) {
+      var rtl = document.documentElement.dir === "rtl", d = 0;
+      if (e.key === "ArrowRight") d = rtl ? -1 : 1;
+      if (e.key === "ArrowLeft") d = rtl ? 1 : -1;
+      if (!d) return;
+      e.preventDefault();
+      var n = abas[(i + d + abas.length) % abas.length];
+      history.replaceState(null, "", "#" + n.getAttribute("data-gen"));
+      mostrar(n.getAttribute("data-gen"), true);
+    });
+  });
+  window.addEventListener("hashchange", function () { mostrar(location.hash.slice(1), false); });
+  mostrar(location.hash.slice(1), false);
+})();
