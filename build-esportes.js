@@ -6,7 +6,7 @@ const fs = require("fs");
 const path = require("path");
 
 module.exports = function (h) {
-  const { D, CAMP, NEWS, cfg, esc, L, T, u, ad, sectionHead, sidebar, timeTag, fmt, fmtDay, fmtTime, tzHint, storyCard, sorted, LANGS, getLang, bandeira } = h;
+  const { D, CAMP, NEWS, cfg, esc, L, T, u, ad, sectionHead, sidebar, timeTag, fmt, fmtDay, fmtTime, tzHint, storyCard, sorted, LANGS, getLang, bandeira, ABAS, painelFut, futFem } = h;
   const ESPORTES = require("./conteudo/esportes.js");
   const ler = (f) => { try { return JSON.parse(fs.readFileSync(path.join(__dirname, "conteudo", f), "utf8")); } catch (e) { return {}; } };
   const FUT = ler("ligas-auto.json").continentais || {};
@@ -99,13 +99,30 @@ module.exports = function (h) {
     const c = FUT[k];
     return c && c.tabela && c.tabela.length ? gruposCards(c.tabela, futUrl(k)) : null;
   }
+  /* o par de cada competição no outro gênero e o quadro "Em números" de cada aba (o CHAN não tem aba: é só masculino) */
+  const PAR_FUT = {
+    canq: { painel: ["can", "canFem"], fem: () => (futFem.canf() + linkFut("canf")) },
+    can: { painel: ["can", "canFem"], fem: () => (futFem.canf() + linkFut("canf")) },
+    mundq: { painel: ["sel", "selFem"] },
+    cl: { painel: ["cl", "clFem"], fem: () => (futFem.clf() + linkFut("clf")) },
+    cc: { painel: ["cc", "fem"], fem: () => `<div class="gen-vazio"><p>${esc(T("semCcF"))}</p><p class="page-links"><a href="${u(D.CATS.cl.route)}#feminino">${esc(T("verClf"))} ›</a></p></div>` },
+    canf: { painel: ["can", "canFem"], masc: () => `<p class="page-links"><a href="${u(D.CATS.can.route)}">${esc(L(D.CATS.can.name))} ›</a></p>` },
+    clf: { painel: ["cl", "clFem"], masc: () => `<p class="page-links"><a href="${u(D.CATS.cl.route)}">${esc(L(D.CATS.cl.name))} ›</a></p>` }
+  };
+  const linkFut = (k) => (temDados(FUT[k]) ? `<p class="page-links"><a href="${futUrl(k)}">${esc(L(NOMES_FUT[k]))} ›</a></p>` : "");
   function futPage(k) {
     const c = FUT[k];
-    return `<div class="layout"><div class="article camp">
-      <div class="page-head cat-can"><h1>${esc(L(NOMES_FUT[k]))}</h1><p>${esc(T("compDesc", { nome: L(NOMES_FUT[k]) }))}</p></div>
-      <div class="cover banner cat-can sp-futebol" aria-hidden="true"></div>
-      ${blocoComp(c, "cat-can", "campUpdated")}
-    </div>${sidebar()}</div>`;
+    const cabeca = `<div class="page-head cat-can"><h1>${esc(L(NOMES_FUT[k]))}</h1><p>${esc(T("compDesc", { nome: L(NOMES_FUT[k]) }))}</p></div>`;
+    const proprio = `<div class="cover banner cat-can sp-futebol" aria-hidden="true"></div>${blocoComp(c, "cat-can", "campUpdated")}`;
+    const par = PAR_FUT[k];
+    if (!par) return `<div class="layout"><div class="article camp">${cabeca}${proprio}</div>${sidebar()}</div>`;
+    const fem = FUT_FEM.includes(k);
+    return ABAS.pagina({
+      cabeca, classe: "camp", inicial: fem ? "feminino" : "masculino",
+      corpo: { masculino: fem ? (par.masc ? par.masc() : "") : proprio, feminino: fem ? proprio : (par.fem ? par.fem() : "") },
+      lado: { masculino: painelFut(par.painel[0]), feminino: painelFut(par.painel[1]) },
+      ad: ad("lateral")
+    });
   }
 
   /* ---------- mais esportes ---------- */
@@ -123,6 +140,18 @@ module.exports = function (h) {
   const newsDe = (e) => sorted.filter((n) => n.esporte === e.id || (Array.isArray(n.esporte) && n.esporte.includes(e.id)));
   const espIndexavel = (e) => comps(e).length > 0 || newsDe(e).length > 0;
 
+  /* competições e notícias de um esporte num gênero */
+  function blocoGenero(e, g) {
+    const cs = comps(e).filter((c) => generoComp(c.nome) === g);
+    const afr = cs.filter((c) => c.pais === "AFR");
+    const nac = cs.filter((c) => c.pais !== "AFR").sort((a, b) => L(paisDe(a.pais).nome).localeCompare(L(paisDe(b.pais).nome), h.LOCALE[getLang()]));
+    const news = newsDe(e).filter((n) => temGenero(n, g)).slice(0, 6);
+    if (!cs.length && !news.length) return "";
+    return `${afr.map((c) => `<section class="section"><div class="section-head"><h2>${esc(c.nome)}</h2><a href="${compUrl(e, c)}">${esc(T("fullPage"))}</a></div>${c.tabela && c.tabela.length ? gruposCards(c.tabela) : `<div class="panel">${jogosHtml((c.resultados || []).slice(0, 4), true)}</div>`}</section>`).join("")}
+      ${nac.length ? `<section class="section">${sectionHead(T("espNational"))}<ul class="camp-dir">${nac.map((c) => `<li><a href="${compUrl(e, c)}"><span class="pais">${esc(L(paisDe(c.pais).nome))}</span><span class="liga">${esc(c.nome)}</span></a></li>`).join("")}</ul></section>` : ""}
+      ${news.length ? `<section class="section">${sectionHead(T("espNews"))}<div class="grid-stories">${news.map(storyCard).join("")}</div></section>` : ""}`;
+  }
+  const GEN_API = { masculino: "masc", feminino: "fem" };
   function hubPage() {
     return `<div class="layout"><div>
       <div class="page-head"><h1>${esc(T("moreSports"))}</h1><p>${esc(T("moreSportsDesc"))}</p></div>
@@ -130,30 +159,37 @@ module.exports = function (h) {
         const n = comps(e).length;
         return `<li class="cor-${e.id}"><a href="${espUrl(e)}"><div class="cover esp sp-${e.id}" aria-hidden="true"></div><span class="pais">${esc(L(e.nome))}</span><span class="liga">${esc(n ? T("espCompsN", { n }) : L(e.desc))}</span></a></li>`;
       }).join("")}</ul>
-    </div>${sidebar()}</div>`;
+    </div><aside class="sidebar">${ad("lateral")}</aside></div>`;
   }
+  /* "Em números" de outro esporte: nunca o quadro do futebol */
+  const lados = (e) => ({ masculino: ABAS.numeros(e.id, "masculino"), feminino: ABAS.numeros(e.id, "feminino") });
   function espPage(e) {
-    const cs = comps(e);
-    const afr = cs.filter((c) => c.pais === "AFR");
-    const nac = cs.filter((c) => c.pais !== "AFR").sort((a, b) => L(paisDe(a.pais).nome).localeCompare(L(paisDe(b.pais).nome), h.LOCALE[getLang()]));
-    const news = newsDe(e).slice(0, 9);
-    return `<div class="layout"><div class="article camp cor-${e.id}">
-      <a class="back" href="${u("esportes")}">‹ ${esc(T("allSports"))}</a>
-      <div class="page-head cor-${e.id}"><h1>${esc(L(e.nome))}</h1><p>${esc(L(e.desc))}</p></div>
-      <div class="cover banner esp sp-${e.id}" aria-hidden="true"></div>
-      ${afr.map((c) => `<section class="section"><div class="section-head"><h2>${esc(c.nome)}</h2><a href="${compUrl(e, c)}">${esc(T("fullPage"))}</a></div>${c.tabela && c.tabela.length ? gruposCards(c.tabela) : `<div class="panel">${jogosHtml((c.resultados || []).slice(0, 4), true)}</div>`}</section>`).join("")}
-      ${nac.length ? `<section class="section">${sectionHead(T("espNational"))}<ul class="camp-dir">${nac.map((c) => `<li><a href="${compUrl(e, c)}"><span class="pais">${esc(L(paisDe(c.pais).nome))}</span><span class="liga">${esc(c.nome)}</span></a></li>`).join("")}</ul></section>` : ""}
-      ${news.length ? `<p class="page-links"><a href="${u("noticias")}#${e.id}">${esc(T("espNews"))} · ${esc(L(e.nome))} ›</a></p>` : ""}
-      ${!cs.length ? `<p class="note">${esc(T("espEmpty"))}</p>` : ""}
-    </div>${sidebar()}</div>`;
+    const corpo = {
+      masculino: blocoGenero(e, GEN_API.masculino),
+      feminino: blocoGenero(e, GEN_API.feminino)
+    };
+    return ABAS.pagina({
+      cabeca: `<a class="back" href="${u("esportes")}">‹ ${esc(T("allSports"))}</a>
+        <div class="page-head cor-${e.id}"><h1>${esc(L(e.nome))}</h1><p>${esc(L(e.desc))}</p></div>
+        <div class="cover banner esp sp-${e.id}" aria-hidden="true"></div>`,
+      classe: `camp cor-${e.id}`, corpo, lado: lados(e), ad: ad("lateral")
+    });
   }
+  /* página de uma competição: a aba do gênero dela traz a tabela; a outra aba lista as competições do outro gênero */
   function compPage(e, c) {
-    return `<div class="layout"><div class="article camp cor-${e.id}">
-      <a class="back" href="${espUrl(e)}">‹ ${esc(L(e.nome))}</a>
-      <div class="page-head"><h1>${esc(compTitle(e, c))}</h1><p>${esc(T("compDesc", { nome: c.nome }))}</p></div>
-      <div class="cover banner esp sp-${e.id}" aria-hidden="true"></div>
-      ${blocoComp(c, "", "updatedT")}
-    </div>${sidebar()}</div>`;
+    const g = generoComp(c.nome) === "fem" ? "feminino" : "masculino";
+    const outro = g === "feminino" ? "masculino" : "feminino";
+    const outras = comps(e).filter((x) => generoComp(x.nome) === GEN_API[outro]);
+    const corpo = {
+      [g]: blocoComp(c, "", "updatedT"),
+      [outro]: outras.length ? `<ul class="camp-dir">${outras.map((x) => `<li><a href="${compUrl(e, x)}"><span class="pais">${esc(x.pais === "AFR" ? T("gAfr") : L(paisDe(x.pais).nome))}</span><span class="liga">${esc(x.nome)}</span></a></li>`).join("")}</ul>` : ""
+    };
+    return ABAS.pagina({
+      cabeca: `<a class="back" href="${espUrl(e)}">‹ ${esc(L(e.nome))}</a>
+        <div class="page-head"><h1>${esc(compTitle(e, c))}</h1><p>${esc(T("compDesc", { nome: c.nome }))}</p></div>
+        <div class="cover banner esp sp-${e.id}" aria-hidden="true"></div>`,
+      classe: `camp cor-${e.id}`, corpo, lado: lados(e), inicial: g, ad: ad("lateral")
+    });
   }
 
   function emitir(emit, pages) {
