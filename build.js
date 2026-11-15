@@ -257,8 +257,7 @@ function drawerHtml(active, editionLabel) {
   const fut = [
     ...["can", "cl", "cc", "sel", "ligas"].map((k) => pag(CATS[k].route, L(CATS[k].name))),
     ...ESP.futChaves("masc").filter((k) => !["canq", "cl", "cc"].includes(k)).map((k) => [ESP.futUrl(k), L(ESP.NOMES_FUT[k])]),
-    ...ESP.futChaves("fem").map((k) => [ESP.futUrl(k), L(ESP.NOMES_FUT[k])]),
-    [u(CATS.fem.route) + "#historia", T("hHistFem")]
+    ...ESP.futChaves("fem").map((k) => [ESP.futUrl(k), L(ESP.NOMES_FUT[k])])
   ];
   const outros = [...ESP.ESPORTES.map((e) => [ESP.espUrl(e), L(e.nome)]), pag("esportes", T("moreSports"))];
   const aberto = ["can", "cl", "cc", "sel", "ligas"].some((k) => CATS[k].route === active) || active === "esportes";
@@ -434,7 +433,9 @@ function campPage(c) {
 }
 
 /* grupos das competições africanas e seção "Mais esportes" (arquivo build-esportes.js) */
-const ESP = require("./build-esportes.js")({ D, CAMP, NEWS, cfg, esc, L, T, u, ad, sectionHead, sidebar, timeTag, fmt, fmtDay, fmtTime, tzHint, storyCard, sorted, LANGS, LOCALE, bandeira, getLang: () => lang });
+/* abas Masculino e Feminino e "Em números" dos outros esportes (arquivo build-abas.js) */
+const ABAS = require("./build-abas.js")({ D, esc, L, T, fmt });
+const ESP = require("./build-esportes.js")({ D, CAMP, NEWS, cfg, esc, L, T, u, ad, sectionHead, sidebar, timeTag, fmt, fmtDay, fmtTime, tzHint, storyCard, sorted, LANGS, LOCALE, bandeira, ABAS, painelFut: (k) => HI.painel(k), futFem: { canf: () => HI.canfHtml(), clf: () => HI.clfHtml() }, getLang: () => lang });
 /* página de cada time dos campeonatos nacionais (arquivo build-times.js) */
 const TM = require("./build-times.js")({ D, CAMP, AUTO, CATS, esc, L, T, u, sectionHead, sidebar, storyCard, sorted, timeTag, fmt, fmtDay, fmtTime, tzHint, bandeira, campTitle, LOCALE, getLang: () => lang });
 /* história, títulos e recordes (arquivo build-historia.js, dados em conteudo/historia.js) */
@@ -482,6 +483,16 @@ function homePage() {
 }
 
 /* páginas das competições: tabelas, grupos, história e títulos. As notícias ficam no Início e na página Notícias */
+const CAT_FEM_UI = {
+  descF_can: { pt: "A CAN Feminina: as seleções campeãs e todas as finais.", fr: "La CAN féminine : les sélections championnes et toutes les finales.", en: "The Women's AFCON: every champion and every final.", ar: "كأس أمم أفريقيا للسيدات: المنتخبات البطلة وجميع النهائيات." },
+  descF_cl: { pt: "A Liga dos Campeões Feminina da CAF: os próximos jogos e as campeãs de cada edição.", fr: "La Ligue des champions féminine de la CAF : les prochains matchs et les championnes de chaque édition.", en: "The CAF Women's Champions League: upcoming games and every winner.", ar: "دوري أبطال أفريقيا للسيدات: المباريات المقبلة وبطلات كل نسخة." },
+  descF_sel: { pt: "As seleções femininas da África: títulos da CAN Feminina e a Jogadora Africana do Ano.", fr: "Les sélections féminines africaines : le palmarès de la CAN féminine et la Joueuse africaine de l'année.", en: "Africa's women's national teams: Women's AFCON titles and the African Women's Player of the Year.", ar: "منتخبات السيدات في أفريقيا: ألقاب كأس الأمم للسيدات وأفضل لاعبة أفريقية." },
+  semCcF: { pt: "A CAF não tem uma Copa das Confederações feminina. A competição continental dos clubes femininos é a Liga dos Campeões Feminina.", fr: "La CAF n'organise pas de Coupe de la Confédération féminine. La compétition continentale des clubs féminins est la Ligue des champions féminine.", en: "CAF has no women's Confederation Cup. The continental competition for women's clubs is the Women's Champions League.", ar: "لا ينظم الكاف كأس كونفدرالية للسيدات. والمسابقة القارية لأندية السيدات هي دوري أبطال أفريقيا للسيدات." },
+  semLigasF: { pt: "Ainda não temos as tabelas das ligas nacionais femininas. Por enquanto, os clubes femininos aparecem na Liga dos Campeões Feminina.", fr: "Nous n'avons pas encore les classements des championnats nationaux féminins. Pour l'instant, les clubs féminins figurent dans la Ligue des champions féminine.", en: "We don't have women's national league tables yet. For now, women's clubs appear under the Women's Champions League.", ar: "لا تتوفر لدينا بعد جداول الدوريات النسائية المحلية. وتظهر أندية السيدات حاليًا في دوري أبطال أفريقيا للسيدات." },
+  verClf: { pt: "Liga dos Campeões Feminina", fr: "Ligue des champions féminine", en: "Women's Champions League", ar: "دوري أبطال أفريقيا للسيدات" }
+};
+Object.assign(D.UI, CAT_FEM_UI);
+const FEM_PAINEL = { can: "canFem", cl: "clFem", cc: "fem", sel: "selFem", ligas: "fem" };
 function categoryPage(k) {
   const temNoticias = sorted.some((n) => n.cat === k && esporteDe(n) === "futebol");
   let corpo = "";
@@ -490,10 +501,26 @@ function categoryPage(k) {
   if (k === "cc") corpo = `<section class="section cat-cc">${sectionHead(T("groupsTitle"))}${groupsHtml(D.CC_GROUPS, "cc")}<p class="note">${esc(T("ccNote"))}</p></section>${ad("meio")}${HI.ccHtml()}`;
   if (k === "ligas") corpo = `${campDirHtml()}<section class="section cat-ligas">${sectionHead(T("champsTitle"))}${leaguesHtml()}</section>`;
   if (k === "sel") corpo = HI.selHtml();
-  return `${ad("topo")}<div class="layout"><div>
-    <div class="page-head cat-${k}"><h1>${esc(catName(k))}</h1><p>${esc(L(CATS[k].desc))}</p>
-      ${temNoticias ? `<p class="page-links"><a href="${u("noticias")}#${k}">${esc(T("newsOf", { x: catName(k) }))} ›</a></p>` : ""}</div>
-    ${corpo}</div>${HI.fatos(k, ad("lateral"))}</div>`;
+  const masc = `<p class="gen-desc">${esc(L(CATS[k].desc))}</p>
+    ${temNoticias ? `<p class="page-links"><a href="${u("noticias")}#${k}">${esc(T("newsOf", { x: catName(k) }))} ›</a></p>` : ""}${corpo}`;
+  /* aba Feminino: o equivalente feminino da competição, quando existe */
+  const noticiasF = sorted.some((n) => n.cat === "fem") ? `<p class="page-links"><a href="${u("noticias")}#fem">${esc(T("gFemNews"))} ›</a></p>` : "";
+  const jogosF = D.FIXTURES.filter((f) => f.cat === "fem" && (k === "cl" ? f.club : !f.club));
+  const agendaF = jogosF.length ? `<section class="section">${sectionHead(T("agenda"))}${tzHint()}<div class="panel">${agendaList(0, jogosF)}</div></section>` : "";
+  const linkClf = `<p class="page-links"><a href="${u(CATS.cl.route)}#feminino">${esc(T("verClf"))} ›</a></p>`;
+  const fem = {
+    can: () => `<p class="gen-desc">${esc(T("descF_can"))}</p>${noticiasF}${agendaF}${HI.canfHtml()}`,
+    cl: () => `<p class="gen-desc">${esc(T("descF_cl"))}</p>${noticiasF}${agendaF}${HI.clfHtml()}`,
+    cc: () => `<div class="gen-vazio"><p>${esc(T("semCcF"))}</p>${linkClf}</div>`,
+    sel: () => `<p class="gen-desc">${esc(T("descF_sel"))}</p>${noticiasF}${agendaF}${HI.selFemHtml()}`,
+    ligas: () => `<div class="gen-vazio"><p>${esc(T("semLigasF"))}</p>${linkClf}</div>`
+  }[k]();
+  return ad("topo") + ABAS.pagina({
+    cabeca: `<div class="page-head cat-${k}"><h1>${esc(catName(k))}</h1></div>`,
+    corpo: { masculino: masc, feminino: fem },
+    lado: { masculino: HI.painel(k), feminino: HI.painel(FEM_PAINEL[k]) },
+    ad: ad("lateral")
+  });
 }
 
 /* página Notícias: todas as notícias, separadas por competição e por esporte */
