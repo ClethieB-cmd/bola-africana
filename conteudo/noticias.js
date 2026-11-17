@@ -17,6 +17,152 @@
    sources: [nome do veículo, link] — sempre cite de onde veio a informação */
 module.exports = [
   {
+    slug: "as-far-tricampea-liga-dos-campeoes-feminina", cat: "fem", paises: ["RSA", "MAR"], tags: ["fem"], date: "2026-11-15T18:00",
+    cover: { big: "3–1", cx: "70%", small: { pt: "AS FAR campeã · Final em Ismailia", fr: "L'AS FAR championne · Finale à Ismaïlia", en: "AS FAR champions · Final in Ismailia", ar: "الجيش الملكي بطلاً · النهائي في الإسماعيلية" } },
+    title: { pt: "AS FAR vence o Sundowns e conquista a terceira Liga dos Campeões Feminina", fr: "L'AS FAR bat Sundowns et remporte sa troisième Ligue des champions féminine", en: "AS FAR beat Sundowns to win a third Women's Champions League", ar: "الجيش الملكي يهزم صن داونز ويتوج بلقبه الثالث في دوري أبطال أفريقيا للسيدات" },
+    lead: { pt: "Imane Touriss marcou duas vezes nos 3 a 1 em Ismailia, e as marroquinas mantiveram o título africano.", fr: "Imane Touriss a marqué deux fois lors du 3-1 à Ismaïlia, et les Marocaines conservent leur titre africain.", en: "Imane Touriss scored twice in a 3-1 win in Ismailia as the Moroccans kept their African crown.", ar: "سجلت إيمان توريس هدفين في الفوز 3-1 بالإسماعيلية، وحافظت المغربيات على اللقب الأفريقي." },
+    body: {
+      pt: [
+        "O AS FAR venceu o Mamelodi Sundowns por 3 a 1 neste domingo (15), no Estádio do Canal de Suez, em Ismailia, no Egito, e conquistou pela terceira vez a Liga dos Campeões Feminina da CAF. As marroquinas defendiam o título. As sul-africanas, que também tinham duas conquistas, continuam com duas.",
+        "Imane Touriss abriu o placar aos 23 minutos, e Refilwe Tholakele empatou para o Sundowns dois minutos depois. Hiba Youssoufi recolocou o AS FAR na frente antes do intervalo, e Touriss fez o terceiro aos 77 minutos.",
+        "Com os dois gols da final, Touriss terminou o torneio com quatro e dividiu a artilharia com a ugandense Agnes Nabukenya, da Kawempe Muslim.",
+        "A campeã leva US$ 600 mil e uma vaga na segunda fase classificatória da Liga dos Campeões Feminina da FIFA de 2027."
+      ],
+      fr: [
+        "L'AS FAR a battu Mamelodi Sundowns 3-1 ce dimanche 15 novembre au stade du Canal de Suez, à Ismaïlia, en Égypte, et remporte pour la troisième fois la Ligue des champions féminine de la CAF. Les Marocaines défendaient leur titre. Les Sud-Africaines, elles aussi doubles lauréates, en restent à deux sacres.",
+        "Imane Touriss a ouvert le score à la 23e minute, et Refilwe Tholakele a égalisé pour Sundowns deux minutes plus tard. Hiba Youssoufi a redonné l'avantage à l'AS FAR avant la pause, puis Touriss a inscrit le troisième but à la 77e minute.",
+        "Avec son doublé en finale, Touriss termine le tournoi avec quatre buts et partage le titre de meilleure buteuse avec l'Ougandaise Agnes Nabukenya, de Kawempe Muslim.",
+        "La championne empoche 600 000 dollars et une place au deuxième tour de qualification de la Ligue des champions féminine de la FIFA 2027."
+      ],
+      en: [
+        "AS FAR beat Mamelodi Sundowns 3-1 on Sunday (15 November) at the Suez Canal Stadium in Ismailia, Egypt, to win the CAF Women's Champions League for the third time. The Moroccans were the holders. The South Africans, also two-time winners, stay on two titles.",
+        "Imane Touriss opened the scoring on 23 minutes, and Refilwe Tholakele equalised for Sundowns two minutes later. Hiba Youssoufi put AS FAR back in front before half-time, and Touriss added the third on 77 minutes.",
+        "Her final brace took Touriss to four goals for the tournament, sharing the Golden Boot with Uganda's Agnes Nabukenya of Kawempe Muslim.",
+        "The champions take US$600,000 and a place in the second qualifying round of the 2027 FIFA Women's Champions League."
+      ],
+      ar: [
+        "فاز الجيش الملكي على ماميلودي صن داونز 3-1 يوم الأحد 15 نوفمبر على ملعب قناة السويس في الإسماعيلية بمصر، وتُوّج للمرة الثالثة بدوري أبطال أفريقيا للسيدات. وكانت المغربيات حاملات اللقب، فيما يبقى رصيد الجنوب أفريقيات، المتوجات به مرتين أيضاً، عند لقبين.",
+        "افتتحت إيمان توريس التسجيل في الدقيقة 23، وأدركت ريفيلوي ثولاكيلي التعادل لصن داونز بعد دقيقتين. وأعادت هبة اليوسفي التقدم للجيش الملكي قبل الاستراحة، ثم أضافت توريس الهدف الثالث في الدقيقة 77.",
+        "وبهدفيها في النهائي أنهت توريس البطولة برصيد أربعة أهداف، لتتقاسم لقب الهدافة مع الأوغندية أغنيس نابوكينيا لاعبة كاويمبي مسلم.",
+        "وتحصل البطلة على 600 ألف دولار ومقعد في الدور التأهيلي الثاني من دوري أبطال السيدات التابع للفيفا 2027."
+      ]
+    },
+    sources: [
+      ["Kawowo Sports", "https://kawowo.com/2026/11/16/as-far-hit-three-to-win-caf-women-champions-league-as-nabukenya-claims-share-of-golden-boot/"],
+      ["AfricaSoccer", "https://africasoccer.com/as-far-beat-mamelodi-sundowns-to-win-third-caf-womens-champions-league-title/"],
+      ["Médias24", "https://medias24.com/2026/11/16/las-far-remporte-sa-troisieme-ligue-des-champions-feminine-de-la-caf-1791486"],
+      ["CAF", "https://www.cafonline.com/caf-womens-champions-league/news/everything-you-need-to-know-about-the-2026-caf-womens-champions-league/"]
+    ]
+  },
+  {
+    slug: "senegal-camaroes-benin-chegam-a-10-pontos", cat: "can", paises: ["SEN", "SDN", "CMR", "NAM", "BEN", "CTA"], tags: ["can", "sel"], date: "2026-11-16T19:30",
+    cover: { big: "4–2", cx: "82%", small: { pt: "Sudão × Senegal · Grupo J · Juba", fr: "Soudan × Sénégal · Groupe J · Juba", en: "Sudan × Senegal · Group J · Juba", ar: "السودان × السنغال · المجموعة J · جوبا" } },
+    title: { pt: "Senegal vence jogo de seis gols, e Camarões e Benin também chegam a 10 pontos", fr: "Le Sénégal s'impose dans un match à six buts, le Cameroun et le Bénin atteignent aussi 10 points", en: "Senegal win a six-goal thriller as Cameroon and Benin also reach 10 points", ar: "السنغال تفوز في مباراة الأهداف الستة، والكاميرون وبنين تبلغان أيضاً 10 نقاط" },
+    lead: { pt: "Senegal ganhou do Sudão por 4 a 2 em Juba, Camarões bateu a Namíbia por 3 a 0, e Benin venceu nos acréscimos. Os três podem garantir a vaga na terça.", fr: "Le Sénégal a battu le Soudan 4-2 à Juba, le Cameroun a dominé la Namibie 3-0 et le Bénin s'est imposé dans le temps additionnel. Les trois peuvent valider leur billet mardi.", en: "Senegal beat Sudan 4-2 in Juba, Cameroon saw off Namibia 3-0 and Benin won in stoppage time. All three could seal qualification on Tuesday.", ar: "فازت السنغال على السودان 4-2 في جوبا، وتغلبت الكاميرون على ناميبيا 3-0، وفازت بنين في الوقت بدل الضائع. ويمكن للمنتخبات الثلاثة حسم التأهل يوم الثلاثاء." },
+    body: {
+      pt: [
+        "No Estádio de Juba, no Sudão do Sul, onde o Sudão mandou o jogo nesta segunda-feira (16), Senegal abriu 2 a 0 no primeiro tempo, com Nicolas Jackson aos 4 minutos e El Hadji Malick Diouf aos 22. O Sudão empatou no segundo tempo com Al-Gozoli Nooh, aos 52, e Salaheldin Adil, aos 75. Pathé Mboup recolocou Senegal na frente aos 87, e Paul Mendy fechou o placar nos acréscimos. Com 10 pontos, Senegal lidera o Grupo J, seis à frente de Moçambique.",
+        "Em Gaborone, em Botsuana, onde a Namíbia mandou a partida, Camarões venceu por 3 a 0, com gols de Mahamadou Nagida aos 12 minutos, Ryan Fosso aos 58 e Saidou Alioum aos 71. Os camaroneses somam 10 pontos no Grupo G, seis à frente das Comores.",
+        "Em Douala, Benin venceu a República Centro-Africana por 1 a 0, com gol de Ede Oloko nos acréscimos, e chegou a 10 pontos no Grupo F, três à frente de Burkina Faso. Com quatro derrotas em quatro jogos, a República Centro-Africana não pode mais terminar entre os dois primeiros e está eliminada.",
+        "Segundo o jornal nigeriano Vanguard, Senegal, Camarões e Benin podem confirmar a classificação já na terça-feira (17), dependendo dos outros resultados de seus grupos."
+      ],
+      fr: [
+        "Au stade de Juba, au Soudan du Sud, où le Soudan recevait ce lundi 16 novembre, le Sénégal menait 2-0 à la pause grâce à Nicolas Jackson (4e) et El Hadji Malick Diouf (22e). Le Soudan est revenu en seconde période par Al-Gozoli Nooh (52e) et Salaheldin Adil (75e). Pathé Mboup a redonné l'avantage au Sénégal à la 87e minute, et Paul Mendy a fixé le score dans le temps additionnel. Avec 10 points, le Sénégal mène le groupe J avec six longueurs d'avance sur le Mozambique.",
+        "À Gaborone, au Botswana, où la Namibie recevait, le Cameroun s'est imposé 3-0 grâce à Mahamadou Nagida (12e), Ryan Fosso (58e) et Saidou Alioum (71e). Les Lions indomptables comptent 10 points dans le groupe G, six de plus que les Comores.",
+        "À Douala, le Bénin a battu la Centrafrique 1-0 sur un but d'Ede Oloko dans le temps additionnel et atteint 10 points dans le groupe F, trois de plus que le Burkina Faso. Avec quatre défaites en quatre matchs, la Centrafrique ne peut plus finir dans les deux premiers et est éliminée.",
+        "Selon le quotidien nigérian Vanguard, le Sénégal, le Cameroun et le Bénin peuvent valider leur qualification dès mardi 17 novembre, selon les autres résultats de leurs groupes."
+      ],
+      en: [
+        "At Juba Stadium in South Sudan, where Sudan hosted the game on Monday (16 November), Senegal led 2-0 at half-time through Nicolas Jackson on 4 minutes and El Hadji Malick Diouf on 22. Sudan levelled in the second half through Al-Gozoli Nooh on 52 and Salaheldin Adil on 75. Pathé Mboup restored Senegal's lead on 87 minutes, and Paul Mendy made it 4-2 in stoppage time. On 10 points, Senegal lead Group J by six from Mozambique.",
+        "In Gaborone, Botswana, where Namibia hosted the match, Cameroon won 3-0 with goals from Mahamadou Nagida on 12 minutes, Ryan Fosso on 58 and Saidou Alioum on 71. Cameroon have 10 points in Group G, six ahead of Comoros.",
+        "In Douala, Benin beat the Central African Republic 1-0 with an Ede Oloko goal in stoppage time and moved to 10 points in Group F, three ahead of Burkina Faso. After four defeats in four games, the Central African Republic can no longer finish in the top two and are out.",
+        "According to Nigeria's Vanguard newspaper, Senegal, Cameroon and Benin could all confirm qualification on Tuesday (17 November), depending on the other results in their groups."
+      ],
+      ar: [
+        "على ملعب جوبا في جنوب السودان، حيث استضاف السودان المباراة يوم الاثنين 16 نوفمبر، تقدمت السنغال 2-0 في الشوط الأول عبر نيكولا جاكسون في الدقيقة 4 والحاج مالك ديوف في الدقيقة 22. وأدرك السودان التعادل في الشوط الثاني عبر القوزولي نوح في الدقيقة 52 وصلاح الدين عادل في الدقيقة 75. وأعاد باتي مبوب التقدم للسنغال في الدقيقة 87، وختم بول ميندي النتيجة في الوقت بدل الضائع. وتتصدر السنغال المجموعة J بـ10 نقاط، بفارق ست نقاط عن موزمبيق.",
+        "وفي غابورون ببوتسوانا، حيث استضافت ناميبيا المباراة، فازت الكاميرون 3-0 بأهداف محمدو ناغيدا في الدقيقة 12 وريان فوسو في الدقيقة 58 وسعيدو أليوم في الدقيقة 71. وتملك الكاميرون 10 نقاط في المجموعة G، بفارق ست نقاط عن جزر القمر.",
+        "وفي دوالا فازت بنين على جمهورية أفريقيا الوسطى 1-0 بهدف إيدي أولوكو في الوقت بدل الضائع، ورفعت رصيدها إلى 10 نقاط في المجموعة F، بفارق ثلاث نقاط عن بوركينا فاسو. وبعد أربع هزائم في أربع مباريات، لم يعد بإمكان أفريقيا الوسطى إنهاء المجموعة في أحد المركزين الأولين، وخرجت من التصفيات.",
+        "وبحسب صحيفة فانغارد النيجيرية، يمكن للسنغال والكاميرون وبنين تأكيد التأهل يوم الثلاثاء 17 نوفمبر، تبعاً لنتائج المباريات الأخرى في مجموعاتها."
+      ]
+    },
+    sources: [
+      ["AfricaSoccer", "https://africasoccer.com/afcon-2027-qualifiers-cameroon-and-senegal-continue-unbeaten-runs-as-somalia-and-central-african-republic-exit/"],
+      ["AfricaSoccer", "https://africasoccer.com/afcon-2027-qualifiers-cameroon-beat-namibia-3-0-to-strengthen-group-g-lead/"],
+      ["Vanguard", "https://www.vanguardngr.com/2026/11/jackson-scores-as-senegal-move-closer-to-2027-afcon/"],
+      ["VAVEL", "https://www.vavel.com/en-us/soccer/2026/11/16/1279455-sudan-vs-senegal-live-score-africa-cup-of-nations-qualifiers.html"]
+    ]
+  },
+  {
+    slug: "gana-vence-somalia-guine-lidera-grupo-d", cat: "can", paises: ["GHA", "SOM", "GUI", "ERI", "ZIM", "EQG"], tags: ["can", "sel"], date: "2026-11-16T19:00",
+    cover: { big: "1–0", cx: "82%", small: { pt: "Somália × Gana · Grupo C", fr: "Somalie × Ghana · Groupe C", en: "Somalia × Ghana · Group C", ar: "الصومال × غانا · المجموعة C" } },
+    title: { pt: "Gana vence a Somália de novo, e a Guiné assume a liderança do Grupo D", fr: "Le Ghana bat encore la Somalie, la Guinée prend la tête du groupe D", en: "Ghana beat Somalia again as Guinea go top of Group D", ar: "غانا تفوز على الصومال مجدداً، وغينيا تنتزع صدارة المجموعة D" },
+    lead: { pt: "Jordan Ayew decidiu de pênalti, a Guiné bateu a Eritreia no Cairo, e o Zimbábue fez 3 a 0 na Guiné Equatorial.", fr: "Jordan Ayew a fait la différence sur penalty, la Guinée a battu l'Érythrée au Caire et le Zimbabwe a dominé la Guinée équatoriale 3-0.", en: "Jordan Ayew settled it from the spot, Guinea beat Eritrea in Cairo and Zimbabwe saw off Equatorial Guinea 3-0.", ar: "حسم جوردان أيو المباراة من ركلة جزاء، وفازت غينيا على إريتريا في القاهرة، وتغلبت زيمبابوي على غينيا الاستوائية 3-0." },
+    body: {
+      pt: [
+        "Gana venceu a Somália por 1 a 0 nesta segunda-feira (16), em Sekondi-Takoradi, em Gana, onde a Somália mandou o jogo. Jordan Ayew marcou de pênalti aos 36 minutos. Os ganeses chegam a 6 pontos, os mesmos da Gâmbia, segunda colocada do Grupo C. A Costa do Marfim lidera com 9. A Somália perdeu os quatro jogos e, segundo o AfricaSoccer, está eliminada.",
+        "No Cairo, onde a Eritreia mandou a partida, a Guiné venceu por 3 a 1. Mohamed Soumah abriu o placar aos 28 minutos, Yakhouba Barry marcou duas vezes no segundo tempo, aos 52 e aos 77, e Ali Suleiman descontou nos acréscimos. Com 9 pontos, a Guiné lidera o Grupo D, dois à frente da África do Sul, que tem um jogo a menos e visita o Quênia na terça-feira (17).",
+        "Em Harare, o Zimbábue venceu a Guiné Equatorial por 3 a 0, com gols de Thandolwenkosi Ngwenya aos 4 minutos, Tawanda Chirewa aos 71 e Tawanda Maswanhise aos 78. Com 7 pontos, os zimbabuanos estão dois atrás da líder RD Congo e abriram três de vantagem sobre a Guiné Equatorial na briga pelo segundo lugar do Grupo E."
+      ],
+      fr: [
+        "Le Ghana a battu la Somalie 1-0 ce lundi 16 novembre à Sekondi-Takoradi, au Ghana, où la Somalie recevait. Jordan Ayew a marqué sur penalty à la 36e minute. Les Black Stars comptent 6 points, autant que la Gambie, deuxième du groupe C. La Côte d'Ivoire mène avec 9 points. La Somalie a perdu ses quatre matchs et, selon AfricaSoccer, est éliminée.",
+        "Au Caire, où l'Érythrée recevait, la Guinée s'est imposée 3-1. Mohamed Soumah a ouvert le score à la 28e minute, Yakhouba Barry a marqué deux fois en seconde période (52e et 77e), et Ali Suleiman a réduit l'écart dans le temps additionnel. Avec 9 points, la Guinée mène le groupe D, deux de plus que l'Afrique du Sud, qui compte un match de moins et se rend au Kenya mardi 17 novembre.",
+        "À Harare, le Zimbabwe a battu la Guinée équatoriale 3-0 grâce à Thandolwenkosi Ngwenya (4e), Tawanda Chirewa (71e) et Tawanda Maswanhise (78e). Avec 7 points, les Warriors sont à deux longueurs de la RD Congo, leader, et comptent trois points d'avance sur la Guinée équatoriale dans la course à la deuxième place du groupe E."
+      ],
+      en: [
+        "Ghana beat Somalia 1-0 on Monday (16 November) in Sekondi-Takoradi, Ghana, where Somalia hosted the game. Jordan Ayew scored from the penalty spot on 36 minutes. Ghana move to 6 points, level with Gambia in second place in Group C. Côte d'Ivoire lead on 9. Somalia have lost all four games and, according to AfricaSoccer, are out.",
+        "In Cairo, where Eritrea hosted the match, Guinea won 3-1. Mohamed Soumah opened the scoring on 28 minutes, Yakhouba Barry scored twice after the break, on 52 and 77, and Ali Suleiman pulled one back in stoppage time. On 9 points, Guinea lead Group D by two from South Africa, who have a game in hand and visit Kenya on Tuesday (17 November).",
+        "In Harare, Zimbabwe beat Equatorial Guinea 3-0 with goals from Thandolwenkosi Ngwenya on 4 minutes, Tawanda Chirewa on 71 and Tawanda Maswanhise on 78. On 7 points, Zimbabwe are two behind leaders DR Congo and three clear of Equatorial Guinea in the race for second place in Group E."
+      ],
+      ar: [
+        "فازت غانا على الصومال 1-0 يوم الاثنين 16 نوفمبر في سيكوندي تاكورادي بغانا، حيث استضافت الصومال المباراة. وسجل جوردان أيو من ركلة جزاء في الدقيقة 36. ورفعت غانا رصيدها إلى 6 نقاط، بالتساوي مع غامبيا صاحبة المركز الثاني في المجموعة C، فيما تتصدر كوت ديفوار بـ9 نقاط. وخسرت الصومال مبارياتها الأربع، وبحسب موقع أفريكا سوكر خرجت من التصفيات.",
+        "وفي القاهرة، حيث استضافت إريتريا المباراة، فازت غينيا 3-1. افتتح محمد سوماه التسجيل في الدقيقة 28، وسجل يعقوبا باري هدفين في الشوط الثاني في الدقيقتين 52 و77، وقلّص علي سليمان الفارق في الوقت بدل الضائع. وتتصدر غينيا المجموعة D بـ9 نقاط، بفارق نقطتين عن جنوب أفريقيا التي لعبت مباراة أقل وتحل ضيفة على كينيا يوم الثلاثاء 17 نوفمبر.",
+        "وفي هراري فازت زيمبابوي على غينيا الاستوائية 3-0 بأهداف ثاندولوينكوسي نغوينيا في الدقيقة 4 وتاواندا تشيريوا في الدقيقة 71 وتاواندا ماسوانهيسي في الدقيقة 78. وبرصيد 7 نقاط تتأخر زيمبابوي بنقطتين عن الكونغو الديمقراطية المتصدرة، وتتقدم بثلاث نقاط على غينيا الاستوائية في سباق المركز الثاني في المجموعة E."
+      ]
+    },
+    sources: [
+      ["AfricaSoccer", "https://africasoccer.com/afcon-2027-qualifiers-cameroon-and-senegal-continue-unbeaten-runs-as-somalia-and-central-african-republic-exit/"],
+      ["Vanguard", "https://www.vanguardngr.com/2026/11/jackson-scores-as-senegal-move-closer-to-2027-afcon/"]
+    ]
+  },
+  {
+    slug: "argelia-angola-vencem-uganda-empata", cat: "can", paises: ["ALG", "TOG", "ANG", "SSD", "UGA", "BOT"], tags: ["can", "sel"], date: "2026-11-14T22:30",
+    cover: { big: "1–0", cx: "82%", small: { pt: "Argélia × Togo · Grupo I · Tizi Ouzou", fr: "Algérie × Togo · Groupe I · Tizi Ouzou", en: "Algeria × Togo · Group I · Tizi Ouzou", ar: "الجزائر × توغو · المجموعة I · تيزي وزو" } },
+    title: { pt: "Bensebaini garante a Argélia, e Angola vence nos acréscimos", fr: "Bensebaini délivre l'Algérie, l'Angola s'impose dans le temps additionnel", en: "Bensebaini rescues Algeria as Angola win in stoppage time", ar: "بن سبعيني يمنح الجزائر الفوز، وأنغولا تنتصر في الوقت بدل الضائع" },
+    lead: { pt: "A Argélia bateu o Togo por 1 a 0 em Tizi Ouzou, Angola fez 2 a 0 no Sudão do Sul com dois gols nos descontos, e Uganda empatou com Botsuana.", fr: "L'Algérie a battu le Togo 1-0 à Tizi Ouzou, l'Angola a dominé le Soudan du Sud 2-0 grâce à deux buts dans le temps additionnel, et l'Ouganda a fait match nul avec le Botswana.", en: "Algeria beat Togo 1-0 in Tizi Ouzou, Angola beat South Sudan 2-0 with two stoppage-time goals, and Uganda drew with Botswana.", ar: "فازت الجزائر على توغو 1-0 في تيزي وزو، وتغلبت أنغولا على جنوب السودان 2-0 بهدفين في الوقت بدل الضائع، وتعادلت أوغندا مع بوتسوانا." },
+    body: {
+      pt: [
+        "No Estádio Hocine Aït Ahmed, em Tizi Ouzou, a Argélia venceu o Togo por 1 a 0 neste sábado (14). O capitão Ramy Bensebaini marcou de cabeça aos 76 minutos. Com 7 pontos, a Argélia lidera o Grupo I, três à frente da Zâmbia.",
+        "Em Luanda, no Estádio 11 de Novembro, Angola só desfez o 0 a 0 nos acréscimos, contra um Sudão do Sul que jogava com dez desde os 48 minutos, quando um de seus zagueiros foi expulso. Chico Banza, que saiu do banco, abriu o placar aos 90, e Miro fez o segundo aos 98. Angola soma 7 pontos, os mesmos do Egito, que lidera o Grupo B pelo saldo de gols.",
+        "Em Hoima, Uganda ficou no 1 a 1 com Botsuana. James Bogere abriu o placar aos 8 minutos, e Losika Ratshukudu empatou por volta da meia hora. O goleiro Denis Onyango se machucou e deu lugar a Kingdom Osayi aos 40 minutos. Uganda, uma das sedes da CAN, lidera o Grupo H com 5 pontos, um à frente da Líbia.",
+        "Os três jogos se repetem na terça-feira (17), com o mando invertido: Togo × Argélia, Sudão do Sul × Angola e Botsuana × Uganda."
+      ],
+      fr: [
+        "Au stade Hocine-Aït-Ahmed de Tizi Ouzou, l'Algérie a battu le Togo 1-0 ce samedi 14 novembre. Le capitaine Ramy Bensebaini a marqué de la tête à la 76e minute. Avec 7 points, l'Algérie mène le groupe I, trois de plus que la Zambie.",
+        "À Luanda, au stade du 11-Novembre, l'Angola n'a fait sauter le verrou que dans le temps additionnel, face à un Soudan du Sud réduit à dix depuis l'expulsion d'un défenseur à la 48e minute. Chico Banza, entré en jeu, a ouvert le score à la 90e minute, et Miro a doublé la mise à la 98e. L'Angola compte 7 points, autant que l'Égypte, qui mène le groupe B à la différence de buts.",
+        "À Hoima, l'Ouganda a été tenu en échec 1-1 par le Botswana. James Bogere a ouvert le score à la 8e minute, et Losika Ratshukudu a égalisé vers la demi-heure de jeu. Blessé, le gardien Denis Onyango a cédé sa place à Kingdom Osayi à la 40e minute. L'Ouganda, l'un des pays hôtes de la CAN, mène le groupe H avec 5 points, un de plus que la Libye.",
+        "Les trois affiches se rejouent mardi 17 novembre, avec les rôles inversés : Togo-Algérie, Soudan du Sud-Angola et Botswana-Ouganda."
+      ],
+      en: [
+        "At the Hocine Aït Ahmed Stadium in Tizi Ouzou, Algeria beat Togo 1-0 on Saturday (14 November). Captain Ramy Bensebaini headed in the winner on 76 minutes. On 7 points, Algeria lead Group I by three from Zambia.",
+        "In Luanda, at the Estádio 11 de Novembro, Angola only broke through in stoppage time against a South Sudan side down to ten men since a defender was sent off on 48 minutes. Substitute Chico Banza opened the scoring on 90 minutes, and Miro added the second on 98. Angola have 7 points, level with Egypt, who lead Group B on goal difference.",
+        "In Hoima, Uganda were held 1-1 by Botswana. James Bogere opened the scoring on 8 minutes, and Losika Ratshukudu equalised around the half-hour. Goalkeeper Denis Onyango was injured and replaced by Kingdom Osayi on 40 minutes. Uganda, one of the AFCON co-hosts, lead Group H on 5 points, one ahead of Libya.",
+        "All three fixtures are repeated on Tuesday (17 November) with home advantage reversed: Togo v Algeria, South Sudan v Angola and Botswana v Uganda."
+      ],
+      ar: [
+        "على ملعب حسين آيت أحمد في تيزي وزو فازت الجزائر على توغو 1-0 يوم السبت 14 نوفمبر. وسجل القائد رامي بن سبعيني هدف الفوز برأسية في الدقيقة 76. وتتصدر الجزائر المجموعة I بـ7 نقاط، بفارق ثلاث نقاط عن زامبيا.",
+        "وفي لواندا، على ملعب 11 نوفمبر، لم تفك أنغولا شفرة جنوب السودان إلا في الوقت بدل الضائع، رغم أن المنافس لعب بعشرة لاعبين منذ طرد أحد مدافعيه في الدقيقة 48. وافتتح البديل شيكو بانزا التسجيل في الدقيقة 90، وأضاف ميرو الهدف الثاني في الدقيقة 98. وتملك أنغولا 7 نقاط، بالتساوي مع مصر التي تتصدر المجموعة B بفارق الأهداف.",
+        "وفي هويما تعادلت أوغندا مع بوتسوانا 1-1. افتتح جيمس بوغيري التسجيل في الدقيقة 8، وأدرك لوسيكا راتشوكودو التعادل قرابة نصف الساعة. وأصيب الحارس دينيس أونيانغو وحل مكانه كينغدوم أوساي في الدقيقة 40. وتتصدر أوغندا، إحدى الدول المستضيفة لكأس الأمم، المجموعة H بـ5 نقاط، بفارق نقطة عن ليبيا.",
+        "وتتكرر المواجهات الثلاث يوم الثلاثاء 17 نوفمبر بعد تبادل الأرض: توغو والجزائر، وجنوب السودان وأنغولا، وبوتسوانا وأوغندا."
+      ]
+    },
+    sources: [
+      ["Pan Africa Football", "https://panafricafootball.com/article/fennecs-algerie-bat-togo"],
+      ["AfricaSoccer", "https://africasoccer.com/afcon-2027-qualifiers-angola-beat-south-sudan-2-0-to-boost-group-b-hopes/"],
+      ["Daily Express", "https://dailyexpress.co.ug/2026/11/14/uganda-cranes-botswana-1-1-draw-hoima-afcon-qualifiers/"],
+      ["Bola na Rede", "https://bolanarede.pt/internacional/can/angola-marca-2-golos-nos-descontos-e-garante-vitoria-importantissima-eis-os-resultados-do-dia-no-apuramento-para-a-can-2027/"]
+    ]
+  },
+  {
     slug: "franca-vence-africa-do-sul-rugbi-nations-championship", cat: "sel", esporte: "rugbi", genero: "masc", paises: ["RSA"], tags: ["rugbi"], date: "2026-11-14T21:00",
     cover: { big: "21–19", small: { pt: "França x África do Sul, em Paris", fr: "France-Afrique du Sud, à Paris", en: "France v South Africa in Paris", ar: "فرنسا وجنوب أفريقيا في باريس" } },
     title: {
