@@ -11,24 +11,25 @@ module.exports = {
 
   /* Eliminatórias da CAN 2027: [seleção, jogos, vitórias, empates, derrotas, saldo, pontos] */
   canq: {
-    ate: "2026-11-13",
+    ate: "2026-11-16",
     sedes: ["KEN", "UGA", "TAN"],
     fontes: [
+      ["Sofascore", "https://www.sofascore.com/football/tournament/africa/africa-cup-of-nations-qual/1848"],
+      ["Africa Soccer", "https://africasoccer.com/afcon-2027-qualifiers-cameroon-and-senegal-continue-unbeaten-runs-as-somalia-and-central-african-republic-exit/"],
       ["Sport News Africa", "https://sportnewsafrica.com/en/fixtures/afcon-2027-qualifiers/table/"],
-      ["Africa Soccer", "https://africasoccer.com/afcon-2027-qualifiers-check-out-full-group-standings/"],
       ["CAF", "https://www.cafonline.com/afcon2025/news/crucial-matchdays-3-and-4-to-shape-totalenergies-caf-afcon-pamoja-2027-qualification-race/"]
     ],
     grupos: [
       ["A", [["MAR", 3, 3, 0, 0, 8, 9], ["GAB", 3, 2, 0, 1, 2, 6], ["NIG", 3, 1, 0, 2, -5, 3], ["LES", 3, 0, 0, 3, -5, 0]]],
-      ["B", [["EGY", 3, 2, 1, 0, 10, 7], ["ANG", 2, 1, 1, 0, 2, 4], ["MWI", 3, 1, 0, 2, -6, 3], ["SSD", 2, 0, 0, 2, -6, 0]]],
-      ["C", [["CIV", 3, 3, 0, 0, 5, 9], ["GAM", 3, 2, 0, 1, 2, 6], ["GHA", 3, 1, 0, 2, -2, 3], ["SOM", 3, 0, 0, 3, -5, 0]]],
-      ["D", [["RSA", 3, 2, 1, 0, 6, 7], ["GUI", 3, 2, 0, 1, 1, 6], ["KEN", 3, 0, 2, 1, -1, 2], ["ERI", 3, 0, 1, 2, -6, 1]]],
-      ["E", [["COD", 3, 3, 0, 0, 5, 9], ["ZIM", 3, 1, 1, 1, 0, 4], ["EQG", 3, 1, 1, 1, -1, 4], ["SLE", 3, 0, 0, 3, -4, 0]]],
-      ["F", [["BEN", 3, 2, 1, 0, 4, 7], ["BFA", 3, 2, 1, 0, 2, 7], ["MTN", 3, 1, 0, 2, 0, 3], ["CTA", 3, 0, 0, 3, -6, 0]]],
-      ["G", [["CMR", 3, 2, 1, 0, 4, 7], ["COM", 3, 1, 1, 1, -1, 4], ["NAM", 3, 1, 0, 2, -2, 3], ["CGO", 3, 0, 2, 1, -1, 2]]],
-      ["H", [["LBA", 3, 1, 1, 1, 1, 4], ["UGA", 2, 1, 1, 0, 1, 4], ["BOT", 2, 0, 2, 0, 0, 2], ["TUN", 3, 0, 2, 1, -2, 2]]],
-      ["I", [["ALG", 2, 1, 1, 0, 2, 4], ["ZAM", 3, 1, 1, 1, 0, 4], ["TOG", 2, 1, 0, 1, -1, 3], ["BDI", 3, 0, 2, 1, -1, 2]]],
-      ["J", [["SEN", 3, 2, 1, 0, 4, 7], ["MOZ", 3, 1, 1, 1, 2, 4], ["SDN", 3, 1, 0, 2, -5, 3], ["ETH", 3, 1, 0, 2, -1, 3]]],
+      ["B", [["EGY", 3, 2, 1, 0, 10, 7], ["ANG", 3, 2, 1, 0, 4, 7], ["MWI", 3, 1, 0, 2, -6, 3], ["SSD", 3, 0, 0, 3, -8, 0]]],
+      ["C", [["CIV", 3, 3, 0, 0, 5, 9], ["GAM", 3, 2, 0, 1, 2, 6], ["GHA", 4, 2, 0, 2, -1, 6], ["SOM", 4, 0, 0, 4, -6, 0]]],
+      ["D", [["GUI", 4, 3, 0, 1, 3, 9], ["RSA", 3, 2, 1, 0, 6, 7], ["KEN", 3, 0, 2, 1, -1, 2], ["ERI", 4, 0, 1, 3, -8, 1]]],
+      ["E", [["COD", 3, 3, 0, 0, 5, 9], ["ZIM", 4, 2, 1, 1, 3, 7], ["EQG", 4, 1, 1, 2, -4, 4], ["SLE", 3, 0, 0, 3, -4, 0]]],
+      ["F", [["BEN", 4, 3, 1, 0, 5, 10], ["BFA", 3, 2, 1, 0, 2, 7], ["MTN", 3, 1, 0, 2, 0, 3], ["CTA", 4, 0, 0, 4, -7, 0]]],
+      ["G", [["CMR", 4, 3, 1, 0, 7, 10], ["COM", 3, 1, 1, 1, -1, 4], ["NAM", 4, 1, 0, 3, -5, 3], ["CGO", 3, 0, 2, 1, -1, 2]]],
+      ["H", [["UGA", 3, 1, 2, 0, 1, 5], ["LBA", 3, 1, 1, 1, 1, 4], ["BOT", 3, 0, 3, 0, 0, 3], ["TUN", 3, 0, 2, 1, -2, 2]]],
+      ["I", [["ALG", 3, 2, 1, 0, 3, 7], ["ZAM", 3, 1, 1, 1, 0, 4], ["TOG", 3, 1, 0, 2, -2, 3], ["BDI", 3, 0, 2, 1, -1, 2]]],
+      ["J", [["SEN", 4, 3, 1, 0, 6, 10], ["MOZ", 3, 1, 1, 1, 2, 4], ["ETH", 3, 1, 0, 2, -1, 3], ["SDN", 4, 1, 0, 3, -7, 3]]],
       ["K", [["MLI", 3, 3, 0, 0, 4, 9], ["RWA", 3, 2, 0, 1, 2, 6], ["CPV", 3, 1, 0, 2, -1, 3], ["LBR", 3, 0, 0, 3, -5, 0]]],
       ["L", [["GNB", 3, 2, 1, 0, 5, 7], ["NGA", 3, 2, 0, 1, 0, 6], ["MAD", 3, 0, 2, 1, -1, 2], ["TAN", 3, 0, 1, 2, -4, 1]]]
     ]
